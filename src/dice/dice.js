@@ -12,8 +12,16 @@ function roll() {
 }
 
 export function diceInitTest() {
-  document.querySelector('.roll-button').addEventListener('click', () => {
+  const rollButton = document.querySelector('.roll-button');
+  const rollButtonEvent = function (){
+    //rollButton.style.pointerEvents = 'none';
+    rollButton.removeEventListener('click', rollButtonEvent);
     const test = setInterval(roll, 200);
-    setTimeout(() => clearInterval(test), 3000);
-  });
+    setTimeout(() => {
+      clearInterval(test);
+      rollButton.addEventListener('click', rollButtonEvent);
+      //rollButton.style.pointerEvents = 'auto';
+    }, 3000);
+  }
+  rollButton.addEventListener('click', rollButtonEvent);
 }
