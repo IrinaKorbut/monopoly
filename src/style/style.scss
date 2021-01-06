@@ -5,7 +5,6 @@
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 10px;
-  
 }
 
 body {
@@ -19,7 +18,6 @@ body {
   margin: 0 auto;
   background-color: blue;
 
-
   .row {
     width: 100%;
     height: 11.75%;
@@ -29,14 +27,14 @@ body {
       width: 11.75%;
       height: 100%;
       border: 3px solid #000;
-      background-color: aquamarine;      
+      background-color: aquamarine;
+      display: flex;
+      flex-direction: column;
+      text-align: center;
     }
 
     .go-corner {
-      display: flex;
-      flex-direction: column;
       justify-content: flex-end;
-      text-align: center;
 
       &__title {
         transform: rotate(-45deg);
@@ -45,18 +43,15 @@ body {
 
       &__image {
         margin-top: 6px;
-        
+
         img {
           width: 100%;
         }
       }
-    }  
-    
+    }
+
     .jail-corner {
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      text-align: center;
 
       &__wrapper {
         transform: rotate(45deg);
@@ -65,7 +60,32 @@ body {
       img {
         width: 60%;
       }
+    }
 
+    .parking-corner {
+      align-items: center;
+
+      &__wrapper {
+        height: 100%;
+        transform: rotate(135deg);
+      }
+
+      img {
+        width: 40%;
+      }
+    }
+
+    .go-to-jail-corner {
+      align-items: center;
+
+      &__wrapper {
+        height: 100%;
+        transform: rotate(-135deg);
+      }
+
+      img {
+        width: 60%;
+      }
     }
   }
 
@@ -110,38 +130,34 @@ body {
   }
 }
 
-
-
-
-
 .light-purple {
-  background-color:#C8BAFF;
+  background-color: #c8baff;
 }
 
 .light-blue {
-  background-color: #699CF8;
+  background-color: #699cf8;
 }
 
 .red {
-  background-color: #F44E1F;
+  background-color: #f44e1f;
 }
 
 .gold {
-  background-color: #FFC700;
+  background-color: #ffc700;
 }
 
 .light-red {
-  background-color: #FF8678;
+  background-color: #ff8678;
 }
 
 .purple {
-  background-color: #A25AFF;
+  background-color: #a25aff;
 }
 
 .green {
-  background-color: #0FAA58;
+  background-color: #0faa58;
 }
 
 .blue {
-  background-color: #699CF8;
+  background-color: #699cf8;
 }
