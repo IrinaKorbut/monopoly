@@ -1,0 +1,116 @@
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .dice-wrapper {
+    background-color: rgb(255, 136, 0);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .face {
+      margin: 16px;
+      padding: 4px;
+      
+      background-color: #e7e7e7;
+      width: 104px;
+      height: 104px;
+      object-fit: contain;
+      
+      box-shadow:
+        inset 0 5px white, 
+        inset 0 -5px #bbb,
+        inset 5px 0 #d7d7d7, 
+        inset -5px 0 #d7d7d7;
+      
+      border-radius: 10%;
+
+      .pip {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        margin: 4px;
+      
+        background-color: #333;
+        box-shadow: inset 0 3px #111, inset 0 -3px
+      }
+
+      .column {
+        width: 30px;
+        height: 100%;
+      }
+    }
+
+    .first-face {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .second-face {
+      display: none;
+      justify-content: space-between;
+
+      .pip:nth-of-type(2) {
+        align-self: flex-end;
+      }
+    }
+
+    .third-face {
+      display: none;
+      justify-content: space-between;
+
+      .pip:nth-of-type(2) {
+        align-self: center;
+      }
+
+      .pip:nth-of-type(3) {
+        align-self: flex-end;
+      }
+    }
+
+    .fourth-face, .sixth-face, .fifth-face {
+      display: none;
+      justify-content: space-between;
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+    }
+
+    .fifth-face {
+
+      .column:nth-of-type(2) {
+        justify-content: center;
+      }
+    }
+  }
+
+  .roll-button {
+    background-color: #fff;
+    border: 0;
+    outline: 0;
+    padding: 10px;
+    font-size: 2rem;
+    font-family: monospace;
+    box-shadow: 0px 5px 10px #000;
+    transition: all 0.3s;
+    cursor: pointer;
+    border-radius: 5px;
+    border-bottom: 4px solid #d9d9d9;
+
+    &:hover {
+      box-shadow: 0px 15px 25px -5px #000;
+      transform: scale(1.03);
+    }
+
+    &:active {
+      box-shadow: 0px 4px 8px #000;
+      transform: scale(0.98);
+    }
+  }
+}
