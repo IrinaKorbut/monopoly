@@ -1,6 +1,8 @@
 import { diceInitTest } from './dice/dice';
 
-import './style.scss';
-import './dice.scss';
+import './style/style.scss';
+import './style/dice.scss';
+import './style/cell.scss';
 
 diceInitTest();
+
