@@ -31,6 +31,11 @@ body {
       display: flex;
       flex-direction: column;
       text-align: center;
+      position: relative;
+    } 
+    
+    .active {
+      background-color: rgb(237, 10, 206);
     }
 
     .go-corner {
@@ -112,6 +117,10 @@ body {
         }
       }
 
+      .active {
+        background-color: rgb(237, 10, 206);
+      }
+
       .left-cell {
         justify-content: flex-end;
 
@@ -160,4 +169,14 @@ body {
 
 .blue {
   background-color: #699cf8;
+}
+
+.player {
+  position: absolute;
+  background-color: #40fd01;
+  width: 10px;
+  height: 10px;
+  top: calc(50% - 5px);
+  left: calc(50% - 5px);
+  z-index: 1000;
 }
