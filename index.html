@@ -8,374 +8,401 @@
 </head>
 
 <body>
-  <div class="wrapper">
-    <div class="row top-row">
-      <div class="corner parking-corner">
-        <div class="parking-corner__wrapper">
-          <div class="parking-corner__title">
-            FREE
-          </div>
-          <div class="parking-corner__image">
-            <img src="./images/free_parking_icon.png" alt="">
-          </div>
-          <div class="parking-corner__subtitle">
-            PARKING
-          </div>
+  <section class="game-field">
+    <div class="row">
+      <div class="cell left-edge-cell go">
+        <img src="./images/go.svg" alt="">
+        <p class="title">Start</p>
+        <p class="cost">+ $200</p>
+      </div>
+      <div class="cell street">
+        <div class="street-color brown"></div>
+        <p class="title">Mediterranean Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$60</p>
+          <div class="owner"></div>
         </div>
       </div>
-
-      <div class="cell top-cell">
-        <div class="color red"></div>
-      </div>
-      <div class="cell top-cell special-cell chance-cell">
-        <div class="special-cell__wrapper">
-          <div class="special-cell__title">
-            CHANCE
-          </div>
-          <div class="special-cell__image">
-            <img src="./images/chance_icon.png" alt="">
-          </div>
+      <div class="cell chest">
+        <img src="./images/chest.svg" alt="">
+        <p class="title">Community Chest</p>
+      </div>  
+      <div class="cell street">
+        <div class="street-color brown"></div>
+        <p class="title">Baltic Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$60</p>
+          <div class="owner"></div>
         </div>
       </div>
-      <div class="cell top-cell">
-        <div class="color red"></div>
+      <div class="cell tax">
+        <img src="./images/tax.svg" alt="">
+        <p class="title">City Tax</p>
+        <p class="cost">- $200</p>
       </div>
-      <div class="cell top-cell">
-        <div class="color red"></div>
-      </div>
-      <div class="cell top-cell special-cell B&O-reilroad-cell">
-        <div class="special-cell__wrapper">
-          <div class="special-cell__title">
-            B&O Reilroad <br> $200
-          </div>
-          <div class="special-cell__image">
-            <img src="./images/train_icon.png" alt="">
-          </div>
+      <div class="cell railroad">
+        <img src="./images/railroad.svg" alt="">
+        <p class="title">Reading Railroad</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$200</p>
+          <div class="owner"></div>
         </div>
       </div>
-      <div class="cell top-cell">
-        <div class="color gold"></div>
-      </div>
-      <div class="cell top-cell">
-        <div class="color gold"></div>
-      </div>
-      <div class="cell top-cell special-cell water-works-cell">
-        <div class="special-cell__wrapper">
-          <div class="special-cell__title">
-            Water Works <br> $150
-          </div>
-          <div class="special-cell__image">
-            <img src="./images/water_icon.png" alt="">
-          </div>
+      <div class="cell street">
+        <div class="street-color blue"></div>
+        <p class="title">Oriental Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$100</p>
+          <div class="owner"></div>
         </div>
       </div>
-      <div class="cell top-cell">
-        <div class="color gold"></div>
+      <div class="cell chance">
+        <img src="./images/chance.svg" alt="">
+        <p class="title">Chance</p>
       </div>
-
-      <div class="corner go-to-jail-corner">
-        <div class="go-to-jail-corner__wrapper">
-          <div class="go-to-jail-corner__title">
-            GO TO
-          </div>
-          <div class="go-to-jail-corner__image">
-            <img src="./images/go-to-jail.png" alt="">
-          </div>
-          <div class="go-to-jail-corner__subtitle">
-            GAIL
-          </div>
+      <div class="cell street">
+        <div class="street-color blue"></div>
+        <p class="title">Vermont Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$100</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell right-edge-cell street">
+        <div class="street-color blue"></div>
+        <p class="title">Connecticut Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$120</p>
+          <div class="owner"></div>
         </div>
       </div>
     </div>
-
-    <div class="middle">
-      <div class="column left-column">
-        <div class="cell left-cell">
-          <div class="color light-red"></div>
+    <div class="row">
+      <div class="cell left-edge-cell jail">
+        <div class="jail-section">
+          <img src="./images/prisoner.svg" alt="">
+          <p class="title">Jail</p>
         </div>
-        <div class="cell left-cell">
-          <div class="color light-red"></div>
-        </div>
-        <div class="cell left-cell special-cell community-chest-cell">
-          <div class="left-cell__wrapper">
-            <div class="special-cell__title">
-              Community Chest
-            </div>
-            <div class="special-cell__image">
-              <img src="./images/community_chest_icon.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="cell left-cell">
-          <div class="color light-red"></div>
-        </div>
-        <div class="cell left-cell special-cell pensylvania-reilroad-cell">
-          <div class="left-cell__wrapper">
-            <div class="special-cell__title">
-              Pensilvania Reilroad <br> $200
-            </div>
-            <div class="special-cell__image">
-              <img src="./images/train_icon.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="cell left-cell">
-          <div class="color purple"></div>
-        </div>
-        <div class="cell left-cell">
-          <div class="color purple"></div>
-        </div>
-        <div class="cell left-cell special-cell electric-company-cell">
-          <div class="left-cell__wrapper">
-            <div class="special-cell__title">
-              Electric Company <br> $150
-            </div>
-            <div class="special-cell__image">
-              <img src="./images/electric_icon.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="cell left-cell">
-          <div class="color purple"></div>
+        <div class="visit-section">
+          <p class="title">Visiting</p>
         </div>
       </div>
-      <div class="center">
-        <div class="dice-section">
-          <div class="dice-wrapper">
-            <div class="dice-one">
-              <div class="face first-face">
-                <div class="pip"></div>
-              </div>
-              <div class="face second-face">
-                <div class="pip"></div>
-                <div class="pip"></div>
-              </div>
-              <div class="face third-face">
-                <div class="pip"></div>
-                <div class="pip"></div>
-                <div class="pip"></div>
-              </div>
-              <div class="face fourth-face">
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-              </div>
-              <div class="face fifth-face">
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-              </div>
-              <div class="face sixth-face">
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-              </div>
-            </div>
-            <div class="dice-two">
-              <div class="face first-face">
-                <div class="pip"></div>
-              </div>
-              <div class="face second-face">
-                <div class="pip"></div>
-                <div class="pip"></div>
-              </div>
-              <div class="face third-face">
-                <div class="pip"></div>
-                <div class="pip"></div>
-                <div class="pip"></div>
-              </div>
-              <div class="face fourth-face">
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-              </div>
-              <div class="face fifth-face">
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-              </div>
-              <div class="face sixth-face">
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-                <div class="column">
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                  <div class="pip"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="roll-button">Roll</div>
+      <div class="cell street">
+        <div class="street-color purple"></div>
+        <p class="title">St. Charles Place</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$140</p>
+          <div class="owner"></div>
         </div>
       </div>
-      <div class="column rigth-column">
-        <div class="cell right-cell">
-          <div class="color green"></div>
+      <div class="cell communal">
+        <img src="./images/bulb.svg" alt="">
+        <p class="title electricity">Electricity Company</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$150</p>
+          <div class="owner"></div>
         </div>
-        <div class="cell right-cell">
-          <div class="color green"></div>
+      </div>
+      <div class="cell street">
+        <div class="street-color purple"></div>
+        <p class="title">States Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$140</p>
+          <div class="owner"></div>
         </div>
-        <div class="cell right-cell special-cell community-chest-cell">
-          <div class="right-cell__wrapper">
-            <div class="special-cell__title">
-              Community Chest
-            </div>
-            <div class="special-cell__image">
-              <img src="./images/community_chest_icon.png" alt="">
-            </div>
-          </div>
+      </div>
+      <div class="cell street">
+        <div class="street-color purple"></div>
+        <p class="title">Virginia Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$160</p>
+          <div class="owner"></div>
         </div>
-        <div class="cell right-cell">
-          <div class="color green"></div>
+      </div>
+      <div class="cell railroad">
+        <img src="./images/railroad.svg" alt="">
+        <p class="title">Pennsylvania Railroad</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$200</p>
+          <div class="owner"></div>
         </div>
-        <div class="cell right-cell special-cell short-line-reilroad-cell">
-          <div class="right-cell__wrapper">
-            <div class="special-cell__title">
-              Short Line <br> $200
-            </div>
-            <div class="special-cell__image">
-              <img src="./images/train_icon.png" alt="">
-            </div>
-          </div>
+      </div>
+      <div class="cell street">
+        <div class="street-color orange"></div>
+        <p class="title">St. James Place</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$180</p>
+          <div class="owner"></div>
         </div>
-        <div class="cell right-cell special-cell chance-cell">
-          <div class="right-cell__wrapper">
-            <div class="special-cell__title">
-              CHANCE
-            </div>
-            <div class="special-cell__image">
-              <img src="./images/chance_icon.png" alt="">
-            </div>
-          </div>
+      </div>
+      <div class="cell chest">
+        <img src="./images/chest.svg" alt="">
+        <p class="title">Community Chest</p>
+      </div>
+      <div class="cell street">
+        <div class="street-color orange"></div>
+        <p class="title">Tennessee Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$180</p>
+          <div class="owner"></div>
         </div>
-        <div class="cell right-cell">
-          <div class="color blue"></div>
-        </div>
-        <div class="cell right-cell special-cell luxury-tax-cell">
-          <div class="right-cell__wrapper">
-            <div class="special-cell__title">
-              LUXURY TAX <br> Pay $100
-            </div>
-            <div class="special-cell__image">
-              <img src="./images/tax_icon.png" alt="">
-            </div>
-          </div>
-        </div>
-        <div class="cell right-cell">
-          <div class="color blue"></div>
+      </div>
+      <div class="cell right-edge-cell street">
+        <div class="street-color orange"></div>
+        <p class="title">New York Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$200</p>
+          <div class="owner"></div>
         </div>
       </div>
     </div>
-
-    <div class="row bottom-row">
-      <div class="corner jail-corner">
-        <div class="jail-corner__wrapper">
-          <div class="jail-corner__title">
-            IN
-          </div>
-          <div class="jail-corner__image">
-            <img src="./images/jake_icon.png" alt="">
-          </div>
-          <div class="jail-corner__subtitle">
-            JAIL
-          </div>
+    <div class="row">
+      <div class="cell left-edge-cell parking">
+        <img src="./images/car.svg" alt="">
+        <p class="title">Free Parking</p>
+      </div>
+      <div class="cell street">
+        <div class="street-color red"></div>
+        <p class="title">Kentucky Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$220</p>
+          <div class="owner"></div>
         </div>
       </div>
-
-      <div class="cell">
-        <div class="color light-blue"></div>
+      <div class="cell chance">
+        <img src="./images/chance.svg" alt="">
+        <p class="title">Chance</p>
       </div>
-      <div class="cell">
-        <div class="color light-blue"></div>
-      </div>
-      <div class="cell special-cell chance-cell">
-        <div class="special-cell__title">
-          CHANCE
-        </div>
-        <div class="special-cell__image">
-          <img src="./images/chance_icon.png" alt="">
+      <div class="cell street">
+        <div class="street-color red"></div>
+        <p class="title">Indiana Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$220</p>
+          <div class="owner"></div>
         </div>
       </div>
-      <div class="cell">
-        <div class="color light-blue"></div>
-      </div>
-      <div class="cell special-cell reading-reilroad-cell">
-        <div class="special-cell__title">
-          Reading Reilroad <br> $200
-        </div>
-        <div class="special-cell__image">
-          <img src="./images/train_icon.png" alt="">
+      <div class="cell street">
+        <div class="street-color red"></div>
+        <p class="title">Illinois Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$240</p>
+          <div class="owner"></div>
         </div>
       </div>
-      <div class="cell special-cell income-tax-cell">
-        <div class="special-cell__title">
-          INCOME TAX
-        </div>
-        <div class="special-cell__subtitle">
-          pay <br> $200
-        </div>
-      </div>
-      <div class="cell">
-        <div class="color light-purple"></div>
-      </div>
-      <div class="cell special-cell community-chest-cell">
-        <div class="special-cell__title">
-          Community Chest
-        </div>
-        <div class="special-cell__image">
-          <img src="./images/community_chest_icon.png" alt="">
+      <div class="cell railroad">
+        <img src="./images/railroad.svg" alt="">
+        <p class="title">B&O Railroad</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$200</p>
+          <div class="owner"></div>
         </div>
       </div>
-      <div class="cell">
-        <div class="color light-purple"></div>
-      </div>
-
-      <div class="corner go-corner">
-        <div class="go-corner__title">
-          GO
+      <div class="cell street">
+        <div class="street-color yellow"></div>
+        <p class="title">Atlantic Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$260</p>
+          <div class="owner"></div>
         </div>
-        <div class="go-corner__image">
-          <img src="./images/arrow_icon.png" alt="">
+      </div>
+      <div class="cell street">
+        <div class="street-color yellow"></div>
+        <p class="title">Ventnor Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$260</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell communal">
+        <img src="./images/water.svg" alt="">
+        <p class="title water">Water Company</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$150</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell right-edge-cell street">
+        <div class="street-color yellow"></div>
+        <p class="title">Marvin Gardens</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$280</p>
+          <div class="owner"></div>
         </div>
       </div>
     </div>
-  </div>
+    <div class="row">
+      <div class="cell left-edge-cell go-to-jail">
+        <img src="./images/police.svg" alt="">
+        <p class="title">Go to Jail</p>
+      </div>
+      <div class="cell street">
+        <div class="street-color green"></div>
+        <p class="title">Pacific Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$300</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell street">
+        <div class="street-color green"></div>
+        <p class="title">North Carolina Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$300</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell chest">
+        <img src="./images/chest.svg" alt="">
+        <p class="title">Community Chest</p>
+      </div>
+      <div class="cell street">
+        <div class="street-color green"></div>
+        <p class="title">Pennsylvania Avenue</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$320</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell railroad">
+        <img src="./images/railroad.svg" alt="">
+        <p class="title">Short Line</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$200</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell chance">
+        <img src="./images/chance.svg" alt="">
+        <p class="title">Chance</p>
+      </div>
+      <div class="cell street">
+        <div class="street-color dark-blue"></div>
+        <p class="title">Park Place</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$350</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+      <div class="cell tax">
+        <img src="./images/tax.svg" alt="">
+        <p class="title">Luxury Tax</p>
+        <p class="cost">- $100</p>
+      </div>
+      <div class="cell right-edge-cell street">
+        <div class="street-color dark-blue"></div>
+        <p class="title">Boardwalk</p>
+        <div class="owner-and-cost-wrapper">
+          <p class="cost">$400</p>
+          <div class="owner"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <section class='dice'>
+      <div class="dice-wrapper">
+        <div class="dice-one">
+          <div class="face first-face">
+            <div class="pip"></div>
+          </div>
+          <div class="face second-face">
+            <div class="pip"></div>
+            <div class="pip"></div>
+          </div>
+          <div class="face third-face">
+            <div class="pip"></div>
+            <div class="pip"></div>
+            <div class="pip"></div>
+          </div>
+          <div class="face fourth-face">
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="face fifth-face">
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="face sixth-face">
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+        </div>
+        <div class="dice-two">
+          <div class="face first-face">
+            <div class="pip"></div>
+          </div>
+          <div class="face second-face">
+            <div class="pip"></div>
+            <div class="pip"></div>
+          </div>
+          <div class="face third-face">
+            <div class="pip"></div>
+            <div class="pip"></div>
+            <div class="pip"></div>
+          </div>
+          <div class="face fourth-face">
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="face fifth-face">
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+          <div class="face sixth-face">
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+            <div class="column">
+              <div class="pip"></div>
+              <div class="pip"></div>
+              <div class="pip"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="roll-button">Roll</div>
+    </section>
+  </section>
 </body>
 
 </html>
