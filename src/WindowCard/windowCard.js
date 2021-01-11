@@ -49,6 +49,42 @@ export function cardStreet(event) {
     addWindow(target, tooltipElem)
 }
 
+export function cardRailroad(event) {
+    let target = event.target;
+    tooltipElem = createElementAdd('div', 'card-tax')
+    let image = createElementAdd('img', 'image')
+    image.src = target.children[0].attributes[0].value
+    let nameRailroad = createElementAdd('div', 'name-railroad', 'Reading Railroad')
+    let rentalInstruction = createElementAdd('div', 'rental-instruction')
+    let rent = createCell('rent', 'Rent', '$25')
+    let owner = createElementAdd('div', 'owner', 'OWNER:')
+    let ownerTwo = createCell('owner-two', '2 transport objects', '$50')
+    let ownerThree = createCell('owner-three', '3 transport objects', '$100')
+    let ownerFour = createCell('owner-four', '4 transport objects', '$200')
+
+    appendElementTo(document.body, tooltipElem)
+    appendElementTo(tooltipElem, image)
+    appendElementTo(tooltipElem, nameRailroad)
+    appendElementTo(tooltipElem, rentalInstruction)
+    appendElementTo(rentalInstruction, rent, owner, ownerTwo, ownerThree, ownerFour)
+    addWindow(target, tooltipElem)
+}
+
+export function cardCompany(event) {
+    let target = event.target;
+    tooltipElem = createElementAdd('div', 'company')
+    let image = createElementAdd('img', 'image')
+    image.src = target.children[0].attributes[0].value
+    let nameCompany = createElementAdd('div', 'name-company', `${target.children[1].innerText}`)
+    let companyInstructionOne = createElementAdd('div', 'company-instruction-one', 'If the player has one business, then the rent is four times the result of the die roll.')
+
+    let companyInstructionTwo = createElementAdd('div', 'company-instruction-two', 'If the player owns both businesses, the rent is ten times the result of the die roll.')
+
+    appendElementTo(document.body, tooltipElem)
+    appendElementTo(tooltipElem, image, nameCompany, companyInstructionOne, companyInstructionTwo)
+    addWindow(target, tooltipElem)
+}
+
 export function removeCardStreet() {
     if (tooltipElem) {
         tooltipElem.remove();

@@ -178,3 +178,92 @@
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
     font-family: Montserrat;
 }
+
+.card-tax {
+    position: fixed;
+    width: 180px;
+    height: 300px;
+    border: 1px solid #b3c9ce;
+    border-radius: 7px;
+    text-align: center;
+    color: #333;
+    background: #fff;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    font-family: Montserrat;
+
+    img {
+        width: 40%;
+        margin: 10px;
+    }
+
+    .name-railroad {
+        margin: 5px;
+        font-weight: bold;
+    }
+
+    .rent {
+        margin-top: 10px;
+        margin: 5px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .owner {
+        inline-size: fit-content;
+        margin: 5px;
+    }
+
+    .owner-two {
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        margin: 5px;
+    }
+
+    .owner-three {
+        margin: 5px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+
+    .owner-four {
+        margin: 5px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+}
+
+.company {
+    position: fixed;
+    width: 180px;
+    height: 300px;
+    border: 1px solid #b3c9ce;
+    border-radius: 7px;
+    text-align: center;
+    color: #333;
+    background: #fff;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
+    font-family: Montserrat;
+
+    .image {
+        width: 40%;
+        margin: 10px;
+    }
+
+    .name-company {
+        font-weight: bold;
+        margin: 5px;
+    }
+
+    .company-instruction-one {
+        margin: 5px;
+        font-size: 90%;
+    }
+
+    .company-instruction-two {
+        margin: 5px;
+        font-size: 90%;
+    }
+}
