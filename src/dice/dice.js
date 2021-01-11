@@ -1,27 +1,38 @@
+import movePlayer from '../move_player/movePlayerFn';
+
+let diceNumber;
+
 function roll() {
   const facesNames = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
   const allFaces = document.querySelectorAll('.face');
   allFaces.forEach((face) => {
     face.style.display = 'none';
   });
-  const firstDiceFace = Math.floor(Math.random() * 6);
-  const secondDiceFace = Math.floor(Math.random() * 6);
-  document.querySelector(`.dice-one .${facesNames[firstDiceFace]}-face`).style.display = 'flex';
-  document.querySelector(`.dice-two .${facesNames[secondDiceFace]}-face`).style.display = 'flex';
-  return firstDiceFace + secondDiceFace;
+  const firstDiceFace = Math.floor(Math.random() * 6) + 1;
+  const secondDiceFace = Math.floor(Math.random() * 6) + 1;
+  document.querySelector(`.dice-one .${facesNames[firstDiceFace - 1]}-face`).style.display = 'flex';
+  document.querySelector(`.dice-two .${facesNames[secondDiceFace - 1]}-face`).style.display = 'flex';
+  diceNumber = firstDiceFace + secondDiceFace;
 }
 
-export function diceInitTest() {
+export default function diceInit() {
   const rollButton = document.querySelector('.roll-button');
-  const rollButtonEvent = function (){
-    //rollButton.style.pointerEvents = 'none';
-    rollButton.removeEventListener('click', rollButtonEvent);
-    const test = setInterval(roll, 200);
-    setTimeout(() => {
-      clearInterval(test);
-      rollButton.addEventListener('click', rollButtonEvent);
-      //rollButton.style.pointerEvents = 'auto';
-    }, 3000);
-  }
+  const rollButtonEvent = function () {
+    rollButton.removeEventListener('click', rollButtonEvent);    
+    const p = new Promise((resolve, reject) => {
+      let test;
+      setTimeout(() => {
+        test = setInterval(roll, 200);
+        rollButton.addEventListener('click', rollButtonEvent);
+      }, 0);
+      setTimeout(() => {
+        clearInterval(test);
+        resolve();
+      }, 3000);
+    });
+    p.then(() => {
+      movePlayer(diceNumber);
+    });
+  };
   rollButton.addEventListener('click', rollButtonEvent);
 }
