@@ -30,6 +30,8 @@
       font-weight: 600;
       font-size: 15px;
       text-align: center;
+      position: relative;
+      
 
       .cost {
           margin-bottom: 21px;
@@ -73,7 +75,7 @@
       .dark-blue {
         background-color: #0167A4;
       }
-    }
+    }    
 
     .go {
       background-color: #D2F0C7;
@@ -192,5 +194,10 @@
     .left-edge-cell {
       border-left: 2px solid black;
     }
+
+    .active {
+      background-color: purple;
+    }
   }
 }
+
