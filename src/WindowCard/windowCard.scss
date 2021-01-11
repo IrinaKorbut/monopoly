@@ -9,6 +9,148 @@
     background: #fff;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
     font-family: Montserrat;
+
+    .color {
+        width: 100%;
+        height: 17%;
+        border-radius: 7px 7px 1px 1px;
+    }
+
+    .wrapper-card {
+        width: 100%;
+        height: 100%;
+
+        .wrapper-color {
+            width: 100%;
+            height: 15%;
+            border-radius: 7px 7px 1px 1px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .wrapper-color-name {
+                font-weight: bold;
+            }
+        }
+        .brown {
+            background-color: #864c39;
+        }
+
+        .blue {
+            background-color: #47a7ff;
+        }
+
+        .orange {
+            background-color: #eb8b2c;
+        }
+
+        .purple {
+            background-color: #c63883;
+        }
+
+        .yellow {
+            background-color: #fef102;
+        }
+
+        .red {
+            background-color: #db2428;
+        }
+
+        .green {
+            background-color: #11a85a;
+        }
+
+        .dark-blue {
+            background-color: #0167a4;
+        }
+
+        .info-rents {
+            margin: 10px;
+            font: italic 14px/1.3 sans-serif;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 10px;
+
+            .rent {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .rent-with-color-set {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .rent-with-one {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+
+                .img-haus {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .rent-with-two {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+
+                .img-haus {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .rent-with-three {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+
+                .img-haus {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .rent-with-four {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+
+                .img-haus {
+                    width: 20px;
+                    height: 20px;
+                }
+            }
+
+            .rent-with-five {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+
+        .housest {
+            margin-top: 20px;
+            margin: 10px;
+            font: italic 14px/1.3 sans-serif;
+
+            .housest-cost {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+            }
+
+            .hotels-cost {
+                margin-top: 2px;
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
 }
 
 .card-tax {

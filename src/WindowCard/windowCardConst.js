@@ -22,6 +22,21 @@ export function appendElementTo(parent, ...elements) {
     }
 }
 
+export function addWindow(target, tooltipEle) {
+    let coords = target.getBoundingClientRect();
+
+    let left = coords.left + (target.offsetWidth - tooltipEle.offsetWidth) / 2;
+    if (left < 0) left = 0;
+
+    let top = coords.top - tooltipEle.offsetHeight - 5;
+    if (top < 0) {
+        top = coords.top + target.offsetHeight + 5;
+    }
+
+    tooltipEle.style.left = left + 'px';
+    tooltipEle.style.top = top + 'px';
+}
+
 export function addSelectorClass(classNames, fuNames) {
     let street = document.querySelectorAll(`.${classNames}`)
     for (let i = 0; i < street.length; i++) {
