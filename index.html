@@ -10,12 +10,13 @@
 <body>
   <section class="game-field">
     <div class="row">
-      <div class="cell left-edge-cell go">
+      <div class="cell left-edge-cell go" id="0">
         <img src="./images/go.svg" alt="">
         <p class="title">Start</p>
         <p class="cost">+ $200</p>
+        <div class="player">P</div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="1">
         <div class="street-color brown"></div>
         <p class="title">Mediterranean Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -23,11 +24,11 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell chest">
+      <div class="cell chest" id="2">
         <img src="./images/chest.svg" alt="">
         <p class="title">Community Chest</p>
       </div>  
-      <div class="cell street">
+      <div class="cell street" id="3">
         <div class="street-color brown"></div>
         <p class="title">Baltic Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -35,12 +36,12 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell tax">
+      <div class="cell tax" id="4">
         <img src="./images/tax.svg" alt="">
         <p class="title">City Tax</p>
         <p class="cost">- $200</p>
       </div>
-      <div class="cell railroad">
+      <div class="cell railroad" id="5">
         <img src="./images/railroad.svg" alt="">
         <p class="title">Reading Railroad</p>
         <div class="owner-and-cost-wrapper">
@@ -48,7 +49,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="6">
         <div class="street-color blue"></div>
         <p class="title">Oriental Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -56,11 +57,11 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell chance">
+      <div class="cell chance" id="7">
         <img src="./images/chance.svg" alt="">
         <p class="title">Chance</p>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="8">
         <div class="street-color blue"></div>
         <p class="title">Vermont Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -68,7 +69,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell right-edge-cell street">
+      <div class="cell right-edge-cell street" id="9">
         <div class="street-color blue"></div>
         <p class="title">Connecticut Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -78,7 +79,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="cell left-edge-cell jail">
+      <div class="cell left-edge-cell jail" id="10">
         <div class="jail-section">
           <img src="./images/prisoner.svg" alt="">
           <p class="title">Jail</p>
@@ -87,7 +88,7 @@
           <p class="title">Visiting</p>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="11">
         <div class="street-color purple"></div>
         <p class="title">St. Charles Place</p>
         <div class="owner-and-cost-wrapper">
@@ -95,7 +96,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell communal">
+      <div class="cell communal" id="12">
         <img src="./images/bulb.svg" alt="">
         <p class="title electricity">Electricity Company</p>
         <div class="owner-and-cost-wrapper">
@@ -103,7 +104,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="13">
         <div class="street-color purple"></div>
         <p class="title">States Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -111,7 +112,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="14">
         <div class="street-color purple"></div>
         <p class="title">Virginia Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -119,7 +120,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell railroad">
+      <div class="cell railroad" id="15">
         <img src="./images/railroad.svg" alt="">
         <p class="title">Pennsylvania Railroad</p>
         <div class="owner-and-cost-wrapper">
@@ -127,7 +128,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="16">
         <div class="street-color orange"></div>
         <p class="title">St. James Place</p>
         <div class="owner-and-cost-wrapper">
@@ -135,11 +136,11 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell chest">
+      <div class="cell chest" id="17">
         <img src="./images/chest.svg" alt="">
         <p class="title">Community Chest</p>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="18">
         <div class="street-color orange"></div>
         <p class="title">Tennessee Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -147,7 +148,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell right-edge-cell street">
+      <div class="cell right-edge-cell street" id="19">
         <div class="street-color orange"></div>
         <p class="title">New York Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -157,11 +158,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="cell left-edge-cell parking">
+      <div class="cell left-edge-cell parking" id="20">
         <img src="./images/car.svg" alt="">
         <p class="title">Free Parking</p>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="21">
         <div class="street-color red"></div>
         <p class="title">Kentucky Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -169,11 +170,11 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell chance">
+      <div class="cell chance" id="22">
         <img src="./images/chance.svg" alt="">
         <p class="title">Chance</p>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="23">
         <div class="street-color red"></div>
         <p class="title">Indiana Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -181,7 +182,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="24">
         <div class="street-color red"></div>
         <p class="title">Illinois Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -189,7 +190,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell railroad">
+      <div class="cell railroad" id="25">
         <img src="./images/railroad.svg" alt="">
         <p class="title">B&O Railroad</p>
         <div class="owner-and-cost-wrapper">
@@ -197,7 +198,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="26">
         <div class="street-color yellow"></div>
         <p class="title">Atlantic Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -205,7 +206,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="27">
         <div class="street-color yellow"></div>
         <p class="title">Ventnor Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -213,7 +214,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell communal">
+      <div class="cell communal" id="28">
         <img src="./images/water.svg" alt="">
         <p class="title water">Water Company</p>
         <div class="owner-and-cost-wrapper">
@@ -221,7 +222,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell right-edge-cell street">
+      <div class="cell right-edge-cell street" id="29">
         <div class="street-color yellow"></div>
         <p class="title">Marvin Gardens</p>
         <div class="owner-and-cost-wrapper">
@@ -231,11 +232,11 @@
       </div>
     </div>
     <div class="row">
-      <div class="cell left-edge-cell go-to-jail">
+      <div class="cell left-edge-cell go-to-jail" id="30">
         <img src="./images/police.svg" alt="">
         <p class="title">Go to Jail</p>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="31">
         <div class="street-color green"></div>
         <p class="title">Pacific Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -243,7 +244,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="32">
         <div class="street-color green"></div>
         <p class="title">North Carolina Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -251,11 +252,11 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell chest">
+      <div class="cell chest" id="33">
         <img src="./images/chest.svg" alt="">
         <p class="title">Community Chest</p>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="34">
         <div class="street-color green"></div>
         <p class="title">Pennsylvania Avenue</p>
         <div class="owner-and-cost-wrapper">
@@ -263,7 +264,7 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell railroad">
+      <div class="cell railroad" id="35">
         <img src="./images/railroad.svg" alt="">
         <p class="title">Short Line</p>
         <div class="owner-and-cost-wrapper">
@@ -271,11 +272,11 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell chance">
+      <div class="cell chance" id="36">
         <img src="./images/chance.svg" alt="">
         <p class="title">Chance</p>
       </div>
-      <div class="cell street">
+      <div class="cell street" id="37">
         <div class="street-color dark-blue"></div>
         <p class="title">Park Place</p>
         <div class="owner-and-cost-wrapper">
@@ -283,12 +284,12 @@
           <div class="owner"></div>
         </div>
       </div>
-      <div class="cell tax">
+      <div class="cell tax" id="38">
         <img src="./images/tax.svg" alt="">
         <p class="title">Luxury Tax</p>
         <p class="cost">- $100</p>
       </div>
-      <div class="cell right-edge-cell street">
+      <div class="cell right-edge-cell street" id="39">
         <div class="street-color dark-blue"></div>
         <p class="title">Boardwalk</p>
         <div class="owner-and-cost-wrapper">
