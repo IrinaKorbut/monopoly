@@ -1,7 +1,5 @@
 import movePlayer from '../move_player/movePlayerFn';
 
-let diceNumber;
-
 function roll() {
   const facesNames = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
   const allFaces = document.querySelectorAll('.face');
@@ -12,14 +10,14 @@ function roll() {
   const secondDiceFace = Math.floor(Math.random() * 6) + 1;
   document.querySelector(`.dice-one .${facesNames[firstDiceFace - 1]}-face`).style.display = 'flex';
   document.querySelector(`.dice-two .${facesNames[secondDiceFace - 1]}-face`).style.display = 'flex';
-  diceNumber = firstDiceFace + secondDiceFace;
+  return firstDiceFace + secondDiceFace;
 }
 
 export default function diceInit() {
   const rollButton = document.querySelector('.roll-button');
   const rollButtonEvent = function () {
     rollButton.removeEventListener('click', rollButtonEvent);    
-    const p = new Promise((resolve, reject) => {
+    const p = new Promise((resolve) => {
       let test;
       setTimeout(() => {
         test = setInterval(roll, 200);
@@ -31,7 +29,7 @@ export default function diceInit() {
       }, 3000);
     });
     p.then(() => {
-      movePlayer(diceNumber);
+      movePlayer(roll());
     });
   };
   rollButton.addEventListener('click', rollButtonEvent);
