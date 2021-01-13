@@ -1,6 +1,6 @@
 import movePlayer from '../move_player/movePlayerFn';
 
-function roll() {
+export function roll() {
   const facesNames = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
   const allFaces = document.querySelectorAll('.face');
   allFaces.forEach((face) => {
