@@ -16,7 +16,7 @@ function roll() {
 export default function diceInit() {
   const rollButton = document.querySelector('.roll-button');
   const rollButtonEvent = function () {
-    rollButton.removeEventListener('click', rollButtonEvent);    
+    rollButton.removeEventListener('click', rollButtonEvent);
     const p = new Promise((resolve) => {
       let test;
       setTimeout(() => {
