@@ -1,6 +1,6 @@
-import movePlayer from '../move_player/movePlayerFn';
+//import movePlayer from '../move_player/movePlayerFn';
 
-export function roll() {
+export default function roll() {
   const facesNames = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
   const allFaces = document.querySelectorAll('.face');
   allFaces.forEach((face) => {
@@ -13,24 +13,24 @@ export function roll() {
   return firstDiceFace + secondDiceFace;
 }
 
-export default function diceInit() {
-  const rollButton = document.querySelector('.roll-button');
-  const rollButtonEvent = function () {
-    rollButton.removeEventListener('click', rollButtonEvent);
-    const p = new Promise((resolve) => {
-      let test;
-      setTimeout(() => {
-        test = setInterval(roll, 200);
-        rollButton.addEventListener('click', rollButtonEvent);
-      }, 0);
-      setTimeout(() => {
-        clearInterval(test);
-        resolve();
-      }, 3000);
-    });
-    p.then(() => {
-      movePlayer(roll());
-    });
-  };
-  rollButton.addEventListener('click', rollButtonEvent);
-}
+// export default function diceInit() {
+//   const rollButton = document.querySelector('.roll-button');
+//   const rollButtonEvent = function () {
+//     rollButton.removeEventListener('click', rollButtonEvent);
+//     const p = new Promise((resolve) => {
+//       let test;
+//       setTimeout(() => {
+//         test = setInterval(roll, 200);
+//         rollButton.addEventListener('click', rollButtonEvent);
+//       }, 0);
+//       setTimeout(() => {
+//         clearInterval(test);
+//         resolve();
+//       }, 3000);
+//     });
+//     p.then(() => {
+//       movePlayer(roll());
+//     });
+//   };
+//   rollButton.addEventListener('click', rollButtonEvent);
+// }

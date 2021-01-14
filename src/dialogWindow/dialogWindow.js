@@ -1,5 +1,5 @@
 import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
-import { roll } from '../dice/dice';
+import roll from '../dice/dice';
 import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 
