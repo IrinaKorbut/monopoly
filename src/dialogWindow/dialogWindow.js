@@ -44,11 +44,11 @@ export default function showDialogWindow(action) {
         addPropertyToPlayer(game.activePlayer, property);
         const ownerLine = property.element.querySelector('.owner');
         ownerLine.style.backgroundColor = game.activePlayer.color;
-        showDialogWindow('roll');
+        showDialogWindow();
       });
       const buttonNo = createElement('div', ['button', 'no'], 'No');
       buttonNo.addEventListener('click', () => {
-        showDialogWindow('roll');
+        showDialogWindow();
       });
       appendElementTo(buttonsWrapper, buttonYes, buttonNo);
       appendElementTo(dialogWindowSection, title, buttonsWrapper);
@@ -67,12 +67,17 @@ export default function showDialogWindow(action) {
       const payTaxButton = createElement('div', ['button'], 'Pay');
       payTaxButton.addEventListener('click', () => {
         game.activePlayer.subtractMoney(cell.cost);
-        showDialogWindow('roll');
+        showDialogWindow();
       });
       appendElementTo(dialogWindowSection, title, payTaxButton);
       break;
     default:
-      console.log();
+      title = createElement('p', ['title'], 'End of turn');
+      const endButton = createElement('div', ['button'], 'End');
+      endButton.addEventListener('click', () => {
+        showDialogWindow('roll');
+      });
+      appendElementTo(dialogWindowSection, title, endButton);
   }
 }
 
