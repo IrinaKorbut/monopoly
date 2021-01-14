@@ -1,38 +1,75 @@
 import cells from '../cells/cells';
+//import { game, player } from '../main';
+import game from '../Game/Game';
+import showDialogWindow from '../dialogWindow/dialogWindow';
 
-function checkWherePlayerNow(player) {
-  const currentPlayerCell = player.parentNode;
-  currentPlayerCell.removeChild(player);
+function checkWherePlayerNow(playerDisplay) {
+  const currentPlayerCell = playerDisplay.parentNode;
+  currentPlayerCell.removeChild(playerDisplay);
   let currentPlayerPosition;
-  cells.forEach((item) => {    
+  cells.forEach((item) => {
     if (item.element === currentPlayerCell) {
       currentPlayerPosition = item.position;
-    };
+    }
   });
   return currentPlayerPosition;
 }
 
-function showAnimationMove(currentPlayerPosition, playerPositionAfterMove, player) {
-  for (let i = currentPlayerPosition + 1, j = 1; i <= playerPositionAfterMove; i += 1) {
+function highlightActiveCell(delay, i) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      cells[i].element.classList.toggle('active');
+      resolve();
+    }, delay);
+  });
+}
+
+async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay) {
+  for (let i = currentPlayerPosition + 1; i <= playerPositionAfterMove; i += 1) {
     if (i === 40) {
-      playerPositionAfterMove = playerPositionAfterMove - 40;
+      playerPositionAfterMove -= 40;
       i = 0;
     }
-
     if (i < playerPositionAfterMove) {
-      setTimeout(() => { cells[i].element.classList.toggle('active'); }, j * 400);
-      setTimeout(() => { cells[i].element.classList.toggle('active'); }, j * 400 + 200);
-      j += 1;
-    };
+      await highlightActiveCell(250, i);
+      await highlightActiveCell(250, i);
+    }
     if (i === playerPositionAfterMove) {
-      setTimeout(() => { cells[playerPositionAfterMove].element.appendChild(player); }, j * 400);
-    };
-  };
-};
+      cells[playerPositionAfterMove].element.appendChild(playerDisplay);
+    }
+  }
+}
 
-export default function movePlayer(stepsAmount) {
-  const player = document.querySelector('.player');
-  const currentPlayerPosition = checkWherePlayerNow(player);
+function doMoveLogic(playerPositionAfterMove) {
+  game.activePlayer.position = playerPositionAfterMove;
+  console.log(game.activePlayer.position);
+  const cellType = cells[playerPositionAfterMove].type;
+  switch (cellType) {
+    case 'start':
+    case 'jail':
+    case 'parking':
+    case 'goToJail':
+      showDialogWindow('roll');
+      break;
+    case 'chest':
+      showDialogWindow('roll');
+      break;
+    case 'chance':
+      showDialogWindow('roll');
+      break;
+    case 'tax':
+      showDialogWindow('tax');
+      break;
+    default:
+      showDialogWindow('buy');
+      break;
+  }
+}
+
+export default async function movePlayer(stepsAmount) {
+  const playerDisplay = document.querySelector('.player');
+  const currentPlayerPosition = checkWherePlayerNow(playerDisplay);
   const playerPositionAfterMove = currentPlayerPosition + stepsAmount;
-  showAnimationMove(currentPlayerPosition, playerPositionAfterMove, player);
+  await showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay);
+  doMoveLogic(playerPositionAfterMove);
 }

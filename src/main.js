@@ -1,6 +1,6 @@
 import { initWindowCards } from './WindowCard/windowCard';
-import diceInit from './dice/dice';
 import showDialogWindow from './dialogWindow/dialogWindow';
+import diceInit from './dice/dice';
 import Game from './Game/Game';
 import Player from './Player/Player';
 
@@ -10,14 +10,11 @@ import './style/dialogWindow.scss';
 import './style/field.scss';
 import './style/player.scss';
 
-diceInit();
 initWindowCards();
+diceInit();
 
-const game = new Game();
-const player = new Player('#11A85A');
-player.position = 6;
-game.addPlayer(player);
-game.activePlayer = player;
+export const player = new Player('#2295FF');
 
-showDialogWindow(game, 'tax');
-// console.log(player);
+Game.addPlayer(player);
+Game.activePlayer = player;
+showDialogWindow('roll');

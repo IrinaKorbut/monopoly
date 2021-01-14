@@ -1,15 +1,24 @@
-import { createElement, appendElementTo } from '../helpFunctions/helpFunctions';
+import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
 import { roll } from '../dice/dice';
 import movePlayer from '../move_player/movePlayerFn';
+import game from '../Game/Game';
 
-export default function showDialogWindow(game, action) {
+export default function showDialogWindow(action) {
+  console.log(game.activePlayer);
   let title;
-  let dialogWindowSection;
+  const dialogWindowSection = document.querySelector('.dialog-window');
+  removeChildsFromElement(dialogWindowSection);
   switch (action) {
+    case 'wait':
+      const img = createElement('img');
+      img.setAttribute('src', './images/time.svg');
+      appendElementTo(dialogWindowSection, img);
+      break;
     case 'roll':
-      title = createElement('p', ['title'], 'Player 1 move');
+      title = createElement('p', ['title'], `${game.activePlayer.name} move`);
       const rollButton = createElement('div', ['button'], 'Roll Dice');
       rollButton.addEventListener('click', () => {
+        showDialogWindow('wait');
         const p = new Promise((resolve) => {
           let test;
           setTimeout(() => {
@@ -24,7 +33,6 @@ export default function showDialogWindow(game, action) {
           movePlayer(roll());
         });
       });
-      dialogWindowSection = document.querySelector('.dialog-window');
       appendElementTo(dialogWindowSection, title, rollButton);
       break;
     case 'buy':
@@ -32,16 +40,16 @@ export default function showDialogWindow(game, action) {
       const buttonsWrapper = createElement('div', ['buttons-wrapper']);
       const buttonYes = createElement('div', ['button', 'yes'], 'Yes');
       buttonYes.addEventListener('click', () => {
-        let property = getCellObjByPosition(game, game.activePlayer.position);
+        let property = getCellObjByPosition(game.activePlayer.position);
         addPropertyToPlayer(game.activePlayer, property);
         const ownerLine = property.element.querySelector('.owner');
         ownerLine.style.backgroundColor = game.activePlayer.color;
+        showDialogWindow('roll');
       });
       const buttonNo = createElement('div', ['button', 'no'], 'No');
       buttonNo.addEventListener('click', () => {
-        console.log();
+        showDialogWindow('roll');
       });
-      dialogWindowSection = document.querySelector('.dialog-window');
       appendElementTo(buttonsWrapper, buttonYes, buttonNo);
       appendElementTo(dialogWindowSection, title, buttonsWrapper);
       break;
@@ -51,18 +59,18 @@ export default function showDialogWindow(game, action) {
       payRentButton.addEventListener('click', () => {
         // do some magic
       });
-      dialogWindowSection = document.querySelector('.dialog-window');
       appendElementTo(dialogWindowSection, title, payRentButton);
       break;
-      case 'tax':
-        title = createElement('p', ['title'], 'Some tax $200');
-        const payTaxButton = createElement('div', ['button'], 'Pay');
-        payTaxButton.addEventListener('click', () => {
-          // do some magic
-        });
-        dialogWindowSection = document.querySelector('.dialog-window');
-        appendElementTo(dialogWindowSection, title, payTaxButton);
-        break;
+    case 'tax':
+      const cell = getCellObjByPosition(game.activePlayer.position);
+      title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+      const payTaxButton = createElement('div', ['button'], 'Pay');
+      payTaxButton.addEventListener('click', () => {
+        game.activePlayer.subtractMoney(cell.cost);
+        showDialogWindow('roll');
+      });
+      appendElementTo(dialogWindowSection, title, payTaxButton);
+      break;
     default:
       console.log();
   }
@@ -70,10 +78,11 @@ export default function showDialogWindow(game, action) {
 
 function addPropertyToPlayer(player, property) {
   player.addProperty(property);
+  player.subtractMoney(property.cost);
   property.owner = game.activePlayer;
 }
 
-function getCellObjByPosition(game, position) {
+function getCellObjByPosition(position) {
   for (let i = 0; i < game.cells.length; i += 1) {
     const cell = game.cells[i];
     if (cell.position === position) {
