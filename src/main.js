@@ -1,20 +1,20 @@
 import { initWindowCards } from './WindowCard/windowCard';
+import showDialogWindow from './dialogWindow/dialogWindow';
 import diceInit from './dice/dice';
 import Game from './Game/Game';
 import Player from './Player/Player';
 
-// import cells from './cells/cells';
-
 import './style/style.scss';
 import './style/dice.scss';
+import './style/dialogWindow.scss';
 import './style/field.scss';
 import './style/player.scss';
 
 initWindowCards();
 diceInit();
 
-export const game = new Game();
-export const player = new Player('blue');
+export const player = new Player('#2295FF');
 
-game.addPlayer(player);
-game.activePlayer = player;
+Game.addPlayer(player);
+Game.activePlayer = player;
+showDialogWindow('roll');

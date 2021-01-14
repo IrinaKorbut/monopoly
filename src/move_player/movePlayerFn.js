@@ -1,5 +1,7 @@
 import cells from '../cells/cells';
-import { game, player } from '../main';
+//import { game, player } from '../main';
+import game from '../Game/Game';
+import showDialogWindow from '../dialogWindow/dialogWindow';
 
 function checkWherePlayerNow(playerDisplay) {
   const currentPlayerCell = playerDisplay.parentNode;
@@ -40,25 +42,26 @@ async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove,
 
 function doMoveLogic(playerPositionAfterMove) {
   game.activePlayer.position = playerPositionAfterMove;
+  console.log(game.activePlayer.position);
   const cellType = cells[playerPositionAfterMove].type;
   switch (cellType) {
     case 'start':
     case 'jail':
     case 'parking':
     case 'goToJail':
-      // showDialogWindow('roll')
+      showDialogWindow('roll');
       break;
     case 'chest':
-      // showDialogWindow('chest')
+      showDialogWindow('roll');
       break;
     case 'chance':
-      // showDialogWindow('chance')
+      showDialogWindow('roll');
       break;
     case 'tax':
-      // showDialogWindow('tax')
+      showDialogWindow('tax');
       break;
     default:
-      // showDialogWindow('buy')
+      showDialogWindow('buy');
       break;
   }
 }

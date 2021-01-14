@@ -1,11 +1,10 @@
 import { createElementAdd, createCell, appendElementTo, addWindow, addSelectorClass } from './windowCardConst';
-import Game from '../Game/Game';
+import game from '../Game/Game';
 import './windowCard.scss';
 
 let tooltipElem;
 
 export function cardStreet(event) {
-    const game = new Game()
     let target = event.target;
 
     let property;

@@ -1,7 +1,6 @@
 import cells from '../cells/cells';
 
-
-export default class Game {
+class Game {
   constructor() {
     this.players = [];
     this.cells = cells;
@@ -19,3 +18,5 @@ export default class Game {
     return this._activePlayer;
   }
 }
+
+export default new Game();
