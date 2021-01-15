@@ -28,6 +28,10 @@ function resetPlayerPosition(playerPositionAfterMove) {
   return playerPositionAfterMove - 40;
 }
 
+function addMoneyPerCycle() {
+  game.activePlayer.money += 200;
+}
+
 async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay) {
   for (let i = currentPlayerPosition + 1; i <= playerPositionAfterMove; i += 1) {
     if (i === 40) {
@@ -45,9 +49,7 @@ async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove,
 }
 
 function doMoveLogic(playerPositionAfterMove) {
-  console.log(playerPositionAfterMove)
   game.activePlayer.position = playerPositionAfterMove;
-  console.log(game.activePlayer.position);
   const cellType = cells[playerPositionAfterMove].type;
   switch (cellType) {
     case 'start':
@@ -78,6 +80,8 @@ export default async function movePlayer(stepsAmount) {
   await showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay);
   if (playerPositionAfterMove > 39) {
     playerPositionAfterMove = resetPlayerPosition(playerPositionAfterMove);
+    addMoneyPerCycle();
   }
   doMoveLogic(playerPositionAfterMove);
+  console.log(game)
 }
