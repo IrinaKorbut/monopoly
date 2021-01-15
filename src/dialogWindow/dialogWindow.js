@@ -4,7 +4,7 @@ import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 
 export default function showDialogWindow(action) {
-  console.log(game.activePlayer);
+ // console.log(game.activePlayer);
   let title;
   const dialogWindowSection = document.querySelector('.dialog-window');
   removeChildsFromElement(dialogWindowSection);

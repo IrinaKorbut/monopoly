@@ -36,8 +36,8 @@ export default [
   new Communal('communal', 'Water Works', 28), // communal
   new Street('street', 'Marvin Gardens', 29, 280, 24, 120, 360, 850, 1025, 1200, 150),
   new Cell('goToJail', 'Go To Jail', 30), // go to jail
-  new Street('street', 'Pacific Avenue', 31, 300, 26, 130, 390, 900, 110, 1275, 200),
-  new Street('street', 'North Carolina Avenue', 32, 300, 26, 130, 390, 900, 110, 1275, 200),
+  new Street('street', 'Pacific Avenue', 31, 300, 26, 130, 390, 900, 1100, 1275, 200),
+  new Street('street', 'North Carolina Avenue', 32, 300, 26, 130, 390, 900, 1100, 1275, 200),
   new Cell('chest', 'Chest', 33), // chest
   new Street('street', 'Pennsylvania Avenue', 34, 320, 30, 150, 450, 1000, 1200, 1400, 200),
   new Railroad('railroad', 'Short Line', 35),
