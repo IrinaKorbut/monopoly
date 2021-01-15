@@ -1,8 +1,9 @@
 import Cell from '../Cell/Cell';
 
 export default class Communal extends Cell {
-  constructor(type, name, position) {
+  constructor(type, name, position, cost) {
     super(type, name, position);
+    this.cost = cost;
   }
 
   get rent() {

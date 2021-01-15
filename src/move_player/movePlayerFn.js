@@ -54,13 +54,13 @@ function doMoveLogic(playerPositionAfterMove) {
     case 'jail':
     case 'parking':
     case 'goToJail':
-      showDialogWindow('roll');
+      showDialogWindow();
       break;
     case 'chest':
-      showDialogWindow('roll');
+      showDialogWindow();
       break;
     case 'chance':
-      showDialogWindow('roll');
+      showDialogWindow();
       break;
     case 'tax':
       showDialogWindow('tax');

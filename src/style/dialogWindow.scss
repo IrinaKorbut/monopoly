@@ -40,4 +40,12 @@
       cursor: pointer;
     }
   }
+
+  .inactive {
+    background-color: #C0C0C0;
+    
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
 }
