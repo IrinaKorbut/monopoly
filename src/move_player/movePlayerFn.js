@@ -68,7 +68,13 @@ function doMoveLogic(playerPositionAfterMove) {
       showDialogWindow('tax');
       break;
     default:
-      showDialogWindow('buy');
+      const cellsOwner = cells[playerPositionAfterMove].owner;
+      if (cellsOwner && cellsOwner !== game.activePlayer) {
+        showDialogWindow('rent');
+      } 
+      if (!cellsOwner) {
+        showDialogWindow('buy');
+      }
       break;
   }
 }
