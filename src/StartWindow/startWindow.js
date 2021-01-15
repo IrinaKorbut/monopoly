@@ -27,6 +27,16 @@ export function startWindow() {
     appendElementTo(classStartWindow, btnStart)
 
     gamekoi.addEventListener('change', () => addGamecoaSetting(settingGamers, gamekoi.value))
+
+    startBtn()
+}
+
+export function startBtn() {
+    const startBtn = document.querySelector('.btn-start')
+    startBtn.addEventListener('click', function () {
+        document.querySelector('.start-window').classList.add('no-active')
+        document.querySelector('#blackout').classList.remove('blackout');
+    })
 }
 
 function addGamecoaSetting(settingGamers, selectNum) {
