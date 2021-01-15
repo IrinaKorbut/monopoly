@@ -1,4 +1,6 @@
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
+import Game from '../Game/Game'
+import Player from '../Player/Player'
 
 export function startWindow() {
     const classStartWindow = document.querySelector('.start-window')
@@ -27,15 +29,34 @@ export function startWindow() {
     appendElementTo(classStartWindow, btnStart)
 
     gamekoi.addEventListener('change', () => addGamecoaSetting(settingGamers, gamekoi.value))
-
     startBtn()
 }
 
 export function startBtn() {
     const startBtn = document.querySelector('.btn-start')
     startBtn.addEventListener('click', function () {
-        document.querySelector('.start-window').classList.add('no-active')
-        document.querySelector('#blackout').classList.remove('blackout');
+        let name = 0
+        let sumClass = false
+
+        const inputName = document.querySelectorAll('.input-name')
+        inputName.forEach(e => name += !e.value == 0)
+
+        const selectStyle = document.querySelectorAll('.select-game')
+        selectStyle.forEach(e => sumClass = e.value !== 'Color')
+        
+        if (name === inputName.length && sumClass) {
+
+            for (let i = 0; i < inputName.length; i++) {
+                Game.addPlayer(new Player(selectStyle[i].value, inputName[i].value))
+            }
+
+            document.querySelector('.start-window').classList.add('no-active')
+            document.querySelector('#blackout').classList.remove('blackout');
+
+        } else {
+            startBtn.classList.remove('color-btn')
+            startBtn.classList.add('color-warning-btn')
+        }
     })
 }
 
@@ -80,5 +101,14 @@ function addGamecoaSetting(settingGamers, selectNum) {
         appendElementTo(playerSelectHuman, selectHuman, selectAi)
 
         playerSelectColor.addEventListener('change', () => playerIcon.style.backgroundColor = playerSelectColor.value)
+        playerInput.addEventListener('input', () => addNameA(playerIconName, playerInput.value))
+    }
+}
+
+function addNameA(playerIconName, playerInput) {
+    if (!playerInput[0]) {
+        playerIconName.textContent = 'P'
+    } else {
+        playerIconName.textContent = playerInput[0].toUpperCase()
     }
 }
