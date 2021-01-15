@@ -26,4 +26,49 @@ export function startWindow() {
     appendElementTo(classStartWindow, settingGamers)
     appendElementTo(classStartWindow, btnStart)
 
+    gamekoi.addEventListener('change', () => addGamecoaSetting(settingGamers, gamekoi.value))
+}
+
+function addGamecoaSetting(settingGamers, selectNum) {
+    settingGamers.innerHTML = '';
+    for (let i = 0; i < selectNum; i++) {
+
+        const playerWrapper = createElement('div', ['player-wrapper'])
+        const playerIcon = createElement('div', [`player-icon${i + 1}`, 'icon'])
+        const playerIconName = createElement('p', [`player-icon-name${i + 1}`, 'icon-name'], 'P')
+        const playerInput = createElement('input', [`player-input${i + 1}`, 'input-name'])
+        playerInput.placeholder = `Player ${i + 1}`
+
+        const playerSelectColor = createElement('select', [`player-select-color${i + 1}`, 'select-style', 'select-game'])
+        const selectColorDisabl = createElement('option', ['disabled'], 'Color')
+        selectColorDisabl.selected = 'selected'
+        selectColorDisabl.disabled = 'disabled'
+
+        const selectColorUan = createElement('option', ['red'], 'Red')
+        selectColorUan.value = '#db2428'
+
+        const selectColorTuo = createElement('option', ['blue'], 'Blue')
+        selectColorTuo.value = '#47a7ff'
+
+        const selectColorThree = createElement('option', ['orange'], 'Orange')
+        selectColorThree.value = '#eb8b2c'
+
+        const selectColorFour = createElement('option', ['green'], 'Green')
+        selectColorFour.value = '#11a85a'
+
+        const playerSelectHuman = createElement('select', ['player-selectHuman', 'select-style'])
+        const selectHuman = createElement('option', ['num'], 'Human')
+        selectHuman.value = 'human'
+
+        const selectAi = createElement('option', ['num'], 'AI(test)')
+        selectAi.value = 'ai'
+
+        appendElementTo(settingGamers, playerWrapper)
+        appendElementTo(playerWrapper, playerIcon, playerInput, playerSelectColor, playerSelectHuman)
+        appendElementTo(playerIcon, playerIconName)
+        appendElementTo(playerSelectColor, selectColorDisabl, selectColorUan, selectColorTuo, selectColorThree, selectColorFour)
+        appendElementTo(playerSelectHuman, selectHuman, selectAi)
+
+        playerSelectColor.addEventListener('change', () => playerIcon.style.backgroundColor = playerSelectColor.value)
+    }
 }
