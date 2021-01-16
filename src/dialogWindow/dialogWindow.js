@@ -12,7 +12,7 @@ export default function showDialogWindow(action) {
   switch (action) {
     case 'wait':
       const img = createElement('img');
-      img.setAttribute('src', './images/time.svg');
+      img.setAttribute('src', './images/dollar-coin.svg');
       appendElementTo(dialogWindowSection, img);
       break;
     case 'roll':

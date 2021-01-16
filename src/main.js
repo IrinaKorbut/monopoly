@@ -30,7 +30,7 @@ startWindow();
 //     player.addProperty(Game.cells[i]);
 //   }
 // }
-// showDialogWindow('wait');
+// showDialogWindow('roll');
 // const player1 = new Player('#2295FF', 'player1');
 // const player2 = new Player('#2295FF', 'player2');
 // Game.addPlayer(player1);
