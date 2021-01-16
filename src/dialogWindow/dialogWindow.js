@@ -7,7 +7,6 @@ export default function showDialogWindow(action) {
  // console.log(game.activePlayer);
   let title;
   const cell = getCellObjByPosition(game.activePlayer.position);
-  console.log(cell);
   const dialogWindowSection = document.querySelector('.dialog-window');
   removeChildsFromElement(dialogWindowSection);
   switch (action) {
@@ -51,6 +50,15 @@ export default function showDialogWindow(action) {
           addPropertyToPlayer(game.activePlayer, cell);
           const ownerLine = cell.element.querySelector('.owner');
           ownerLine.style.backgroundColor = game.activePlayer.color;
+          setRent(cell, game.activePlayer);
+          // // change color
+          // const ownerLine = cell.element.querySelector('.owner');
+          // ownerLine.style.backgroundColor = game.activePlayer.color;
+          // // set rent
+          // const rent = cell.element.querySelector('.cost');
+          // rent.innerText = `$${cell.rent}`;
+          // cell.currentRent = cell.rent;
+          // // end of turn
           showDialogWindow();
         });
         buttonNo.addEventListener('click', () => {
@@ -107,6 +115,38 @@ function getCellObjByPosition(position) {
 
 function isPlayerHaveEnoughMoney(player, price) {
   if (player.money >= price) {
+    return true;
+  }
+  return false;
+}
+
+function setRent(property, player) {
+  if (isColorSet(player, property)) {
+    for (let i = 0; i < player.property.length; i += 1) {
+      const playerProperty = player.property[i];
+      if (playerProperty.kitId === property.kitId) {
+        console.log(playerProperty);
+        const rent = playerProperty.element.querySelector('.cost');
+        rent.innerText = `$${playerProperty.rent * 2}`;
+        playerProperty.currentRent = playerProperty.rent * 2;
+      }
+    }
+  } else {
+    const rent = property.element.querySelector('.cost');
+    rent.innerText = `$${property.rent}`;
+    property.currentRent = property.rent;
+  }
+}
+
+function isColorSet(player, purchaseProperty) {
+  let sameKitPropertyCounter = 0;
+  for (let i = 0; i < player.property.length; i += 1) {
+    const playerProperty = player.property[i];
+    if (playerProperty.kitId === purchaseProperty.kitId) {
+      sameKitPropertyCounter += 1;
+    }
+  }
+  if (sameKitPropertyCounter === purchaseProperty.kitSize) {
     return true;
   }
   return false;

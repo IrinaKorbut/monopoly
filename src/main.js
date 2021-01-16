@@ -17,10 +17,14 @@ import './StartWindow/startWindow.scss';
 initWindowCards();
 diceInit();
 
+startWindow();
 // export const player = new Player('#2295FF');
-
 // Game.addPlayer(player);
 // Game.activePlayer = player;
-// showDialogWindow('roll');
-
-startWindow();
+// Game.activePlayer.position = 6;
+// for (let i = 0; i < Game.cells.length; i += 1) {
+//   if (Game.cells[i].name === 'Vermont Avenue' || Game.cells[i].name === 'Connecticut Avenue') {
+//     player.addProperty(Game.cells[i]);
+//   }
+// }
+showDialogWindow('roll');
