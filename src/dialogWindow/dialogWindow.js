@@ -4,7 +4,7 @@ import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 
 export default function showDialogWindow(action) {
-  console.log(game.activePlayer);
+ // console.log(game.activePlayer);
   let title;
   const cell = getCellObjByPosition(game.activePlayer.position);
   console.log(cell);
