@@ -1,6 +1,7 @@
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
 import Game from '../Game/Game'
 import Player from '../Player/Player'
+import renderPlayerCard from '../playerCards/renderPlayerCard';
 
 export function startWindow() {
     const classStartWindow = document.querySelector('.start-window')
@@ -57,6 +58,7 @@ export function startBtn() {
             startBtn.classList.remove('color-btn')
             startBtn.classList.add('color-warning-btn')
         }
+        renderPlayerCard();
     })
 }
 

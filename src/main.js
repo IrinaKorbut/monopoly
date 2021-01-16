@@ -1,4 +1,3 @@
-import diceInitTest from './dice/dice';
 import { initWindowCards } from './WindowCard/windowCard';
 import showDialogWindow from './dialogWindow/dialogWindow';
 import diceInit from './dice/dice';
@@ -13,6 +12,7 @@ import './style/dialogWindow.scss';
 import './style/field.scss';
 import './style/player.scss';
 import './StartWindow/startWindow.scss';
+import './style/playerCards.scss';
 
 initWindowCards();
 diceInit();
