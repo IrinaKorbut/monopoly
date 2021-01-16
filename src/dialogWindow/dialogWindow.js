@@ -4,7 +4,6 @@ import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 
 export default function showDialogWindow(action) {
- // console.log(game.activePlayer);
   let title;
   const cell = getCellObjByPosition(game.activePlayer.position);
   const dialogWindowSection = document.querySelector('.dialog-window');
@@ -41,24 +40,19 @@ export default function showDialogWindow(action) {
       const buttonsWrapper = createElement('div', ['buttons-wrapper']);
       const buttonYes = createElement('div', ['button', 'yes'], 'Buy');
       const buttonNo = createElement('div', ['button', 'no'], 'Don\'t buy');
-      buttonNo.addEventListener('click', () => {
-        showDialogWindow();
-      });
       appendElementTo(buttonsWrapper, buttonYes, buttonNo);
       if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
         buttonYes.addEventListener('click', () => {
           addPropertyToPlayer(game.activePlayer, cell);
           const ownerLine = cell.element.querySelector('.owner');
           ownerLine.style.backgroundColor = game.activePlayer.color;
-          setRent(cell, game.activePlayer);
-          // // change color
-          // const ownerLine = cell.element.querySelector('.owner');
-          // ownerLine.style.backgroundColor = game.activePlayer.color;
-          // // set rent
-          // const rent = cell.element.querySelector('.cost');
-          // rent.innerText = `$${cell.rent}`;
-          // cell.currentRent = cell.rent;
-          // // end of turn
+          if (cell.type === 'street') {
+            setStreetRent(cell, game.activePlayer);
+          } else if (cell.type === 'railroad') {
+            setRailroadRent(game.activePlayer);
+          } else {
+            //
+          }
           showDialogWindow();
         });
         buttonNo.addEventListener('click', () => {
@@ -72,12 +66,19 @@ export default function showDialogWindow(action) {
       }
       break;
     case 'rent':
-      title = createElement('p', ['title'], 'The rent is $1000');
+      title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
       const payRentButton = createElement('div', ['button'], 'Pay');
-      payRentButton.addEventListener('click', () => {
-        // do some magic
-      });
-      appendElementTo(dialogWindowSection, title, payRentButton);
+      if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
+        payRentButton.addEventListener('click', () => {
+          game.activePlayer.money -= cell.currentRent;
+          showDialogWindow();
+        });
+        appendElementTo(dialogWindowSection, title, payRentButton);
+      } else {
+        buttonYes.classList.add('inactive');
+        const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
+        appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+      }
       break;
     case 'tax':
       title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
@@ -121,12 +122,11 @@ function isPlayerHaveEnoughMoney(player, price) {
   return false;
 }
 
-function setRent(property, player) {
+function setStreetRent(property, player) {
   if (isColorSet(player, property)) {
     for (let i = 0; i < player.property.length; i += 1) {
       const playerProperty = player.property[i];
       if (playerProperty.kitId === property.kitId) {
-        console.log(playerProperty);
         const rent = playerProperty.element.querySelector('.cost');
         rent.innerText = `$${playerProperty.rent * 2}`;
         playerProperty.currentRent = playerProperty.rent * 2;
@@ -137,6 +137,20 @@ function setRent(property, player) {
     rent.innerText = `$${property.rent}`;
     property.currentRent = property.rent;
   }
+}
+
+function setRailroadRent(player) {
+  let railroadCounter = 0;
+  player.property.forEach((propery) => {
+    if (propery.type === 'railroad') {
+      railroadCounter += 1;
+    }
+  });
+  player.property.forEach((propery) => {
+    propery.rent = railroadCounter;
+    const rent = propery.element.querySelector('.cost');
+    rent.innerText = `$${propery.rent}`;
+  });
 }
 
 function isColorSet(player, purchaseProperty) {
@@ -157,11 +171,7 @@ export function setNextPlayerAsActive() {
   const activePlayerIndex = game.players.indexOf(game.activePlayer);
   if (activePlayerIndex < game.players.length - 1) {
     game.activePlayer = game.players[activePlayerIndex + 1];
-    console.log(`if`);
-    console.log(game);
   } else {
     game.activePlayer = game.players[0];
-    console.log(`else`);
-    console.log(game);
   }
 }
