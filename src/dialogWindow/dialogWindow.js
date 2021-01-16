@@ -92,6 +92,7 @@ export default function showDialogWindow(action) {
       title = createElement('p', ['title'], 'End of turn');
       const endButton = createElement('div', ['button'], 'End');
       endButton.addEventListener('click', () => {
+        setNextPlayerAsActive();
         showDialogWindow('roll');
       });
       appendElementTo(dialogWindowSection, title, endButton);
@@ -150,4 +151,17 @@ function isColorSet(player, purchaseProperty) {
     return true;
   }
   return false;
+}
+
+export function setNextPlayerAsActive() {
+  const activePlayerIndex = game.players.indexOf(game.activePlayer);
+  if (activePlayerIndex < game.players.length - 1) {
+    game.activePlayer = game.players[activePlayerIndex + 1];
+    console.log(`if`);
+    console.log(game);
+  } else {
+    game.activePlayer = game.players[0];
+    console.log(`else`);
+    console.log(game);
+  }
 }

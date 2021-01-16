@@ -7,6 +7,9 @@ import Player from './Player/Player';
 import { startWindow } from './StartWindow/startWindow';
 // import cells from './cells/cells';
 
+import { setNextPlayerAsActive } from './dialogWindow/dialogWindow'
+
+
 import './style/style.scss';
 import './style/dice.scss';
 import './style/dialogWindow.scss';
@@ -27,4 +30,15 @@ startWindow();
 //     player.addProperty(Game.cells[i]);
 //   }
 // }
-showDialogWindow('roll');
+// showDialogWindow('wait');
+// const player1 = new Player('#2295FF', 'player1');
+// const player2 = new Player('#2295FF', 'player2');
+// Game.addPlayer(player1);
+// Game.addPlayer(player2);
+// Game.activePlayer = player1;
+// console.log(Game);
+// setNextPlayerAsActive();
+// console.log(Game);
+// setNextPlayerAsActive();
+// console.log(Game);
+// setNextPlayerAsActive();
