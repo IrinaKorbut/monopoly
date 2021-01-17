@@ -1,11 +1,11 @@
-import { createElementAdd, createCell, appendElementTo, addWindow, addSelectorClass } from './windowCardConst';
+import { createCell, addWindow, addSelectorClass } from './windowCardConst';
+import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
 import game from '../Game/Game';
+
 import './windowCard.scss';
 
-let tooltipElem;
-
-export function cardStreet(event) {
-    let target = event.target;
+export function cardStreet(event, tooltipElem) {
+    const target = event.target;
 
     let property;
     for (let i = 0; i < game.cells.length; i += 1) {
@@ -16,25 +16,24 @@ export function cardStreet(event) {
         }
     }
 
-    tooltipElem = createElementAdd('div', 'tooltip')
-    let wrapperCard = createElementAdd('div', 'wrapper-card')
-    let wrapperColor = createElementAdd('div', 'wrapper-color')
-    wrapperColor.classList.add(target.children[0].classList[1])
-    let wrapperColorName = createElementAdd('div', 'wrapper-color-name', property.name)
+    tooltipElem = createElement('div', ['tooltip', 'tooltips'])
+    const wrapperCard = createElement('div', ['wrapper-card'])
+    const wrapperColor = createElement('div', ['wrapper-color', `${target.children[0].classList[1]}`])
+    const wrapperColorName = createElement('div', ['wrapper-color-name'], property.name)
 
-    let infoRents = createElementAdd('div', 'info-rents')
-    let rent = createCell('rent', 'Rent', `$ ${property.rent}`)
-    let rentWithColorSet = createCell('rent-with-color-set', 'Rent with color set', `$ ${property.rent * 2}`)
+    const infoRents = createElement('div', ['info-rents'])
+    const rent = createCell('rent', 'Rent', `$ ${property.rent}`)
+    const rentWithColorSet = createCell('rent-with-color-set', 'Rent with color set', `$ ${property.rent * 2}`)
 
-    let rentWithOne = createCell('rent-with-one', 'with 1 hause', `$ ${property.rentWithOneHouse}`)
-    let rentWithTwo = createCell('rent-with-two', 'with 2 hauses', `$ ${property.rentWhithTwoHouses}`)
-    let rentWithThree = createCell('rent-with-three', 'with 3 hauses', `$ ${property.rentWithTreeHouses}`)
-    let rentWithFour = createCell('rent-with-four', 'with 4 hauses', `$ ${property.rentWhithFourHouses}`)
-    let rentWithFive = createCell('rent-with-five', 'with HOTEL', `$ ${property.rentWhithHotel}`)
+    const rentWithOne = createCell('rent-with-one', 'with 1 hause', `$ ${property.rentWithOneHouse}`)
+    const rentWithTwo = createCell('rent-with-two', 'with 2 hauses', `$ ${property.rentWhithTwoHouses}`)
+    const rentWithThree = createCell('rent-with-three', 'with 3 hauses', `$ ${property.rentWithTreeHouses}`)
+    const rentWithFour = createCell('rent-with-four', 'with 4 hauses', `$ ${property.rentWhithFourHouses}`)
+    const rentWithFive = createCell('rent-with-five', 'with HOTEL', `$ ${property.rentWhithHotel}`)
 
-    let housest = createElementAdd('div', 'housest')
-    let housestCost = createCell('housest-cost', 'Housest cost', `$ ${property.houseCost}`)
-    let hotelsCost = createCell('hotels-cost', 'Hotels cost', `$ ${property.houseCost}`)
+    const housest = createElement('div', ['housest'])
+    const housestCost = createCell('housest-cost', 'Housest cost', `$ ${property.houseCost}`)
+    const hotelsCost = createCell('hotels-cost', 'Hotels cost', `$ ${property.houseCost}`)
 
     appendElementTo(document.body, tooltipElem)
     appendElementTo(tooltipElem, wrapperCard)
@@ -48,18 +47,20 @@ export function cardStreet(event) {
     addWindow(target, tooltipElem)
 }
 
-export function cardRailroad(event) {
-    let target = event.target;
-    tooltipElem = createElementAdd('div', 'card-tax')
-    let image = createElementAdd('img', 'image')
+export function cardRailroad(event, tooltipElem) {
+    const target = event.target;
+
+    tooltipElem = createElement('div', ['card-tax', 'tooltips'])
+    const image = createElement('img', ['image'])
     image.src = target.children[0].attributes[0].value
-    let nameRailroad = createElementAdd('div', 'name-railroad', 'Reading Railroad')
-    let rentalInstruction = createElementAdd('div', 'rental-instruction')
-    let rent = createCell('rent', 'Rent', '$25')
-    let owner = createElementAdd('div', 'owner', 'OWNER:')
-    let ownerTwo = createCell('owner-two', '2 transport objects', '$50')
-    let ownerThree = createCell('owner-three', '3 transport objects', '$100')
-    let ownerFour = createCell('owner-four', '4 transport objects', '$200')
+
+    const nameRailroad = createElement('div', ['name-railroad'], 'Reading Railroad')
+    const rentalInstruction = createElement('div', ['rental-instruction'])
+    const rent = createCell('rent', 'Rent', '$25')
+    const owner = createElement('div', ['owner'], 'OWNER:')
+    const ownerTwo = createCell('owner-two', '2 transport objects', '$50')
+    const ownerThree = createCell('owner-three', '3 transport objects', '$100')
+    const ownerFour = createCell('owner-four', '4 transport objects', '$200')
 
     appendElementTo(document.body, tooltipElem)
     appendElementTo(tooltipElem, image)
@@ -69,15 +70,16 @@ export function cardRailroad(event) {
     addWindow(target, tooltipElem)
 }
 
-export function cardCompany(event) {
-    let target = event.target;
-    tooltipElem = createElementAdd('div', 'company')
-    let image = createElementAdd('img', 'image')
-    image.src = target.children[0].attributes[0].value
-    let nameCompany = createElementAdd('div', 'name-company', `${target.children[1].innerText}`)
-    let companyInstructionOne = createElementAdd('div', 'company-instruction-one', 'If the player has one business, then the rent is four times the result of the die roll.')
+export function cardCompany(event, tooltipElem) {
+    const target = event.target;
 
-    let companyInstructionTwo = createElementAdd('div', 'company-instruction-two', 'If the player owns both businesses, the rent is ten times the result of the die roll.')
+    tooltipElem = createElement('div', ['company', 'tooltips'])
+    const image = createElement('img', ['image'])
+    image.src = target.children[0].attributes[0].value
+
+    const nameCompany = createElement('div', ['name-company'], `${target.children[1].innerText}`)
+    const companyInstructionOne = createElement('div', ['company-instruction-one'], 'If the player has one business, then the rent is four times the result of the die roll.')
+    const companyInstructionTwo = createElement('div', ['company-instruction-two'], 'If the player owns both businesses, the rent is ten times the result of the die roll.')
 
     appendElementTo(document.body, tooltipElem)
     appendElementTo(tooltipElem, image, nameCompany, companyInstructionOne, companyInstructionTwo)
@@ -85,9 +87,9 @@ export function cardCompany(event) {
 }
 
 export function removeCardStreet() {
+   const tooltipElem = document.querySelector('.tooltips')
     if (tooltipElem) {
         tooltipElem.remove();
-        tooltipElem = null;
     }
 }
 
