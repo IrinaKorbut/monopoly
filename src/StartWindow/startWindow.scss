@@ -11,6 +11,7 @@ body {
     background: rgb(43 35 35 / 87%);
     -webkit-transform: 0.2s;
     transform: 0.2s;
+    z-index: 1000;
 }
 
 .no-active {
@@ -31,6 +32,7 @@ body {
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+    z-index: 1000;
 
     .number-players {
         margin: 1rem;

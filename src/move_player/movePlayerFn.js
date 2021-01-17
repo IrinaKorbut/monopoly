@@ -1,11 +1,11 @@
 import cells from '../cells/cells';
-//import { game, player } from '../main';
+// import { game, player } from '../main';
 import game from '../Game/Game';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 
 function checkWherePlayerNow(playerDisplay) {
-  const currentPlayerCell = playerDisplay.parentNode;
-  currentPlayerCell.removeChild(playerDisplay);
+  const currentPlayerCell = playerDisplay.parentNode.parentNode;
+  playerDisplay.remove();
   let currentPlayerPosition;
   cells.forEach((item) => {
     if (item.element === currentPlayerCell) {
@@ -43,7 +43,7 @@ async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove,
       await highlightActiveCell(250, i);
     }
     if (i === playerPositionAfterMove) {
-      cells[playerPositionAfterMove].element.appendChild(playerDisplay);
+      cells[playerPositionAfterMove].element.querySelector('.players-container').appendChild(playerDisplay);
     }
   }
 }
@@ -71,7 +71,7 @@ function doMoveLogic(playerPositionAfterMove) {
       const cellsOwner = cells[playerPositionAfterMove].owner;
       if (cellsOwner && cellsOwner !== game.activePlayer) {
         showDialogWindow('rent');
-      } 
+      }
       if (!cellsOwner) {
         showDialogWindow('buy');
       }
@@ -92,5 +92,4 @@ export default async function movePlayer(stepsAmount) {
     addMoneyPerCycle();
   }
   doMoveLogic(playerPositionAfterMove);
-  console.log(game)
 }
