@@ -1,6 +1,7 @@
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
 import Game from '../Game/Game'
 import Player from '../Player/Player'
+import renderPlayerCard from '../playerCards/renderPlayerCard';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 
 export function startWindow() {
@@ -59,6 +60,7 @@ export function startBtn() {
             startBtn.classList.remove('color-btn')
             startBtn.classList.add('color-warning-btn')
         }
+        renderPlayerCard();
     })
 }
 
