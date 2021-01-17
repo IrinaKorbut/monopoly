@@ -75,6 +75,9 @@ function doMoveLogic(playerPositionAfterMove) {
       if (!cellsOwner) {
         showDialogWindow('buy');
       }
+      if (cellsOwner === game.activePlayer) {
+        showDialogWindow();
+      }
       break;
   }
 }

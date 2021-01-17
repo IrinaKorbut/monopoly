@@ -18,7 +18,7 @@ export default function showDialogWindow(action) {
       title = createElement('p', ['title'], `${game.activePlayer.name} move`);
       const rollButton = createElement('div', ['button'], 'Roll Dice');
       rollButton.addEventListener('click', () => {
-        showDialogWindow('wait');
+        showDialogWindow('wait'); 
         const p = new Promise((resolve) => {
           let test;
           setTimeout(() => {
@@ -51,7 +51,7 @@ export default function showDialogWindow(action) {
           } else if (cell.type === 'railroad') {
             setRailroadRent(game.activePlayer);
           } else {
-            //
+            setCommunalRent(cell, game.activePlayer);
           }
           showDialogWindow();
         });
@@ -66,18 +66,53 @@ export default function showDialogWindow(action) {
       }
       break;
     case 'rent':
-      title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
-      const payRentButton = createElement('div', ['button'], 'Pay');
-      if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
-        payRentButton.addEventListener('click', () => {
-          game.activePlayer.money -= cell.currentRent;
-          showDialogWindow();
-        });
-        appendElementTo(dialogWindowSection, title, payRentButton);
+      if(cell.type !== 'communal') {
+        title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
+        const payRentButton = createElement('div', ['button'], 'Pay');
+        if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
+          payRentButton.addEventListener('click', () => {
+            game.activePlayer.money -= cell.currentRent;
+            showDialogWindow();
+          });
+          appendElementTo(dialogWindowSection, title, payRentButton);
+        } else {
+          buttonYes.classList.add('inactive');
+          const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
+          appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+        }
       } else {
-        buttonYes.classList.add('inactive');
-        const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
-        appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+        title = createElement('p', ['title'], 'Roll dice to know rent');
+        const rollDiceButton = createElement('div', ['button'], 'Roll Dice');
+        rollDiceButton.addEventListener('click', () => {
+          showDialogWindow('wait'); 
+          const p = new Promise((resolve) => {
+            let test;
+            setTimeout(() => {
+              test = setInterval(roll, 200);
+            }, 0);
+            setTimeout(() => {
+              clearInterval(test);
+              resolve();
+            }, 3000);
+          });
+          p.then(() => {
+            let rent = roll();
+            rent = isColorSet(game.activePlayer, cell) ? rent * 10 : rent * 4;
+            title = createElement('p', ['title'], `The rent is $${rent}`);
+            const payRentButton = createElement('div', ['button'], 'Pay');
+            if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
+              payRentButton.addEventListener('click', () => {
+                game.activePlayer.money -= rent;
+                showDialogWindow();
+              });
+              appendElementTo(dialogWindowSection, title, payRentButton);
+            } else {
+              buttonYes.classList.add('inactive');
+              const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
+              appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+            }
+          });
+        });
       }
       break;
     case 'tax':
@@ -136,6 +171,21 @@ function setStreetRent(property, player) {
     const rent = property.element.querySelector('.cost');
     rent.innerText = `$${property.rent}`;
     property.currentRent = property.rent;
+  }
+}
+
+function setCommunalRent(property, player) {
+  if (isColorSet(player, property)) {
+    for (let i = 0; i < player.property.length; i += 1) {
+      const playerProperty = player.property[i];
+      if (playerProperty.kitId === property.kitId) {
+        const rent = playerProperty.element.querySelector('.cost');
+        rent.innerText = 'x10';
+      }
+    }
+  } else {
+    const rent = property.element.querySelector('.cost');
+    rent.innerText = 'x4';
   }
 }
 
