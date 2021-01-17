@@ -1,5 +1,5 @@
 import cells from '../cells/cells';
-//import { game, player } from '../main';
+// import { game, player } from '../main';
 import game from '../Game/Game';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 
@@ -71,7 +71,7 @@ function doMoveLogic(playerPositionAfterMove) {
       const cellsOwner = cells[playerPositionAfterMove].owner;
       if (cellsOwner && cellsOwner !== game.activePlayer) {
         showDialogWindow('rent');
-      } 
+      }
       if (!cellsOwner) {
         showDialogWindow('buy');
       }
@@ -89,5 +89,5 @@ export default async function movePlayer(stepsAmount) {
     addMoneyPerCycle();
   }
   doMoveLogic(playerPositionAfterMove);
-  console.log(game)
+  console.log(game);
 }
