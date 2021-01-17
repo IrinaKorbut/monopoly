@@ -4,14 +4,14 @@ import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 
 export default function showDialogWindow(action) {
- // console.log(game.activePlayer);
   let title;
+  const cell = getCellObjByPosition(game.activePlayer.position);
   const dialogWindowSection = document.querySelector('.dialog-window');
   removeChildsFromElement(dialogWindowSection);
   switch (action) {
     case 'wait':
       const img = createElement('img');
-      img.setAttribute('src', './images/time.svg');
+      img.setAttribute('src', './images/dollar-coin.svg');
       appendElementTo(dialogWindowSection, img);
       break;
     case 'roll':
@@ -36,43 +36,67 @@ export default function showDialogWindow(action) {
       appendElementTo(dialogWindowSection, title, rollButton);
       break;
     case 'buy':
-      title = createElement('p', ['title'], 'Buy?');
+      title = createElement('p', ['title'], 'Free property');
       const buttonsWrapper = createElement('div', ['buttons-wrapper']);
-      const buttonYes = createElement('div', ['button', 'yes'], 'Yes');
-      buttonYes.addEventListener('click', () => {
-        let property = getCellObjByPosition(game.activePlayer.position);
-        addPropertyToPlayer(game.activePlayer, property);
-        const ownerLine = property.element.querySelector('.owner');
-        ownerLine.style.backgroundColor = game.activePlayer.color;
-        showDialogWindow('roll');
-      });
-      const buttonNo = createElement('div', ['button', 'no'], 'No');
-      buttonNo.addEventListener('click', () => {
-        showDialogWindow('roll');
-      });
+      const buttonYes = createElement('div', ['button', 'yes'], 'Buy');
+      const buttonNo = createElement('div', ['button', 'no'], 'Don\'t buy');
       appendElementTo(buttonsWrapper, buttonYes, buttonNo);
-      appendElementTo(dialogWindowSection, title, buttonsWrapper);
+      if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
+        buttonYes.addEventListener('click', () => {
+          addPropertyToPlayer(game.activePlayer, cell);
+          const ownerLine = cell.element.querySelector('.owner');
+          ownerLine.style.backgroundColor = game.activePlayer.color;
+          if (cell.type === 'street') {
+            setStreetRent(cell, game.activePlayer);
+          } else if (cell.type === 'railroad') {
+            setRailroadRent(game.activePlayer);
+          } else {
+            //
+          }
+          showDialogWindow();
+        });
+        buttonNo.addEventListener('click', () => {
+          showDialogWindow();
+        });
+        appendElementTo(dialogWindowSection, title, buttonsWrapper);
+      } else {
+        buttonYes.classList.add('inactive');
+        const subtitle = createElement('p', ['subtitle'], `You are short $${cell.cost - game.activePlayer.money}`);
+        appendElementTo(dialogWindowSection, title, subtitle, buttonsWrapper);
+      }
       break;
     case 'rent':
-      title = createElement('p', ['title'], 'The rent is $1000');
+      title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
       const payRentButton = createElement('div', ['button'], 'Pay');
-      payRentButton.addEventListener('click', () => {
-        // do some magic
-      });
-      appendElementTo(dialogWindowSection, title, payRentButton);
+      if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
+        payRentButton.addEventListener('click', () => {
+          game.activePlayer.money -= cell.currentRent;
+          showDialogWindow();
+        });
+        appendElementTo(dialogWindowSection, title, payRentButton);
+      } else {
+        buttonYes.classList.add('inactive');
+        const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
+        appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+      }
       break;
     case 'tax':
-      const cell = getCellObjByPosition(game.activePlayer.position);
       title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
       const payTaxButton = createElement('div', ['button'], 'Pay');
       payTaxButton.addEventListener('click', () => {
         game.activePlayer.subtractMoney(cell.cost);
-        showDialogWindow('roll');
+        showDialogWindow();
       });
       appendElementTo(dialogWindowSection, title, payTaxButton);
       break;
     default:
-      console.log();
+      title = createElement('p', ['title'], 'End of turn');
+      const endButton = createElement('div', ['button'], 'End');
+      endButton.addEventListener('click', () => {
+        setNextPlayerAsActive();
+        showDialogWindow('roll');
+      });
+      appendElementTo(dialogWindowSection, title, endButton);
   }
 }
 
@@ -88,5 +112,66 @@ function getCellObjByPosition(position) {
     if (cell.position === position) {
       return cell;
     }
+  }
+}
+
+function isPlayerHaveEnoughMoney(player, price) {
+  if (player.money >= price) {
+    return true;
+  }
+  return false;
+}
+
+function setStreetRent(property, player) {
+  if (isColorSet(player, property)) {
+    for (let i = 0; i < player.property.length; i += 1) {
+      const playerProperty = player.property[i];
+      if (playerProperty.kitId === property.kitId) {
+        const rent = playerProperty.element.querySelector('.cost');
+        rent.innerText = `$${playerProperty.rent * 2}`;
+        playerProperty.currentRent = playerProperty.rent * 2;
+      }
+    }
+  } else {
+    const rent = property.element.querySelector('.cost');
+    rent.innerText = `$${property.rent}`;
+    property.currentRent = property.rent;
+  }
+}
+
+function setRailroadRent(player) {
+  let railroadCounter = 0;
+  player.property.forEach((propery) => {
+    if (propery.type === 'railroad') {
+      railroadCounter += 1;
+    }
+  });
+  player.property.forEach((propery) => {
+    propery.rent = railroadCounter;
+    const rent = propery.element.querySelector('.cost');
+    rent.innerText = `$${propery.rent}`;
+  });
+}
+
+function isColorSet(player, purchaseProperty) {
+  let sameKitPropertyCounter = 0;
+  for (let i = 0; i < player.property.length; i += 1) {
+    const playerProperty = player.property[i];
+    if (playerProperty.kitId === purchaseProperty.kitId) {
+      sameKitPropertyCounter += 1;
+    }
+  }
+  if (sameKitPropertyCounter === purchaseProperty.kitSize) {
+    return true;
+  }
+  return false;
+}
+
+export function setNextPlayerAsActive() {
+  const activePlayerIndex = game.players.indexOf(game.activePlayer);
+  if (activePlayerIndex < game.players.length - 1) {
+    game.activePlayer = game.players[activePlayerIndex + 1];
+  } else {
+    game.activePlayer = game.players[0];
   }
 }

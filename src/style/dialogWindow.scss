@@ -14,6 +14,7 @@
 
   img {
     width: 80px;
+    animation: circle 1s linear infinite;
   }
 
   .title {
@@ -39,5 +40,24 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .inactive {
+    background-color: #C0C0C0;
+    
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+}
+
+@keyframes circle{
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
