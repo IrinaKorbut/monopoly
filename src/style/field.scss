@@ -30,7 +30,7 @@
       font-weight: 600;
       font-size: 15px;
       text-align: center;
-      // position: relative; //
+      position: relative; 
       
 
       .cost {
@@ -156,7 +156,8 @@
       .visit-section {
         height: 50%;
         width: 100%;
-        background-color: #F2F4F5;
+        // background-color: #F2F4F5;
+        border-top: solid 0.5px gray;
 
         .title {
           margin: 0 auto;
@@ -198,7 +199,7 @@
 
     .active {
       background-color: purple;
-    }
+    }    
   }
 }
 
