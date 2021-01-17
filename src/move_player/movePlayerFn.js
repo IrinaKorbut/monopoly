@@ -18,6 +18,9 @@ function checkWherePlayerNow(playerDisplay) {
 function highlightActiveCell(delay, i) {
   return new Promise((resolve) => {
     setTimeout(() => {
+      if (i === 10) {
+        cells[i].element.children[1].classList.toggle('active');
+      }
       cells[i].element.classList.toggle('active');
       resolve();
     }, delay);
