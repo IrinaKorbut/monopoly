@@ -3,6 +3,7 @@ import Game from '../Game/Game';
 import Player from '../Player/Player';
 import renderPlayerCard from '../playerCards/renderPlayerCard';
 import showDialogWindow from '../dialogWindow/dialogWindow';
+import addPlayerToField from '../addPlayerToField/addPlayerToField'
 
 export function startWindow() {
   const classStartWindow = document.querySelector('.start-window');
@@ -59,6 +60,7 @@ export function startBtn() {
       startBtn.classList.add('color-warning-btn');
     }
     renderPlayerCard();
+    addPlayerToField();
   });
 }
 
