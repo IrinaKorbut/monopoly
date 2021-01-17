@@ -2,6 +2,7 @@ import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
 import Game from '../Game/Game'
 import Player from '../Player/Player'
 import renderPlayerCard from '../playerCards/renderPlayerCard';
+import showDialogWindow from '../dialogWindow/dialogWindow';
 
 export function startWindow() {
     const classStartWindow = document.querySelector('.start-window')
@@ -50,7 +51,8 @@ export function startBtn() {
             for (let i = 0; i < inputName.length; i++) {
                 Game.addPlayer(new Player(selectStyle[i].value, inputName[i].value))
             }
-
+            Game.activePlayer = Game.players[0];
+            showDialogWindow('roll');
             document.querySelector('.start-window').classList.add('no-active')
             document.querySelector('#blackout').classList.remove('blackout');
 

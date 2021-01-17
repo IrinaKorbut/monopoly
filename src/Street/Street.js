@@ -3,7 +3,7 @@ import Cell from '../Cell/Cell';
 export default class Street extends Cell {
   constructor(type, name, position, cost, rent,
     rentWithOneHouse, rentWhithTwoHouses, rentWithTreeHouses, rentWhithFourHouses,
-    rentWhithHotel, houseCost) {
+    rentWhithHotel, houseCost, kitSize, kitId) {
     super(type, name, position);
     this.cost = cost;
     this.rent = rent;
@@ -13,6 +13,8 @@ export default class Street extends Cell {
     this.rentWhithFourHouses = rentWhithFourHouses;
     this.rentWhithHotel = rentWhithHotel;
     this.houseCost = houseCost;
+    this.kitSize = kitSize;
+    this.kitId = kitId;
   }
 
   set owner(owner) {
