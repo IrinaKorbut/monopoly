@@ -10,11 +10,11 @@ export default class Railroad extends Cell {
     this.fourRailroadRent = 200;
   }
 
-  get rent() {
+  get currentRent() {
     return this._rent;
   }
 
-  set rent(reilroadQantity) {
+  set currentRent(reilroadQantity) {
     switch (reilroadQantity) {
       case 1:
         this._rent = this.oneReilroadRent;

@@ -16,6 +16,7 @@ function createCard(player, playerCardsField) {
   const playerCardColor = createElement('div', ['player-card__color']);
   playerCardColor.style.background = player.color;
   appendElementTo(playerCard, playerCardColor);
+  player.playerCard = playerCard;
 }
 
 export default function renderPlayerCard() {
