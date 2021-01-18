@@ -86,7 +86,7 @@ function doMoveLogic(playerPositionAfterMove) {
 }
 
 export default async function movePlayer(stepsAmount) {
-  const playerDisplay = document.querySelector('.player');
+  const playerDisplay = game.activePlayer.chip;
   const currentPlayerPosition = checkWherePlayerNow(playerDisplay);
   let playerPositionAfterMove = currentPlayerPosition + stepsAmount;
   await showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay);
