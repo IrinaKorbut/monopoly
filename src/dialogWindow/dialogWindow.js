@@ -98,11 +98,12 @@ export default function showDialogWindow(action) {
             }, 3000);
           });
           p.then(() => {
+            removeChildsFromElement(dialogWindowSection);
             let rent = roll();
             rent = isColorSet(game.activePlayer, cell) ? rent * 10 : rent * 4;
             title = createElement('p', ['title'], `The rent is $${rent}`);
             const payRentButton = createElement('div', ['button'], 'Pay');
-            if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
+            if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
               payRentButton.addEventListener('click', () => {
                 game.activePlayer.money -= rent;
                 changeMoneyOnPlayerCard(game.activePlayer);
@@ -116,6 +117,7 @@ export default function showDialogWindow(action) {
             }
           });
         });
+        appendElementTo(dialogWindowSection, title, rollDiceButton);
       }
       break;
     case 'tax':
