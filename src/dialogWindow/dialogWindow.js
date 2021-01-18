@@ -107,7 +107,7 @@ export default function showDialogWindow(action) {
               });
               appendElementTo(dialogWindowSection, title, payRentButton);
             } else {
-              buttonYes.classList.add('inactive');
+              payRentButton.classList.add('inactive');
               const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
               appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
             }
