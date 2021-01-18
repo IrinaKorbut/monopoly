@@ -3,24 +3,35 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 120px;
-  border-radius: 25px;
+  // width: 300px;
+  // height: 120px;
+  width: 90%;
+  height: 70px;
+  // border-radius: 25px;
+  border-radius: 15px;
   background-color: #fff;
-  margin: 20px 20px 0 0;
+  // margin: 20px 20px 0 0;
+  margin-top: 20px;
+  padding: 0 4%;
   
   .dice-wrapper {
     display: flex;
-    justify-content: center;
+    // justify-content: center;
+    justify-content: space-around;
     align-items: center;
-
+    width: 100%;
+    height: 100%;    
+    
     .face {
-      margin: 16px;
-      padding: 4px;
+      // margin: 16px;
+      // padding: 4px;
+      padding: 6px;
       
       background-color: #e7e7e7;
-      width: 104px;
-      height: 104px;
+      // width: 104px;
+      // height: 104px;
+      width: 60px;
+      height: 60px;
       object-fit: contain;
       
       box-shadow:
@@ -32,17 +43,21 @@
       border-radius: 10%;
 
       .pip {
-        width: 24px;
-        height: 24px;
+        // width: 24px;
+        // height: 24px;
+        width: 12px;
+        height: 12px;
         border-radius: 50%;
-        margin: 4px;
+        // margin: 4px;
+        margin: 2px;
       
         background-color: #333;
         box-shadow: inset 0 3px #111, inset 0 -3px
       }
 
       .column {
-        width: 30px;
+        // width: 30px;
+        width: 20px;
         height: 100%;
       }
     }
