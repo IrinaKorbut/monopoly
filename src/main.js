@@ -13,6 +13,7 @@ import './style/style.scss';
 import './style/dice.scss';
 import './style/dialogWindow.scss';
 import './style/field.scss';
+import './style/historyWindow.scss';
 import './style/player.scss';
 import './StartWindow/startWindow.scss';
 import './style/playerCards.scss';
@@ -20,7 +21,9 @@ import './style/playerCards.scss';
 initWindowCards();
 diceInit();
 
-startWindow();
+// startWindow();
+
+
 // export const player = new Player('#2295FF');
 // Game.addPlayer(player);
 // Game.activePlayer = player;
