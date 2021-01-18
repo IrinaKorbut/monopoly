@@ -156,14 +156,17 @@
       .visit-section {
         height: 50%;
         width: 100%;
-        // background-color: #F2F4F5;
-        border-top: solid 0.5px gray;
+        background-color: #F2F4F5;
 
         .title {
           margin: 0 auto;
           padding-top: 5px;
         }
       }
+
+      .active {
+        background-color: purple;
+      } 
     }
     
     .owner-and-cost-wrapper {
