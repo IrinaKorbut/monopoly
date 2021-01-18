@@ -2,6 +2,7 @@ import cells from '../cells/cells';
 // import { game, player } from '../main';
 import game from '../Game/Game';
 import showDialogWindow from '../dialogWindow/dialogWindow';
+import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
 
 function checkWherePlayerNow(playerDisplay) {
   const currentPlayerCell = playerDisplay.parentNode.parentNode;
@@ -33,6 +34,7 @@ function resetPlayerPosition(playerPositionAfterMove) {
 
 function addMoneyPerCycle() {
   game.activePlayer.money += 200;
+  changeMoneyOnPlayerCard(game.activePlayer);
 }
 
 async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay) {

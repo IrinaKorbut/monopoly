@@ -44,6 +44,7 @@ export default function showDialogWindow(action) {
       if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
         buttonYes.addEventListener('click', () => {
           addPropertyToPlayer(game.activePlayer, cell);
+          changeMoneyOnPlayerCard(game.activePlayer);
           const ownerLine = cell.element.querySelector('.owner');
           ownerLine.style.backgroundColor = game.activePlayer.color;
           if (cell.type === 'street') {
@@ -66,17 +67,18 @@ export default function showDialogWindow(action) {
       }
       break;
     case 'rent':
-      if(cell.type !== 'communal') {
+      if (cell.type !== 'communal') {
         title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
         const payRentButton = createElement('div', ['button'], 'Pay');
         if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
           payRentButton.addEventListener('click', () => {
             game.activePlayer.money -= cell.currentRent;
+            changeMoneyOnPlayerCard(game.activePlayer);
             showDialogWindow();
           });
           appendElementTo(dialogWindowSection, title, payRentButton);
         } else {
-          buttonYes.classList.add('inactive');
+          payRentButton.classList.add('inactive');
           const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
           appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
         }
@@ -103,6 +105,7 @@ export default function showDialogWindow(action) {
             if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
               payRentButton.addEventListener('click', () => {
                 game.activePlayer.money -= rent;
+                changeMoneyOnPlayerCard(game.activePlayer);
                 showDialogWindow();
               });
               appendElementTo(dialogWindowSection, title, payRentButton);
@@ -120,6 +123,7 @@ export default function showDialogWindow(action) {
       const payTaxButton = createElement('div', ['button'], 'Pay');
       payTaxButton.addEventListener('click', () => {
         game.activePlayer.subtractMoney(cell.cost);
+        changeMoneyOnPlayerCard(game.activePlayer);
         showDialogWindow();
       });
       appendElementTo(dialogWindowSection, title, payTaxButton);
@@ -151,10 +155,7 @@ function getCellObjByPosition(position) {
 }
 
 function isPlayerHaveEnoughMoney(player, price) {
-  if (player.money >= price) {
-    return true;
-  }
-  return false;
+  return player.money >= price;
 }
 
 function setStreetRent(property, player) {
@@ -197,9 +198,11 @@ function setRailroadRent(player) {
     }
   });
   player.property.forEach((propery) => {
-    propery.rent = railroadCounter;
-    const rent = propery.element.querySelector('.cost');
-    rent.innerText = `$${propery.rent}`;
+    if (propery.type === 'railroad') {
+      propery.currentRent = railroadCounter;
+      const rent = propery.element.querySelector('.cost');
+      rent.innerText = `$${propery.currentRent}`;
+    }
   });
 }
 
@@ -217,11 +220,16 @@ function isColorSet(player, purchaseProperty) {
   return false;
 }
 
-export function setNextPlayerAsActive() {
+function setNextPlayerAsActive() {
   const activePlayerIndex = game.players.indexOf(game.activePlayer);
   if (activePlayerIndex < game.players.length - 1) {
     game.activePlayer = game.players[activePlayerIndex + 1];
   } else {
     game.activePlayer = game.players[0];
   }
+}
+
+export function changeMoneyOnPlayerCard(player) {
+  const playerCardMoney = player.playerCard.querySelector('.player-card__cash__money');
+  playerCardMoney.innerText = player.money;
 }
