@@ -8,6 +8,22 @@
 
 html {
   font-size: 10px;
+
+  @media only screen and (min-width: 1650px) {
+    font-size: 12px;
+  }
+  
+  @media only screen and (min-width: 1850px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (min-width: 2200px) {
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: 4000px) {
+    font-size: 30px;
+  }
 }
 
 body {
