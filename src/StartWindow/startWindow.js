@@ -3,7 +3,8 @@ import Game from '../Game/Game';
 import Player from '../Player/Player';
 import renderPlayerCard from '../playerCards/renderPlayerCard';
 import showDialogWindow from '../dialogWindow/dialogWindow';
-import addPlayerToField from '../addPlayerToField/addPlayerToField'
+import addPlayerToField from '../addPlayerToField/addPlayerToField';
+import computerMove from '../computerRival/computerRival';
 
 export function startWindow() {
   const classStartWindow = document.querySelector('.start-window');
@@ -47,12 +48,20 @@ export function startBtn() {
     const selectStyle = document.querySelectorAll('.select-game');
     selectStyle.forEach((e) => sumClass = e.value !== 'Color');
 
+    const isHumanSelect = document.querySelectorAll('.player-selectHuman');
+
     if (name === inputName.length && sumClass) {
       for (let i = 0; i < inputName.length; i++) {
-        Game.addPlayer(new Player(selectStyle[i].value, inputName[i].value));
+        const isHuman = isHumanSelect[i].value === 'human';
+        Game.addPlayer(new Player(selectStyle[i].value, inputName[i].value, isHuman));
       }
       Game.activePlayer = Game.players[0];
-      showDialogWindow('roll');
+      if (Game.activePlayer.isHuman) {
+        showDialogWindow('roll');
+      } else {
+        showDialogWindow('wait');
+        computerMove('roll');
+      }
       document.querySelector('.start-window').classList.add('no-active');
       document.querySelector('#blackout').classList.remove('blackout');
     } else {
