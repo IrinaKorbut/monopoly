@@ -20,6 +20,7 @@ import './style/historyWindow.scss';
 import './style/player.scss';
 import './StartWindow/startWindow.scss';
 import './style/playerCards.scss';
+import './style/constants.scss';
 
 initWindowCards();
 diceInit();
