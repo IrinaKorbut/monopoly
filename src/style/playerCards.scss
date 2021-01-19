@@ -13,8 +13,8 @@
         align-items: flex-start;
         padding: 5%;
         margin-top: 15px;
-        width: 160px;
-        height: 110px;
+        width: 16em;
+        height: 11em;
         background: #FFFFFF;
         box-shadow: 0px 5px 15px rgba(28, 36, 43, 0.1), 0px 10px 30px rgba(28, 36, 43, 0.1);
         border-radius: 10px;
@@ -24,16 +24,12 @@
             color: #2295FF;
             font-size: 2.2rem;
             font-weight: 500;
-            // margin-bottom: 10px;
         }
 
         &__cash {
             display: flex;
             justify-content: space-between;
             width: 100%;
-            // flex-direction: row;
-            // align-items: flex-start;
-            // margin-bottom: 10px;
 
             &__money {
                 font-size: 3.5rem;

@@ -1,14 +1,13 @@
 .tooltip {
     position: fixed;
-    width: 180px;
-    height: 300px;
+    width: 18rem;
+    height: 25rem;
     border: 1px solid #b3c9ce;
     border-radius: 7px;
     text-align: center;
     color: #333;
     background: #fff;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-    font-family: Montserrat;
 
     .color {
         width: 100%;
@@ -66,7 +65,7 @@
 
         .info-rents {
             margin: 10px;
-            font: italic 14px/1.3 sans-serif;
+            font: Montserrat 1.6rem/1.3 sans-serif;
             border-bottom: 2px solid #ccc;
             padding-bottom: 10px;
 
@@ -136,7 +135,7 @@
         .housest {
             margin-top: 20px;
             margin: 10px;
-            font: italic 14px/1.3 sans-serif;
+            font: Montserrat 1.4rem/1.3 sans-serif;
 
             .housest-cost {
                 margin-top: 2px;
@@ -155,41 +154,14 @@
 
 .card-tax {
     position: fixed;
-    width: 180px;
-    height: 300px;
+    width: 18rem;
+    height: 25rem;
     border: 1px solid #b3c9ce;
     border-radius: 7px;
     text-align: center;
     color: #333;
     background: #fff;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-    font-family: Montserrat;
-}
-
-.company {
-    position: fixed;
-    width: 180px;
-    height: 300px;
-    border: 1px solid #b3c9ce;
-    border-radius: 7px;
-    text-align: center;
-    color: #333;
-    background: #fff;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-    font-family: Montserrat;
-}
-
-.card-tax {
-    position: fixed;
-    width: 180px;
-    height: 300px;
-    border: 1px solid #b3c9ce;
-    border-radius: 7px;
-    text-align: center;
-    color: #333;
-    background: #fff;
-    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-    font-family: Montserrat;
 
     img {
         width: 40%;
@@ -216,7 +188,7 @@
     .owner-two {
         display: flex;
         justify-content: space-between;
-        font-size: 12px;
+        font-style: 1.2rem;
         margin: 5px;
     }
 
@@ -224,28 +196,27 @@
         margin: 5px;
         display: flex;
         justify-content: space-between;
-        font-size: 12px;
+        font-size: 1.2rem;
     }
 
     .owner-four {
         margin: 5px;
         display: flex;
         justify-content: space-between;
-        font-size: 12px;
+        font-size: 1.2rem;
     }
 }
 
 .company {
     position: fixed;
-    width: 180px;
-    height: 300px;
+    width: 18rem;
+    height: 25rem;
     border: 1px solid #b3c9ce;
     border-radius: 7px;
     text-align: center;
     color: #333;
     background: #fff;
     box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.3);
-    font-family: Montserrat;
 
     .image {
         width: 40%;
@@ -259,11 +230,11 @@
 
     .company-instruction-one {
         margin: 5px;
-        font-size: 90%;
+        font-size: 1.2rem;
     }
 
     .company-instruction-two {
         margin: 5px;
-        font-size: 90%;
+        font-size: 1.2rem;
     }
 }
