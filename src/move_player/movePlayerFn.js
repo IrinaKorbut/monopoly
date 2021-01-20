@@ -90,28 +90,26 @@ function doMoveLogic(playerPositionAfterMove) {
       break;
     default:
       const cellsOwner = cells[playerPositionAfterMove].owner;
-      if (game.activePlayer.isHuman) {
-        if (cellsOwner && cellsOwner !== game.activePlayer) {
+      if (cellsOwner && cellsOwner !== game.activePlayer) {
+        if (game.activePlayer.isHuman) {
           showDialogWindow('rent');
-          return;
-        }
-        if (!cellsOwner) {
-          showDialogWindow('buy');
-          return;
-        }
-        if (cellsOwner === game.activePlayer) {
-          showDialogWindow();
-        }
-      } else {
-        if (cellsOwner && cellsOwner !== game.activePlayer) {
+        } else {
           computerMove('rent');
-          return;
         }
-        if (!cellsOwner) {
+        return;
+      }
+      if (!cellsOwner) {
+        if (game.activePlayer.isHuman) {
+          showDialogWindow('buy');
+        } else {
           computerMove('buy');
-          return;
         }
-        if (cellsOwner === game.activePlayer) {
+        return;
+      }
+      if (cellsOwner === game.activePlayer) {
+        if (game.activePlayer.isHuman) {
+          showDialogWindow();
+        } else {
           computerMove();
         }
       }
