@@ -1,19 +1,22 @@
+@import "constants";
+
 .dice {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  // width: 300px;
-  // height: 120px;
   width: 90%;
-  // height: 70px;
   height: 8rem;
-  // border-radius: 25px;
   border-radius: 1.5rem;
   background-color: #fff;
-  // margin: 20px 20px 0 0;
   margin-top: 20px;
   padding: 0 4%;
+
+  @include tablet-width {
+    width: 50%;
+    height: 12rem;
+    margin-top: 0;
+  }
   
   .dice-wrapper {
     display: flex;
@@ -37,13 +40,23 @@
 
       border-radius: 10%;
 
+      @include tablet-width {
+        width: 8rem;
+        height: 8rem;
+      }
+
       .pip {
         width: 1.2rem;
         height: 1.2rem;
         border-radius: 50%;
         margin: 0.2rem;
         background-color: #333;
-        box-shadow: inset 0 0.3rem #111, inset 0 -0.3rem
+        box-shadow: inset 0 0.3rem #111, inset 0 -0.3rem;
+
+        @include tablet-width {
+          width: 1.8rem;
+          height: 1.8rem;
+        }
       }
 
       .column {
