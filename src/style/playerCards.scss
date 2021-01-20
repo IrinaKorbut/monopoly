@@ -1,3 +1,5 @@
+@import "constants";
+
 .players-cards {
     display: flex;
     flex-direction: column;
@@ -5,6 +7,15 @@
     background-color: sandybrown;
     width: 15%;
     height: 100%;
+
+    @include tablet-width {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 50%;
+        height: 25%;
+        order: 1;
+    }
 
     .player-card {
         display: flex;
@@ -17,7 +28,14 @@
         height: 11em;
         background: #FFFFFF;
         box-shadow: 0px 5px 15px rgba(28, 36, 43, 0.1), 0px 10px 30px rgba(28, 36, 43, 0.1);
-        border-radius: 10px;
+        border-radius: 1rem;
+
+
+        @include tablet-width {
+            padding: 2%;
+            margin-top: 0px;
+            width: 20em;
+        }
         
 
         &__name {
@@ -42,9 +60,9 @@
         }
 
         &__color {
-            height: 10px;
+            height: 1rem;
             width: 100%;
-            border-radius: 10px;
+            border-radius: 1rem;
         }
     }
 }
