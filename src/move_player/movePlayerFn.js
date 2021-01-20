@@ -1,5 +1,5 @@
 import cells from '../cells/cells';
-// import { game, player } from '../main';
+import computerMove from '../computerRival/computerRival';
 import game from '../Game/Game';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
@@ -61,27 +61,57 @@ function doMoveLogic(playerPositionAfterMove) {
     case 'jail':
     case 'parking':
     case 'goToJail':
-      showDialogWindow();
+      if (game.activePlayer.isHuman) {
+        showDialogWindow();
+      } else {
+        computerMove();
+      }
       break;
     case 'chest':
-      showDialogWindow();
+      if (game.activePlayer.isHuman) {
+        showDialogWindow();
+      } else {
+        computerMove();
+      }
       break;
     case 'chance':
-      showDialogWindow();
+      if (game.activePlayer.isHuman) {
+        showDialogWindow();
+      } else {
+        computerMove();
+      }
       break;
     case 'tax':
-      showDialogWindow('tax');
+      if (game.activePlayer.isHuman) {
+        showDialogWindow('tax');
+      } else {
+        computerMove('tax');
+      }
       break;
     default:
       const cellsOwner = cells[playerPositionAfterMove].owner;
       if (cellsOwner && cellsOwner !== game.activePlayer) {
-        showDialogWindow('rent');
+        if (game.activePlayer.isHuman) {
+          showDialogWindow('rent');
+        } else {
+          computerMove('rent');
+        }
+        return;
       }
       if (!cellsOwner) {
-        showDialogWindow('buy');
+        if (game.activePlayer.isHuman) {
+          showDialogWindow('buy');
+        } else {
+          computerMove('buy');
+        }
+        return;
       }
       if (cellsOwner === game.activePlayer) {
-        showDialogWindow();
+        if (game.activePlayer.isHuman) {
+          showDialogWindow();
+        } else {
+          computerMove();
+        }
       }
       break;
   }

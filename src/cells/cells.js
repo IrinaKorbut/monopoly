@@ -8,7 +8,7 @@ export default [
   new Cell('start', 'Start', 0),
   new Street('street', 'Mediterranean Avenue', 1, 60, 2, 10, 30, 90, 160, 250, 50, 2, 1),
   new Cell('chest', 'Chest', 2), // chest,
-  new Street('street', 'Baltic Avenue', 3, 60, 4, 20, 60, 180, 320, 450, 50, 2, 1),
+  new Street('street', 'Baltic Avenue', 3, 70, 4, 20, 60, 180, 320, 450, 50, 2, 1),
   new Tax('tax', 'City Tax', 4, 200),
   new Railroad('railroad', 'Reading Railroad', 5),
   new Street('street', 'Oriental Avenue', 6, 100, 6, 30, 90, 270, 400, 550, 50, 3, 2),

@@ -1,10 +1,11 @@
 export default class Player {
-  constructor(color, name) {
+  constructor(color, name, isHuman) {
     this.color = color;
     this.name = name;
     this._position = 0;
     this.property = [];
-    this.money = 1500;
+    this.money = 15000;
+    this.isHuman = isHuman;
   }
 
   get position() {
