@@ -41,6 +41,9 @@ export default function showDialogWindow(action) {
       const buttonsWrapper = createElement('div', ['buttons-wrapper']);
       const buttonYes = createElement('div', ['button', 'yes'], 'Buy');
       const buttonNo = createElement('div', ['button', 'no'], 'Don\'t buy');
+      buttonNo.addEventListener('click', () => {
+        showDialogWindow();
+      });
       appendElementTo(buttonsWrapper, buttonYes, buttonNo);
       if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
         buttonYes.addEventListener('click', () => {
@@ -55,9 +58,6 @@ export default function showDialogWindow(action) {
           } else {
             setCommunalRent(cell, game.activePlayer);
           }
-          showDialogWindow();
-        });
-        buttonNo.addEventListener('click', () => {
           showDialogWindow();
         });
         appendElementTo(dialogWindowSection, title, buttonsWrapper);
