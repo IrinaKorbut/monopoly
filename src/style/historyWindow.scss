@@ -9,4 +9,24 @@
     @include tablet-width {
         height: 35%;
     }
+
+    .action-list {
+        padding: 10px 15px;
+        height: 70%;
+        overflow-y: scroll;
+        overflow-x: hidden;
+        list-style-type: none;
+        border: 2px solid;
+    }    
+
+    .button {
+        border: 1px solid black;
+        width: fit-content;
+        padding: 5px;
+        margin-left: 10px;
+        
+        &:hover {
+            cursor: pointer;
+        }        
+    }
 }

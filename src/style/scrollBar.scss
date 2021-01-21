@@ -1,0 +1,18 @@
+@import "constants";
+
+::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: $scroll_bar_track_color; 
+  }
+   
+  ::-webkit-scrollbar-thumb {
+    background: $scroll_bar_thumb_color;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: $scroll_bar_thumb_hover_color; 
+    cursor: pointer;
+  }
