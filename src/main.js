@@ -10,6 +10,7 @@ import { setNextPlayerAsActive } from './dialogWindow/dialogWindow'
 
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
+import initHistoryWindow from './histiryWindow/historyWindow'
 
 
 import './style/style.scss';
@@ -21,11 +22,14 @@ import './style/player.scss';
 import './StartWindow/startWindow.scss';
 import './style/playerCards.scss';
 import './style/constants.scss';
+import './style/scrollBar.scss';
 
 initWindowCards();
 diceInit();
 
 startWindow();
+
+initHistoryWindow('do something');
 
 
 // export const player = new Player('#2295FF');
