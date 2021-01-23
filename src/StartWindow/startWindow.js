@@ -5,6 +5,7 @@ import renderPlayerCard from '../playerCards/renderPlayerCard';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 import addPlayerToField from '../addPlayerToField/addPlayerToField';
 import computerMove from '../computerRival/computerRival';
+import initBuyHouseButton from '../buyHouse/buyHouse'
 
 export function startWindow() {
   const classStartWindow = document.querySelector('.start-window');
@@ -70,6 +71,7 @@ export function startBtn() {
     }
     renderPlayerCard();
     addPlayerToField();
+    initBuyHouseButton();
   });
 }
 

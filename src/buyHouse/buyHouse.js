@@ -1,45 +1,54 @@
 import game from '../Game/Game';
 import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
 
-function hilightActivePlayerCells() {
-  const playerProperties = game.activePlayer.property;
+function highlightActivePlayerCells(playerProperties) {
   playerProperties.forEach((property) => {
-    console.log('property.element', property.element);
     property.element.querySelector('.players-container').classList.remove('dark');
   });
 }
 
-function addHouse(cell) {
-
+function addHouse(eventTarget) {
+  const housePlace = eventTarget.target.parentNode.querySelector('.street-color');
+  const houseImg = createElement('img', ['house']);
+  houseImg.src = './images/House.svg';
+  appendElementTo(housePlace, houseImg);
 }
 
-function createButtonFinishBuyingHouses(buyingSection) {
+function createButton(buyingSection, buttonName) {
   removeChildsFromElement(buyingSection);
-  const buttonFinishBuyHouse = createElement('div', ['button__buy-house'], 'Finish buy house');
-  appendElementTo(buyingSection, buttonFinishBuyHouse);
-  buttonFinishBuyHouse.addEventListener('click', () => {
-    game.cells.forEach((cell) => {
-      cell.element.querySelector('.players-container').classList.remove('dark');
-    });
-    createButtonBuyingHouses(buyingSection)
-  });
-}
-
-function createButtonBuyingHouses(buyingSection) {
-  removeChildsFromElement(buyingSection);
-  const buttonBuyHouse = createElement('div', ['button__buy-house'], 'Buy house');
+  const buttonBuyHouse = createElement('div', ['button__buy-house'], buttonName);
   appendElementTo(buyingSection, buttonBuyHouse);
-  buttonBuyHouse.addEventListener('click', () => {
-    game.cells.forEach((cell) => {
-      cell.element.querySelector('.players-container').classList.add('dark');
-    });
-    hilightActivePlayerCells();
-    createButtonFinishBuyingHouses(buyingSection);
-  });
-  
+  const playerProperties = game.activePlayer.property;
+  switch (buttonName) {
+    case 'Buy houses':
+      buttonBuyHouse.addEventListener('click', () => {
+        game.cells.forEach((cell) => {
+          cell.element.querySelector('.players-container').classList.add('dark');
+        });
+        highlightActivePlayerCells(playerProperties);
+        game.activePlayer.property.forEach((property) => {
+          property.element.addEventListener('click', addHouse);
+        });
+        createButton(buyingSection, 'Finish buy house');
+      });
+      break;
+    case 'Finish buy house':
+      buttonBuyHouse.addEventListener('click', () => {
+        game.cells.forEach((cell) => {
+          cell.element.querySelector('.players-container').classList.remove('dark');
+        });
+        playerProperties.forEach((property) => {
+          property.element.removeEventListener('click', addHouse);
+        });
+        createButton(buyingSection, 'Buy houses');
+      });
+      break;
+    default:
+      break;
+  }
 }
 
 export default function initBuyHouseButton() {
   const buyingSection = document.querySelector('.buying-section');
-  createButtonBuyingHouses(buyingSection);
+  createButton(buyingSection, 'Buy houses');
 }

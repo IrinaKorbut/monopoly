@@ -28,5 +28,5 @@ roll();
 
 initHistoryWindow('do something');
 
-initBuyHouseButton();
+// initBuyHouseButton();
 
