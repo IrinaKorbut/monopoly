@@ -24,6 +24,10 @@ module.exports = {
           from: path.resolve(__dirname, 'src/images'),
           to: path.resolve(__dirname, 'dist/images'),
         },
+        {
+          from: path.resolve(__dirname, 'src/audio'),
+          to: path.resolve(__dirname, 'dist/audio'),
+        },
       ],
     }),
   ],
@@ -37,6 +41,10 @@ module.exports = {
         test: /\.(png|svg|jpg|gif)$/,
         use: ['file-loader'],
       },
+      {
+        test: /\.(ogg|mp3|wav|mpe?g)$/i,
+        use: 'file-loader'
+    },
     ],
   },
 };

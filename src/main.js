@@ -4,6 +4,7 @@ import diceInit from './dice/dice';
 import Game from './Game/Game';
 import Player from './Player/Player';
 import { startWindow } from './StartWindow/startWindow';
+import { btnClikMenu } from './menu/menu';
 // import cells from './cells/cells';
 
 import { setNextPlayerAsActive } from './dialogWindow/dialogWindow'
@@ -16,11 +17,15 @@ import './style/field.scss';
 import './style/player.scss';
 import './StartWindow/startWindow.scss';
 import './style/playerCards.scss';
+import './menu/menu.scss';
 
 initWindowCards();
 diceInit();
 
 startWindow();
+
+btnClikMenu()
+
 // export const player = new Player('#2295FF');
 // Game.addPlayer(player);
 // Game.activePlayer = player;
