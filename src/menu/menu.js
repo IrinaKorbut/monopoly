@@ -60,9 +60,30 @@ function setingsMeny(classOptions, menus, audioPlay) {
     appendElementTo(audioBtn, audioInput, audioLabel)
     appendElementTo(volume, volumeLabel, volumeInput)
 
-    //audioFn(audioPlay)
+    audioFn(audioPlay)
 
     menus.addEventListener('click', menu)
+}
+
+function polz(audio, volumeInputElem) {
+    localStorage.setItem('volume', volumeInputElem.value);
+    audio.volume = volumeInputElem.value
+}
+
+function audioFn(audioPlay) {
+    const audioBtn = document.querySelector('.slideThreeInput')
+    let volumeInput = document.querySelector('.volumeInput');
+
+    volumeInput.addEventListener('click', (e) => polz(audioPlay, e.target))
+    audioBtn.addEventListener('click', (e) => audioRepeat(audioPlay, e.target))
+}
+
+function audioRepeat(audio, audioBtnElem) {
+
+    localStorage.setItem('stateRange', Number(audioBtnElem.checked));
+    audioBtnElem.checked ? audio.play() : audio.pause()
+
+    audio.addEventListener('ended', () => audio.play())
 }
 
 export function btnClikMenu() {
