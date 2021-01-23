@@ -29,7 +29,7 @@ diceInit();
 
 startWindow();
 
-initHistoryWindow('do something');
+//initHistoryWindow('do something');
 
 
 // export const player = new Player('#2295FF');

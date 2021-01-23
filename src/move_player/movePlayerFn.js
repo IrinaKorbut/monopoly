@@ -3,6 +3,7 @@ import computerMove from '../computerRival/computerRival';
 import game from '../Game/Game';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
+import initHistoryWindow from '../histiryWindow/historyWindow';
 
 function checkWherePlayerNow(playerDisplay) {
   const currentPlayerCell = playerDisplay.parentNode.parentNode;
@@ -35,6 +36,7 @@ function resetPlayerPosition(playerPositionAfterMove) {
 function addMoneyPerCycle() {
   game.activePlayer.money += 200;
   changeMoneyOnPlayerCard(game.activePlayer);
+  initHistoryWindow('got $ 200 for completing the circle');
 }
 
 async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay) {
