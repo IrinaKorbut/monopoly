@@ -86,10 +86,61 @@ function audioRepeat(audio, audioBtnElem) {
     audio.addEventListener('ended', () => audio.play())
 }
 
+export function keyEsc(audioPlay) {
+    document.addEventListener('keydown', (event) => {
+        const audioBtn = document.querySelector('.slideThreeInput')
+        const volumeInputs = document.querySelector('.volumeInput');
+
+        if (event.code === 'Escape') {
+            classMenu(audioPlay)
+        }
+
+        if (event.code === 'F9') {
+            audioPlay.paused ? audioPlay.play() : audioPlay.pause()
+            audioPlay.addEventListener('ended', () => audioPlay.play())
+
+            if (audioBtn) {
+                audioBtn.checked ? audioBtn.checked = false : audioBtn.checked = true
+                audioRepeat(audioPlay, audioBtn)
+            }
+        }
+
+        if (event.code === 'NumpadAdd') {  //+  
+            if (audioPlay.volume < 0.99) {
+                audioPlay.volume += 0.1
+                localStorage.setItem('volume', audioPlay.volume);
+            }
+
+            if (volumeInputs) {
+                if (audioPlay.volume < 0.99) {
+                    volumeInputs.value = audioPlay.volume += 0.1
+                    localStorage.setItem('volume', volumeInputs.value);
+                }
+            }
+        }
+
+        if (event.code === 'NumpadSubtract') { //-
+            if (audioPlay.volume > 0.1) {
+                audioPlay.volume -= 0.1
+                localStorage.setItem('volume', audioPlay.volume);
+            }
+
+            if (volumeInputs) {
+                if (audioPlay.volume > 0.1) {
+                    volumeInputs.value = audioPlay.volume -= 0.1
+                    localStorage.setItem('volume', volumeInputs.value);
+                }
+            }
+            
+        }
+    })
+}
+
 export function btnClikMenu() {
     const btnMenu = document.querySelector('.btn-Menu')
     const audioPlay = new Audio('./audio/Ennio-Morricone.mp3')
     btnMenu.addEventListener('click', () => classMenu(audioPlay))
+    keyEsc(audioPlay)
 }
 
 function classMenu(audioPlay) {
