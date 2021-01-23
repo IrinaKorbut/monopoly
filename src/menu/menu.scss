@@ -1,0 +1,60 @@
+.no-burger-menu {
+    display: none;
+}
+
+.window-menu {
+    width: 600px;
+    height: 350px;
+    border: 3px solid #0c0c0c;
+    text-align: center;
+    flex-direction: column;
+    color: #fdfdfd;
+    font-family: Montserrat;
+    background: #000000a3;
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+
+    .heder {
+        display: flex;
+        justify-content: flex-end;
+
+        .name-menu {
+            margin-bottom: 43px;
+            margin-top: 30px;
+            font-size: 24px;
+            width: 31rem;
+            cursor: pointer;
+        }
+
+        .btn-close {
+            margin-top: 10px;
+            flex-flow: column-reverse;
+            width: 3rem;
+            font-size: 1.3rem;
+            cursor: pointer;
+        }
+    }
+
+    .name-btn {
+        flex-flow: column;
+        align-items: flex-start;
+        font-size: 18px;
+
+        .name-setings {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .language {
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .new-play {
+            cursor: pointer;
+        }
+    }
+}
