@@ -18,6 +18,7 @@ import './StartWindow/startWindow.scss';
 import './style/playerCards.scss';
 import './style/constants.scss';
 import './style/scrollBar.scss';
+import './style/buyingSection.scss';
 
 initWindowCards();
 

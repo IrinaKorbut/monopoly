@@ -1,0 +1,32 @@
+@import "constants";
+
+.buying-section {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+    background-color: rgb(116, 144, 180);
+    font-size: 2rem;
+
+
+    .button {
+        width: 45%;
+        height: 3rem;
+        background-color: #DC4433;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 3.5rem;
+        color: #fff;
+        font-size: 1.2rem;
+    
+        @include tablet-width{
+          font-size: 1.5rem;
+        }
+    
+        &:hover {
+          cursor: pointer;
+        }
+      }
+}
