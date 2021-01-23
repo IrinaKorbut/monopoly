@@ -19,8 +19,50 @@ function menu(audioPlay) {
     appendElementTo(heder, menu, btnClose)
     appendElementTo(nameBtn, setings, language, newPlay, options)
 
+    setings.addEventListener('click', () => setingsMeny(nameBtn, menu, audioPlay))
     newPlay.addEventListener('click', () => console.log('добавить Функции перезагрузки игры'))
     btnClose.addEventListener('click', () => classMenu(audioPlay))
+}
+
+function setingsMeny(classOptions, menus, audioPlay) {
+
+    classOptions.innerHTML = '';
+    const audio = createElement('div', ['audio'], 'Audio')
+
+    const audioBtn = createElement('div', ['slideThree'])
+    const audioInput = createElement('input', ['slideThreeInput'])
+
+    let stateRange = localStorage.getItem('stateRange')
+    audioInput.checked = Boolean(+stateRange)
+
+    audioInput.id = 'slideThree'
+    audioInput.type = "checkbox"
+    audioInput.name = "check"
+
+    const audioLabel = createElement('label', ['audioLabel'])
+    audioLabel.setAttribute('for', "slideThree");
+
+
+    const volume = createElement('div', ['volume'], 'Volume')
+    const volumeLabel = createElement('label', ['volumeLabel'])
+
+    const volumeInput = createElement('input', ['volumeInput'])
+    volumeInput.setAttribute('type', "range");
+    volumeInput.setAttribute('min', "0");
+    volumeInput.setAttribute('max', "1");
+    volumeInput.setAttribute('step', "0.1");
+
+    let volumeValue = localStorage.getItem('volume')
+    volumeInput.value = volumeValue || 0.5
+
+    appendElementTo(classOptions, audio, volume)
+    appendElementTo(audio, audioBtn)
+    appendElementTo(audioBtn, audioInput, audioLabel)
+    appendElementTo(volume, volumeLabel, volumeInput)
+
+    //audioFn(audioPlay)
+
+    menus.addEventListener('click', menu)
 }
 
 export function btnClikMenu() {
