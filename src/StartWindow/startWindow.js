@@ -5,6 +5,7 @@ import renderPlayerCard from '../playerCards/renderPlayerCard';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 import addPlayerToField from '../addPlayerToField/addPlayerToField';
 import computerMove from '../computerRival/computerRival';
+import { btnClikMenu } from '../menu/menu';
 
 export function startWindow() {
   const classStartWindow = document.querySelector('.start-window');
@@ -64,6 +65,9 @@ export function startBtn() {
       }
       document.querySelector('.start-window').classList.add('no-active');
       document.querySelector('#blackout').classList.remove('blackout');
+
+      btnClikMenu()
+
     } else {
       startBtn.classList.remove('color-btn');
       startBtn.classList.add('color-warning-btn');
