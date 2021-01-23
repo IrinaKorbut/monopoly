@@ -6,9 +6,9 @@
     background-color: rgb(116, 180, 132);
     font-size: 2rem;
 
-    @include tablet-width {
-        height: 35%;
-    }
+    // @include tablet-width {
+    //     height: 100%;
+    // }
 
     .action-list {
         padding: 10px 15px;

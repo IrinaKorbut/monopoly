@@ -6,6 +6,7 @@ import { startWindow } from './StartWindow/startWindow';
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
 import initHistoryWindow from './histiryWindow/historyWindow'
+import initBuyHouseButton from './buyHouse/buyHouse'
 
 
 import './style/style.scss';
@@ -26,4 +27,6 @@ startWindow();
 roll();
 
 initHistoryWindow('do something');
+
+initBuyHouseButton();
 
