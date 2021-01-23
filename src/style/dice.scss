@@ -1,96 +1,25 @@
+@import "constants";
+
 .dice {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 300px;
-  height: 120px;
-  border-radius: 25px;
+  width: 90%;
+  height: 8rem;
+  border-radius: 1.5rem;
   background-color: #fff;
-  margin: 20px 20px 0 0;
-  
-  .dice-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  margin-top: 20px;
+  padding: 0 4%;
 
-    .face {
-      margin: 16px;
-      padding: 4px;
-      
-      background-color: #e7e7e7;
-      width: 104px;
-      height: 104px;
-      object-fit: contain;
-      
-      box-shadow:
-        inset 0 5px white, 
-        inset 0 -5px #bbb,
-        inset 5px 0 #d7d7d7, 
-        inset -5px 0 #d7d7d7;
+  @include tablet-width {
+    width: 50%;
+    height: 12rem;
+    margin-top: 0;
+  }
 
-      border-radius: 10%;
-
-      .pip {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        margin: 4px;
-      
-        background-color: #333;
-        box-shadow: inset 0 3px #111, inset 0 -3px
-      }
-
-      .column {
-        width: 30px;
-        height: 100%;
-      }
-    }
-
-    .first-face {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .second-face {
-      display: none;
-      justify-content: space-between;
-
-      .pip:nth-of-type(2) {
-        align-self: flex-end;
-      }
-    }
-
-    .third-face {
-      display: none;
-      justify-content: space-between;
-
-      .pip:nth-of-type(2) {
-        align-self: center;
-      }
-
-      .pip:nth-of-type(3) {
-        align-self: flex-end;
-      }
-    }
-
-    .fourth-face, .sixth-face, .fifth-face {
-      display: none;
-      justify-content: space-between;
-
-      .column {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-      }
-    }
-
-    .fifth-face {
-
-      .column:nth-of-type(2) {
-        justify-content: center;
-      }
-    }
+  #canvas {
+    width: 100%;
+    height: 100%; 
   }
 }

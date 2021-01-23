@@ -1,26 +1,27 @@
 import { initWindowCards } from './WindowCard/windowCard';
-import showDialogWindow from './dialogWindow/dialogWindow';
-import diceInit from './dice/dice';
-import Game from './Game/Game';
-import Player from './Player/Player';
+import roll from './dice/dice';
 import { startWindow } from './StartWindow/startWindow';
 import { btnClikMenu } from './menu/menu';
 // import cells from './cells/cells';
 
-import { setNextPlayerAsActive } from './dialogWindow/dialogWindow'
+import renderPlayerCard from './playerCards/renderPlayerCard';
+import addPlayerToField from './addPlayerToField/addPlayerToField'
+import initHistoryWindow from './histiryWindow/historyWindow'
 
 
 import './style/style.scss';
 import './style/dice.scss';
 import './style/dialogWindow.scss';
 import './style/field.scss';
+import './style/historyWindow.scss';
 import './style/player.scss';
 import './StartWindow/startWindow.scss';
 import './style/playerCards.scss';
 import './menu/menu.scss';
+import './style/constants.scss';
+import './style/scrollBar.scss';
 
 initWindowCards();
-diceInit();
 
 startWindow();
 
@@ -47,3 +48,7 @@ btnClikMenu()
 // setNextPlayerAsActive();
 // console.log(Game);
 // setNextPlayerAsActive();
+roll();
+
+initHistoryWindow('do something');
+

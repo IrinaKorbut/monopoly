@@ -1,7 +1,21 @@
+@import "constants";
+
 .players-cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: sandybrown;
-    width: 300px;
-    height: 700px;
+    width: 15%;
+    height: 100%;
+
+    @include tablet-width {
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-around;
+        width: 50%;
+        height: 25%;
+        order: 1;
+    }
 
     .btn-Menu {
         width: 85%;
@@ -54,43 +68,49 @@
     .player-card {
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         align-items: flex-start;
-        padding: 30px 40px;
-        margin: 20px;
-        width: 247px;
-        height: 195px;
-        background: #ffffff;
+        padding: 5%;
+        margin-top: 15px;
+        width: 16em;
+        height: 11em;
+        background: #FFFFFF;
         box-shadow: 0px 5px 15px rgba(28, 36, 43, 0.1), 0px 10px 30px rgba(28, 36, 43, 0.1);
-        border-radius: 10px;
+        border-radius: 1rem;
+
+
+        @include tablet-width {
+            padding: 2%;
+            margin-top: 0px;
+            width: 20em;
+        }
+        
 
         &__name {
-            color: #2295ff;
-            font-size: 24px;
+            color: #2295FF;
+            font-size: 2.2rem;
             font-weight: 500;
-            margin-bottom: 10px;
         }
 
         &__cash {
             display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            margin-bottom: 10px;
+            justify-content: space-between;
+            width: 100%;
 
             &__money {
-                font-size: 50px;
+                font-size: 3.5rem;
             }
 
             &__currency {
-                font-size: 50px;
-                margin-left: 15px;
+                font-size: 3.5rem;
                 color: gray;
             }
         }
 
         &__color {
-            height: 15px;
+            height: 1rem;
             width: 100%;
-            border-radius: 10px;
+            border-radius: 1rem;
         }
     }
 }

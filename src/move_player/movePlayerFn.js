@@ -1,11 +1,12 @@
 import cells from '../cells/cells';
-//import { game, player } from '../main';
+import computerMove from '../computerRival/computerRival';
 import game from '../Game/Game';
 import showDialogWindow from '../dialogWindow/dialogWindow';
+import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
 
 function checkWherePlayerNow(playerDisplay) {
-  const currentPlayerCell = playerDisplay.parentNode;
-  currentPlayerCell.removeChild(playerDisplay);
+  const currentPlayerCell = playerDisplay.parentNode.parentNode;
+  playerDisplay.remove();
   let currentPlayerPosition;
   cells.forEach((item) => {
     if (item.element === currentPlayerCell) {
@@ -18,6 +19,9 @@ function checkWherePlayerNow(playerDisplay) {
 function highlightActiveCell(delay, i) {
   return new Promise((resolve) => {
     setTimeout(() => {
+      if (i === 10) {
+        cells[i].element.children[1].classList.toggle('active');
+      }
       cells[i].element.classList.toggle('active');
       resolve();
     }, delay);
@@ -30,6 +34,7 @@ function resetPlayerPosition(playerPositionAfterMove) {
 
 function addMoneyPerCycle() {
   game.activePlayer.money += 200;
+  changeMoneyOnPlayerCard(game.activePlayer);
 }
 
 async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay) {
@@ -43,7 +48,7 @@ async function showAnimationMove(currentPlayerPosition, playerPositionAfterMove,
       await highlightActiveCell(250, i);
     }
     if (i === playerPositionAfterMove) {
-      cells[playerPositionAfterMove].element.appendChild(playerDisplay);
+      cells[playerPositionAfterMove].element.querySelector('.players-container').appendChild(playerDisplay);
     }
   }
 }
@@ -56,31 +61,64 @@ function doMoveLogic(playerPositionAfterMove) {
     case 'jail':
     case 'parking':
     case 'goToJail':
-      showDialogWindow();
+      if (game.activePlayer.isHuman) {
+        showDialogWindow();
+      } else {
+        computerMove();
+      }
       break;
     case 'chest':
-      showDialogWindow();
+      if (game.activePlayer.isHuman) {
+        showDialogWindow();
+      } else {
+        computerMove();
+      }
       break;
     case 'chance':
-      showDialogWindow();
+      if (game.activePlayer.isHuman) {
+        showDialogWindow();
+      } else {
+        computerMove();
+      }
       break;
     case 'tax':
-      showDialogWindow('tax');
+      if (game.activePlayer.isHuman) {
+        showDialogWindow('tax');
+      } else {
+        computerMove('tax');
+      }
       break;
     default:
       const cellsOwner = cells[playerPositionAfterMove].owner;
       if (cellsOwner && cellsOwner !== game.activePlayer) {
-        showDialogWindow('rent');
-      } 
+        if (game.activePlayer.isHuman) {
+          showDialogWindow('rent');
+        } else {
+          computerMove('rent');
+        }
+        return;
+      }
       if (!cellsOwner) {
-        showDialogWindow('buy');
+        if (game.activePlayer.isHuman) {
+          showDialogWindow('buy');
+        } else {
+          computerMove('buy');
+        }
+        return;
+      }
+      if (cellsOwner === game.activePlayer) {
+        if (game.activePlayer.isHuman) {
+          showDialogWindow();
+        } else {
+          computerMove();
+        }
       }
       break;
   }
 }
 
 export default async function movePlayer(stepsAmount) {
-  const playerDisplay = document.querySelector('.player');
+  const playerDisplay = game.activePlayer.chip;
   const currentPlayerPosition = checkWherePlayerNow(playerDisplay);
   let playerPositionAfterMove = currentPlayerPosition + stepsAmount;
   await showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay);
@@ -89,5 +127,4 @@ export default async function movePlayer(stepsAmount) {
     addMoneyPerCycle();
   }
   doMoveLogic(playerPositionAfterMove);
-  console.log(game)
 }

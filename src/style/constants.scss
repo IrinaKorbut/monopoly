@@ -1,0 +1,13 @@
+$tablet-width: 1024px;
+
+
+$scroll_bar_track_color: #5a5a5aea;
+$scroll_bar_thumb_color: #222222;
+$scroll_bar_thumb_hover_color: #000000;
+
+@mixin tablet-width {
+  @media (max-width: $tablet-width) {
+    @content;
+  }
+}
+

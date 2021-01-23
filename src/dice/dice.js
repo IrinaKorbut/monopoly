@@ -1,36 +1,70 @@
-//import movePlayer from '../move_player/movePlayerFn';
-
-export default function roll() {
-  const facesNames = ['first', 'second', 'third', 'fourth', 'fifth', 'sixth'];
-  const allFaces = document.querySelectorAll('.face');
-  allFaces.forEach((face) => {
-    face.style.display = 'none';
-  });
-  const firstDiceFace = Math.floor(Math.random() * 6) + 1;
-  const secondDiceFace = Math.floor(Math.random() * 6) + 1;
-  document.querySelector(`.dice-one .${facesNames[firstDiceFace - 1]}-face`).style.display = 'flex';
-  document.querySelector(`.dice-two .${facesNames[secondDiceFace - 1]}-face`).style.display = 'flex';
-  return firstDiceFace + secondDiceFace;
+function roundRect(ctx, x, y, width, height, radius, fill) {
+  ctx.beginPath();
+  ctx.moveTo(x + radius, y);
+  ctx.lineTo(x + width - radius, y);
+  ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+  ctx.lineTo(x + width, y + height - radius);
+  ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+  ctx.lineTo(x + radius, y + height);
+  ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+  ctx.lineTo(x, y + radius);
+  ctx.quadraticCurveTo(x, y, x + radius, y);
+  ctx.closePath();
+  if (fill) {
+    ctx.fill();
+  }
 }
 
-// export default function diceInit() {
-//   const rollButton = document.querySelector('.roll-button');
-//   const rollButtonEvent = function () {
-//     rollButton.removeEventListener('click', rollButtonEvent);
-//     const p = new Promise((resolve) => {
-//       let test;
-//       setTimeout(() => {
-//         test = setInterval(roll, 200);
-//         rollButton.addEventListener('click', rollButtonEvent);
-//       }, 0);
-//       setTimeout(() => {
-//         clearInterval(test);
-//         resolve();
-//       }, 3000);
-//     });
-//     p.then(() => {
-//       movePlayer(roll());
-//     });
-//   };
-//   rollButton.addEventListener('click', rollButtonEvent);
-// }
+function drawDice(ctx, x, y, size, value) {
+  const dots = [];
+  ctx.save();
+  ctx.fillStyle = '#D77';
+  ctx.translate(x, y);
+  roundRect(ctx, 0, 0, size, size, size * 0.1, true, false);
+  const padding = 0.25;
+  let dotX;
+  let dotY;
+  dotX = padding * size;
+  dotY = padding * size;
+  dots.push({ x: dotX, y: dotY });
+  dotY = size * 0.5;
+  dots.push({ x: dotX, y: dotY });
+  dotY = size * (1 - padding);
+  dots.push({ x: dotX, y: dotY });
+  dotX = size * 0.5;
+  dotY = size * 0.5;
+  dots.push({ x: dotX, y: dotY });
+  dotX = size * (1 - padding);
+  dotY = padding * size;
+  dots.push({ x: dotX, y: dotY });
+  dotY = size * 0.5;
+  dots.push({ x: dotX, y: dotY });
+  dotY = size * (1 - padding);
+  dots.push({ x: dotX, y: dotY });
+  let dotsToDraw;
+  if (value === 1) dotsToDraw = [3];
+  else if (value === 2) dotsToDraw = [0, 6];
+  else if (value === 3) dotsToDraw = [0, 3, 6];
+  else if (value === 4) dotsToDraw = [0, 2, 4, 6];
+  else if (value === 5) dotsToDraw = [0, 2, 3, 4, 6];
+  else dotsToDraw = [0, 1, 2, 4, 5, 6];
+  ctx.fillStyle = '#332';
+  for (let i = 0; i < dotsToDraw.length; i += 1) {
+    ctx.beginPath();
+    const j = dotsToDraw[i];
+    ctx.arc(dots[j].x, dots[j].y, size * 0.07, 0, 2 * Math.PI);
+    ctx.fill();
+  }
+  ctx.translate(-x, -y);
+}
+
+export default function roll() {
+  const firstDiceValue = Math.floor(Math.random() * 6) + 1;
+  const secondDiceValue = Math.floor(Math.random() * 6) + 1;
+  const canvas = document.getElementById('canvas');
+  const context = canvas.getContext('2d');
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  drawDice(context, 15, 22, 110, firstDiceValue);
+  drawDice(context, 170, 22, 110, secondDiceValue);
+  return firstDiceValue + secondDiceValue;
+}
