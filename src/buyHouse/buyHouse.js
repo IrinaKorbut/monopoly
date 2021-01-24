@@ -11,20 +11,37 @@ function highlightActivePlayerCells(playerProperties) {
   });
 }
 
-function addHouse(eventTarget) {
-  const cellElement = eventTarget.target.parentNode;
-  let currentCell;
-  cells.forEach((cell) => {
-    if (cellElement === cell.element) {
-      currentCell = cell;
+function isAvailableToBuyAnotherOneHouse(currentObjCell) {
+  const playerPropertiesAvailableToBuyHose = game.activePlayer.property
+    .filter((property) => property.kitId === currentObjCell.kitId);
+  let result = true;
+  playerPropertiesAvailableToBuyHose.forEach((property) => {
+    if (currentObjCell !== property) {
+      if (currentObjCell.numberOfHouses > property.numberOfHouses) {
+        result = false;
+      }
     }
   });
-  const housePlace = cellElement.querySelector('.street-color');
-  const houseImg = createElement('img', ['house']);
-  houseImg.src = './images/House.svg';
-  appendElementTo(housePlace, houseImg);
-  game.activePlayer.subtractMoney(currentCell.houseCost);
-  changeMoneyOnPlayerCard(game.activePlayer);
+  return result;
+}
+
+function addHouse(eventTarget) {
+  const cellElement = eventTarget.target.parentNode;
+  let currentObjCell;
+  cells.forEach((cell) => {
+    if (cellElement === cell.element) {
+      currentObjCell = cell;
+    }
+  });
+  if (isAvailableToBuyAnotherOneHouse(currentObjCell)) {
+    const housePlace = cellElement.querySelector('.street-color');
+    const houseImg = createElement('img', ['house']);
+    houseImg.src = './images/House.svg';
+    appendElementTo(housePlace, houseImg);
+    game.activePlayer.subtractMoney(currentObjCell.houseCost);
+    changeMoneyOnPlayerCard(game.activePlayer);
+    currentObjCell.numberOfHouses += 1;
+  }
 }
 
 function createButton(buyingSection, buttonName) {
