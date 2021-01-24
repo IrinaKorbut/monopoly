@@ -5,7 +5,7 @@ import showDialogWindow, {
   getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet,
 } from '../dialogWindow/dialogWindow';
 import initBuyHouseButton from '../buyHouse/buyHouse';
-
+import initHistoryWindow from '../histiryWindow/historyWindow';
 
 export default function computerMove(action) {
   const cell = getCellObjByPosition(game.activePlayer.position);
@@ -22,7 +22,9 @@ export default function computerMove(action) {
         }, 3000);
       });
       p.then(() => {
-        movePlayer(roll());
+        const diceValue = roll();
+        movePlayer(diceValue);
+        initHistoryWindow(`rolled ${diceValue} on the dice`);
       });
       break;
     case 'buy':
@@ -43,6 +45,7 @@ export default function computerMove(action) {
       } else {
         computerMove();
       }
+      initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
       break;
     case 'rent':
       if (cell.type !== 'communal') {
@@ -51,6 +54,7 @@ export default function computerMove(action) {
           changeMoneyOnPlayerCard(game.activePlayer);
           cell.owner.addMoney(cell.currentRent);
           changeMoneyOnPlayerCard(cell.owner);
+          initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
           computerMove();
         } else {
           // доработать
@@ -68,12 +72,14 @@ export default function computerMove(action) {
         });
         p.then(() => {
           let rent = roll();
+          initHistoryWindow(`rolled ${diceValue} on the dice`);
           rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
           if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
             game.activePlayer.money -= rent;
             changeMoneyOnPlayerCard(game.activePlayer);
             cell.owner.addMoney(rent);
             changeMoneyOnPlayerCard(cell.owner);
+            initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
             computerMove();
           } else {
             // доработать
@@ -85,6 +91,7 @@ export default function computerMove(action) {
       if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
         game.activePlayer.subtractMoney(cell.cost);
         changeMoneyOnPlayerCard(game.activePlayer);
+        initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
         computerMove();
       } else {
         // доработать
@@ -92,7 +99,6 @@ export default function computerMove(action) {
       break;
     default:
       setNextPlayerAsActive();
-      console.log(game);
       if (game.activePlayer.isHuman) {
         showDialogWindow('roll');
       } else {
