@@ -1,5 +1,7 @@
 import game from '../Game/Game';
+import cells from '../cells/cells';
 import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
+import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
 
 function highlightActivePlayerCells(playerProperties) {
   playerProperties.forEach((property) => {
@@ -10,29 +12,34 @@ function highlightActivePlayerCells(playerProperties) {
 }
 
 function addHouse(eventTarget) {
-  const housePlace = eventTarget.target.parentNode.querySelector('.street-color');
+  const cellElement = eventTarget.target.parentNode;
+  let currentCell;
+  cells.forEach((cell) => {
+    if (cellElement === cell.element) {
+      currentCell = cell;
+    }
+  });
+  const housePlace = cellElement.querySelector('.street-color');
   const houseImg = createElement('img', ['house']);
   houseImg.src = './images/House.svg';
   appendElementTo(housePlace, houseImg);
+  game.activePlayer.subtractMoney(currentCell.houseCost);
+  changeMoneyOnPlayerCard(game.activePlayer);
 }
 
 function createButton(buyingSection, buttonName) {
   removeChildsFromElement(buyingSection);
   const buttonBuyHouse = createElement('div', ['button__buy-house'], buttonName);
   appendElementTo(buyingSection, buttonBuyHouse);
-  const playerProperties = game.activePlayer.property;
   switch (buttonName) {
     case 'Buy houses':
       buttonBuyHouse.addEventListener('click', () => {
         game.cells.forEach((cell) => {
           cell.element.querySelector('.players-container').classList.add('dark');
         });
-        highlightActivePlayerCells(playerProperties);
-        console.log('all street', playerProperties);
+        highlightActivePlayerCells(game.activePlayer.property);
         game.activePlayer.property.forEach((property) => {
           if (property.isAvailableToBuyHouse) {
-            console.log('can buy', property);
-
             property.element.addEventListener('click', addHouse);
           }
         });
@@ -44,7 +51,7 @@ function createButton(buyingSection, buttonName) {
         game.cells.forEach((cell) => {
           cell.element.querySelector('.players-container').classList.remove('dark');
         });
-        playerProperties.forEach((property) => {
+        game.activePlayer.property.forEach((property) => {
           if (property.isAvailableToBuyHouse) {
             property.element.removeEventListener('click', addHouse);
           }
