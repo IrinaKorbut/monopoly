@@ -1,7 +1,7 @@
 import game from '../Game/Game';
 import cells from '../cells/cells';
 import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
-import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
+import { changeMoneyOnPlayerCard, setStreetRent } from '../dialogWindow/dialogWindow';
 
 function highlightActivePlayerCells(playerProperties) {
   playerProperties.forEach((property) => {
@@ -53,6 +53,7 @@ function addHouse(eventTarget) {
     game.activePlayer.subtractMoney(currentObjCell.houseCost);
     changeMoneyOnPlayerCard(game.activePlayer);
   }
+  setStreetRent(currentObjCell, game.activePlayer);
 }
 
 function createButton(buyingSection, buttonName) {

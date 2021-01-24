@@ -172,19 +172,45 @@ export function isPlayerHaveEnoughMoney(player, price) {
 }
 
 export function setStreetRent(property, player) {
-  if (isColorSet(player, property)) {
-    for (let i = 0; i < player.property.length; i += 1) {
-      const playerProperty = player.property[i];
-      if (playerProperty.kitId === property.kitId) {
-        const rent = playerProperty.element.querySelector('.cost');
-        rent.innerText = `$${playerProperty.rent * 2}`;
-        playerProperty.currentRent = playerProperty.rent * 2;
-      }
-    }
+  let rent = property.element.querySelector('.cost');
+  if (property.isThereHotel) {
+    rent.innerText = `$${property.rentWhithHotel}`;
+    property.currentRent = property.rentWhithHotel;
   } else {
-    const rent = property.element.querySelector('.cost');
-    rent.innerText = `$${property.rent}`;
-    property.currentRent = property.rent;
+    switch (property.numberOfHouses) {
+      case 1:
+        rent.innerText = `$${property.rentWithOneHouse}`;
+        property.currentRent = property.rentWithOneHouse;
+        break;
+      case 2:
+        rent.innerText = `$${property.rentWhithTwoHouses}`;
+        property.currentRent = property.rentWhithTwoHouses;
+        break;
+      case 3:
+        rent.innerText = `$${property.rentWithTreeHouses}`;
+        property.currentRent = property.rentWithTreeHouses;
+        break;
+      case 4:
+        rent.innerText = `$${property.rentWhithFourHouses}`;
+        property.currentRent = property.rentWhithFourHouses;
+        break;
+      default:
+        if (isColorSet(player, property)) {
+          for (let i = 0; i < player.property.length; i += 1) {
+            const playerProperty = player.property[i];
+            if (playerProperty.kitId === property.kitId) {
+              rent = playerProperty.element.querySelector('.cost');
+              rent.innerText = `$${playerProperty.rent * 2}`;
+              playerProperty.currentRent = playerProperty.rent * 2;
+            }
+          }
+        } else {
+          const rent = property.element.querySelector('.cost');
+          rent.innerText = `$${property.rent}`;
+          property.currentRent = property.rent;
+        }
+        break;
+    }
   }
 }
 
@@ -220,11 +246,13 @@ export function setRailroadRent(player) {
 }
 
 function setAvailableToBuyHouse(player, purchaseProperty) {
-  const allPlayerProperties = player.property;
-  allPlayerProperties.filter((property) => property.kitId === purchaseProperty.kitId)
-    .map((property) => {
-      property.isAvailableToBuyHouse = true;
-    });
+  if (purchaseProperty.type === 'street') {
+    const allPlayerProperties = player.property;
+    allPlayerProperties.filter((property) => property.kitId === purchaseProperty.kitId)
+      .map((property) => {
+        property.isAvailableToBuyHouse = true;
+      });
+  }
 }
 
 export function isColorSet(player, purchaseProperty) {
