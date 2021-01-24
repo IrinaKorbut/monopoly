@@ -1,12 +1,7 @@
 import { initWindowCards } from './WindowCard/windowCard';
-import showDialogWindow from './dialogWindow/dialogWindow';
-import diceInit from './dice/dice';
-import Game from './Game/Game';
-import Player from './Player/Player';
+import roll from './dice/dice';
 import { startWindow } from './StartWindow/startWindow';
 // import cells from './cells/cells';
-
-import { setNextPlayerAsActive } from './dialogWindow/dialogWindow'
 
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
@@ -21,15 +16,13 @@ import './style/historyWindow.scss';
 import './style/player.scss';
 import './StartWindow/startWindow.scss';
 import './style/playerCards.scss';
+import './menu/menu.scss';
 import './style/constants.scss';
 import './style/scrollBar.scss';
 
 initWindowCards();
-diceInit();
 
 startWindow();
-
-//initHistoryWindow('do something');
 
 
 // export const player = new Player('#2295FF');
@@ -42,15 +35,10 @@ startWindow();
 //   }
 // }
 // showDialogWindow('roll');
-
 // const player1 = new Player('#2295FF', 'player1');
 // const player2 = new Player('#2295FF', 'player2');
 // Game.addPlayer(player1);
 // Game.addPlayer(player2);
-
-// renderPlayerCard();
-// addPlayerToField();
-
 // Game.activePlayer = player1;
 // console.log(Game);
 // setNextPlayerAsActive();
@@ -58,3 +46,7 @@ startWindow();
 // setNextPlayerAsActive();
 // console.log(Game);
 // setNextPlayerAsActive();
+roll();
+
+//initHistoryWindow('do something');
+
