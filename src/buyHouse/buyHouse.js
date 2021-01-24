@@ -16,10 +16,14 @@ function isAvailableToBuyAnotherOneHouse(currentObjCell) {
     .filter((property) => property.kitId === currentObjCell.kitId);
   let result = true;
   playerPropertiesAvailableToBuyHose.forEach((property) => {
-    if (currentObjCell !== property) {
-      if (currentObjCell.numberOfHouses > property.numberOfHouses) {
-        result = false;
-      }
+    if (currentObjCell !== property && currentObjCell.numberOfHouses > property.numberOfHouses) {
+      result = false;
+    }
+    if (currentObjCell.numberOfHouses === 4 && property.isThereHotel) {
+      result = true;
+    }
+    if (currentObjCell.isThereHotel) {
+      result = false;
     }
   });
   return result;
@@ -36,11 +40,18 @@ function addHouse(eventTarget) {
   if (isAvailableToBuyAnotherOneHouse(currentObjCell)) {
     const housePlace = cellElement.querySelector('.street-color');
     const houseImg = createElement('img', ['house']);
-    houseImg.src = './images/House.svg';
+    if (currentObjCell.numberOfHouses === 4) {
+      houseImg.src = './images/Hotel.svg';
+      removeChildsFromElement(housePlace);
+      currentObjCell.numberOfHouses = 0;
+      currentObjCell.isThereHotel = true;
+    } else {
+      houseImg.src = './images/House.svg';
+      currentObjCell.numberOfHouses += 1;
+    }
     appendElementTo(housePlace, houseImg);
     game.activePlayer.subtractMoney(currentObjCell.houseCost);
     changeMoneyOnPlayerCard(game.activePlayer);
-    currentObjCell.numberOfHouses += 1;
   }
 }
 
