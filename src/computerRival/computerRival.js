@@ -2,7 +2,7 @@ import roll from '../dice/dice';
 import game from '../Game/Game';
 import movePlayer from '../move_player/movePlayerFn';
 import showDialogWindow from '../dialogWindow/dialogWindow';
-import { getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet } from '../dialogWindow/dialogWindow';
+import { getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame } from '../dialogWindow/dialogWindow';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
 export default function computerMove(action) {
@@ -39,11 +39,11 @@ export default function computerMove(action) {
           setCommunalRent(cell, game.activePlayer);
         }
         // логика постройки дома
+        initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
         computerMove();
       } else {
         computerMove();
       }
-      initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
       break;
     case 'rent':
       if (cell.type !== 'communal') {
@@ -56,6 +56,7 @@ export default function computerMove(action) {
           computerMove();
         } else {
           // доработать
+          removePlayerFromGame();
         }
       } else {
         const p = new Promise((resolve) => {
@@ -70,7 +71,7 @@ export default function computerMove(action) {
         });
         p.then(() => {
           let rent = roll();
-          initHistoryWindow(`rolled ${diceValue} on the dice`);
+          // initHistoryWindow(`rolled ${rent} on the dice`);
           rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
           if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
             game.activePlayer.money -= rent;
@@ -81,6 +82,7 @@ export default function computerMove(action) {
             computerMove();
           } else {
             // доработать
+            removePlayerFromGame();
           }
         });
       }
@@ -92,16 +94,21 @@ export default function computerMove(action) {
         initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
         computerMove();
       } else {
-        // доработать 
+        // доработать
+        removePlayerFromGame();
       }
       break;
     default:
       setNextPlayerAsActive();
-      if (game.activePlayer.isHuman) {
-        showDialogWindow('roll');
-      } else {
-        computerMove('roll');
-      }
+      nextPlayerMove();
       break;
+  }
+}
+
+function nextPlayerMove() {
+  if (game.activePlayer.isHuman) {
+    showDialogWindow('roll');
+  } else {
+    computerMove('roll');
   }
 }

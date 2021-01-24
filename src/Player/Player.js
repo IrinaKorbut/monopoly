@@ -4,7 +4,7 @@ export default class Player {
     this.name = name;
     this._position = 0;
     this.property = [];
-    this.money = 15000;
+    this.money = 1500;
     this.isHuman = isHuman;
   }
 

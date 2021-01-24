@@ -4,6 +4,7 @@ import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
 import initHistoryWindow from '../histiryWindow/historyWindow';
+import playerLose from '../losing/lose';
 
 export default function showDialogWindow(action) {
   let title;
@@ -86,9 +87,10 @@ export default function showDialogWindow(action) {
           });
           appendElementTo(dialogWindowSection, title, payRentButton);
         } else {
-          payRentButton.classList.add('inactive');
-          const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
-          appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+          // payRentButton.classList.add('inactive');
+          // const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
+          // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+          removePlayerFromGame();
         }
       } else {
         title = createElement('p', ['title'], 'Roll dice to know rent');
@@ -108,7 +110,7 @@ export default function showDialogWindow(action) {
           p.then(() => {
             removeChildsFromElement(dialogWindowSection);
             let rent = roll();
-            initHistoryWindow(`rolled ${rent} on the dice`);
+            // initHistoryWindow(`rolled ${rent} on the dice`);
             rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
             title = createElement('p', ['title'], `The rent is $${rent}`);
             const payRentButton = createElement('div', ['button'], 'Pay');
@@ -123,9 +125,10 @@ export default function showDialogWindow(action) {
               });
               appendElementTo(dialogWindowSection, title, payRentButton);
             } else {
-              payRentButton.classList.add('inactive');
-              const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
-              appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+              // payRentButton.classList.add('inactive');
+              // const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
+              // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+              removePlayerFromGame();
             }
           });
         });
@@ -134,29 +137,45 @@ export default function showDialogWindow(action) {
       break;
     case 'tax':
       // проработать случай с нехваткой денег
-      title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
-      const payTaxButton = createElement('div', ['button'], 'Pay');
-      payTaxButton.addEventListener('click', () => {
-        game.activePlayer.subtractMoney(cell.cost);
-        changeMoneyOnPlayerCard(game.activePlayer);
-        initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
-        showDialogWindow();
-      });
-      appendElementTo(dialogWindowSection, title, payTaxButton);
+      if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
+        title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+        const payTaxButton = createElement('div', ['button'], 'Pay');
+        payTaxButton.addEventListener('click', () => {
+          game.activePlayer.subtractMoney(cell.cost);
+          changeMoneyOnPlayerCard(game.activePlayer);
+          initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
+          showDialogWindow();
+        });
+        appendElementTo(dialogWindowSection, title, payTaxButton);
+      } else {
+        removePlayerFromGame();
+      }
       break;
     default:
       title = createElement('p', ['title'], 'End of turn');
       const endButton = createElement('div', ['button'], 'End');
       endButton.addEventListener('click', () => {
         setNextPlayerAsActive();
-        if (game.activePlayer.isHuman) {
-          showDialogWindow('roll');
-        } else {
-          showDialogWindow('wait');
-          computerMove('roll');
-        }
+        nextPlayerMove();
       });
       appendElementTo(dialogWindowSection, title, endButton);
+  }
+}
+
+export function removePlayerFromGame() {
+  const loser = game.activePlayer;
+  initHistoryWindow('went bankrupt');
+  setNextPlayerAsActive();
+  playerLose(loser);
+  nextPlayerMove();
+}
+
+function nextPlayerMove() {
+  if (game.activePlayer.isHuman) {
+    showDialogWindow('roll');
+  } else {
+    showDialogWindow('wait');
+    computerMove('roll');
   }
 }
 
@@ -177,6 +196,20 @@ export function getCellObjByPosition(position) {
 
 export function isPlayerHaveEnoughMoney(player, price) {
   return player.money >= price;
+}
+
+export function isColorSet(player, purchaseProperty) {
+  let sameKitPropertyCounter = 0;
+  for (let i = 0; i < player.property.length; i += 1) {
+    const playerProperty = player.property[i];
+    if (playerProperty.kitId === purchaseProperty.kitId) {
+      sameKitPropertyCounter += 1;
+    }
+  }
+  if (sameKitPropertyCounter === purchaseProperty.kitSize) {
+    return true;
+  }
+  return false;
 }
 
 export function setStreetRent(property, player) {
@@ -225,20 +258,6 @@ export function setRailroadRent(player) {
       rent.innerText = `$${propery.currentRent}`;
     }
   });
-}
-
-export function isColorSet(player, purchaseProperty) {
-  let sameKitPropertyCounter = 0;
-  for (let i = 0; i < player.property.length; i += 1) {
-    const playerProperty = player.property[i];
-    if (playerProperty.kitId === purchaseProperty.kitId) {
-      sameKitPropertyCounter += 1;
-    }
-  }
-  if (sameKitPropertyCounter === purchaseProperty.kitSize) {
-    return true;
-  }
-  return false;
 }
 
 export function setNextPlayerAsActive() {
