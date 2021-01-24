@@ -3,6 +3,8 @@ import roll from '../dice/dice';
 import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
+import initBuyHouseButton from '../buyHouse/buyHouse';
+
 
 export default function showDialogWindow(action) {
   let title;
@@ -147,6 +149,7 @@ export default function showDialogWindow(action) {
           showDialogWindow('wait');
           computerMove('roll');
         }
+        initBuyHouseButton();
       });
       appendElementTo(dialogWindowSection, title, endButton);
   }

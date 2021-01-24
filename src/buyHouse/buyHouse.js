@@ -91,6 +91,9 @@ function createButton(buyingSection, buttonName) {
     default:
       break;
   }
+  if (!game.activePlayer.isHuman) {
+    buttonBuyHouse.classList.add('inactive');
+  }
 }
 
 export default function initBuyHouseButton() {

@@ -1,32 +1,38 @@
 @import "constants";
 
 .buying-section {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 30%;
+  height: 100%;
+  background-color: rgb(116, 144, 180);
+  font-size: 2rem;
+
+  .button__buy-house {
+    width: 45%;
+    height: 3rem;
+    background-color: #dc4433;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
-    width: 30%;
-    height: 100%;
-    background-color: rgb(116, 144, 180);
-    font-size: 2rem;
+    border-radius: 3.5rem;
+    color: #fff;
+    font-size: 1.2rem;
 
+    @include tablet-width {
+      font-size: 1.5rem;
+    }
 
-    .button__buy-house {
-        width: 45%;
-        height: 3rem;
-        background-color: #DC4433;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 3.5rem;
-        color: #fff;
-        font-size: 1.2rem;
-    
-        @include tablet-width{
-          font-size: 1.5rem;
-        }
-    
-        &:hover {
-          cursor: pointer;
-        }
-      }
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  .inactive {
+    background-color: #c0c0c0;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
 }
