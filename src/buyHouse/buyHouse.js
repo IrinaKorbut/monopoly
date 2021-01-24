@@ -3,7 +3,9 @@ import { createElement, appendElementTo, removeChildsFromElement } from '../help
 
 function highlightActivePlayerCells(playerProperties) {
   playerProperties.forEach((property) => {
-    property.element.querySelector('.players-container').classList.remove('dark');
+    if (property.isAvailableToBuyHouse) {
+      property.element.querySelector('.players-container').classList.remove('dark');
+    }
   });
 }
 
@@ -26,8 +28,13 @@ function createButton(buyingSection, buttonName) {
           cell.element.querySelector('.players-container').classList.add('dark');
         });
         highlightActivePlayerCells(playerProperties);
+        console.log('all street', playerProperties);
         game.activePlayer.property.forEach((property) => {
-          property.element.addEventListener('click', addHouse);
+          if (property.isAvailableToBuyHouse) {
+            console.log('can buy', property);
+
+            property.element.addEventListener('click', addHouse);
+          }
         });
         createButton(buyingSection, 'Finish buy house');
       });
@@ -38,7 +45,9 @@ function createButton(buyingSection, buttonName) {
           cell.element.querySelector('.players-container').classList.remove('dark');
         });
         playerProperties.forEach((property) => {
-          property.element.removeEventListener('click', addHouse);
+          if (property.isAvailableToBuyHouse) {
+            property.element.removeEventListener('click', addHouse);
+          }
         });
         createButton(buyingSection, 'Buy houses');
       });

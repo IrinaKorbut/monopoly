@@ -15,6 +15,7 @@ export default class Street extends Cell {
     this.houseCost = houseCost;
     this.kitSize = kitSize;
     this.kitId = kitId;
+    this.isAvailableToBuyHouse = false;
   }
 
   set owner(owner) {

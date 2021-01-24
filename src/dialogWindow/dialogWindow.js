@@ -19,7 +19,7 @@ export default function showDialogWindow(action) {
       title = createElement('p', ['title'], `${game.activePlayer.name} move`);
       const rollButton = createElement('div', ['button'], 'Roll Dice');
       rollButton.addEventListener('click', () => {
-        showDialogWindow('wait'); 
+        showDialogWindow('wait');
         const p = new Promise((resolve) => {
           let test;
           setTimeout(() => {
@@ -89,7 +89,7 @@ export default function showDialogWindow(action) {
         title = createElement('p', ['title'], 'Roll dice to know rent');
         const rollDiceButton = createElement('div', ['button'], 'Roll Dice');
         rollDiceButton.addEventListener('click', () => {
-          showDialogWindow('wait'); 
+          showDialogWindow('wait');
           const p = new Promise((resolve) => {
             let test;
             setTimeout(() => {
@@ -219,6 +219,14 @@ export function setRailroadRent(player) {
   });
 }
 
+function setAvailableToBuyHouse(player, purchaseProperty) {
+  const allPlayerProperties = player.property;
+  allPlayerProperties.filter((property) => property.kitId === purchaseProperty.kitId)
+    .map((property) => {
+      property.isAvailableToBuyHouse = true;
+    });
+}
+
 export function isColorSet(player, purchaseProperty) {
   let sameKitPropertyCounter = 0;
   for (let i = 0; i < player.property.length; i += 1) {
@@ -228,6 +236,7 @@ export function isColorSet(player, purchaseProperty) {
     }
   }
   if (sameKitPropertyCounter === purchaseProperty.kitSize) {
+    setAvailableToBuyHouse(player, purchaseProperty);
     return true;
   }
   return false;
