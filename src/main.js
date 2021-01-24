@@ -48,5 +48,5 @@ startWindow();
 // setNextPlayerAsActive();
 roll();
 
-initHistoryWindow('do something');
+//initHistoryWindow('do something');
 

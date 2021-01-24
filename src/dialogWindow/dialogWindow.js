@@ -3,6 +3,7 @@ import roll from '../dice/dice';
 import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
+import initHistoryWindow from '../histiryWindow/historyWindow';
 
 export default function showDialogWindow(action) {
   let title;
@@ -31,7 +32,9 @@ export default function showDialogWindow(action) {
           }, 3000);
         });
         p.then(() => {
-          movePlayer(roll());
+          const diceValue = roll();
+          movePlayer(diceValue);
+          initHistoryWindow(`rolled ${diceValue} on the dice`);
         });
       });
       appendElementTo(dialogWindowSection, title, rollButton);
@@ -58,6 +61,7 @@ export default function showDialogWindow(action) {
           } else {
             setCommunalRent(cell, game.activePlayer);
           }
+          initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
           showDialogWindow();
         });
         appendElementTo(dialogWindowSection, title, buttonsWrapper);
@@ -77,6 +81,7 @@ export default function showDialogWindow(action) {
             changeMoneyOnPlayerCard(game.activePlayer);
             cell.owner.addMoney(cell.currentRent);
             changeMoneyOnPlayerCard(cell.owner);
+            initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
             showDialogWindow();
           });
           appendElementTo(dialogWindowSection, title, payRentButton);
@@ -103,6 +108,7 @@ export default function showDialogWindow(action) {
           p.then(() => {
             removeChildsFromElement(dialogWindowSection);
             let rent = roll();
+            initHistoryWindow(`rolled ${rent} on the dice`);
             rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
             title = createElement('p', ['title'], `The rent is $${rent}`);
             const payRentButton = createElement('div', ['button'], 'Pay');
@@ -112,6 +118,7 @@ export default function showDialogWindow(action) {
                 changeMoneyOnPlayerCard(game.activePlayer);
                 cell.owner.addMoney(rent);
                 changeMoneyOnPlayerCard(cell.owner);
+                initHistoryWindow(`paid $${rent} rent to ${cell.owner.name}`);
                 showDialogWindow();
               });
               appendElementTo(dialogWindowSection, title, payRentButton);
@@ -132,6 +139,7 @@ export default function showDialogWindow(action) {
       payTaxButton.addEventListener('click', () => {
         game.activePlayer.subtractMoney(cell.cost);
         changeMoneyOnPlayerCard(game.activePlayer);
+        initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
         showDialogWindow();
       });
       appendElementTo(dialogWindowSection, title, payTaxButton);
