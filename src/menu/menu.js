@@ -1,4 +1,7 @@
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
+import { startWindow } from '../StartWindow/startWindow';
+import Game from '../Game/Game';
+import Player from '../Player/Player';
 
 function menu(audioPlay) {
     const setingMenu = document.querySelector('.setings-menu')
@@ -19,14 +22,19 @@ function menu(audioPlay) {
     appendElementTo(heder, menu, btnClose)
     appendElementTo(nameBtn, setings, language, newPlay, options)
 
-    setings.addEventListener('click', () => setingsMeny(nameBtn, menu, audioPlay))
-    newPlay.addEventListener('click', () => console.log('добавить Функции перезагрузки игры'))
+    setings.addEventListener('click', () => setingsMeny(setingMenu, nameBtn, menu, setings, audioPlay))
+    newPlay.addEventListener('click', () => newPlayFn())
     btnClose.addEventListener('click', () => classMenu(audioPlay))
 }
 
-function setingsMeny(classOptions, menus, audioPlay) {
+function newPlayFn() {
 
+}
+
+function setingsMeny(setingMenu, classOptions, menus, setings, audioPlay) {
+    menus.textContent = setings.textContent
     classOptions.innerHTML = '';
+    
     const audio = createElement('div', ['audio'], 'Audio')
 
     const audioBtn = createElement('div', ['slideThree'])
@@ -52,17 +60,21 @@ function setingsMeny(classOptions, menus, audioPlay) {
     volumeInput.setAttribute('max', "1");
     volumeInput.setAttribute('step', "0.1");
 
+    const back = createElement('button', ['back'], 'back')
+
     let volumeValue = localStorage.getItem('volume')
     volumeInput.value = volumeValue || 0.5
 
+    appendElementTo(setingMenu, back)
     appendElementTo(classOptions, audio, volume)
+
     appendElementTo(audio, audioBtn)
     appendElementTo(audioBtn, audioInput, audioLabel)
     appendElementTo(volume, volumeLabel, volumeInput)
 
     audioFn(audioPlay)
 
-    menus.addEventListener('click', menu)
+    back.addEventListener('click', menu)
 }
 
 function polz(audio, volumeInputElem) {
@@ -96,6 +108,7 @@ export function keyEsc(audioPlay) {
         }
 
         if (event.code === 'F9') {
+            localStorage.setItem('stateRange', Number(audioPlay.paused));
             audioPlay.paused ? audioPlay.play() : audioPlay.pause()
             audioPlay.addEventListener('ended', () => audioPlay.play())
 
@@ -131,7 +144,7 @@ export function keyEsc(audioPlay) {
                     localStorage.setItem('volume', volumeInputs.value);
                 }
             }
-            
+
         }
     })
 }
@@ -141,6 +154,7 @@ export function btnClikMenu() {
     const audioPlay = new Audio('./audio/Ennio-Morricone.mp3')
     btnMenu.addEventListener('click', () => classMenu(audioPlay))
     keyEsc(audioPlay)
+    checkBtnAudio(audioPlay)
 }
 
 function classMenu(audioPlay) {
@@ -149,4 +163,9 @@ function classMenu(audioPlay) {
     document.querySelector('.setings-menu').classList.toggle('no-burger-menu')
 
     menu(audioPlay)
+}
+
+function checkBtnAudio(audioPlay) {   
+    const stateRange = localStorage.getItem('stateRange')
+    stateRange === '1' ? audioPlay.play() : audioPlay.pause()
 }
