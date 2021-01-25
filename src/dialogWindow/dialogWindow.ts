@@ -9,8 +9,9 @@ import Player from '../Player/Player';
 import Street from '../Street/Street';
 import Communal from '../Communal/Communal';
 import Property from '../ifacies/Property';
+import playerLose from '../losing/lose';
 
-export default function showDialogWindow(action?: string) {
+export default function showDialogWindow(action?: string): void {
   let title: HTMLElement;
   const cell = getCellObjByPosition(game.activePlayer.position);
   const dialogWindowSection = document.querySelector('.dialog-window');
@@ -91,9 +92,10 @@ export default function showDialogWindow(action?: string) {
           });
           appendElementTo(dialogWindowSection, title, payRentButton);
         } else {
-          payRentButton.classList.add('inactive');
-          const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
-          appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+          // payRentButton.classList.add('inactive');
+          // const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
+          // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+          removePlayerFromGame();
         }
       } else {
         title = createElement('p', ['title'], 'Roll dice to know rent');
@@ -113,7 +115,7 @@ export default function showDialogWindow(action?: string) {
           p.then(() => {
             removeChildsFromElement(dialogWindowSection);
             let rent = roll();
-            initHistoryWindow(`rolled ${rent} on the dice`);
+            // initHistoryWindow(`rolled ${rent} on the dice`);
             rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
             title = createElement('p', ['title'], `The rent is $${rent}`);
             const payRentButton = createElement('div', ['button'], 'Pay');
@@ -128,9 +130,10 @@ export default function showDialogWindow(action?: string) {
               });
               appendElementTo(dialogWindowSection, title, payRentButton);
             } else {
-              payRentButton.classList.add('inactive');
-              const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
-              appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+              // payRentButton.classList.add('inactive');
+              // const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
+              // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
+              removePlayerFromGame();
             }
           });
         });
@@ -139,34 +142,50 @@ export default function showDialogWindow(action?: string) {
       break;
     case 'tax':
       // проработать случай с нехваткой денег
-      title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
-      const payTaxButton = createElement('div', ['button'], 'Pay');
-      payTaxButton.addEventListener('click', () => {
-        game.activePlayer.subtractMoney(cell.cost);
-        changeMoneyOnPlayerCard(game.activePlayer);
-        initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
-        showDialogWindow();
-      });
-      appendElementTo(dialogWindowSection, title, payTaxButton);
+      if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
+        title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+        const payTaxButton = createElement('div', ['button'], 'Pay');
+        payTaxButton.addEventListener('click', () => {
+          game.activePlayer.subtractMoney(cell.cost);
+          changeMoneyOnPlayerCard(game.activePlayer);
+          initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
+          showDialogWindow();
+        });
+        appendElementTo(dialogWindowSection, title, payTaxButton);
+      } else {
+        removePlayerFromGame();
+      }
       break;
     default:
       title = createElement('p', ['title'], 'End of turn');
       const endButton = createElement('div', ['button'], 'End');
       endButton.addEventListener('click', () => {
         setNextPlayerAsActive();
-        if (game.activePlayer.isHuman) {
-          showDialogWindow('roll');
-        } else {
-          showDialogWindow('wait');
-          computerMove('roll');
-        }
+        nextPlayerMove();
         initBuyHouseButton();
       });
       appendElementTo(dialogWindowSection, title, endButton);
   }
 }
 
-export function addPropertyToPlayer(player: Player, property: Property) {
+export function removePlayerFromGame(): void {
+  const loser = game.activePlayer;
+  initHistoryWindow('went bankrupt');
+  setNextPlayerAsActive();
+  playerLose(loser);
+  nextPlayerMove();
+}
+
+function nextPlayerMove(): void {
+  if (game.activePlayer.isHuman) {
+    showDialogWindow('roll');
+  } else {
+    showDialogWindow('wait');
+    computerMove('roll');
+  }
+}
+
+export function addPropertyToPlayer(player: Player, property: Property): void {
   player.addProperty(property);
   player.subtractMoney(property.cost);
   property.owner = game.activePlayer;
@@ -181,11 +200,11 @@ export function getCellObjByPosition(position: number): any {
   }
 }
 
-export function isPlayerHaveEnoughMoney(player: Player, price: number) {
+export function isPlayerHaveEnoughMoney(player: Player, price: number): boolean {
   return player.money >= price;
 }
 
-export function setStreetRent(property: Street, player: Player) {
+export function setStreetRent(property: Street, player: Player): void {
   let rent: HTMLElement = property.element.querySelector('.cost');
   if (property.isThereHotel) {
     rent.innerText = `$${property.rentWhithHotel}`;
@@ -228,7 +247,7 @@ export function setStreetRent(property: Street, player: Player) {
   }
 }
 
-export function setCommunalRent(property: Communal, player: Player) {
+export function setCommunalRent(property: Communal, player: Player): void {
   if (isColorSet(player, property)) {
     for (let i = 0; i < player.property.length; i += 1) {
       const playerProperty = player.property[i];

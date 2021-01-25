@@ -2,12 +2,12 @@ import roll from '../dice/dice';
 import game from '../Game/Game';
 import movePlayer from '../move_player/movePlayerFn';
 import showDialogWindow, {
-  getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet,
+  getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame
 } from '../dialogWindow/dialogWindow';
 import initBuyHouseButton from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
-export default function computerMove(action?: string) {
+export default function computerMove(action?: string): void {
   const cell = getCellObjByPosition(game.activePlayer.position);
   switch (action) {
     case 'roll':
@@ -41,11 +41,11 @@ export default function computerMove(action?: string) {
           setCommunalRent(cell, game.activePlayer);
         }
         // логика постройки дома
+        initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
         computerMove();
       } else {
         computerMove();
       }
-      initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
       break;
     case 'rent':
       if (cell.type !== 'communal') {
@@ -58,6 +58,7 @@ export default function computerMove(action?: string) {
           computerMove();
         } else {
           // доработать
+          removePlayerFromGame();
         }
       } else {
         const p: Promise<void> = new Promise((resolve) => {
@@ -72,17 +73,17 @@ export default function computerMove(action?: string) {
         });
         p.then(() => {
           let rent = roll();
-          initHistoryWindow(`rolled ${rent} on the dice`);
           rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
           if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
             game.activePlayer.money -= rent;
             changeMoneyOnPlayerCard(game.activePlayer);
             cell.owner.addMoney(rent);
             changeMoneyOnPlayerCard(cell.owner);
-            initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
+            initHistoryWindow(`paid $${rent} rent to ${cell.owner.name}`);
             computerMove();
           } else {
             // доработать
+            removePlayerFromGame();
           }
         });
       }
@@ -95,16 +96,21 @@ export default function computerMove(action?: string) {
         computerMove();
       } else {
         // доработать
+        removePlayerFromGame();
       }
       break;
     default:
       setNextPlayerAsActive();
-      if (game.activePlayer.isHuman) {
-        showDialogWindow('roll');
-      } else {
-        computerMove('roll');
-      }
+      nextPlayerMove();
       initBuyHouseButton();
       break;
+  }
+}
+
+function nextPlayerMove(): void {
+  if (game.activePlayer.isHuman) {
+    showDialogWindow('roll');
+  } else {
+    computerMove('roll');
   }
 }

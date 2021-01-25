@@ -6,7 +6,7 @@ export default class Player {
   readonly isHuman: boolean;
   playerCard: HTMLElement;
   position: number = 0;
-  money: number = 15000;
+  money: number = 1500;
   property: Array<Property> = [];
   chip: HTMLElement;
 

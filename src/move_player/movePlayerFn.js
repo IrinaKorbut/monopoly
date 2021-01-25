@@ -126,7 +126,7 @@ export default async function movePlayer(stepsAmount) {
   await showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay);
   if (playerPositionAfterMove > 39) {
     playerPositionAfterMove = resetPlayerPosition(playerPositionAfterMove);
-    addMoneyPerCycle();
+    // addMoneyPerCycle();
   }
   doMoveLogic(playerPositionAfterMove);
 }
