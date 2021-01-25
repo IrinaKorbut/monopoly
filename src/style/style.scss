@@ -9,6 +9,7 @@
 }
 
 html {
+  user-select: none;
   font-size: 10px;  
 
   @media only screen and (max-width: 1400px) {
