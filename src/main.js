@@ -6,6 +6,7 @@ import { startWindow } from './StartWindow/startWindow';
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
 import initHistoryWindow from './histiryWindow/historyWindow'
+import initBuyHouseButton from './buyHouse/buyHouse'
 
 
 import './style/style.scss';
@@ -19,6 +20,7 @@ import './style/playerCards.scss';
 import './menu/menu.scss';
 import './style/constants.scss';
 import './style/scrollBar.scss';
+import './style/buyingSection.scss';
 
 initWindowCards();
 
@@ -48,5 +50,7 @@ startWindow();
 // setNextPlayerAsActive();
 roll();
 
-initHistoryWindow('do something');
+//initHistoryWindow('do something');
+
+// initBuyHouseButton();
 
