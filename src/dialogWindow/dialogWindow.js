@@ -200,20 +200,6 @@ export function isPlayerHaveEnoughMoney(player, price) {
   return player.money >= price;
 }
 
-export function isColorSet(player, purchaseProperty) {
-  let sameKitPropertyCounter = 0;
-  for (let i = 0; i < player.property.length; i += 1) {
-    const playerProperty = player.property[i];
-    if (playerProperty.kitId === purchaseProperty.kitId) {
-      sameKitPropertyCounter += 1;
-    }
-  }
-  if (sameKitPropertyCounter === purchaseProperty.kitSize) {
-    return true;
-  }
-  return false;
-}
-
 export function setStreetRent(property, player) {
   let rent = property.element.querySelector('.cost');
   if (property.isThereHotel) {
@@ -288,8 +274,6 @@ export function setRailroadRent(player) {
   });
 }
 
-<<<<<<< HEAD
-=======
 function setAvailableToBuyHouse(player, purchaseProperty) {
   if (purchaseProperty.type === 'street') {
     const allPlayerProperties = player.property;
@@ -315,7 +299,6 @@ export function isColorSet(player, purchaseProperty) {
   return false;
 }
 
->>>>>>> develop
 export function setNextPlayerAsActive() {
   const activePlayerIndex = game.players.indexOf(game.activePlayer);
   if (activePlayerIndex < game.players.length - 1) {
