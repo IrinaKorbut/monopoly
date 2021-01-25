@@ -6,13 +6,13 @@
     background-color: rgb(116, 180, 132);
     font-size: 2rem;
 
-    // @include tablet-width {
-    //     height: 100%;
-    // }
+    @include tablet-width {
+        height: 100%;
+    }
 
     .action-list {
         padding: 10px 15px;
-        height: 70%;
+        height: 100%;
         overflow-y: scroll;
         overflow-x: hidden;
         list-style-type: none;
