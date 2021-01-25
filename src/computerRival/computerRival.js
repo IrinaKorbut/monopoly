@@ -72,7 +72,7 @@ export default function computerMove(action) {
         });
         p.then(() => {
           let rent = roll();
-          initHistoryWindow(`rolled ${diceValue} on the dice`);
+          initHistoryWindow(`rolled ${rent} on the dice`);
           rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
           if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
             game.activePlayer.money -= rent;
