@@ -1,4 +1,4 @@
-function roundRect(ctx, x, y, width, height, radius, fill) {
+function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fill: boolean) {
   ctx.beginPath();
   ctx.moveTo(x + radius, y);
   ctx.lineTo(x + width - radius, y);
@@ -15,12 +15,12 @@ function roundRect(ctx, x, y, width, height, radius, fill) {
   }
 }
 
-function drawDice(ctx, x, y, size, value) {
+function drawDice(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, value: number) {
   const dots = [];
   ctx.save();
   ctx.fillStyle = '#D77';
   ctx.translate(x, y);
-  roundRect(ctx, 0, 0, size, size, size * 0.1, true, false);
+  roundRect(ctx, 0, 0, size, size, size * 0.1, true);
   const padding = 0.25;
   let dotX;
   let dotY;
@@ -41,7 +41,7 @@ function drawDice(ctx, x, y, size, value) {
   dots.push({ x: dotX, y: dotY });
   dotY = size * (1 - padding);
   dots.push({ x: dotX, y: dotY });
-  let dotsToDraw;
+  let dotsToDraw: Array<number>;
   if (value === 1) dotsToDraw = [3];
   else if (value === 2) dotsToDraw = [0, 6];
   else if (value === 3) dotsToDraw = [0, 3, 6];
@@ -61,7 +61,7 @@ function drawDice(ctx, x, y, size, value) {
 export default function roll() {
   const firstDiceValue = Math.floor(Math.random() * 6) + 1;
   const secondDiceValue = Math.floor(Math.random() * 6) + 1;
-  const canvas = document.getElementById('canvas');
+  const canvas = <HTMLCanvasElement> document.getElementById('canvas');
   const context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height);
   drawDice(context, 15, 22, 110, firstDiceValue);

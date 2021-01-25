@@ -1,3 +1,5 @@
+import Player from "../Player/Player";
+
 export default class Cell {
   readonly type: string;
   readonly name: string;

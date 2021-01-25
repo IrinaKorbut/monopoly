@@ -1,12 +1,15 @@
 import Cell from '../Cell/Cell';
+import Property from '../ifacies/Property';
+import Player from '../Player/Player';
 
-export default class Railroad extends Cell {
+export default class Railroad extends Cell implements Property {
   readonly cost: number = 200;
   readonly oneRailroadRent: number = 25;
   readonly twoRailroadRent: number = 50;
   readonly threeRailroadRent: number = 100;
   readonly fourRailroadRent: number = 200;
-  private rent: number;
+  rent: number;
+  owner: Player;
 
   constructor(type: string, name: string, position: number) {
     super(type, name, position);

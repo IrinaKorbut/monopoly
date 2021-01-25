@@ -7,12 +7,12 @@ import showDialogWindow, {
 import initBuyHouseButton from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
-export default function computerMove(action) {
+export default function computerMove(action?: string) {
   const cell = getCellObjByPosition(game.activePlayer.position);
   switch (action) {
     case 'roll':
-      const p = new Promise((resolve) => {
-        let test;
+      const p: Promise<void> = new Promise((resolve) => {
+        let test: any;
         setTimeout(() => {
           test = setInterval(roll, 200);
         }, 0);
@@ -60,8 +60,8 @@ export default function computerMove(action) {
           // доработать
         }
       } else {
-        const p = new Promise((resolve) => {
-          let test;
+        const p: Promise<void> = new Promise((resolve) => {
+          let test: any;
           setTimeout(() => {
             test = setInterval(roll, 200);
           }, 0);

@@ -1,6 +1,8 @@
 import Cell from '../Cell/Cell';
+import Property from '../ifacies/Property';
+import Player from '../Player/Player';
 
-export default class Street extends Cell {
+export default class Street extends Cell implements Property{
   readonly cost: number;
   readonly rent: number;
   readonly rentWithOneHouse: number;
@@ -14,6 +16,7 @@ export default class Street extends Cell {
   isAvailableToBuyHouse: boolean = false;
   numberOfHouses: number = 0;
   isThereHotel: boolean = false;
+  owner: Player;
   private _currentRent: number;
 
   constructor(type: string, name: string, position: number, cost: number, rent: number,

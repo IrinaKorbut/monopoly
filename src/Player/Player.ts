@@ -1,12 +1,14 @@
-import Cell from "../Cell/Cell";
+import Property from '../ifacies/Property';
 
 export default class Player {
   readonly color: string;
   readonly name: string;
   readonly isHuman: boolean;
+  playerCard: HTMLElement;
   position: number = 0;
   money: number = 15000;
-  property: Array<Cell> = [];
+  property: Array<Property> = [];
+  chip: HTMLElement;
 
   constructor(color: string, name: string, isHuman: boolean) {
     this.color = color;
@@ -26,7 +28,7 @@ export default class Player {
     return false;
   }
 
-  addProperty(property: Cell) {
+  addProperty(property: Property) {
     this.property.push(property);
   }
 }
