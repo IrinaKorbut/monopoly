@@ -9,6 +9,8 @@
     width: 100%;
     height: 100%;
     padding: 50% 3% 0;
+    background: none;
+    
 
     .player {
         width: 3rem;
@@ -27,6 +29,9 @@
     }
 }
 
+.dark {
+    background: rgba(0,0,0,0.5);
+}
 
 // .active {
 //     background-color: purple;

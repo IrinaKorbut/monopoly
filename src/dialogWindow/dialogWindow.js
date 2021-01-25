@@ -3,6 +3,7 @@ import roll from '../dice/dice';
 import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
+import initBuyHouseButton from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
 export default function showDialogWindow(action) {
@@ -20,7 +21,7 @@ export default function showDialogWindow(action) {
       title = createElement('p', ['title'], `${game.activePlayer.name} move`);
       const rollButton = createElement('div', ['button'], 'Roll Dice');
       rollButton.addEventListener('click', () => {
-        showDialogWindow('wait'); 
+        showDialogWindow('wait');
         const p = new Promise((resolve) => {
           let test;
           setTimeout(() => {
@@ -94,7 +95,7 @@ export default function showDialogWindow(action) {
         title = createElement('p', ['title'], 'Roll dice to know rent');
         const rollDiceButton = createElement('div', ['button'], 'Roll Dice');
         rollDiceButton.addEventListener('click', () => {
-          showDialogWindow('wait'); 
+          showDialogWindow('wait');
           const p = new Promise((resolve) => {
             let test;
             setTimeout(() => {
@@ -155,6 +156,7 @@ export default function showDialogWindow(action) {
           showDialogWindow('wait');
           computerMove('roll');
         }
+        initBuyHouseButton();
       });
       appendElementTo(dialogWindowSection, title, endButton);
   }
@@ -180,19 +182,45 @@ export function isPlayerHaveEnoughMoney(player, price) {
 }
 
 export function setStreetRent(property, player) {
-  if (isColorSet(player, property)) {
-    for (let i = 0; i < player.property.length; i += 1) {
-      const playerProperty = player.property[i];
-      if (playerProperty.kitId === property.kitId) {
-        const rent = playerProperty.element.querySelector('.cost');
-        rent.innerText = `$${playerProperty.rent * 2}`;
-        playerProperty.currentRent = playerProperty.rent * 2;
-      }
-    }
+  let rent = property.element.querySelector('.cost');
+  if (property.isThereHotel) {
+    rent.innerText = `$${property.rentWhithHotel}`;
+    property.currentRent = property.rentWhithHotel;
   } else {
-    const rent = property.element.querySelector('.cost');
-    rent.innerText = `$${property.rent}`;
-    property.currentRent = property.rent;
+    switch (property.numberOfHouses) {
+      case 1:
+        rent.innerText = `$${property.rentWithOneHouse}`;
+        property.currentRent = property.rentWithOneHouse;
+        break;
+      case 2:
+        rent.innerText = `$${property.rentWhithTwoHouses}`;
+        property.currentRent = property.rentWhithTwoHouses;
+        break;
+      case 3:
+        rent.innerText = `$${property.rentWithTreeHouses}`;
+        property.currentRent = property.rentWithTreeHouses;
+        break;
+      case 4:
+        rent.innerText = `$${property.rentWhithFourHouses}`;
+        property.currentRent = property.rentWhithFourHouses;
+        break;
+      default:
+        if (isColorSet(player, property)) {
+          for (let i = 0; i < player.property.length; i += 1) {
+            const playerProperty = player.property[i];
+            if (playerProperty.kitId === property.kitId) {
+              rent = playerProperty.element.querySelector('.cost');
+              rent.innerText = `$${playerProperty.rent * 2}`;
+              playerProperty.currentRent = playerProperty.rent * 2;
+            }
+          }
+        } else {
+          const rent = property.element.querySelector('.cost');
+          rent.innerText = `$${property.rent}`;
+          property.currentRent = property.rent;
+        }
+        break;
+    }
   }
 }
 
@@ -227,6 +255,16 @@ export function setRailroadRent(player) {
   });
 }
 
+function setAvailableToBuyHouse(player, purchaseProperty) {
+  if (purchaseProperty.type === 'street') {
+    const allPlayerProperties = player.property;
+    allPlayerProperties.filter((property) => property.kitId === purchaseProperty.kitId)
+      .map((property) => {
+        property.isAvailableToBuyHouse = true;
+      });
+  }
+}
+
 export function isColorSet(player, purchaseProperty) {
   let sameKitPropertyCounter = 0;
   for (let i = 0; i < player.property.length; i += 1) {
@@ -236,6 +274,7 @@ export function isColorSet(player, purchaseProperty) {
     }
   }
   if (sameKitPropertyCounter === purchaseProperty.kitSize) {
+    setAvailableToBuyHouse(player, purchaseProperty);
     return true;
   }
   return false;

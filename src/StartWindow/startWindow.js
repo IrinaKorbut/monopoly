@@ -5,6 +5,7 @@ import renderPlayerCard from '../playerCards/renderPlayerCard';
 import showDialogWindow from '../dialogWindow/dialogWindow';
 import addPlayerToField from '../addPlayerToField/addPlayerToField';
 import computerMove from '../computerRival/computerRival';
+import initBuyHouseButton from '../buyHouse/buyHouse'
 import { btnClikMenu } from '../menu/menu';
 
 export function startWindow() {
@@ -57,10 +58,13 @@ export function startBtn() {
         Game.addPlayer(new Player(selectStyle[i].value, inputName[i].value, isHuman));
       }
       Game.activePlayer = Game.players[0];
+      initBuyHouseButton();
       if (Game.activePlayer.isHuman) {
         showDialogWindow('roll');
       } else {
         showDialogWindow('wait');
+        const buttonBuyHouse = document.querySelector('.button__buy-house');
+        buttonBuyHouse.classList.add('inactive');
         computerMove('roll');
       }
       document.querySelector('.start-window').classList.add('no-active');
@@ -74,6 +78,7 @@ export function startBtn() {
     }
     renderPlayerCard();
     addPlayerToField();
+    
   });
 }
 

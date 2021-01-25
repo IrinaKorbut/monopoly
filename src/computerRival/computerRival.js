@@ -1,8 +1,10 @@
 import roll from '../dice/dice';
 import game from '../Game/Game';
 import movePlayer from '../move_player/movePlayerFn';
-import showDialogWindow from '../dialogWindow/dialogWindow';
-import { getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet } from '../dialogWindow/dialogWindow';
+import showDialogWindow, {
+  getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet,
+} from '../dialogWindow/dialogWindow';
+import initBuyHouseButton from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
 export default function computerMove(action) {
@@ -92,7 +94,7 @@ export default function computerMove(action) {
         initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
         computerMove();
       } else {
-        // доработать 
+        // доработать
       }
       break;
     default:
@@ -102,6 +104,7 @@ export default function computerMove(action) {
       } else {
         computerMove('roll');
       }
+      initBuyHouseButton();
       break;
   }
 }
