@@ -23,18 +23,43 @@ function menu(audioPlay) {
     appendElementTo(nameBtn, setings, language, newPlay, options)
 
     setings.addEventListener('click', () => setingsMeny(setingMenu, nameBtn, menu, setings, audioPlay))
-    newPlay.addEventListener('click', () => newPlayFn())
+    newPlay.addEventListener('click', newPlayFn)
     btnClose.addEventListener('click', () => classMenu(audioPlay))
 }
 
 function newPlayFn() {
+    Game.players.forEach(player => {
+        player.chip.remove()
+        player.playerCard.remove()
+    })
+    Game.players = []
+    Game.cells.forEach(cell => {
+        if (cell.type === 'street' || cell.type === 'railroad' || cell.type === 'communal') {
+            cell.owner = null
+            cell.isAvailableToBuyHouse = false;
+            cell.numberOfHouses = 0;
+            cell.isThereHotel = false;
 
+            document.querySelectorAll('.house').forEach(hous => hous.remove())
+            document.querySelector('.action-list').innerHTML = "";
+            const propertyViewCost = cell.element.querySelector('.cost');
+            const ownerColor = cell.element.querySelector('.owner');
+            ownerColor.style.backgroundColor = '#c0c0c0';
+            propertyViewCost.innerText = `$${cell.cost}`;
+        }
+    })
+
+    document.querySelector('.setings-menu').classList.toggle('no-burger-menu')
+    document.querySelector('.setings-menu').classList.toggle('window-menu')
+    document.querySelector('.start-window').classList.toggle('no-active');
+
+    startWindow()
 }
 
 function setingsMeny(setingMenu, classOptions, menus, setings, audioPlay) {
     menus.textContent = setings.textContent
     classOptions.innerHTML = '';
-    
+
     const audio = createElement('div', ['audio'], 'Audio')
 
     const audioBtn = createElement('div', ['slideThree'])
@@ -60,7 +85,7 @@ function setingsMeny(setingMenu, classOptions, menus, setings, audioPlay) {
     volumeInput.setAttribute('max', "1");
     volumeInput.setAttribute('step', "0.1");
 
-    const back = createElement('button', ['back'], 'back')
+    const back = createElement('div', ['back'], 'back')
 
     let volumeValue = localStorage.getItem('volume')
     volumeInput.value = volumeValue || 0.5
@@ -91,11 +116,8 @@ function audioFn(audioPlay) {
 }
 
 function audioRepeat(audio, audioBtnElem) {
-
     localStorage.setItem('stateRange', Number(audioBtnElem.checked));
-    audioBtnElem.checked ? audio.play() : audio.pause()
-
-    audio.addEventListener('ended', () => audio.play())
+    checkBtnAudio(audio)
 }
 
 export function keyEsc(audioPlay) {
@@ -109,8 +131,8 @@ export function keyEsc(audioPlay) {
 
         if (event.code === 'F9') {
             localStorage.setItem('stateRange', Number(audioPlay.paused));
-            audioPlay.paused ? audioPlay.play() : audioPlay.pause()
-            audioPlay.addEventListener('ended', () => audioPlay.play())
+
+            checkBtnAudio(audioPlay)
 
             if (audioBtn) {
                 audioBtn.checked ? audioBtn.checked = false : audioBtn.checked = true
@@ -144,8 +166,7 @@ export function keyEsc(audioPlay) {
                     localStorage.setItem('volume', volumeInputs.value);
                 }
             }
-
-        }
+        }5
     })
 }
 
@@ -155,17 +176,59 @@ export function btnClikMenu() {
     btnMenu.addEventListener('click', () => classMenu(audioPlay))
     keyEsc(audioPlay)
     checkBtnAudio(audioPlay)
+
+    const blackout = document.querySelector('#blackout')
+    blackout.addEventListener('click', clickBlackout)
+}
+
+function clickBlackout() {
+    const startWindow = document.querySelector('.start-window')
+    const setingsMenu = document.querySelector('.setings-menu')
+
+    if (startWindow.classList[2] === 'menu-and-section' && setingsMenu.classList[1] === 'window-menu') {
+        classMenu()
+    }
+    if (startWindow.classList[1] === 'no-active' && setingsMenu.classList[1] === 'window-menu') {
+        classMenu()
+    }
 }
 
 function classMenu(audioPlay) {
-    document.querySelector('.setings-menu').classList.toggle('window-menu')
-    document.querySelector('#blackout').classList.toggle('blackout');
-    document.querySelector('.setings-menu').classList.toggle('no-burger-menu')
+    const startWindow = document.querySelector('.start-window')
+    const setingsMenu = document.querySelector('.setings-menu')
+    const blackout = document.querySelector('#blackout')
+    const menuAndSection = document.querySelector('.menu-and-section')
+
+    if (startWindow.classList.length === 1) {
+        startWindow.classList.toggle('no-active');
+        setingsMenu.classList.toggle('window-menu')
+        setingsMenu.classList.toggle('no-burger-menu')
+        startWindow.classList.toggle('menu-and-section');
+    } else {
+        if (menuAndSection) {
+            startWindow.classList.toggle('menu-and-section');
+            setingsMenu.classList.toggle('no-burger-menu')
+            setingsMenu.classList.toggle('window-menu')
+            startWindow.classList.toggle('no-active');
+        } else {
+            setingsMenu.classList.toggle('window-menu')
+            blackout.classList.toggle('blackout');
+            setingsMenu.classList.toggle('no-burger-menu')
+        }
+    }
 
     menu(audioPlay)
 }
 
-function checkBtnAudio(audioPlay) {   
+function checkBtnAudio(audioPlay) {
     const stateRange = localStorage.getItem('stateRange')
-    stateRange === '1' ? audioPlay.play() : audioPlay.pause()
+    if (stateRange === '1') {
+        // audioPlay.setAttribute('muted', false)
+        audioPlay.setAttribute('allow', "autoplay");
+        audioPlay.play()
+    } else {
+        audioPlay.pause()
+    }
+
+    audioPlay.addEventListener('ended', () => audioPlay.play())
 }

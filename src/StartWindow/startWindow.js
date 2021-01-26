@@ -10,6 +10,7 @@ import { btnClikMenu } from '../menu/menu';
 
 export function startWindow() {
   const classStartWindow = document.querySelector('.start-window');
+  classStartWindow.innerHTML = ''
   const numberPlayers = createElement('div', ['number-players'], 'Select number of players.');
   const gamekoi = createElement('select', ['select-style']);
   const gamekoiDisabl = createElement('option', ['num'], 'num');
@@ -70,7 +71,7 @@ export function startBtn() {
       document.querySelector('.start-window').classList.add('no-active');
       document.querySelector('#blackout').classList.remove('blackout');
 
-      btnClikMenu()
+      // btnClikMenu()
 
     } else {
       startBtn.classList.remove('color-btn');
