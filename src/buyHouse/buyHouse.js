@@ -2,6 +2,7 @@ import game from '../Game/Game';
 import cells from '../cells/cells';
 import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
 import { changeMoneyOnPlayerCard, setStreetRent } from '../dialogWindow/dialogWindow';
+import initHistoryWindow from '../histiryWindow/historyWindow';
 
 function highlightActivePlayerCells(playerProperties) {
   playerProperties.forEach((property) => {
@@ -52,6 +53,11 @@ function addHouse(eventTarget) {
     appendElementTo(housePlace, houseImg);
     game.activePlayer.subtractMoney(currentObjCell.houseCost);
     changeMoneyOnPlayerCard(game.activePlayer);
+    if (currentObjCell.isThereHotel) {
+      initHistoryWindow(`bought hotel on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
+    } else {
+      initHistoryWindow(`bought house on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
+    }
   }
   setStreetRent(currentObjCell, game.activePlayer);
 }
@@ -62,31 +68,35 @@ function createButton(buyingSection, buttonName) {
   appendElementTo(buyingSection, buttonBuyHouse);
   switch (buttonName) {
     case 'Buy houses':
-      buttonBuyHouse.addEventListener('click', () => {
-        game.cells.forEach((cell) => {
-          cell.element.querySelector('.players-container').classList.add('dark');
+      if (game.activePlayer.isHuman) {
+        buttonBuyHouse.addEventListener('click', () => {
+          game.cells.forEach((cell) => {
+            cell.element.querySelector('.players-container').classList.add('dark');
+          });
+          highlightActivePlayerCells(game.activePlayer.property);
+          game.activePlayer.property.forEach((property) => {
+            if (property.isAvailableToBuyHouse) {
+              property.element.addEventListener('click', addHouse);
+            }
+          });
+          createButton(buyingSection, 'Finish buy house');
         });
-        highlightActivePlayerCells(game.activePlayer.property);
-        game.activePlayer.property.forEach((property) => {
-          if (property.isAvailableToBuyHouse) {
-            property.element.addEventListener('click', addHouse);
-          }
-        });
-        createButton(buyingSection, 'Finish buy house');
-      });
+      }
       break;
     case 'Finish buy house':
-      buttonBuyHouse.addEventListener('click', () => {
-        game.cells.forEach((cell) => {
-          cell.element.querySelector('.players-container').classList.remove('dark');
+      if (game.activePlayer.isHuman) {
+        buttonBuyHouse.addEventListener('click', () => {
+          game.cells.forEach((cell) => {
+            cell.element.querySelector('.players-container').classList.remove('dark');
+          });
+          game.activePlayer.property.forEach((property) => {
+            if (property.isAvailableToBuyHouse) {
+              property.element.removeEventListener('click', addHouse);
+            }
+          });
+          createButton(buyingSection, 'Buy houses');
         });
-        game.activePlayer.property.forEach((property) => {
-          if (property.isAvailableToBuyHouse) {
-            property.element.removeEventListener('click', addHouse);
-          }
-        });
-        createButton(buyingSection, 'Buy houses');
-      });
+      }
       break;
     default:
       break;
