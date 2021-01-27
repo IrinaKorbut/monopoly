@@ -42,18 +42,18 @@ export function startWindow() {
 export function startBtn() {
   const startBtn = document.querySelector('.btn-start');
   startBtn.addEventListener('click', () => {
-    let name = 0;
+    let name: any = 0;
     let sumClass = false;
 
-    const inputName = document.querySelectorAll('.input-name');
-    inputName.forEach((e) => name += !e.value == 0);
+    const inputName: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.input-name');
+    inputName.forEach((e) => name += !e.value);
 
-    const selectStyle = document.querySelectorAll('.select-game');
+    const selectStyle: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-game');
     selectStyle.forEach((e) => sumClass = e.value !== 'Color');
 
-    const isHumanSelect = document.querySelectorAll('.player-selectHuman');
+    const isHumanSelect: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.player-selectHuman');
 
-    if (name === inputName.length && sumClass) {
+    if (name === 0 && sumClass) {
       for (let i = 0; i < inputName.length; i++) {
         const isHuman = isHumanSelect[i].value === 'human';
         Game.addPlayer(new Player(selectStyle[i].value, inputName[i].value, isHuman));
@@ -83,7 +83,7 @@ export function startBtn() {
   });
 }
 
-function addGamecoaSetting(settingGamers, selectNum) {
+function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number) {
   settingGamers.innerHTML = '';
   for (let i = 0; i < selectNum; i++) {
     const playerWrapper = createElement('div', ['player-wrapper']);
@@ -127,7 +127,7 @@ function addGamecoaSetting(settingGamers, selectNum) {
   }
 }
 
-function addNameA(playerIconName, playerInput) {
+function addNameA(playerIconName: HTMLElement, playerInput: any): void {
   if (!playerInput[0]) {
     playerIconName.textContent = 'P';
   } else {
