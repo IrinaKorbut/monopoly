@@ -1,12 +1,13 @@
 import { initWindowCards } from './WindowCard/windowCard';
 import roll from './dice/dice';
 import { startWindow } from './StartWindow/startWindow';
+import { btnClikMenu } from './menu/menu';
 // import cells from './cells/cells';
 
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
 import initHistoryWindow from './histiryWindow/historyWindow'
-import initBuyHouseButton from './buyHouse/buyHouse'
+import initBuyHouseButton from './buyHouse/buyHouse';
 
 
 import './style/style.scss';
@@ -22,9 +23,14 @@ import './style/constants.scss';
 import './style/scrollBar.scss';
 import './style/buyingSection.scss';
 
+import './style/testBtn.scss';
+import './style/dark.scss';
+import './style/loader.scss';
+
 initWindowCards();
 
 startWindow();
+btnClikMenu()
 
 
 // export const player = new Player('#2295FF');
@@ -53,3 +59,21 @@ roll();
 //initHistoryWindow('do something');
 
 // initBuyHouseButton();
+
+//let isDark = false;
+document.querySelector('.switch-mode').addEventListener('click', () => {
+  // isDark = !isDark;
+  // if (isDark) {
+    document.querySelector('.players-cards').classList.toggle('dark-style');
+    document.querySelector('.addition-section').classList.toggle('dark-style');
+    document.querySelector('.game-field').classList.toggle('dark-style');
+    document.querySelector('.history-and-buying-section').classList.toggle('dark-style');
+    document.querySelector('.buying-section').classList.toggle('dark-style');
+  // } else {
+  //   document.querySelector('.players-cards').classList.remove('dark-style');
+  //   document.querySelector('.addition-section').classList.remove('dark-style');
+  //   document.querySelector('.game-field').classList.remove('dark-style');
+  //   document.querySelector('.history-and-buying-section').classList.remove('dark-style');
+  //   document.querySelector('.buying-section').classList.remove('dark-style');
+  // }
+});
