@@ -1,6 +1,7 @@
 import { initWindowCards } from './WindowCard/windowCard';
 import roll from './dice/dice';
 import { startWindow } from './StartWindow/startWindow';
+import { btnClikMenu } from './menu/menu';
 // import cells from './cells/cells';
 
 import renderPlayerCard from './playerCards/renderPlayerCard';
@@ -29,6 +30,7 @@ import './style/loader.scss';
 initWindowCards();
 
 startWindow();
+btnClikMenu()
 
 
 // export const player = new Player('#2295FF');
