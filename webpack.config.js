@@ -7,7 +7,7 @@ module.exports = {
   context: path.resolve(__dirname, 'src'),
   mode: 'development',
   entry: {
-    main: './main.js',
+    main: './main.ts',
   },
   output: {
     filename: 'bundle.[contenthash].js',
@@ -43,8 +43,16 @@ module.exports = {
       },
       {
         test: /\.(ogg|mp3|wav|mpe?g)$/i,
-        use: 'file-loader'
-    },
+        use: 'file-loader',
+      },
+      {
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: path.resolve(__dirname, 'node_modules/'),
+      },
     ],
+  },
+  resolve: {
+    extensions: [ '.tsx', '.ts', '.js' ],
   },
 };

@@ -5,10 +5,14 @@ import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
 import initBuyHouseButton from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
+import Player from '../Player/Player';
+import Street from '../Street/Street';
+import Communal from '../Communal/Communal';
+import Property from '../ifacies/Property';
 import playerLose from '../losing/lose';
 
-export default function showDialogWindow(action) {
-  let title;
+export default function showDialogWindow(action?: string): void {
+  let title: HTMLElement;
   const cell = getCellObjByPosition(game.activePlayer.position);
   const dialogWindowSection = document.querySelector('.dialog-window');
   removeChildsFromElement(dialogWindowSection);
@@ -23,8 +27,8 @@ export default function showDialogWindow(action) {
       const rollButton = createElement('div', ['button'], 'Roll Dice');
       rollButton.addEventListener('click', () => {
         showDialogWindow('wait');
-        const p = new Promise((resolve) => {
-          let test;
+        const p: Promise<void> = new Promise((resolve) => {
+          let test: any;
           setTimeout(() => {
             test = setInterval(roll, 200);
           }, 0);
@@ -54,7 +58,7 @@ export default function showDialogWindow(action) {
         buttonYes.addEventListener('click', () => {
           addPropertyToPlayer(game.activePlayer, cell);
           changeMoneyOnPlayerCard(game.activePlayer);
-          const ownerLine = cell.element.querySelector('.owner');
+          const ownerLine: HTMLElement = cell.element.querySelector('.owner');
           ownerLine.style.backgroundColor = game.activePlayer.color;
           if (cell.type === 'street') {
             setStreetRent(cell, game.activePlayer);
@@ -98,8 +102,8 @@ export default function showDialogWindow(action) {
         const rollDiceButton = createElement('div', ['button'], 'Roll Dice');
         rollDiceButton.addEventListener('click', () => {
           showDialogWindow('wait');
-          const p = new Promise((resolve) => {
-            let test;
+          const p: Promise<void> = new Promise((resolve) => {
+            let test: any;
             setTimeout(() => {
               test = setInterval(roll, 200);
             }, 0);
@@ -164,7 +168,7 @@ export default function showDialogWindow(action) {
   }
 }
 
-export function removePlayerFromGame() {
+export function removePlayerFromGame(): void {
   const loser = game.activePlayer;
   initHistoryWindow('went bankrupt');
   setNextPlayerAsActive();
@@ -172,7 +176,7 @@ export function removePlayerFromGame() {
   nextPlayerMove();
 }
 
-function nextPlayerMove() {
+function nextPlayerMove(): void {
   if (game.activePlayer.isHuman) {
     showDialogWindow('roll');
   } else {
@@ -181,13 +185,13 @@ function nextPlayerMove() {
   }
 }
 
-export function addPropertyToPlayer(player, property) {
+export function addPropertyToPlayer(player: Player, property: Property): void {
   player.addProperty(property);
   player.subtractMoney(property.cost);
   property.owner = game.activePlayer;
 }
 
-export function getCellObjByPosition(position) {
+export function getCellObjByPosition(position: number): any {
   for (let i = 0; i < game.cells.length; i += 1) {
     const cell = game.cells[i];
     if (cell.position === position) {
@@ -196,12 +200,12 @@ export function getCellObjByPosition(position) {
   }
 }
 
-export function isPlayerHaveEnoughMoney(player, price) {
+export function isPlayerHaveEnoughMoney(player: Player, price: number): boolean {
   return player.money >= price;
 }
 
-export function setStreetRent(property, player) {
-  let rent = property.element.querySelector('.cost');
+export function setStreetRent(property: Street, player: Player): void {
+  let rent: HTMLElement = property.element.querySelector('.cost');
   if (property.isThereHotel) {
     rent.innerText = `$${property.rentWhithHotel}`;
     property.currentRent = property.rentWhithHotel;
@@ -234,7 +238,7 @@ export function setStreetRent(property, player) {
             }
           }
         } else {
-          const rent = property.element.querySelector('.cost');
+          const rent: HTMLElement = property.element.querySelector('.cost');
           rent.innerText = `$${property.rent}`;
           property.currentRent = property.rent;
         }
@@ -243,22 +247,22 @@ export function setStreetRent(property, player) {
   }
 }
 
-export function setCommunalRent(property, player) {
+export function setCommunalRent(property: Communal, player: Player): void {
   if (isColorSet(player, property)) {
     for (let i = 0; i < player.property.length; i += 1) {
       const playerProperty = player.property[i];
       if (playerProperty.kitId === property.kitId) {
-        const rent = playerProperty.element.querySelector('.cost');
+        const rent: HTMLElement = playerProperty.element.querySelector('.cost');
         rent.innerText = 'x10';
       }
     }
   } else {
-    const rent = property.element.querySelector('.cost');
+    const rent: HTMLElement = property.element.querySelector('.cost');
     rent.innerText = 'x4';
   }
 }
 
-export function setRailroadRent(player) {
+export function setRailroadRent(player: Player): void {
   let railroadCounter = 0;
   player.property.forEach((propery) => {
     if (propery.type === 'railroad') {
@@ -268,13 +272,13 @@ export function setRailroadRent(player) {
   player.property.forEach((propery) => {
     if (propery.type === 'railroad') {
       propery.currentRent = railroadCounter;
-      const rent = propery.element.querySelector('.cost');
+      const rent: HTMLElement = propery.element.querySelector('.cost');
       rent.innerText = `$${propery.currentRent}`;
     }
   });
 }
 
-function setAvailableToBuyHouse(player, purchaseProperty) {
+function setAvailableToBuyHouse(player: Player, purchaseProperty: Property): void {
   if (purchaseProperty.type === 'street') {
     const allPlayerProperties = player.property;
     allPlayerProperties.filter((property) => property.kitId === purchaseProperty.kitId)
@@ -284,7 +288,7 @@ function setAvailableToBuyHouse(player, purchaseProperty) {
   }
 }
 
-export function isColorSet(player, purchaseProperty) {
+export function isColorSet(player: Player, purchaseProperty: Property): boolean {
   let sameKitPropertyCounter = 0;
   for (let i = 0; i < player.property.length; i += 1) {
     const playerProperty = player.property[i];
@@ -299,7 +303,7 @@ export function isColorSet(player, purchaseProperty) {
   return false;
 }
 
-export function setNextPlayerAsActive() {
+export function setNextPlayerAsActive(): void {
   const activePlayerIndex = game.players.indexOf(game.activePlayer);
   if (activePlayerIndex < game.players.length - 1) {
     game.activePlayer = game.players[activePlayerIndex + 1];
@@ -308,7 +312,7 @@ export function setNextPlayerAsActive() {
   }
 }
 
-export function changeMoneyOnPlayerCard(player) {
-  const playerCardMoney = player.playerCard.querySelector('.player-card__cash__money');
-  playerCardMoney.innerText = player.money;
+export function changeMoneyOnPlayerCard(player: Player): void {
+  const playerCardMoney: HTMLElement = player.playerCard.querySelector('.player-card__cash__money');
+  playerCardMoney.innerText = `${player.money}`;
 }

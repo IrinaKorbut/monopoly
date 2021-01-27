@@ -1,13 +1,14 @@
 import { createCell, addWindow, addSelectorClass } from './windowCardConst';
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
 import game from '../Game/Game';
+import Cell from '../Cell/Cell';
 
 import './windowCard.scss';
 
-export function cardStreet(event, tooltipElem) {
-    const target = event.target;
+export function cardStreet(event: Event, tooltipElem: HTMLElement) {
+    const target = <HTMLInputElement>event.target;
 
-    let property;
+    let property: any;
     for (let i = 0; i < game.cells.length; i += 1) {
         const cell = game.cells[i];
         if (cell.position === Number(target.id)) {
@@ -47,11 +48,11 @@ export function cardStreet(event, tooltipElem) {
     addWindow(target, tooltipElem)
 }
 
-export function cardRailroad(event, tooltipElem) {
-    const target = event.target;
+export function cardRailroad(event: Event, tooltipElem: HTMLElement) {
+    const target = <HTMLInputElement>event.target;
 
     tooltipElem = createElement('div', ['card-tax', 'tooltips'])
-    const image = createElement('img', ['image'])
+    const image: HTMLImageElement = createElement('img', ['image'])
     image.src = target.children[0].attributes[0].value
 
     const nameRailroad = createElement('div', ['name-railroad'], 'Reading Railroad')
@@ -70,7 +71,7 @@ export function cardRailroad(event, tooltipElem) {
     addWindow(target, tooltipElem)
 }
 
-export function cardCompany(event, tooltipElem) {
+export function cardCompany(event: any, tooltipElem: HTMLElement) {
     const target = event.target;
 
     tooltipElem = createElement('div', ['company', 'tooltips'])

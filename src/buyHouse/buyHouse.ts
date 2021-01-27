@@ -3,20 +3,23 @@ import cells from '../cells/cells';
 import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
 import { changeMoneyOnPlayerCard, setStreetRent } from '../dialogWindow/dialogWindow';
 import initHistoryWindow from '../histiryWindow/historyWindow';
+import Property from '../ifacies/Property';
+import Street from '../Street/Street';
+import Cell from '../Cell/Cell';
 
-function highlightActivePlayerCells(playerProperties) {
-  playerProperties.forEach((property) => {
+function highlightActivePlayerCells(playerProperties: Street[]): void {
+  playerProperties.forEach((property: Street) => {
     if (property.isAvailableToBuyHouse) {
       property.element.querySelector('.players-container').classList.remove('dark');
     }
   });
 }
 
-function isAvailableToBuyAnotherOneHouse(currentObjCell) {
+function isAvailableToBuyAnotherOneHouse(currentObjCell: Street): boolean {
   const playerPropertiesAvailableToBuyHose = game.activePlayer.property
-    .filter((property) => property.kitId === currentObjCell.kitId);
+    .filter((property: Street) => property.kitId === currentObjCell.kitId);
   let result = true;
-  playerPropertiesAvailableToBuyHose.forEach((property) => {
+  playerPropertiesAvailableToBuyHose.forEach((property: Street) => {
     if (currentObjCell !== property && currentObjCell.numberOfHouses > property.numberOfHouses) {
       result = false;
     }
@@ -30,17 +33,17 @@ function isAvailableToBuyAnotherOneHouse(currentObjCell) {
   return result;
 }
 
-function addHouse(eventTarget) {
+function addHouse(eventTarget: any): void {
   const cellElement = eventTarget.target.parentNode;
-  let currentObjCell;
+  let currentObjCell: Street;
   cells.forEach((cell) => {
     if (cellElement === cell.element) {
-      currentObjCell = cell;
+      currentObjCell = <Street>cell;
     }
   });
   if (isAvailableToBuyAnotherOneHouse(currentObjCell)) {
-    const housePlace = cellElement.querySelector('.street-color');
-    const houseImg = createElement('img', ['house']);
+    const housePlace: HTMLElement = cellElement.querySelector('.street-color');
+    const houseImg: HTMLImageElement = createElement('img', ['house']);
     if (currentObjCell.numberOfHouses === 4) {
       houseImg.src = './images/Hotel.svg';
       removeChildsFromElement(housePlace);
@@ -62,19 +65,19 @@ function addHouse(eventTarget) {
   setStreetRent(currentObjCell, game.activePlayer);
 }
 
-function createButton(buyingSection, buttonName) {
+function createButton(buyingSection: HTMLElement , buttonName: string): void {
   removeChildsFromElement(buyingSection);
-  const buttonBuyHouse = createElement('div', ['button__buy-house'], buttonName);
+  const buttonBuyHouse: HTMLElement = createElement('div', ['button__buy-house'], buttonName);
   appendElementTo(buyingSection, buttonBuyHouse);
   switch (buttonName) {
     case 'Buy houses':
       if (game.activePlayer.isHuman) {
         buttonBuyHouse.addEventListener('click', () => {
-          game.cells.forEach((cell) => {
+          game.cells.forEach((cell: Cell) => {
             cell.element.querySelector('.players-container').classList.add('dark');
           });
-          highlightActivePlayerCells(game.activePlayer.property);
-          game.activePlayer.property.forEach((property) => {
+          highlightActivePlayerCells(<Street[]>game.activePlayer.property);
+          game.activePlayer.property.forEach((property: Property) => {
             if (property.isAvailableToBuyHouse) {
               property.element.addEventListener('click', addHouse);
             }
@@ -86,10 +89,10 @@ function createButton(buyingSection, buttonName) {
     case 'Finish buy house':
       if (game.activePlayer.isHuman) {
         buttonBuyHouse.addEventListener('click', () => {
-          game.cells.forEach((cell) => {
+          game.cells.forEach((cell: Cell) => {
             cell.element.querySelector('.players-container').classList.remove('dark');
           });
-          game.activePlayer.property.forEach((property) => {
+          game.activePlayer.property.forEach((property: Property) => {
             if (property.isAvailableToBuyHouse) {
               property.element.removeEventListener('click', addHouse);
             }
@@ -106,7 +109,7 @@ function createButton(buyingSection, buttonName) {
   }
 }
 
-export default function initBuyHouseButton() {
-  const buyingSection = document.querySelector('.buying-section');
+export default function initBuyHouseButton(): void {
+  const buyingSection: HTMLElement = document.querySelector('.buying-section');
   createButton(buyingSection, 'Buy houses');
 }

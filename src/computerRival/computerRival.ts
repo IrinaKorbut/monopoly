@@ -7,12 +7,12 @@ import showDialogWindow, {
 import initBuyHouseButton from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
-export default function computerMove(action) {
+export default function computerMove(action?: string): void {
   const cell = getCellObjByPosition(game.activePlayer.position);
   switch (action) {
     case 'roll':
-      const p = new Promise((resolve) => {
-        let test;
+      const p: Promise<void> = new Promise((resolve) => {
+        let test: any;
         setTimeout(() => {
           test = setInterval(roll, 200);
         }, 0);
@@ -61,8 +61,8 @@ export default function computerMove(action) {
           removePlayerFromGame();
         }
       } else {
-        const p = new Promise((resolve) => {
-          let test;
+        const p: Promise<void> = new Promise((resolve) => {
+          let test: any;
           setTimeout(() => {
             test = setInterval(roll, 200);
           }, 0);
@@ -73,7 +73,6 @@ export default function computerMove(action) {
         });
         p.then(() => {
           let rent = roll();
-          // initHistoryWindow(`rolled ${rent} on the dice`);
           rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
           if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
             game.activePlayer.money -= rent;
@@ -108,7 +107,7 @@ export default function computerMove(action) {
   }
 }
 
-function nextPlayerMove() {
+function nextPlayerMove(): void {
   if (game.activePlayer.isHuman) {
     showDialogWindow('roll');
   } else {

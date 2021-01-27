@@ -2,9 +2,11 @@ import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
 import { startWindow } from '../StartWindow/startWindow';
 import Game from '../Game/Game';
 import Player from '../Player/Player';
+import Cell from '../Cell/Cell';
+import Property from '../ifacies/Property'
 
-function menu(audioPlay) {
-    const setingMenu = document.querySelector('.setings-menu')
+function menu(audioPlay: HTMLAudioElement) {
+    const setingMenu: HTMLElement = document.querySelector('.setings-menu')
     setingMenu.innerHTML = '';
 
     const heder = createElement('div', ['heder'])
@@ -33,7 +35,7 @@ function newPlayFn() {
         player.playerCard.remove()
     })
     Game.players = []
-    Game.cells.forEach(cell => {
+    Game.cells.forEach((cell: any) => {
         if (cell.type === 'street' || cell.type === 'railroad' || cell.type === 'communal') {
             cell.owner = null
             cell.isAvailableToBuyHouse = false;
@@ -42,8 +44,8 @@ function newPlayFn() {
 
             document.querySelectorAll('.house').forEach(hous => hous.remove())
             document.querySelector('.action-list').innerHTML = "";
-            const propertyViewCost = cell.element.querySelector('.cost');
-            const ownerColor = cell.element.querySelector('.owner');
+            const propertyViewCost: HTMLElement = cell.element.querySelector('.cost');
+            const ownerColor: HTMLElement = cell.element.querySelector('.owner');
             ownerColor.style.backgroundColor = '#c0c0c0';
             propertyViewCost.innerText = `$${cell.cost}`;
         }
@@ -56,7 +58,7 @@ function newPlayFn() {
     startWindow()
 }
 
-function setingsMeny(setingMenu, classOptions, menus, setings, audioPlay) {
+function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, menus: HTMLElement, setings: HTMLElement, audioPlay: HTMLAudioElement): void {
     menus.textContent = setings.textContent
     classOptions.innerHTML = '';
 
@@ -102,35 +104,35 @@ function setingsMeny(setingMenu, classOptions, menus, setings, audioPlay) {
     back.addEventListener('click', menu)
 }
 
-function polz(audio, volumeInputElem) {
+function polz(audio: HTMLAudioElement, volumeInputElem: any) {
     localStorage.setItem('volume', volumeInputElem.value);
     audio.volume = volumeInputElem.value
 }
 
-function audioFn(audioPlay) {
+function audioFn(audioPlay: HTMLAudioElement) {
     const audioBtn = document.querySelector('.slideThreeInput')
     let volumeInput = document.querySelector('.volumeInput');
 
     volumeInput.addEventListener('click', (e) => polz(audioPlay, e.target))
-    audioBtn.addEventListener('click', (e) => audioRepeat(audioPlay, e.target))
+    audioBtn.addEventListener('click', (e) => audioRepeat(audioPlay, <HTMLInputElement>e.target))
 }
 
-function audioRepeat(audio, audioBtnElem) {
-    localStorage.setItem('stateRange', Number(audioBtnElem.checked));
+function audioRepeat(audio: HTMLAudioElement, audioBtnElem: HTMLInputElement) {
+    localStorage.setItem('stateRange', String(Number(audioBtnElem.checked)));
     checkBtnAudio(audio)
 }
 
-export function keyEsc(audioPlay) {
+export function keyEsc(audioPlay: HTMLAudioElement) {
     document.addEventListener('keydown', (event) => {
-        const audioBtn = document.querySelector('.slideThreeInput')
-        const volumeInputs = document.querySelector('.volumeInput');
+        const audioBtn: HTMLInputElement = document.querySelector('.slideThreeInput')
+        const volumeInputs: any = document.querySelector('.volumeInput');
 
         if (event.code === 'Escape') {
             classMenu(audioPlay)
         }
 
         if (event.code === 'F9') {
-            localStorage.setItem('stateRange', Number(audioPlay.paused));
+            localStorage.setItem('stateRange', String(Number(audioPlay.paused)));
 
             checkBtnAudio(audioPlay)
 
@@ -143,7 +145,7 @@ export function keyEsc(audioPlay) {
         if (event.code === 'NumpadAdd') {  //+  
             if (audioPlay.volume < 0.99) {
                 audioPlay.volume += 0.1
-                localStorage.setItem('volume', audioPlay.volume);
+                localStorage.setItem('volume', String(audioPlay.volume));
             }
 
             if (volumeInputs) {
@@ -157,7 +159,7 @@ export function keyEsc(audioPlay) {
         if (event.code === 'NumpadSubtract') { //-
             if (audioPlay.volume > 0.1) {
                 audioPlay.volume -= 0.1
-                localStorage.setItem('volume', audioPlay.volume);
+                localStorage.setItem('volume', String(audioPlay.volume));
             }
 
             if (volumeInputs) {
@@ -166,7 +168,7 @@ export function keyEsc(audioPlay) {
                     localStorage.setItem('volume', volumeInputs.value);
                 }
             }
-        }5
+        }
     })
 }
 
@@ -178,22 +180,22 @@ export function btnClikMenu() {
     checkBtnAudio(audioPlay)
 
     const blackout = document.querySelector('#blackout')
-    blackout.addEventListener('click', clickBlackout)
+    blackout.addEventListener('click', () => clickBlackout(audioPlay))
 }
 
-function clickBlackout() {
+function clickBlackout(audioPlay: HTMLAudioElement) {
     const startWindow = document.querySelector('.start-window')
     const setingsMenu = document.querySelector('.setings-menu')
 
     if (startWindow.classList[2] === 'menu-and-section' && setingsMenu.classList[1] === 'window-menu') {
-        classMenu()
+        classMenu(audioPlay)
     }
     if (startWindow.classList[1] === 'no-active' && setingsMenu.classList[1] === 'window-menu') {
-        classMenu()
+        classMenu(audioPlay)
     }
 }
 
-function classMenu(audioPlay) {
+function classMenu(audioPlay: HTMLAudioElement): void {
     const startWindow = document.querySelector('.start-window')
     const setingsMenu = document.querySelector('.setings-menu')
     const blackout = document.querySelector('#blackout')
@@ -220,7 +222,7 @@ function classMenu(audioPlay) {
     menu(audioPlay)
 }
 
-function checkBtnAudio(audioPlay) {
+function checkBtnAudio(audioPlay: HTMLAudioElement): void {
     const stateRange = localStorage.getItem('stateRange')
     if (stateRange === '1') {
         // audioPlay.setAttribute('muted', false)
