@@ -7,7 +7,7 @@ import { btnClikMenu } from './menu/menu';
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
 import initHistoryWindow from './histiryWindow/historyWindow'
-import initBuyHouseButton from './buyHouse/buyHouse'
+import initBuyHouseButton from './buyHouse/buyHouse';
 
 
 import './style/style.scss';
@@ -22,6 +22,10 @@ import './menu/menu.scss';
 import './style/constants.scss';
 import './style/scrollBar.scss';
 import './style/buyingSection.scss';
+
+import './style/testBtn.scss';
+import './style/dark.scss';
+import './style/loader.scss';
 
 initWindowCards();
 
@@ -56,3 +60,20 @@ roll();
 
 // initBuyHouseButton();
 
+//let isDark = false;
+document.querySelector('.switch-mode').addEventListener('click', () => {
+  // isDark = !isDark;
+  // if (isDark) {
+    document.querySelector('.players-cards').classList.toggle('dark-style');
+    document.querySelector('.addition-section').classList.toggle('dark-style');
+    document.querySelector('.game-field').classList.toggle('dark-style');
+    document.querySelector('.history-and-buying-section').classList.toggle('dark-style');
+    document.querySelector('.buying-section').classList.toggle('dark-style');
+  // } else {
+  //   document.querySelector('.players-cards').classList.remove('dark-style');
+  //   document.querySelector('.addition-section').classList.remove('dark-style');
+  //   document.querySelector('.game-field').classList.remove('dark-style');
+  //   document.querySelector('.history-and-buying-section').classList.remove('dark-style');
+  //   document.querySelector('.buying-section').classList.remove('dark-style');
+  // }
+});

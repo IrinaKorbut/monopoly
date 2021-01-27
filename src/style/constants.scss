@@ -5,6 +5,11 @@ $scroll_bar_track_color: #5a5a5aea;
 $scroll_bar_thumb_color: #222222;
 $scroll_bar_thumb_hover_color: #000000;
 
+$dark-mode-red-btns: #FA8072;
+$gray: #A9A9A9;
+$dark-gray: #3E4345;
+$light-gray: #C6CACC;
+
 @mixin tablet-width {
   @media (max-width: $tablet-width) {
     @content;
