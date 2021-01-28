@@ -65,11 +65,24 @@ function addHouse(eventTarget: any): void {
   setStreetRent(currentObjCell, game.activePlayer);
 }
 
-function createButton(buyingSection: HTMLElement , buttonName: string): void {
+function createButton(buyingSection: HTMLElement , buttonKind: string, buttonName: string): void {
+  const currentLanguage: string = localStorage.getItem('language') || 'EN';
+  let buttonBuyName: string;
+  let buttonFinishBuyName: string;
+  if (currentLanguage === 'EN') {
+    buttonBuyName = 'Buy houses';
+    buttonFinishBuyName = 'Finish buy house';
+  } else if (currentLanguage === 'RU') {
+    buttonBuyName = 'Купить дома';
+    buttonFinishBuyName = 'Завершить покупку';
+  } else if (currentLanguage === 'BEL') {
+    buttonBuyName = 'Купіць дома';
+    buttonFinishBuyName = 'Завяршыць куплю';
+  }
   removeChildsFromElement(buyingSection);
   const buttonBuyHouse: HTMLElement = createElement('div', ['button__buy-house'], buttonName);
   appendElementTo(buyingSection, buttonBuyHouse);
-  switch (buttonName) {
+  switch (buttonKind) {
     case 'Buy houses':
       if (game.activePlayer.isHuman) {
         buttonBuyHouse.addEventListener('click', () => {
@@ -82,7 +95,7 @@ function createButton(buyingSection: HTMLElement , buttonName: string): void {
               property.element.addEventListener('click', addHouse);
             }
           });
-          createButton(buyingSection, 'Finish buy house');
+          createButton(buyingSection, 'Finish buy house', buttonFinishBuyName);
         });
       }
       break;
@@ -97,7 +110,7 @@ function createButton(buyingSection: HTMLElement , buttonName: string): void {
               property.element.removeEventListener('click', addHouse);
             }
           });
-          createButton(buyingSection, 'Buy houses');
+          createButton(buyingSection, 'Buy houses', buttonBuyName);
         });
       }
       break;
@@ -110,6 +123,15 @@ function createButton(buyingSection: HTMLElement , buttonName: string): void {
 }
 
 export default function initBuyHouseButton(): void {
+  const currentLanguage: string = localStorage.getItem('language') || 'EN';
+  let buttonBuyName: string;
+  if (currentLanguage === 'EN') {
+    buttonBuyName = 'Buy houses';
+  } else if (currentLanguage === 'RU') {
+    buttonBuyName = 'Купить дома';
+  } else if (currentLanguage === 'BEL') {
+    buttonBuyName = 'Купіць дома';
+  }
   const buyingSection: HTMLElement = document.querySelector('.buying-section');
-  createButton(buyingSection, 'Buy houses');
+  createButton(buyingSection, 'Buy houses', buttonBuyName);
 }

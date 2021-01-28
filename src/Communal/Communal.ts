@@ -8,8 +8,8 @@ export default class Communal extends Cell implements Property {
   readonly kitId: number;
   owner: Player;
 
-  constructor(type: string, name: string, position: number, cost: number, kitSize: number, kitId: number) {
-    super(type, name, position);
+  constructor(type: string, name: string, russianName: string, belarusianName: string, position: number, cost: number, kitSize: number, kitId: number) {
+    super(type, name, russianName, belarusianName, position);
     this.cost = cost;
     this.kitSize = kitSize;
     this.kitId = kitId;
