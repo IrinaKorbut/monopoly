@@ -34,6 +34,7 @@ function isAvailableToBuyAnotherOneHouse(currentObjCell: Street): boolean {
 }
 
 function addHouse(eventTarget: any): void {
+  const currentLanguage: string = localStorage.getItem('language') || 'EN';
   const cellElement = eventTarget.target.parentNode;
   let currentObjCell: Street;
   cells.forEach((cell) => {
@@ -57,16 +58,27 @@ function addHouse(eventTarget: any): void {
     game.activePlayer.subtractMoney(currentObjCell.houseCost);
     changeMoneyOnPlayerCard(game.activePlayer);
     if (currentObjCell.isThereHotel) {
-      initHistoryWindow(`bought hotel on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
+      if (currentLanguage === 'EN') {
+        initHistoryWindow(`bought hotel on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
+      } else if (currentLanguage === 'RU') {
+        initHistoryWindow(`Купил отель по улице ${currentObjCell.name} за $${currentObjCell.houseCost}`);
+      } else if (currentLanguage === 'RU') {
+        initHistoryWindow(`Купіў гатэль па вуліцы ${currentObjCell.name} за $${currentObjCell.houseCost}`);
+      }      
     } else {
-      initHistoryWindow(`bought house on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
+      if (currentLanguage === 'EN') {
+        initHistoryWindow(`bought house on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
+      } else if (currentLanguage === 'RU') {
+        initHistoryWindow(`Купил дом по улице ${currentObjCell.name} за $${currentObjCell.houseCost}`);
+      } else if (currentLanguage === 'RU') {
+        initHistoryWindow(`Купіў дом па вуліцы ${currentObjCell.name} за $${currentObjCell.houseCost}`);
+      }
     }
   }
   setStreetRent(currentObjCell, game.activePlayer);
 }
 
-function createButton(buyingSection: HTMLElement , buttonKind: string, buttonName: string): void {
-  const currentLanguage: string = localStorage.getItem('language') || 'EN';
+function createButton(buyingSection: HTMLElement , buttonKind: string, buttonName: string, currentLanguage?: string): void {
   let buttonBuyName: string;
   let buttonFinishBuyName: string;
   if (currentLanguage === 'EN') {
@@ -133,5 +145,5 @@ export default function initBuyHouseButton(): void {
     buttonBuyName = 'Купіць дома';
   }
   const buyingSection: HTMLElement = document.querySelector('.buying-section');
-  createButton(buyingSection, 'Buy houses', buttonBuyName);
+  createButton(buyingSection, 'Buy houses', buttonBuyName, currentLanguage);
 }

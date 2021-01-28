@@ -20,16 +20,29 @@ function changeTitleOnCell(language: string): void {
 }
 
 function addListenerToButtonLng(): void {
-    const buttonLanguage: Array<HTMLElement> = Array.from(document.querySelectorAll('.radio_language'));
-    buttonLanguage.forEach((btn: HTMLInputElement) => {
-        btn.addEventListener('click', () => {
-            changeTitleOnCell(btn.value);
-            initBuyHouseButton();
-        })
+    const languageSection: HTMLElement = document.querySelector('.language');
+    languageSection.addEventListener('click', (event) => {
+        let input = (<HTMLElement>event.target).closest('input');
+        if (!input) return;
+        if (!languageSection.contains(input)) return;
+        changeTitleOnCell(input.value);
+        initBuyHouseButton();
+    })
+}
+
+function selectCurrentInput(): void {
+    const buttonsLanguage: Array<HTMLElement> = Array.from(document.querySelectorAll('.radio_language'));
+    const currentLanguage: string = localStorage.getItem('language');
+    buttonsLanguage.forEach((btn: HTMLInputElement) => {
+        if (btn.value === currentLanguage) {
+            btn.checked = true;
+            return;
+        }
     })
 }
 
 export default function setLanguage(): void {
+    selectCurrentInput();    
+    addListenerToButtonLng();
     changeTitleOnCell(localStorage.getItem('language') || 'EN');
-    addListenerToButtonLng()
 }
