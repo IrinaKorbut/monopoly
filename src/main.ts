@@ -3,6 +3,7 @@ import roll from './dice/dice';
 import { startWindow } from './StartWindow/startWindow';
 import { btnClikMenu } from './menu/menu';
 // import cells from './cells/cells';
+import setLanguage from './changeLanguage/changeLanguage';
 
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
@@ -22,6 +23,7 @@ import './menu/menu.scss';
 import './style/constants.scss';
 import './style/scrollBar.scss';
 import './style/buyingSection.scss';
+import './style/radioBtnForLanguage.scss';
 
 import './style/testBtn.scss';
 import './style/dark.scss';
@@ -31,6 +33,7 @@ initWindowCards();
 
 startWindow();
 btnClikMenu()
+setLanguage();
 
 
 // export const player = new Player('#2295FF');

@@ -18,9 +18,8 @@ export default function showDialogWindow(action?: string): void {
   removeChildsFromElement(dialogWindowSection);
   switch (action) {
     case 'wait':
-      const img = createElement('img');
-      img.setAttribute('src', './images/dollar-coin.svg');
-      appendElementTo(dialogWindowSection, img);
+      const loader = createElement('div', ['loader']);
+      appendElementTo(dialogWindowSection, loader);
       break;
     case 'roll':
       title = createElement('p', ['title'], `${game.activePlayer.name} move`);

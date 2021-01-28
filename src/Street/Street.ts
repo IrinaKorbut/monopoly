@@ -19,10 +19,10 @@ export default class Street extends Cell implements Property{
   owner: Player;
   private _currentRent: number;
 
-  constructor(type: string, name: string, position: number, cost: number, rent: number,
+  constructor(type: string, name: string, russianName: string, belarusianName: string, position: number, cost: number, rent: number,
     rentWithOneHouse: number, rentWhithTwoHouses: number, rentWithTreeHouses: number, rentWhithFourHouses: number,
     rentWhithHotel: number, houseCost: number, kitSize: number, kitId: number) {
-    super(type, name, position);
+    super(type, name, russianName, belarusianName, position);
     this.cost = cost;
     this.rent = rent;
     this.rentWithOneHouse = rentWithOneHouse;

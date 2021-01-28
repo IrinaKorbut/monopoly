@@ -11,8 +11,8 @@ export default class Railroad extends Cell implements Property {
   rent: number;
   owner: Player;
 
-  constructor(type: string, name: string, position: number) {
-    super(type, name, position);
+  constructor(type: string, name: string, russianName: string, belarusianName: string, position: number) {
+    super(type, name, russianName, belarusianName, position);
   }
 
   get currentRent() {
