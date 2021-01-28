@@ -304,12 +304,14 @@ export function isColorSet(player: Player, purchaseProperty: Property): boolean 
 }
 
 export function setNextPlayerAsActive(): void {
+  game.activePlayer.playerCard.classList.remove('backlight');
   const activePlayerIndex = game.players.indexOf(game.activePlayer);
   if (activePlayerIndex < game.players.length - 1) {
     game.activePlayer = game.players[activePlayerIndex + 1];
   } else {
     game.activePlayer = game.players[0];
   }
+  game.activePlayer.playerCard.classList.add('backlight');
 }
 
 export function changeMoneyOnPlayerCard(player: Player): void {

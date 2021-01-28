@@ -5,11 +5,15 @@
 
   .player-card, .dice, .dialog-window {
     background-color: #919699;
-    
+
     .button {
       background: $dark-mode-red-btns;
     }
   }
+
+  .backlight {
+    animation: backlight-dark-mode 3s linear infinite;
+}
 
   .dialog-window {
     .loader {
@@ -38,7 +42,10 @@
   }
 
   .game-history {
-    background-color: $light-gray;
+
+    .action-list {
+      background-color: $light-gray;
+    }
   }
 
   .row {
@@ -103,5 +110,20 @@
 
   .tooltip-dark {
     background-color: $light-gray;
+  }
+}
+
+@keyframes backlight-dark-mode{
+
+  0% {
+      box-shadow: 0 1px 10px #228b22;
+  }
+
+  50% {
+      box-shadow: 0 1px 30px #32cd32;
+  }
+
+  100% {
+      box-shadow: 0 1px 10px #228b22;
   }
 }
