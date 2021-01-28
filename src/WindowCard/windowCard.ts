@@ -5,6 +5,11 @@ import Cell from '../Cell/Cell';
 
 import './windowCard.scss';
 
+function addStuleBaground(nameCompany: HTMLElement, colorCard: string) {
+    const classStyleDarc = document.querySelector('.dark-style')
+    nameCompany.style.background = classStyleDarc ? `${colorCard}` : '#fff'
+}
+
 export function cardStreet(event: Event, tooltipElem: HTMLElement) {
     const target = <HTMLInputElement>event.target;
 
@@ -46,6 +51,7 @@ export function cardStreet(event: Event, tooltipElem: HTMLElement) {
     appendElementTo(housest, housestCost, hotelsCost)
 
     addWindow(target, tooltipElem)
+    addStuleBaground(tooltipElem, '#C6CACC')
 }
 
 export function cardRailroad(event: Event, tooltipElem: HTMLElement) {
@@ -55,20 +61,22 @@ export function cardRailroad(event: Event, tooltipElem: HTMLElement) {
     const image: HTMLImageElement = createElement('img', ['image'])
     image.src = target.children[0].attributes[0].value
 
-    const nameRailroad = createElement('div', ['name-railroad'], 'Reading Railroad')
+    const nameRailroad = createElement('div', ['name-railroad'], `${target.children[1].textContent}`)
     const rentalInstruction = createElement('div', ['rental-instruction'])
     const rent = createCell('rent', 'Rent', '$25')
-    const owner = createElement('div', ['owner'], 'OWNER:')
-    const ownerTwo = createCell('owner-two', '2 transport objects', '$50')
-    const ownerThree = createCell('owner-three', '3 transport objects', '$100')
-    const ownerFour = createCell('owner-four', '4 transport objects', '$200')
+    const owner = createElement('div', ['owner'])
+    const ownerTwo = createCell('owner-two', 'If 2 owned', '$50')
+    const ownerThree = createCell('owner-three', 'If 3 owned', '$100')
+    const ownerFour = createCell('owner-four', 'If 4 owned', '$200')
 
     appendElementTo(document.body, tooltipElem)
     appendElementTo(tooltipElem, image)
     appendElementTo(tooltipElem, nameRailroad)
     appendElementTo(tooltipElem, rentalInstruction)
     appendElementTo(rentalInstruction, rent, owner, ownerTwo, ownerThree, ownerFour)
+
     addWindow(target, tooltipElem)
+    addStuleBaground(tooltipElem, '#DEB887')
 }
 
 export function cardCompany(event: any, tooltipElem: HTMLElement) {
@@ -84,7 +92,9 @@ export function cardCompany(event: any, tooltipElem: HTMLElement) {
 
     appendElementTo(document.body, tooltipElem)
     appendElementTo(tooltipElem, image, nameCompany, companyInstructionOne, companyInstructionTwo)
+
     addWindow(target, tooltipElem)
+    addStuleBaground(tooltipElem, '#C6CACC')
 }
 
 export function removeCardStreet() {
