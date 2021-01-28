@@ -9,5 +9,7 @@ export default interface Property {
   readonly type: string;
   owner: Player;
   currentRent?: number;
+  numberOfHouses?: number;
+  isThereHotel?: boolean
   isAvailableToBuyHouse?: boolean;
 }

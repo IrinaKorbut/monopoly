@@ -1,13 +1,20 @@
 import Game from '../Game/Game';
 import { createElement, removeChildsFromElement, appendElementTo } from '../helpFunctions/helpFunctions';
+import Property from '../ifacies/Property';
 import Player from '../Player/Player';
 
 export default function playerLose(player: Player): void {
-  player.property.forEach((property) => {
+  player.property.forEach((property: Property) => {
     property.owner = null;
+    if (property.type === 'street') {
+      property.isAvailableToBuyHouse = false;
+      property.numberOfHouses = 0;
+      property.isThereHotel = false;
+      removeChildsFromElement(property.element.querySelector('.street-color'));
+    }
     const propertyViewCost: HTMLElement = property.element.querySelector('.cost');
     const ownerColor: HTMLElement = property.element.querySelector('.owner');
-    ownerColor.style.backgroundColor = '#c0c0c0';
+    ownerColor.style.backgroundColor = '';
     player.chip.remove();
     propertyViewCost.innerText = `$${property.cost}`;
   });

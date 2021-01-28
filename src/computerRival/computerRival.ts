@@ -6,6 +6,7 @@ import showDialogWindow, {
 } from '../dialogWindow/dialogWindow';
 import initBuyHouseButton from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
+import { isGameFinish, end} from '../gameEnding/gameEnding';
 
 export default function computerMove(action?: string): void {
   const cell = getCellObjByPosition(game.activePlayer.position);
@@ -59,6 +60,11 @@ export default function computerMove(action?: string): void {
         } else {
           // доработать
           removePlayerFromGame();
+          if (isGameFinish()) {
+            end();
+          } else {
+            nextPlayerMove();
+          }
         }
       } else {
         const p: Promise<void> = new Promise((resolve) => {
@@ -84,6 +90,11 @@ export default function computerMove(action?: string): void {
           } else {
             // доработать
             removePlayerFromGame();
+            if (isGameFinish()) {
+              end();
+            } else {
+              nextPlayerMove();
+            }
           }
         });
       }
@@ -97,6 +108,11 @@ export default function computerMove(action?: string): void {
       } else {
         // доработать
         removePlayerFromGame();
+        if (isGameFinish()) {
+          end();
+        } else {
+          nextPlayerMove();
+        }
       }
       break;
     default:
