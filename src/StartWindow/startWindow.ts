@@ -78,6 +78,7 @@ export function startBtn() {
       startBtn.classList.add('color-warning-btn');
     }
     renderPlayerCard();
+    Game.activePlayer.playerCard.classList.add('backlight');
     addPlayerToField();
     
   });
