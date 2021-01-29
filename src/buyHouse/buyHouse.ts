@@ -61,17 +61,24 @@ function addHouse(eventTarget: any): void {
       if (currentLanguage === 'EN') {
         initHistoryWindow(`bought hotel on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
       } else if (currentLanguage === 'RU') {
-        initHistoryWindow(`Купил отель по улице ${currentObjCell.name} за $${currentObjCell.houseCost}`);
-      } else if (currentLanguage === 'RU') {
-        initHistoryWindow(`Купіў гатэль па вуліцы ${currentObjCell.name} за $${currentObjCell.houseCost}`);
+        initHistoryWindow(`Купил отель по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost}`);
+      } else if (currentLanguage === 'BEL') {
+        initHistoryWindow(`Купіў гатэль па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
       }      
     } else {
+      console.log('lang', currentLanguage)
       if (currentLanguage === 'EN') {
         initHistoryWindow(`bought house on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
+      console.log('name', currentObjCell.name)
+
       } else if (currentLanguage === 'RU') {
-        initHistoryWindow(`Купил дом по улице ${currentObjCell.name} за $${currentObjCell.houseCost}`);
-      } else if (currentLanguage === 'RU') {
-        initHistoryWindow(`Купіў дом па вуліцы ${currentObjCell.name} за $${currentObjCell.houseCost}`);
+        initHistoryWindow(`Купил дом по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost}`);
+      console.log('name', currentObjCell.russianName)
+
+      } else if (currentLanguage === 'BEL') {
+        initHistoryWindow(`Купіў дом па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
+      console.log('name', currentObjCell.belarusianName)
+
       }
     }
   }
@@ -88,7 +95,7 @@ function createButton(buyingSection: HTMLElement , buttonKind: string, buttonNam
     buttonBuyName = 'Купить дома';
     buttonFinishBuyName = 'Завершить покупку';
   } else if (currentLanguage === 'BEL') {
-    buttonBuyName = 'Купіць дома';
+    buttonBuyName = 'Купіць дамы';
     buttonFinishBuyName = 'Завяршыць куплю';
   }
   removeChildsFromElement(buyingSection);
@@ -107,7 +114,7 @@ function createButton(buyingSection: HTMLElement , buttonKind: string, buttonNam
               property.element.addEventListener('click', addHouse);
             }
           });
-          createButton(buyingSection, 'Finish buy house', buttonFinishBuyName);
+          createButton(buyingSection, 'Finish buy house', buttonFinishBuyName, localStorage.getItem('language'));
         });
       }
       break;
@@ -122,7 +129,7 @@ function createButton(buyingSection: HTMLElement , buttonKind: string, buttonNam
               property.element.removeEventListener('click', addHouse);
             }
           });
-          createButton(buyingSection, 'Buy houses', buttonBuyName);
+          createButton(buyingSection, 'Buy houses', buttonBuyName, localStorage.getItem('language'));
         });
       }
       break;

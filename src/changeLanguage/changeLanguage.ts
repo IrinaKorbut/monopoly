@@ -1,20 +1,33 @@
 import initBuyHouseButton from '../buyHouse/buyHouse';
 
-import Cell from '../Cell/Cell';
+import cell from '../cell/cell';
 import cells from '../cells/cells';
 
-function changeTitleOnCell(language: string): void {
-    cells.forEach((Cell: Cell) => {
-        const cellTitle: HTMLElement = Cell.element.querySelector('.title');        
-        if (language === 'RU') {
+function changeTitleOncell(language: string): void {
+    cells.forEach((cell: cell) => {
+        const cellTitle: HTMLElement = cell.element.querySelector('.title');       
+        let titleJailVisitSection:  HTMLElement;
+        if (cell.position === 10) {
+            titleJailVisitSection = <HTMLElement>cell.element.querySelectorAll('.title')[1];
+        }
+        if (language === 'RU') {            
             localStorage.setItem('language', 'RU');
-            cellTitle.innerText = Cell.russianName;
+            cellTitle.innerText = cell.russianName;
+            if (cell.position === 10) {
+                titleJailVisitSection.innerText = 'Посещение';
+            }
         } else if (language === 'BEL') {
             localStorage.setItem('language', 'BEL');
-            cellTitle.innerText = Cell.belarusianName;
+            cellTitle.innerText = cell.belarusianName;
+            if (cell.position === 10) {
+                titleJailVisitSection.innerText = 'Наведванне';
+            }
         } else if (language === 'EN') {
             localStorage.setItem('language', 'EN');
-            cellTitle.innerText = Cell.name;
+            cellTitle.innerText = cell.name;
+            if (cell.position === 10) {
+                titleJailVisitSection.innerText = 'Visiting';
+            }
         }
     })
 }
@@ -25,7 +38,7 @@ function addListenerToButtonLng(): void {
         let input = (<HTMLElement>event.target).closest('input');
         if (!input) return;
         if (!languageSection.contains(input)) return;
-        changeTitleOnCell(input.value);
+        changeTitleOncell(input.value);
         initBuyHouseButton();
     })
 }
@@ -44,5 +57,5 @@ function selectCurrentInput(): void {
 export default function setLanguage(): void {
     selectCurrentInput();    
     addListenerToButtonLng();
-    changeTitleOnCell(localStorage.getItem('language') || 'EN');
+    changeTitleOncell(localStorage.getItem('language') || 'EN');
 }
