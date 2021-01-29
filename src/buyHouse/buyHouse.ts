@@ -149,8 +149,8 @@ export default function initBuyHouseButton(): void {
   } else if (currentLanguage === 'RU') {
     buttonBuyName = 'Купить дома';
   } else if (currentLanguage === 'BEL') {
-    buttonBuyName = 'Купіць дома';
+    buttonBuyName = 'Купіць дамы';
   }
-  const buyingSection: HTMLElement = document.querySelector('.buying-section');
+  const buyingSection: HTMLElement = document.querySelector('.buying-section');  
   createButton(buyingSection, 'Buy houses', buttonBuyName, currentLanguage);
 }
