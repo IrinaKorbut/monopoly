@@ -8,6 +8,9 @@ export default class Railroad extends Cell implements Property {
   readonly twoRailroadRent: number = 50;
   readonly threeRailroadRent: number = 100;
   readonly fourRailroadRent: number = 200;
+  readonly pledgePrice: number = 100;
+  readonly redemptionPrice: number = 110;
+  isPredge: boolean = false;
   rent: number;
   owner: Player;
 
