@@ -19,18 +19,17 @@
     margin: auto;
     border-radius: 1.5rem;
     background-color: #fff;
-    margin-top: 20px;
     padding: 5px;
     text-align: center;
 
     @include tablet-width {
-      width: 50%;
-      height: 15rem;
+      height: 90%;
     }
 
     .button__buy-house {
       width: 45%;
       min-width: fit-content;
+      padding: 0 0.5rem;
       height: 3rem;
       background-color: #dc4433;
       display: flex;
