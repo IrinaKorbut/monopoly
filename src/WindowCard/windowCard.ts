@@ -5,9 +5,9 @@ import Cell from '../Cell/Cell';
 
 import './windowCard.scss';
 
-function addStuleBaground(nameCompany: HTMLElement, colorCard: string) {
+function addStuleBaground(nameCompany: HTMLElement, colorCard: string, colorCardWil?: string) {
     const classStyleDarc = document.querySelector('.dark-style')
-    nameCompany.style.background = classStyleDarc ? `${colorCard}` : '#fff'
+    nameCompany.style.background = classStyleDarc ? `${colorCard}` : `${colorCardWil}`|| '#fff'
 }
 
 export function cardStreet(event: Event, tooltipElem: HTMLElement) {
@@ -76,7 +76,7 @@ export function cardRailroad(event: Event, tooltipElem: HTMLElement) {
     appendElementTo(rentalInstruction, rent, owner, ownerTwo, ownerThree, ownerFour)
 
     addWindow(target, tooltipElem)
-    addStuleBaground(tooltipElem, '#DEB887')
+    addStuleBaground(tooltipElem, '#DEB887', '#fffce2')
 }
 
 export function cardCompany(event: any, tooltipElem: HTMLElement) {

@@ -87,21 +87,58 @@ function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, menus: 
     volumeInput.setAttribute('max', "1");
     volumeInput.setAttribute('step', "0.1");
 
-    const back = createElement('div', ['back'], 'back')
-
     let volumeValue = localStorage.getItem('volume')
     volumeInput.value = volumeValue || 0.5
 
+    const subject = createElement('div', ['subject'], 'Subject')
+    const subjectBtn = createElement('div', ['subjectBtn'])
+    const subjectInput = createElement('input', ['subjectInput'])
+
+    let subjectLocalStor = localStorage.getItem('subject')
+    subjectInput.checked = Boolean(+subjectLocalStor)
+
+    subjectInput.id = 'subjectBtn'
+    subjectInput.type = "checkbox"
+    const subjectLabel = createElement('label', ['subjectLabel'])
+    subjectLabel.setAttribute('for', "subjectBtn")
+
+    const back = createElement('div', ['back'], 'back')
+
     appendElementTo(setingMenu, back)
-    appendElementTo(classOptions, audio, volume)
+    appendElementTo(classOptions, audio, volume, subject)
 
     appendElementTo(audio, audioBtn)
     appendElementTo(audioBtn, audioInput, audioLabel)
     appendElementTo(volume, volumeLabel, volumeInput)
+    appendElementTo(subject, subjectBtn)
+    appendElementTo(subjectBtn, subjectInput, subjectLabel)
 
     audioFn(audioPlay)
 
     back.addEventListener('click', menu)
+    subjectInput.addEventListener('click', (e: any) => subjectLocalStorage(e.target))
+}
+
+function subjectLocalStorage(subjectInput?: HTMLInputElement) {
+    const subjectLS = localStorage.getItem('subject')
+
+    if(subjectLS === '1'){
+       if(subjectInput) subjectInput.checked = false
+        localStorage.setItem('subject', '0');
+    }else{
+        if(subjectInput) subjectInput.checked = true
+        localStorage.setItem('subject', '1');
+    }
+
+    addSubject()
+}
+
+function addSubject() {
+    document.querySelector('.players-cards').classList.toggle('dark-style');
+    document.querySelector('.addition-section').classList.toggle('dark-style');
+    document.querySelector('.game-field').classList.toggle('dark-style');
+    document.querySelector('.history-and-buying-section').classList.toggle('dark-style');
+    document.querySelector('.buying-section').classList.toggle('dark-style');
 }
 
 function polz(audio: HTMLAudioElement, volumeInputElem: any) {
@@ -125,6 +162,7 @@ function audioRepeat(audio: HTMLAudioElement, audioBtnElem: HTMLInputElement) {
 export function keyEsc(audioPlay: HTMLAudioElement) {
     document.addEventListener('keydown', (event) => {
         const audioBtn: HTMLInputElement = document.querySelector('.slideThreeInput')
+        const subjectInput: HTMLInputElement = document.querySelector('.subjectInput')
         const volumeInputs: any = document.querySelector('.volumeInput');
 
         if (event.code === 'Escape') {
@@ -140,6 +178,10 @@ export function keyEsc(audioPlay: HTMLAudioElement) {
                 audioBtn.checked ? audioBtn.checked = false : audioBtn.checked = true
                 audioRepeat(audioPlay, audioBtn)
             }
+        }
+
+        if (event.code === 'F4') {
+            subjectLocalStorage(subjectInput)
         }
 
         if (event.code === 'NumpadAdd') {  //+  
@@ -181,6 +223,11 @@ export function btnClikMenu() {
 
     const blackout = document.querySelector('#blackout')
     blackout.addEventListener('click', () => clickBlackout(audioPlay))
+
+    const subjectLS = localStorage.getItem('subject')
+    if(subjectLS === '1') {
+        addSubject()
+    }
 }
 
 function clickBlackout(audioPlay: HTMLAudioElement) {
