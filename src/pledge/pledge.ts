@@ -2,9 +2,10 @@ import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
 import Game from '../Game/Game';
 import { appendElementTo, createElement } from '../helpFunctions/helpFunctions';
 import Property from '../ifacies/Property';
+import Player from '../Player/Player';
+import initHistoryWindow from '../histiryWindow/historyWindow';
 
-
-function setPledgeBtnText() {
+function setPledgeBtnText(): void {
   const language: string = localStorage.getItem('language');
   const pladgeBtn: HTMLElement = document.querySelector('.button__pladge');
     if (language === 'RU') {
@@ -16,7 +17,7 @@ function setPledgeBtnText() {
     }
 }
 
-function setFinishPledgeBtnText() {
+function setFinishPledgeBtnText(): void {
   const language: string = localStorage.getItem('language');
   const pladgeBtn: HTMLElement = document.querySelector('.button__pladge');
   if (language === 'RU') {
@@ -28,7 +29,7 @@ function setFinishPledgeBtnText() {
   }
 }
 
-export function changePledgeBtnLanguage() {
+export function changePledgeBtnLanguage(): void {
   const pladgeBtn: HTMLElement = document.querySelector('.button__pladge');
   if (pladgeBtn.innerText === 'Pledge' || pladgeBtn.innerText === 'Залог' || pladgeBtn.innerText === 'Заклад') {
     setPledgeBtnText();
@@ -54,6 +55,7 @@ function pledgeProperty(event: any): void {
   const lockImg: HTMLElement = createElement('img', ['lock']);
   lockImg.setAttribute('src', './images/lock1.svg');
   appendElementTo(event.target, lockImg);
+  initHistoryWindow(getStringPledgeAction(Game.activePlayer, currentObjCell));
 }
 
 function pledgeBtnEvent(event: any): void {
@@ -92,3 +94,13 @@ export default function initPledgeBtn(): void {
   appendElementTo(buyingSection, pledgeBtn);
 }
 
+function getStringPledgeAction(player: Player, property: Property): string {
+  const language: string = localStorage.getItem('language');
+  if (language === 'RU') {
+    return ` заложил(а) ${property.russianName} за $${property.pledgePrice}`;
+  } else if (language === 'BEL') {
+    return ` заклаў(ла) ${property.belarusianName} за $${property.pledgePrice}`;
+  } else {
+    return ` pledged ${property.name} for $${property.pledgePrice}`;
+  }
+}

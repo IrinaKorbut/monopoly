@@ -1,6 +1,9 @@
 import Player from "../Player/Player";
 
 export default interface Property {
+  readonly name: string;
+  readonly russianName: string;
+  readonly belarusianName: string;
   readonly kitSize?: number;
   readonly kitId?: number;
   readonly cost?: number;
