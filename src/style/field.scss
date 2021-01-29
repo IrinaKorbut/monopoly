@@ -202,7 +202,7 @@
       }
 
       .active {
-        background-color: purple;
+        background-color: $active_cell;
       }
     }
 
@@ -239,7 +239,7 @@
     }
 
     .active {
-      background-color: purple;
+      background-color: $active_cell;
     }
   }
 }
