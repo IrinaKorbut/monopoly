@@ -2,9 +2,10 @@
 
 .game-history {
     width: 70%;
-    height: 100%;
+    height: 85%;
     background-color: #B0C4DE;
     font-size: 2rem;
+    margin: auto;
 
     @include tablet-width {
         height: 100%;

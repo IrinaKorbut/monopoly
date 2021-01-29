@@ -28,6 +28,7 @@ import './style/radioBtnForLanguage.scss';
 import './style/testBtn.scss';
 import './style/dark.scss';
 import './style/loader.scss';
+import './style/footer.scss';
 
 initWindowCards();
 
