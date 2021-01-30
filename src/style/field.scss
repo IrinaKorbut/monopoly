@@ -38,6 +38,13 @@
       text-align: center;
       position: relative;
 
+      .lock {
+        position: absolute;
+        width: 50%;
+        top: 28%;
+        left: 26%;
+      }
+
       .cost {
         margin-bottom: 21px;
       }
@@ -207,6 +214,7 @@
     }
 
     .owner-and-cost-wrapper {
+      position: relative;
       width: 100%;
 
       .cost {

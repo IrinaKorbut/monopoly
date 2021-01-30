@@ -13,6 +13,9 @@ export default class Street extends Cell implements Property{
   readonly houseCost: number;
   readonly kitSize: number;
   readonly kitId: number;
+  readonly pledgePrice: number;
+  readonly redemptionPrice: number;
+  isPredge: boolean = false;
   isAvailableToBuyHouse: boolean = false;
   numberOfHouses: number = 0;
   isThereHotel: boolean = false;
@@ -21,7 +24,7 @@ export default class Street extends Cell implements Property{
 
   constructor(type: string, name: string, russianName: string, belarusianName: string, position: number, cost: number, rent: number,
     rentWithOneHouse: number, rentWhithTwoHouses: number, rentWithTreeHouses: number, rentWhithFourHouses: number,
-    rentWhithHotel: number, houseCost: number, kitSize: number, kitId: number) {
+    rentWhithHotel: number, houseCost: number, kitSize: number, kitId: number, pledgePrice: number, redemptionPrice: number) {
     super(type, name, russianName, belarusianName, position);
     this.cost = cost;
     this.rent = rent;
@@ -33,6 +36,8 @@ export default class Street extends Cell implements Property{
     this.houseCost = houseCost;
     this.kitSize = kitSize;
     this.kitId = kitId;
+    this.pledgePrice = pledgePrice;
+    this.redemptionPrice = redemptionPrice;
   }
 
   set currentRent(newRent: number) {

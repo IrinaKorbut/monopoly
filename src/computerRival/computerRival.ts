@@ -5,6 +5,7 @@ import showDialogWindow, {
   getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame
 } from '../dialogWindow/dialogWindow';
 import initBuyHouseButton from '../buyHouse/buyHouse';
+import initPledgeBtn from '../pledge/pledge';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
 export default function computerMove(action?: string): void {
@@ -103,6 +104,7 @@ export default function computerMove(action?: string): void {
       setNextPlayerAsActive();
       nextPlayerMove();
       initBuyHouseButton();
+      initPledgeBtn();
       break;
   }
 }
