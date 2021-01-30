@@ -54,5 +54,13 @@
         cursor: not-allowed;
       }
     }
+
+    .button__buyout, .button__pladge {
+      @include button;
+    }
+
+    .inactive__button {
+      @include inactive-button;
+    }
   }
 }
