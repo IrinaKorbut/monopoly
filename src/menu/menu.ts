@@ -1,30 +1,44 @@
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
 import { startWindow } from '../StartWindow/startWindow';
 import Game from '../Game/Game';
-import Player from '../Player/Player';
-import Cell from '../Cell/Cell';
-import Property from '../ifacies/Property'
 
 function menu(audioPlay: HTMLAudioElement) {
     const setingMenu: HTMLElement = document.querySelector('.setings-menu')
     setingMenu.innerHTML = '';
+    const currentLanguage: string = localStorage.getItem('language')
 
     const heder = createElement('div', ['heder'])
     const btnClose = createElement('div', ['btn-close'], 'x')
     const menu = createElement('div', ['name-menu'], 'Menu')
+    if(currentLanguage === 'RU'){
+        menu.textContent = 'Меню'
+    }else if(currentLanguage === 'BEL'){
+        menu.textContent = 'Меню'
+    }
 
     const nameBtn = createElement('div', ['name-btn'])
 
-    const setings = createElement('div', ['name-setings'], 'Setings')
-    const language = createElement('div', ['language'], 'Language')
-    const newPlay = createElement('div', ['new-play'], 'New Play')
+    const setings = createElement('div', ['name-setings'], 'Settings')
+    if(currentLanguage === 'RU'){
+        setings.textContent = 'Настройки'
+    }else if(currentLanguage === 'BEL'){
+        setings.textContent = 'Налады'
+    }
+
+    const language = createElement('div', ['language'], 'Language') //удалить
+    const newPlay = createElement('div', ['new-play'], 'New Game')
+    if(currentLanguage === 'RU'){
+        newPlay.textContent = 'Новая игра'
+    }else if(currentLanguage === 'BEL'){
+        newPlay.textContent = 'Новая гульня'
+    }
     const options = createElement('div', ['options'])
 
     appendElementTo(setingMenu, heder, nameBtn)
     appendElementTo(heder, menu, btnClose)
     appendElementTo(nameBtn, setings, language, newPlay, options)
 
-    setings.addEventListener('click', () => setingsMeny(setingMenu, nameBtn, menu, setings, audioPlay))
+    setings.addEventListener('click', () => setingsMeny(setingMenu, nameBtn, menu, setings, audioPlay, currentLanguage))
     newPlay.addEventListener('click', newPlayFn)
     btnClose.addEventListener('click', () => classMenu(audioPlay))
 }
@@ -58,12 +72,16 @@ function newPlayFn() {
     startWindow()
 }
 
-function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, menus: HTMLElement, setings: HTMLElement, audioPlay: HTMLAudioElement): void {
+function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, menus: HTMLElement, setings: HTMLElement, audioPlay: HTMLAudioElement, currentLanguage: string): void {
     menus.textContent = setings.textContent
     classOptions.innerHTML = '';
 
     const audio = createElement('div', ['audio'], 'Audio')
-
+    if(currentLanguage === 'RU'){
+        audio.textContent = 'Аудио'
+    }else if(currentLanguage === 'BEL'){
+        audio.textContent = 'Аўдыё'
+    }
     const audioBtn = createElement('div', ['slideThree'])
     const audioInput = createElement('input', ['slideThreeInput'])
 
@@ -79,8 +97,12 @@ function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, menus: 
 
 
     const volume = createElement('div', ['volume'], 'Volume')
+    if(currentLanguage === 'RU'){
+        volume.textContent = 'Громость'
+    }else if(currentLanguage === 'BEL'){
+        volume.textContent = 'Громость'
+    }
     const volumeLabel = createElement('label', ['volumeLabel'])
-
     const volumeInput = createElement('input', ['volumeInput'])
     volumeInput.setAttribute('type', "range");
     volumeInput.setAttribute('min', "0");
@@ -90,7 +112,12 @@ function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, menus: 
     let volumeValue = localStorage.getItem('volume')
     volumeInput.value = volumeValue || 0.5
 
-    const subject = createElement('div', ['subject'], 'Subject')
+    const subject = createElement('div', ['subject'], 'Theme')
+    if(currentLanguage === 'RU'){
+        subject.textContent = 'Тема'
+    }else if(currentLanguage === 'BEL'){
+        subject.textContent = 'Тэма'
+    }
     const subjectBtn = createElement('div', ['subjectBtn'])
     const subjectInput = createElement('input', ['subjectInput'])
 
@@ -102,7 +129,12 @@ function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, menus: 
     const subjectLabel = createElement('label', ['subjectLabel'])
     subjectLabel.setAttribute('for', "subjectBtn")
 
-    const back = createElement('div', ['back'], 'back')
+    const back = createElement('div', ['Back'], 'Back')
+    if(currentLanguage === 'RU'){
+        back.textContent = 'Назад'
+    }else if(currentLanguage === 'BEL'){
+        back.textContent = 'Назад'
+    }
 
     appendElementTo(setingMenu, back)
     appendElementTo(classOptions, audio, volume, subject)
@@ -215,7 +247,13 @@ export function keyEsc(audioPlay: HTMLAudioElement) {
 }
 
 export function btnClikMenu() {
+    const currentLanguage: string = localStorage.getItem('language')
     const btnMenu = document.querySelector('.btn-Menu')
+    if(currentLanguage === 'RU'){
+        btnMenu.textContent = 'Меню'
+    }else if(currentLanguage === 'BEL'){
+        btnMenu.textContent = 'Меню'
+    }
     const audioPlay = new Audio('./audio/Ennio-Morricone.mp3')
     btnMenu.addEventListener('click', () => classMenu(audioPlay))
     keyEsc(audioPlay)
