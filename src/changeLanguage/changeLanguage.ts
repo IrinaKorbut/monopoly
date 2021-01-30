@@ -34,7 +34,7 @@ function changeTitleOncell(language: string): void {
 }
 
 function addListenerToButtonLng(): void {
-    const languageSection: HTMLElement = document.querySelector('.language');
+    const languageSection: HTMLElement = document.querySelector('.language-choose');
     languageSection.addEventListener('click', (event) => {
         let input = (<HTMLElement>event.target).closest('input');
         if (!input) return;
