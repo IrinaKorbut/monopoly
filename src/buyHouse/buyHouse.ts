@@ -1,7 +1,7 @@
 import game from '../Game/Game';
 import cells from '../cells/cells';
 import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
-import { changeMoneyOnPlayerCard, setStreetRent } from '../dialogWindow/dialogWindow';
+import { changeMoneyOnPlayerCard, setStreetRent, isPlayerHaveEnoughMoney } from '../dialogWindow/dialogWindow';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import Property from '../ifacies/Property';
 import Street from '../Street/Street';
@@ -35,14 +35,16 @@ function isAvailableToBuyAnotherOneHouse(currentObjCell: Street): boolean {
 
 function addHouse(eventTarget: any): void {
   const currentLanguage: string = localStorage.getItem('language') || 'EN';
-  const cellElement = eventTarget.target.parentNode;
+  const cellElement: HTMLElement = eventTarget.target.parentNode;
   let currentObjCell: Street;
   cells.forEach((cell) => {
     if (cellElement === cell.element) {
       currentObjCell = <Street>cell;
     }
   });
-  if (isAvailableToBuyAnotherOneHouse(currentObjCell)) {
+  if (isAvailableToBuyAnotherOneHouse(currentObjCell) && isPlayerHaveEnoughMoney(game.activePlayer, currentObjCell.houseCost)) {
+    console.log(game.activePlayer.money)
+    console.log(currentObjCell.houseCost)
     const housePlace: HTMLElement = cellElement.querySelector('.street-color');
     const houseImg: HTMLImageElement = createElement('img', ['house']);
     if (currentObjCell.numberOfHouses === 4) {
@@ -66,19 +68,12 @@ function addHouse(eventTarget: any): void {
         initHistoryWindow(`Купіў гатэль па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
       }      
     } else {
-      console.log('lang', currentLanguage)
       if (currentLanguage === 'EN') {
         initHistoryWindow(`bought house on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
-      console.log('name', currentObjCell.name)
-
       } else if (currentLanguage === 'RU') {
         initHistoryWindow(`Купил дом по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost}`);
-      console.log('name', currentObjCell.russianName)
-
       } else if (currentLanguage === 'BEL') {
         initHistoryWindow(`Купіў дом па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
-      console.log('name', currentObjCell.belarusianName)
-
       }
     }
   }
@@ -151,6 +146,6 @@ export default function initBuyHouseButton(): void {
   } else if (currentLanguage === 'BEL') {
     buttonBuyName = 'Купіць дамы';
   }
-  const buyingSection: HTMLElement = document.querySelector('.buying-section');  
+  const buyingSection: HTMLElement = document.querySelector('.buy-house-wrapper'); 
   createButton(buyingSection, 'Buy houses', buttonBuyName, currentLanguage);
 }
