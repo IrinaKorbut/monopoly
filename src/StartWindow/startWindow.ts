@@ -8,6 +8,7 @@ import computerMove from '../computerRival/computerRival';
 import initBuyHouseButton from '../buyHouse/buyHouse'
 import { btnClikMenu } from '../menu/menu';
 import initPledgeBtn from '../pledge/pledge';
+import initBuyoutBtn from '../buyout/buyout';
 
 export function startWindow() {
   const classStartWindow = document.querySelector('.start-window');
@@ -80,6 +81,7 @@ export function startBtn() {
       Game.activePlayer = Game.players[0];
       initBuyHouseButton();
       initPledgeBtn();
+      initBuyoutBtn();
       if (Game.activePlayer.isHuman) {
         showDialogWindow('roll');
       } else {

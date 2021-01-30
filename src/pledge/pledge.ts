@@ -2,7 +2,6 @@ import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
 import Game from '../Game/Game';
 import { appendElementTo, createElement } from '../helpFunctions/helpFunctions';
 import Property from '../ifacies/Property';
-import Player from '../Player/Player';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
 function setPledgeBtnText(): void {
@@ -46,7 +45,6 @@ function pledgeProperty(event: any): void {
       currentObjCell = <Property>cell;
     }
   });
-  //cellElement.classList.add('pledged');
   currentObjCell.element.removeEventListener('click', pledgeProperty);
   currentObjCell.element.querySelector('.players-container').classList.add('dark');
   currentObjCell.isPredge = true;
@@ -55,7 +53,7 @@ function pledgeProperty(event: any): void {
   const lockImg: HTMLElement = createElement('img', ['lock']);
   lockImg.setAttribute('src', './images/lock1.svg');
   appendElementTo(event.target, lockImg);
-  initHistoryWindow(getStringPledgeAction(Game.activePlayer, currentObjCell));
+  initHistoryWindow(getStringPledgeAction(currentObjCell));
 }
 
 function pledgeBtnEvent(event: any): void {
@@ -67,7 +65,6 @@ function pledgeBtnEvent(event: any): void {
         cell.element.querySelector('.players-container').classList.add('dark');
       }
     });
-    const language: string = localStorage.getItem('language');
     setFinishPledgeBtnText();
   } else {
     setPledgeBtnText();
@@ -94,7 +91,7 @@ export default function initPledgeBtn(): void {
   appendElementTo(buyingSection, pledgeBtn);
 }
 
-function getStringPledgeAction(player: Player, property: Property): string {
+function getStringPledgeAction(property: Property): string {
   const language: string = localStorage.getItem('language');
   if (language === 'RU') {
     return ` заложил(а) ${property.russianName} за $${property.pledgePrice}`;
