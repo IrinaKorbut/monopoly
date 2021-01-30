@@ -12,6 +12,7 @@ import Property from '../ifacies/Property';
 import playerLose from '../losing/lose';
 
 export default function showDialogWindow(action?: string): void {
+  const language: string = localStorage.getItem('language');
   let title: HTMLElement;
   const cell = getCellObjByPosition(game.activePlayer.position);
   const dialogWindowSection = document.querySelector('.dialog-window');
@@ -22,8 +23,18 @@ export default function showDialogWindow(action?: string): void {
       appendElementTo(dialogWindowSection, loader);
       break;
     case 'roll':
-      title = createElement('p', ['title'], `${game.activePlayer.name} move`);
-      const rollButton = createElement('div', ['button'], 'Roll Dice');
+      let rollBtnInnerText: string;
+      if (language === 'RU') {
+        title = createElement('p', ['title'], 'Сделать ход');
+        rollBtnInnerText = 'Кинуть кубики';
+      } else if (language === 'BEL') {
+        title = createElement('p', ['title'], 'Зрабіць ход');
+        rollBtnInnerText = 'Кінуць кубікі';
+      } else {
+        title = createElement('p', ['title'], 'Make a move');
+        rollBtnInnerText = 'Roll Dice';
+      }
+      const rollButton = createElement('div', ['button'], rollBtnInnerText);
       rollButton.addEventListener('click', () => {
         showDialogWindow('wait');
         const p: Promise<void> = new Promise((resolve) => {
@@ -39,16 +50,34 @@ export default function showDialogWindow(action?: string): void {
         p.then(() => {
           const diceValue = roll();
           movePlayer(diceValue);
-          initHistoryWindow(`rolled ${diceValue} on the dice`);
+          if (language === 'RU') {
+            initHistoryWindow(`выкинул(а) ${diceValue} на кубиках`);
+          } else if (language === 'BEL') {
+            initHistoryWindow(`выкінуў(ла) ${diceValue} на кубіках`);
+          } else {
+            initHistoryWindow(`rolled ${diceValue} on the dice`);
+          }
         });
       });
       appendElementTo(dialogWindowSection, title, rollButton);
       break;
     case 'buy':
-      title = createElement('p', ['title'], 'Free property');
-      const buttonsWrapper = createElement('div', ['buttons-wrapper']);
-      const buttonYes = createElement('div', ['button', 'yes'], 'Buy');
-      const buttonNo = createElement('div', ['button', 'no'], 'Don\'t buy');
+      const buttonsWrapper = createElement('div', ['buttons-wrapper']);  
+      let buttonYes: HTMLElement;
+      let buttonNo: HTMLElement;
+      if (language === 'RU') {
+        title = createElement('p', ['title'], 'Kупить?');
+        buttonYes = createElement('div', ['button', 'yes'], 'Да');
+        buttonNo = createElement('div', ['button', 'no'], 'Нет');
+      } else if (language === 'BEL') {
+        title = createElement('p', ['title'], 'Купіць?');
+        buttonYes = createElement('div', ['button', 'yes'], 'Да');
+        buttonNo = createElement('div', ['button', 'no'], 'Нет');
+      } else {
+        title = createElement('p', ['title'], 'Buy?');
+        buttonYes = createElement('div', ['button', 'yes'], 'Yes');
+        buttonNo = createElement('div', ['button', 'no'], 'No');
+      }
       buttonNo.addEventListener('click', () => {
         showDialogWindow();
       });
@@ -66,27 +95,49 @@ export default function showDialogWindow(action?: string): void {
           } else {
             setCommunalRent(cell, game.activePlayer);
           }
-          initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
+          if (language === 'RU') {
+            initHistoryWindow(`купил ${cell.name} за $${cell.cost}`);
+          } else if (language === 'BEL') {
+            initHistoryWindow(`купіл ${cell.name} за $${cell.cost}`);
+          } else {
+            initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
+          }
           showDialogWindow();
         });
         appendElementTo(dialogWindowSection, title, buttonsWrapper);
       } else {
         buttonYes.classList.add('inactive');
-        const subtitle = createElement('p', ['subtitle'], `You are short $${cell.cost - game.activePlayer.money}`);
-        appendElementTo(dialogWindowSection, title, subtitle, buttonsWrapper);
+        // const subtitle = createElement('p', ['subtitle'], `You are short $${cell.cost - game.activePlayer.money}`);
+        // appendElementTo(dialogWindowSection, title, subtitle, buttonsWrapper);
+        appendElementTo(dialogWindowSection, title, buttonsWrapper);
       }
       break;
     case 'rent':
       if (cell.type !== 'communal') {
-        title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
-        const payRentButton = createElement('div', ['button'], 'Pay');
+        let payRentButton: HTMLElement;
+        if (language === 'RU') {
+          title = createElement('p', ['title'], `Аренда $${cell.currentRent}`);
+          payRentButton = createElement('div', ['button'], 'Заплатить');
+        } else if (language === 'BEL') {
+          title = createElement('p', ['title'], `Арэнда $${cell.currentRent}`);
+          payRentButton = createElement('div', ['button'], 'Заплаціць');
+        } else {
+          title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
+          payRentButton = createElement('div', ['button'], 'Pay');
+        }
         if (isPlayerHaveEnoughMoney(game.activePlayer, cell.currentRent)) {
           payRentButton.addEventListener('click', () => {
             game.activePlayer.money -= cell.currentRent;
             changeMoneyOnPlayerCard(game.activePlayer);
             cell.owner.addMoney(cell.currentRent);
             changeMoneyOnPlayerCard(cell.owner);
-            initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
+            if (language === 'RU') {
+              initHistoryWindow(`заплатил $${cell.currentRent} аренды ${cell.owner.name}`);
+            } else if (language === 'BEL') {
+              initHistoryWindow(`заплаціў $${cell.currentRent} арэнды ${cell.owner.name}`);
+            } else {
+              initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
+            }
             showDialogWindow();
           });
           appendElementTo(dialogWindowSection, title, payRentButton);
@@ -97,8 +148,17 @@ export default function showDialogWindow(action?: string): void {
           removePlayerFromGame();
         }
       } else {
-        title = createElement('p', ['title'], 'Roll dice to know rent');
-        const rollDiceButton = createElement('div', ['button'], 'Roll Dice');
+        let rollDiceButton: HTMLElement;
+        if (language === 'RU') {
+          title = createElement('p', ['title'], 'Киньте кубики');
+          rollDiceButton = createElement('div', ['button'], 'Кинуть');
+        } else if (language === 'BEL') {
+          title = createElement('p', ['title'], 'Кіньце кубікі');
+          rollDiceButton = createElement('div', ['button'], 'Кінуць');
+        } else {
+          title = createElement('p', ['title'], 'Roll dice to know rent');
+          rollDiceButton = createElement('div', ['button'], 'Roll Dice');
+        }
         rollDiceButton.addEventListener('click', () => {
           showDialogWindow('wait');
           const p: Promise<void> = new Promise((resolve) => {
@@ -114,17 +174,30 @@ export default function showDialogWindow(action?: string): void {
           p.then(() => {
             removeChildsFromElement(dialogWindowSection);
             let rent = roll();
-            // initHistoryWindow(`rolled ${rent} on the dice`);
-            rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
-            title = createElement('p', ['title'], `The rent is $${rent}`);
-            const payRentButton = createElement('div', ['button'], 'Pay');
+            let payRentButton: HTMLElement;
+            if (language === 'RU') {
+              title = createElement('p', ['title'], `Аренда $${cell.currentRent}`);
+              payRentButton = createElement('div', ['button'], 'Заплатить');
+            } else if (language === 'BEL') {
+              title = createElement('p', ['title'], `Арэнда $${cell.currentRent}`);
+              payRentButton = createElement('div', ['button'], 'Заплаціць');
+            } else {
+              title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
+              payRentButton = createElement('div', ['button'], 'Pay');
+            }
             if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
               payRentButton.addEventListener('click', () => {
                 game.activePlayer.money -= rent;
                 changeMoneyOnPlayerCard(game.activePlayer);
                 cell.owner.addMoney(rent);
                 changeMoneyOnPlayerCard(cell.owner);
-                initHistoryWindow(`paid $${rent} rent to ${cell.owner.name}`);
+                if (language === 'RU') {
+                  initHistoryWindow(`заплатил $${cell.currentRent} аренды ${cell.owner.name}`);
+                } else if (language === 'BEL') {
+                  initHistoryWindow(`заплаціў $${cell.currentRent} арэнды ${cell.owner.name}`);
+                } else {
+                  initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
+                }
                 showDialogWindow();
               });
               appendElementTo(dialogWindowSection, title, payRentButton);
@@ -142,12 +215,27 @@ export default function showDialogWindow(action?: string): void {
     case 'tax':
       // проработать случай с нехваткой денег
       if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
-        title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
-        const payTaxButton = createElement('div', ['button'], 'Pay');
+        let payTaxButton: HTMLElement;
+        if (language === 'RU') {
+          title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+          payTaxButton = createElement('div', ['button'], 'Заплатить');
+        } else if (language === 'BEL') {
+          title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+          payTaxButton = createElement('div', ['button'], 'Заплаціць');
+        } else {
+          title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+          payTaxButton = createElement('div', ['button'], 'Pay');
+        }
         payTaxButton.addEventListener('click', () => {
           game.activePlayer.subtractMoney(cell.cost);
           changeMoneyOnPlayerCard(game.activePlayer);
-          initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
+          if (language === 'RU') {
+            initHistoryWindow(`заплатил $${cell.cost} ${cell.name}`);
+          } else if (language === 'BEL') {
+            initHistoryWindow(`заплаціў $${cell.cost} ${cell.name}`);
+          } else {
+            initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
+          }
           showDialogWindow();
         });
         appendElementTo(dialogWindowSection, title, payTaxButton);
@@ -156,8 +244,17 @@ export default function showDialogWindow(action?: string): void {
       }
       break;
     default:
-      title = createElement('p', ['title'], 'End of turn');
-      const endButton = createElement('div', ['button'], 'End');
+      let endButton: HTMLElement;
+      if (language === 'RU') {
+        title = createElement('p', ['title'], 'Закончить ход?');
+        endButton = createElement('div', ['button'], 'Да');
+      } else if (language === 'BEL') {
+        title = createElement('p', ['title'], 'Скончыць ход?');
+        endButton = createElement('div', ['button'], 'Да');
+      } else {
+        title = createElement('p', ['title'], 'End the turn?');
+        endButton = createElement('div', ['button'], 'Yes');
+      }
       endButton.addEventListener('click', () => {
         setNextPlayerAsActive();
         nextPlayerMove();
