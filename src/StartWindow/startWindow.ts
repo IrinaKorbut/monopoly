@@ -17,16 +17,16 @@ export function startWindow() {
 
   const numberPlayers = createElement('div', ['number-players'], 'Select number of players.');
   if (currentLanguage === 'RU') {
-    numberPlayers.textContent = 'Выберите количество игроков.'
+    numberPlayers.innerText = 'Выберите количество игроков.'
   } else if (currentLanguage === 'BEL') {
-    numberPlayers.textContent = 'Выберыце колькасць гульцоў.'
+    numberPlayers.innerText = 'Выберыце колькасць гульцоў.'
   }
   const gamekoi = createElement('select', ['select-style']);
   const gamekoiDisabl = createElement('option', ['num'], 'num');
   if (currentLanguage === 'RU') {
-    gamekoiDisabl.textContent = 'число'
+    gamekoiDisabl.innerText = 'число'
   } else if (currentLanguage === 'BEL') {
-    gamekoiDisabl.textContent = 'нумар'
+    gamekoiDisabl.innerText = 'нумар'
   }
   gamekoiDisabl.selected = 'selected';
   gamekoiDisabl.disabled = 'disabled';
@@ -43,9 +43,9 @@ export function startWindow() {
   const settingGamers = createElement('div', ['setting-gamers']);
   const btnStart = createElement('button', ['btn-start', 'color-btn'], 'Start game');
   if (currentLanguage === 'RU') {
-    btnStart.textContent = 'Начать игру'
+    btnStart.innerText = 'Начать игру'
   } else if (currentLanguage === 'BEL') {
-    btnStart.textContent = 'Пачаць гульню'
+    btnStart.innerText = 'Пачаць гульню'
   }
 
   appendElementTo(classStartWindow, numberPlayers);
@@ -79,7 +79,7 @@ export function startBtn() {
       }
       Game.activePlayer = Game.players[0];
       initBuyHouseButton();
-      initPledgeBtn();
+      //initPledgeBtn();
       if (Game.activePlayer.isHuman) {
         showDialogWindow('roll');
       } else {
@@ -122,59 +122,59 @@ function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number, curren
     const playerSelectColor = createElement('select', [`player-select-color${i + 1}`, 'select-style', 'select-game']);
     const selectColorDisabl = createElement('option', ['disabled'], 'Color');
     if (currentLanguage === 'RU') {
-      selectColorDisabl.textContent = 'Цвет'
+      selectColorDisabl.innerText = 'Цвет'
     } else if (currentLanguage === 'BEL') {
-      selectColorDisabl.textContent = 'Колер'
+      selectColorDisabl.innerText = 'Колер'
     }
     selectColorDisabl.selected = 'selected';
     selectColorDisabl.disabled = 'disabled';
 
     const selectColorUan = createElement('option', ['red'], 'Red');
     if (currentLanguage === 'RU') {
-      selectColorUan.textContent = 'Красный'
+      selectColorUan.innerText = 'Красный'
     } else if (currentLanguage === 'BEL') {
-      selectColorUan.textContent = 'Чырвоны'
+      selectColorUan.innerText = 'Чырвоны'
     }
     selectColorUan.value = '#db2428';
 
     const selectColorTuo = createElement('option', ['blue'], 'Blue');
     if (currentLanguage === 'RU') {
-      selectColorTuo.textContent = 'Синий'
+      selectColorTuo.innerText = 'Синий'
     } else if (currentLanguage === 'BEL') {
-      selectColorTuo.textContent = 'Сіні'
+      selectColorTuo.innerText = 'Сіні'
     }
     selectColorTuo.value = '#47a7ff';
 
     const selectColorThree = createElement('option', ['orange'], 'Orange');
     if (currentLanguage === 'RU') {
-      selectColorThree.textContent = 'Оранжевый'
+      selectColorThree.innerText = 'Оранжевый'
     } else if (currentLanguage === 'BEL') {
-      selectColorThree.textContent = 'Аранжавы'
+      selectColorThree.innerText = 'Аранжавы'
     }
     selectColorThree.value = '#eb8b2c';
 
     const selectColorFour = createElement('option', ['green'], 'Green');
     if (currentLanguage === 'RU') {
-      selectColorFour.textContent = 'Зеленый'
+      selectColorFour.innerText = 'Зеленый'
     } else if (currentLanguage === 'BEL') {
-      selectColorFour.textContent = 'Зялёны'
+      selectColorFour.innerText = 'Зялёны'
     }
     selectColorFour.value = '#11a85a';
 
     const playerSelectHuman = createElement('select', ['player-selectHuman', 'select-style']);
     const selectHuman = createElement('option', ['num'], 'Human');
     if (currentLanguage === 'RU') {
-      selectHuman.textContent = 'Человек'
+      selectHuman.innerText = 'Человек'
     } else if (currentLanguage === 'BEL') {
-      selectHuman.textContent = 'Чалавек'
+      selectHuman.innerText = 'Чалавек'
     }
     selectHuman.value = 'human';
 
     const selectAi = createElement('option', ['num'], 'Computer');
     if (currentLanguage === 'RU') {
-      selectAi.textContent = 'Компьютер'
+      selectAi.innerText = 'Компьютер'
     } else if (currentLanguage === 'BEL') {
-      selectAi.textContent = "Камп'ютар"
+      selectAi.innerText = "Камп'ютар"
     }
     selectAi.value = 'ai';
 
@@ -191,8 +191,8 @@ function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number, curren
 
 function addNameA(playerIconName: HTMLElement, playerInput: any): void {
   if (!playerInput[0]) {
-    playerIconName.textContent = 'P';
+    playerIconName.innerText = 'P';
   } else {
-    playerIconName.textContent = playerInput[0].toUpperCase();
+    playerIconName.innerText = playerInput[0].toUpperCase();
   }
 }

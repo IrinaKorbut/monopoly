@@ -2,6 +2,7 @@ import initBuyHouseButton from '../buyHouse/buyHouse';
 
 import cell from '../cell/cell';
 import cells from '../cells/cells';
+import Game from '../Game/Game'
 import { changePledgeBtnLanguage } from '../pledge/pledge';
 
 function changeTitleOncell(language: string): void {
@@ -33,14 +34,16 @@ function changeTitleOncell(language: string): void {
     })
 }
 
-function addListenerToButtonLng(): void {
+export function addListenerToButtonLng(): void {
     const languageSection: HTMLElement = document.querySelector('.language-choose');
     languageSection.addEventListener('click', (event) => {
         let input = (<HTMLElement>event.target).closest('input');
         if (!input) return;
         if (!languageSection.contains(input)) return;
         changeTitleOncell(input.value);
-        initBuyHouseButton();
+        if (Game.players.length) {
+            initBuyHouseButton();
+        }
         changePledgeBtnLanguage();
     })
 }
@@ -55,9 +58,15 @@ function selectCurrentInput(): void {
         }
     })
 }
+function isRadioButtonLanguageExist(): boolean {
+    const buttonsLanguage: Array<HTMLElement> = Array.from(document.querySelectorAll('.radio_language'));
+    return !!buttonsLanguage; 
+}
 
 export default function setLanguage(): void {
-    selectCurrentInput();    
+    if(isRadioButtonLanguageExist()){
+        selectCurrentInput(); 
+    } 
     addListenerToButtonLng();
     changeTitleOncell(localStorage.getItem('language') || 'EN');
 }
