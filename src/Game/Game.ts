@@ -3,8 +3,8 @@ import cells from '../cells/cells';
 import Player from '../Player/Player';
 
 class Game {
-  readonly cells: Array<Cell> = cells;
-  players: Array<Player> = [];
+  readonly cells: Cell[] = cells;
+  players: Player[] = [];
   activePlayer: Player;
 
   addPlayer(player: Player) {
