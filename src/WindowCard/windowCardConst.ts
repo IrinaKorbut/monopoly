@@ -23,11 +23,12 @@ export function addWindow(target: HTMLElement, tooltipEle: HTMLElement): void {
     tooltipEle.style.top = top + 'px';
 }
 
-export function addSelectorClass(classNames: string, fuNames: (event: Event, tooltipElem: HTMLElement) => void): void {
+export function addSelectorClass(classNames: string, fuNames: (event: Event, tooltipElem: HTMLElement, currentLanguage: string) => void): void {
     let tooltipElem: HTMLElement;
     const street = document.querySelectorAll(`.${classNames}`)
+    const currentLanguage: string = localStorage.getItem('language')
     for (let i = 0; i < street.length; i++) {
-        street[i].addEventListener('mouseenter', (event) => fuNames(event, tooltipElem));
+        street[i].addEventListener('mouseenter', (event) => fuNames(event, tooltipElem, currentLanguage));
         street[i].addEventListener('mouseleave', removeCardStreet)
     }
 }
