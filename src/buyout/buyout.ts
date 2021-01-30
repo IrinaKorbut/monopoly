@@ -1,0 +1,101 @@
+import Property from '../ifacies/Property';
+import { createElement, appendElementTo } from '../helpFunctions/helpFunctions';
+import Game from '../Game/Game';
+import { changeMoneyOnPlayerCard, isPlayerHaveEnoughMoney } from '../dialogWindow/dialogWindow';
+import initHistoryWindow from '../histiryWindow/historyWindow';
+
+
+function setFinishBuyoutBtnText(): void {
+  const language: string = localStorage.getItem('language');
+  const pladgeBtn: HTMLElement = document.querySelector('.button__buyout');
+    if (language === 'RU') {
+      pladgeBtn.innerText = 'Закончить выкуп';
+    } else if (language === 'BEL') {
+      pladgeBtn.innerText = 'Скончыць выкуп';
+    } else {
+      pladgeBtn.innerText = 'Finish boyout';
+    }
+}
+
+function setBuyoutBtnText(): void {
+  const language: string = localStorage.getItem('language');
+  const pladgeBtn: HTMLElement = document.querySelector('.button__buyout');
+  if (language === 'RU' || language === 'BEL') {
+    pladgeBtn.innerText = 'Выкуп';
+  } else {
+    pladgeBtn.innerText = 'Buyout';
+  }
+}
+
+export function changeBuyoutBtnLanguage(): void {
+  const pladgeBtn: HTMLElement = document.querySelector('.button__buyout');
+  if (pladgeBtn.innerText === 'Buyout' || pladgeBtn.innerText === 'Выкуп') {
+    setBuyoutBtnText();
+  } else {
+    setFinishBuyoutBtnText();
+  }
+}
+
+function getStringBuyoutAction(property: Property): string {
+  const language: string = localStorage.getItem('language');
+  if (language === 'RU') {
+    return ` выкупил(а) ${property.russianName} за $${property.redemptionPrice}`;
+  } else if (language === 'BEL') {
+    return ` выкупіў(ла) ${property.belarusianName} за $${property.redemptionPrice}`;
+  } else {
+    return ` bought out ${property.name} for $${property.redemptionPrice}`;
+  }
+}
+
+function buyoutProperty(event: any): void {
+  const cellElement: HTMLElement = event.target.parentNode;
+  let currentObjCell: Property;
+  Game.cells.forEach((cell) => {
+    if (cellElement === cell.element) {
+      currentObjCell = <Property>cell;
+    }
+  });
+  if (isPlayerHaveEnoughMoney(Game.activePlayer, currentObjCell.redemptionPrice)) {
+    currentObjCell.element.removeEventListener('click', buyoutProperty);
+    currentObjCell.element.querySelector('.players-container').classList.add('dark');
+    currentObjCell.isPredge = false;
+    Game.activePlayer.money -= currentObjCell.redemptionPrice;
+    changeMoneyOnPlayerCard(Game.activePlayer);
+    currentObjCell.element.querySelector('.lock').remove();
+    initHistoryWindow(getStringBuyoutAction(currentObjCell));
+  }
+}
+
+
+function buyoutBtnEvent(event: any): void {
+  if (event.target.innerText === 'Buyout' || event.target.innerText === 'Выкуп') {
+    Game.cells.forEach((cell: Property) => {
+      if (Game.activePlayer.property.includes(cell) && cell.isPredge) {
+        cell.element.addEventListener('click', buyoutProperty);
+      } else {
+        cell.element.querySelector('.players-container').classList.add('dark');
+      }
+    });
+    setFinishBuyoutBtnText();
+  } else {
+    Game.cells.forEach((cell: Property) => {
+      cell.element.querySelector('.players-container').classList.remove('dark');
+      cell.element.removeEventListener('click', buyoutProperty);
+    });
+    setBuyoutBtnText();
+  }
+}
+
+export default function initBuyoutBtn(): void {
+  const buyingSection: HTMLElement = document.querySelector('.buying-section');
+  let btnInnerText: string; 
+  const language: string = localStorage.getItem('language');
+  if (language === 'RU' || language === 'BEL') {
+    btnInnerText = 'Выкуп';
+  } else {
+    btnInnerText = 'Buyout';
+  }
+  const buyoutBtn: HTMLElement = createElement('div', ['button__buy-house', 'button__buyout'], btnInnerText);
+  buyoutBtn.addEventListener('click', buyoutBtnEvent);
+  appendElementTo(buyingSection, buyoutBtn);
+}

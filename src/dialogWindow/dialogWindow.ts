@@ -4,7 +4,6 @@ import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
 import initBuyHouseButton from '../buyHouse/buyHouse';
-import initPledgeBtn from '../pledge/pledge';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import Player from '../Player/Player';
 import Street from '../Street/Street';
@@ -163,7 +162,6 @@ export default function showDialogWindow(action?: string): void {
         setNextPlayerAsActive();
         nextPlayerMove();
         initBuyHouseButton();
-        initPledgeBtn();
       });
       appendElementTo(dialogWindowSection, title, endButton);
   }

@@ -2,7 +2,8 @@ import { initWindowCards } from './WindowCard/windowCard';
 import roll from './dice/dice';
 import { startWindow } from './StartWindow/startWindow';
 import { btnClikMenu } from './menu/menu';
-import  initPledgeBtn  from './pledge/pledge'
+import initPledgeBtn  from './pledge/pledge';
+import initBuyoutBtn from './buyout/buyout';
 // import cells from './cells/cells';
 import setLanguage from './changeLanguage/changeLanguage';
 
@@ -35,8 +36,8 @@ initWindowCards();
 
 startWindow();
 btnClikMenu()
-initPledgeBtn()
-// setLanguage();
+initPledgeBtn();
+initBuyoutBtn();
 
 
 // export const player = new Player('#2295FF');
