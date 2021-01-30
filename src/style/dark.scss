@@ -1,115 +1,126 @@
 @import "constants";
 
-.dark-style {
-  background-color: $dark-gray;
 
-  .player-card, .dice, .dialog-window {
-    background-color: #919699;
+main {
+  .dark-style {
+    background-color: $dark-gray;
+    
+    .addition-options {
+      background-color: $dark-gray;
+    }
+  
+    .player-card, .dice, .dialog-window, .buying-section {
+      background-color: #919699;
 
-    .button {
+      .button__buy-house {
+        background: $dark-mode-red-btns;
+      }
+  
+      .button {
+        background: $dark-mode-red-btns;
+      }
+    }
+  
+    .backlight {
+      animation: backlight-dark-mode 3s linear infinite;
+  }
+  
+    .dialog-window {
+      .loader {
+        border-color: $dark-gray;
+  
+        &::after, &::before {
+          border-bottom-color:  $dark-gray;
+        }
+  
+        &::after {
+          background-color: $dark-gray;
+        }
+      }
+    }
+  
+    .button__buy-house {
       background: $dark-mode-red-btns;
     }
-  }
-
-  .backlight {
-    animation: backlight-dark-mode 3s linear infinite;
-}
-
-  .dialog-window {
-    .loader {
-      border-color: $dark-gray;
-
-      &::after, &::before {
-        border-bottom-color:  $dark-gray;
-      }
-
-      &::after {
-        background-color: $dark-gray;
+  
+    .player-card__name {
+      color: #00FF7F;
+    }
+  
+    .player-card__cash__currency {
+      color: #696969;
+    }
+  
+    .game-history {
+  
+      .action-list {
+        background-color: $light-gray;
       }
     }
-  }
-
-  .button__buy-house {
-    background: $dark-mode-red-btns;
-  }
-
-  .player-card__name {
-    color: #00FF7F;
-  }
-
-  .player-card__cash__currency {
-    color: #696969;
-  }
-
-  .game-history {
-
-    .action-list {
-      background-color: $light-gray;
-    }
-  }
-
-  .row {
-    .street, .tax, .communal, .jail {
-      background-color: $light-gray;
-
-      .visit-section {
+  
+    .row {
+      .street, .tax, .communal, .jail {
+        background-color: $light-gray;
+  
+        .visit-section {
+          background-color: $gray;
+        }
+      }
+  
+      .go-to-jail {
+        background-color: #FFDEAD;
+      }
+  
+      .parking {
         background-color: $gray;
       }
-    }
-
-    .go-to-jail {
-      background-color: #FFDEAD;
-    }
-
-    .parking {
-      background-color: $gray;
-    }
-
-    .railroad {
-      background-color: #DEB887;
-    }
-
-    .chest {
-      background-color: #87CEEB;
-    }
-
-    .chance {
-      background-color: #D8BFD8;
-    }
-
-    .go {
-      background-color: #3CB371;
-
-      .cost {
-        color: #006400;
+  
+      .railroad {
+        background-color: #DEB887;
+      }
+  
+      .chest {
+        background-color: #87CEEB;
+      }
+  
+      .chance {
+        background-color: #D8BFD8;
+      }
+  
+      .go {
+        background-color: #3CB371;
+  
+        .cost {
+          color: #006400;
+        }
+      }
+      
+      .active {
+        background-color: #FFE4E1;
+      }
+  
+      .cell {
+        .owner {
+          background-color: $gray;
+        }
+  
+        .yellow {
+          background-color: #FFD700;
+        }
+  
+        .red {
+          background-color: #B22222;
+        }
+  
+        .blue {
+          background-color: #1E90FF;
+        }
       }
     }
-    
-    .active {
-      background-color: #FFE4E1;
+  
+    .tooltip-dark {
+      background-color: $light-gray;
     }
-
-    .cell {
-      .owner {
-        background-color: $gray;
-      }
-
-      .yellow {
-        background-color: #FFD700;
-      }
-
-      .red {
-        background-color: #B22222;
-      }
-
-      .blue {
-        background-color: #1E90FF;
-      }
-    }
-  }
-
-  .tooltip-dark {
-    background-color: $light-gray;
   }
 }
 
