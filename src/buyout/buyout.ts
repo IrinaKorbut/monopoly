@@ -27,6 +27,15 @@ function setBuyoutBtnText(): void {
   }
 }
 
+export function changeBuyoutBtnLanguage(): void {
+  const pladgeBtn: HTMLElement = document.querySelector('.button__buyout');
+  if (pladgeBtn.innerText === 'Buyout' || pladgeBtn.innerText === 'Выкуп') {
+    setBuyoutBtnText();
+  } else {
+    setFinishBuyoutBtnText();
+  }
+}
+
 function getStringBuyoutAction(property: Property): string {
   const language: string = localStorage.getItem('language');
   if (language === 'RU') {
@@ -59,7 +68,7 @@ function buyoutProperty(event: any): void {
 
 
 function buyoutBtnEvent(event: any): void {
-  if (event.target.innerText === 'Buyout' || event.target.innerText === 'Выкуп' || event.target.innerText === 'Выкуп') {
+  if (event.target.innerText === 'Buyout' || event.target.innerText === 'Выкуп') {
     Game.cells.forEach((cell: Property) => {
       if (Game.activePlayer.property.includes(cell) && cell.isPredge) {
         cell.element.addEventListener('click', buyoutProperty);

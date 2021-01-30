@@ -3,6 +3,7 @@ import initBuyHouseButton from '../buyHouse/buyHouse';
 import cell from '../cell/cell';
 import cells from '../cells/cells';
 import { changePledgeBtnLanguage } from '../pledge/pledge';
+import { changeBuyoutBtnLanguage } from '../buyout/buyout';
 
 function changeTitleOncell(language: string): void {
     cells.forEach((cell: cell) => {
@@ -42,6 +43,7 @@ function addListenerToButtonLng(): void {
         changeTitleOncell(input.value);
         initBuyHouseButton();
         changePledgeBtnLanguage();
+        changeBuyoutBtnLanguage();
     })
 }
 
