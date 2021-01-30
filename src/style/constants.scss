@@ -21,3 +21,21 @@ $light-gray: #C6CACC;
   }
 }
 
+@mixin button {
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dc4433;
+  border-radius: 3.5rem;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+  height: 2.5rem;
+}
+
+@mixin inactive-button {
+  pointer-events: none;
+  background-color: #C6CACC;
+}
+

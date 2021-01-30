@@ -3,6 +3,7 @@ import Game from '../Game/Game';
 import { appendElementTo, createElement } from '../helpFunctions/helpFunctions';
 import Property from '../ifacies/Property';
 import initHistoryWindow from '../histiryWindow/historyWindow';
+import { makeAllButtonsActive, makeAllButtonsInactiveExceptPressed } from '../inactiveButton/inactiveButton';
 
 function setPledgeBtnText(): void {
   const language: string = localStorage.getItem('language');
@@ -66,7 +67,9 @@ function pledgeBtnEvent(event: any): void {
       }
     });
     setFinishPledgeBtnText();
+    makeAllButtonsInactiveExceptPressed(event.target);
   } else {
+    makeAllButtonsActive();
     setPledgeBtnText();
     Game.cells.forEach((cell: Property) => {
       cell.element.querySelector('.players-container').classList.remove('dark');
@@ -86,7 +89,7 @@ export default function initPledgeBtn(): void {
   } else {
     btnInnerText = 'Pledge';
   }
-  const pledgeBtn: HTMLElement = createElement('div', ['button__buy-house', 'button__pladge'], btnInnerText);
+  const pledgeBtn: HTMLElement = createElement('div', ['button__pladge', 'button'], btnInnerText);
   pledgeBtn.addEventListener('click', pledgeBtnEvent);
   appendElementTo(buyingSection, pledgeBtn);
 }

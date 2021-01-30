@@ -19,11 +19,16 @@ main {
       .button {
         background: $dark-mode-red-btns;
       }
+
+      .inactive__button {
+        @include inactive-button;
+      }
     }
   
     .backlight {
       animation: backlight-dark-mode 3s linear infinite;
-  }
+    }
+
   
     .dialog-window {
       .loader {
@@ -37,10 +42,6 @@ main {
           background-color: $dark-gray;
         }
       }
-    }
-  
-    .button__buy-house {
-      background: $dark-mode-red-btns;
     }
   
     .player-card__name {

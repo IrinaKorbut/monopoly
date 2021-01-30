@@ -3,7 +3,7 @@ import { createElement, appendElementTo } from '../helpFunctions/helpFunctions';
 import Game from '../Game/Game';
 import { changeMoneyOnPlayerCard, isPlayerHaveEnoughMoney } from '../dialogWindow/dialogWindow';
 import initHistoryWindow from '../histiryWindow/historyWindow';
-
+import { makeAllButtonsActive, makeAllButtonsInactiveExceptPressed } from '../inactiveButton/inactiveButton';
 
 function setFinishBuyoutBtnText(): void {
   const language: string = localStorage.getItem('language');
@@ -77,12 +77,14 @@ function buyoutBtnEvent(event: any): void {
       }
     });
     setFinishBuyoutBtnText();
+    makeAllButtonsInactiveExceptPressed(event.target);
   } else {
     Game.cells.forEach((cell: Property) => {
       cell.element.querySelector('.players-container').classList.remove('dark');
       cell.element.removeEventListener('click', buyoutProperty);
     });
     setBuyoutBtnText();
+    makeAllButtonsActive();
   }
 }
 
@@ -95,7 +97,7 @@ export default function initBuyoutBtn(): void {
   } else {
     btnInnerText = 'Buyout';
   }
-  const buyoutBtn: HTMLElement = createElement('div', ['button__buy-house', 'button__buyout'], btnInnerText);
+  const buyoutBtn: HTMLElement = createElement('div', ['button__buyout', 'button'], btnInnerText);
   buyoutBtn.addEventListener('click', buyoutBtnEvent);
   appendElementTo(buyingSection, buyoutBtn);
 }
