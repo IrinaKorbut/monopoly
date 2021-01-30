@@ -9,9 +9,9 @@ function addStuleBaground(nameCompany: HTMLElement, colorCard: string, colorCard
     nameCompany.style.background = classStyleDarc ? `${colorCard}` : `${colorCardWil}`|| '#fff'
 }
 
-export function cardStreet(event: Event, tooltipElem: HTMLElement, currentLanguage: string) {
+export function cardStreet(event: Event, tooltipElem: HTMLElement) {
     const target = <HTMLInputElement>event.target;
-
+    const currentLanguage: string = localStorage.getItem('language')
     let property: any;
     for (let i = 0; i < game.cells.length; i += 1) {
         const cell = game.cells[i];
@@ -36,40 +36,40 @@ export function cardStreet(event: Event, tooltipElem: HTMLElement, currentLangua
 
     const rentWithColorSet = createCell('rent-with-color-set', 'Rent with color set', `$ ${property.rent * 2}`)
     if(currentLanguage === 'RU'){
-        rentWithColorSet.firstChild.textContent = 'с набором цветов'
+        rentWithColorSet.firstChild.textContent = 'С набором цветов'
     }else if(currentLanguage === 'BEL'){
-        rentWithColorSet.firstChild.textContent = 'з каляровым наборам'
+        rentWithColorSet.firstChild.textContent = 'З каляровым наборам'
     }
 
     const rentWithOne = createCell('rent-with-one', 'with 1 hause', `$ ${property.rentWithOneHouse}`)
     if(currentLanguage === 'RU'){
-        rentWithOne.firstChild.textContent = 'с 1 домом'
+        rentWithOne.firstChild.textContent = 'С 1 домом'
     }else if(currentLanguage === 'BEL'){
-        rentWithOne.firstChild.textContent = 'з 1 будынкам'
+        rentWithOne.firstChild.textContent = 'З 1 будынкам'
     }
     const rentWithTwo = createCell('rent-with-two', 'with 2 hauses', `$ ${property.rentWhithTwoHouses}`)
     if(currentLanguage === 'RU'){
-        rentWithTwo.firstChild.textContent = 'с 2 домом'
+        rentWithTwo.firstChild.textContent = 'С 2 домом'
     }else if(currentLanguage === 'BEL'){
-        rentWithTwo.firstChild.textContent = 'з 2 будынкам'
+        rentWithTwo.firstChild.textContent = 'З 2 будынкам'
     }
     const rentWithThree = createCell('rent-with-three', 'with 3 hauses', `$ ${property.rentWithTreeHouses}`)
     if(currentLanguage === 'RU'){
-        rentWithThree.firstChild.textContent = 'с 3 домом'
+        rentWithThree.firstChild.textContent = 'С 3 домом'
     }else if(currentLanguage === 'BEL'){
-        rentWithThree.firstChild.textContent = 'з 3 будынкам'
+        rentWithThree.firstChild.textContent = 'З 3 будынкам'
     }
     const rentWithFour = createCell('rent-with-four', 'with 4 hauses', `$ ${property.rentWhithFourHouses}`)
     if(currentLanguage === 'RU'){
-        rentWithFour.firstChild.textContent = 'с 4 домом'
+        rentWithFour.firstChild.textContent = 'С 4 домом'
     }else if(currentLanguage === 'BEL'){
-        rentWithFour.firstChild.textContent = 'з 4 будынкам'
+        rentWithFour.firstChild.textContent = 'З 4 будынкам'
     }
     const rentWithFive = createCell('rent-with-five', 'with HOTEL', `$ ${property.rentWhithHotel}`)
     if(currentLanguage === 'RU'){
-        rentWithFive.firstChild.textContent = 'с ОТЕЛЕМ'
+        rentWithFive.firstChild.textContent = 'С отелем'
     }else if(currentLanguage === 'BEL'){
-        rentWithFive.firstChild.textContent = 'з ГАЕЭЛЕМ'
+        rentWithFive.firstChild.textContent = 'З гатэлем'
     }
     const housest = createElement('div', ['housest'])
     const housestCost = createCell('housest-cost', 'Housest cost', `$ ${property.houseCost}`)
@@ -84,6 +84,32 @@ export function cardStreet(event: Event, tooltipElem: HTMLElement, currentLangua
     }else if(currentLanguage === 'BEL'){
         hotelsCost.firstChild.textContent = 'Гасцініца каштуе'
     }
+
+    const pledge = createCell('pledge', 'Pledge', `$ ${property.rentWithTreeHouses}`)
+    if(currentLanguage === 'RU'){
+        pledge.firstChild.textContent = 'Залог'
+    }else if(currentLanguage === 'BEL'){
+        pledge.firstChild.textContent = 'Заклад'
+    }
+    const redemption = createCell('redemption', 'Redemption', `$ ${property.rentWhithFourHouses}`)
+    if(currentLanguage === 'RU'){
+        redemption.firstChild.textContent = 'Выкуп'
+    }else if(currentLanguage === 'BEL'){
+        redemption.firstChild.textContent = 'Выкуп'
+    }
+    const houseSale = createCell('house-sale', 'House sale', `$ ${property.houseCost * 0.8}`)
+    if(currentLanguage === 'RU'){
+        houseSale.firstChild.textContent = 'Продажа дома'
+    }else if(currentLanguage === 'BEL'){
+        houseSale.firstChild.textContent = 'Продажа дома'
+    }
+    const hotelSale = createCell('hotel-sale', 'Hotel sale', `$ ${property.houseCost * 0.8}`)
+    if(currentLanguage === 'RU'){
+        hotelSale.firstChild.textContent = 'Продажа отеля'
+    }else if(currentLanguage === 'BEL'){
+        hotelSale.firstChild.textContent = 'Продажа гасцініцы'
+    }
+
     appendElementTo(document.body, tooltipElem)
     appendElementTo(tooltipElem, wrapperCard)
     appendElementTo(wrapperCard, wrapperColor)
@@ -91,15 +117,15 @@ export function cardStreet(event: Event, tooltipElem: HTMLElement, currentLangua
     appendElementTo(wrapperCard, infoRents)
     appendElementTo(infoRents, rent, rentWithColorSet, rentWithOne, rentWithTwo, rentWithThree, rentWithFour, rentWithFive)
     appendElementTo(wrapperCard, housest)
-    appendElementTo(housest, housestCost, hotelsCost)
+    appendElementTo(housest, housestCost, hotelsCost, pledge, redemption, houseSale, hotelSale)
 
     addWindow(target, tooltipElem)
     addStuleBaground(tooltipElem, '#C6CACC')
 }
 
-export function cardRailroad(event: Event, tooltipElem: HTMLElement, currentLanguage: string) {
+export function cardRailroad(event: Event, tooltipElem: HTMLElement) {
     const target = <HTMLInputElement>event.target;
-    
+    const currentLanguage: string = localStorage.getItem('language')
     tooltipElem = createElement('div', ['card-tax', 'tooltips'])
     const image: HTMLImageElement = createElement('img', ['image'])
     image.src = target.children[0].attributes[0].value
@@ -144,9 +170,9 @@ export function cardRailroad(event: Event, tooltipElem: HTMLElement, currentLang
     addStuleBaground(tooltipElem, '#DEB887', '#fffce2')
 }
 
-export function cardCompany(event: any, tooltipElem: HTMLElement, currentLanguage: string) {
+export function cardCompany(event: any, tooltipElem: HTMLElement) {
     const target = event.target;
-
+    const currentLanguage: string = localStorage.getItem('language')
     tooltipElem = createElement('div', ['company', 'tooltips'])
     const image = createElement('img', ['image'])
     image.src = target.children[0].attributes[0].value
