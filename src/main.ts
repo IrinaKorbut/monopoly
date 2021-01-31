@@ -12,7 +12,7 @@ import addPlayerToField from './addPlayerToField/addPlayerToField'
 import initHistoryWindow from './histiryWindow/historyWindow'
 import initBuyHouseButton from './buyHouse/buyHouse';
 import initSellHouseButton from './sellHouse/sellHouse';
-
+import { gameСompletion } from './gameСompletion/gameСompletion'
 
 import './style/style.scss';
 import './style/dice.scss';
@@ -32,6 +32,7 @@ import './style/testBtn.scss';
 import './style/dark.scss';
 import './style/loader.scss';
 import './style/footer.scss';
+import './gameСompletion/gameСompletion.scss';
 
 initWindowCards();
 
@@ -45,6 +46,9 @@ initPledgeBtn();
 initBuyoutBtn();
 
 changeTitleOnCell();
+
+const btn = document.querySelector('.btn')
+btn.addEventListener('click', gameСompletion)
 
 
 
