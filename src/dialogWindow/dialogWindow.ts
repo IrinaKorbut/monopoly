@@ -170,15 +170,16 @@ export default function showDialogWindow(action?: string): void {
           p.then(() => {
             removeChildsFromElement(dialogWindowSection);
             let rent = roll();
+            rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
             let payRentButton: HTMLElement;
             if (language === 'RU') {
-              title = createElement('p', ['title'], `Аренда $${cell.currentRent}`);
+              title = createElement('p', ['title'], `Аренда $${rent}`);
               payRentButton = createElement('div', ['button', 'pay-or-buy'], 'Заплатить');
             } else if (language === 'BEL') {
-              title = createElement('p', ['title'], `Арэнда $${cell.currentRent}`);
+              title = createElement('p', ['title'], `Арэнда $${rent}`);
               payRentButton = createElement('div', ['button', 'pay-or-buy'], 'Заплаціць');
             } else {
-              title = createElement('p', ['title'], `The rent is $${cell.currentRent}`);
+              title = createElement('p', ['title'], `The rent is $${rent}`);
               payRentButton = createElement('div', ['button', 'pay-or-buy'], 'Pay');
             }
             if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
@@ -188,11 +189,11 @@ export default function showDialogWindow(action?: string): void {
                 cell.owner.addMoney(rent);
                 changeMoneyOnPlayerCard(cell.owner);
                 if (language === 'RU') {
-                  initHistoryWindow(`заплатил(а) $${cell.currentRent} аренды ${cell.owner.name}`);
+                  initHistoryWindow(`заплатил(а) $${rent} аренды ${cell.owner.name}`);
                 } else if (language === 'BEL') {
-                  initHistoryWindow(`заплаціў(ла) $${cell.currentRent} арэнды ${cell.owner.name}`);
+                  initHistoryWindow(`заплаціў(ла) $${rent} арэнды ${cell.owner.name}`);
                 } else {
-                  initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
+                  initHistoryWindow(`paid $${rent} rent to ${cell.owner.name}`);
                 }
                 showDialogWindow();
               });
