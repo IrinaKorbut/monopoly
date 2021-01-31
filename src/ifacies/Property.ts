@@ -17,4 +17,5 @@ export default interface Property {
   currentRent?: number;
   isAvailableToBuyHouse?: boolean;
   numberOfHouses?: number;
+  isThereHotel?: boolean;
 }

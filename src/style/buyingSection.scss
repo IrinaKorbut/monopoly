@@ -27,7 +27,10 @@
     }
     
 
-    .button__buyout, .button__pladge, .button__buy-house {
+    .button__buyout,
+    .button__pladge,
+    .button__buy-house,
+    .button__sell-house {
       @include button;
     }
 
