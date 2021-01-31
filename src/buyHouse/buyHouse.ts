@@ -5,8 +5,8 @@ import { changeMoneyOnPlayerCard, setStreetRent, isPlayerHaveEnoughMoney } from 
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import Property from '../ifacies/Property';
 import Street from '../Street/Street';
-import Cell from '../Cell/Cell';
 import { makeAllButtonsInactiveExceptPressed, makeAllButtonsActive } from '../inactiveButton/inactiveButton';
+import lockPayOrBuyBtnIfNotEnoughMoney from '../payOrBuyButtonAccess/lockPayOrBuyButton';
 
 function setFinishBuyHouseButton(): void {
   const currentLanguage: string = localStorage.getItem('language');
@@ -115,9 +115,10 @@ function addHouse(event: any): void {
     appendElementTo(housePlace, houseImg);
     Game.activePlayer.subtractMoney(currentObjCell.houseCost);
     changeMoneyOnPlayerCard(Game.activePlayer);
-    generateMessageToHistory(currentObjCell);    
-  }
-  setStreetRent(currentObjCell, Game.activePlayer);
+    generateMessageToHistory(currentObjCell);  
+    setStreetRent(currentObjCell, Game.activePlayer);  
+    lockPayOrBuyBtnIfNotEnoughMoney();
+  }  
 }
 
 export function changeBuyHouseLanguage(): void {
