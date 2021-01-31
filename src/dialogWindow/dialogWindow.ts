@@ -3,7 +3,7 @@ import roll from '../dice/dice';
 import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
-import initBuyHouseButton from '../buyHouse/buyHouse';
+import { checkIsHuman } from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import Player from '../Player/Player';
 import Street from '../Street/Street';
@@ -22,6 +22,7 @@ export default function showDialogWindow(action?: string): void {
       appendElementTo(dialogWindowSection, loader);
       break;
     case 'roll':
+      checkIsHuman();
       title = createElement('p', ['title'], `${game.activePlayer.name} move`);
       const rollButton = createElement('div', ['button'], 'Roll Dice');
       rollButton.addEventListener('click', () => {
@@ -161,7 +162,6 @@ export default function showDialogWindow(action?: string): void {
       endButton.addEventListener('click', () => {
         setNextPlayerAsActive();
         nextPlayerMove();
-        initBuyHouseButton();
       });
       appendElementTo(dialogWindowSection, title, endButton);
   }
