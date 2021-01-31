@@ -52,9 +52,7 @@ function pledgeProperty(event: any): void {
   currentObjCell.isPredge = true;
   Game.activePlayer.money += currentObjCell.pledgePrice;
   changeMoneyOnPlayerCard(Game.activePlayer);
-  const lockImg: HTMLElement = createElement('img', ['lock']);
-  lockImg.setAttribute('src', './images/lock1.svg');
-  appendElementTo(event.target, lockImg);
+  (<HTMLElement>cellElement.querySelector('.lock')).style.display = 'inline-block';
   initHistoryWindow(getStringPledgeAction(currentObjCell));
   unlockPayOrBuyBtnIfEnoughMoney();
 }
