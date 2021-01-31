@@ -27,6 +27,14 @@
         margin: 5px;
     }
 
+    .pledgeCompany, .redemptionCompany {
+        display: flex;
+        justify-content: space-between;
+        margin-left: 1rem;
+        margin-right: 1rem;
+        font-size: 1.2rem;
+    }
+
     .company-instruction-one {
         margin: 5px;
         font-size: 1.2rem;
@@ -92,7 +100,13 @@
             border-bottom: 2px solid #ccc;
             padding-bottom: 10px;
 
-            .rent, .rent-with-color-set, .rent-with-one, .rent-with-two, .rent-with-three, .rent-with-four, .rent-with-five {
+            .rent,
+            .rent-with-color-set,
+            .rent-with-one,
+            .rent-with-two,
+            .rent-with-three,
+            .rent-with-four,
+            .rent-with-five {
                 margin-top: 2px;
                 display: flex;
                 justify-content: space-between;
@@ -109,7 +123,12 @@
             margin: 10px;
             font: Montserrat 1.4rem/1.3 sans-serif;
 
-            .housest-cost, .hotels-cost, .pledge, .redemption, .house-sale, .hotel-sale {
+            .housest-cost,
+            .hotels-cost,
+            .pledge,
+            .redemption,
+            .house-sale,
+            .hotel-sale {
                 margin-top: 2px;
                 display: flex;
                 justify-content: space-between;
@@ -154,7 +173,7 @@
         margin: 5px;
     }
 
-    .owner-two, .owner-three, .owner-four {
+    .owner-two, .owner-three, .owner-four, .pledge, .redemption {
         display: flex;
         justify-content: space-between;
         font-style: 1.2rem;

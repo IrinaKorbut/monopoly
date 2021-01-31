@@ -25,9 +25,9 @@ export function startWindow() {
   const gamekoi = createElement('select', ['select-style']);
   const gamekoiDisabl = createElement('option', ['num'], 'num');
   if (currentLanguage === 'RU') {
-    gamekoiDisabl.textContent = 'число'
+    gamekoiDisabl.textContent = 'кол.'
   } else if (currentLanguage === 'BEL') {
-    gamekoiDisabl.textContent = 'нумар'
+    gamekoiDisabl.textContent = 'кол.'
   }
   gamekoiDisabl.selected = 'selected';
   gamekoiDisabl.disabled = 'disabled';
