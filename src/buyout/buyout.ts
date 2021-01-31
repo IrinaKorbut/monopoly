@@ -4,6 +4,7 @@ import Game from '../Game/Game';
 import { changeMoneyOnPlayerCard, isPlayerHaveEnoughMoney } from '../dialogWindow/dialogWindow';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import { makeAllButtonsActive, makeAllButtonsInactiveExceptPressed } from '../inactiveButton/inactiveButton';
+import lockPayOrBuyBtnIfNotEnoughMoney from '../payOrBuyButtonAccess/lockPayOrBuyButton';
 
 function setFinishBuyoutBtnText(): void {
   const language: string = localStorage.getItem('language');
@@ -63,6 +64,7 @@ function buyoutProperty(event: any): void {
     changeMoneyOnPlayerCard(Game.activePlayer);
     currentObjCell.element.querySelector('.lock').remove();
     initHistoryWindow(getStringBuyoutAction(currentObjCell));
+    lockPayOrBuyBtnIfNotEnoughMoney();
   }
 }
 

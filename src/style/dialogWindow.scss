@@ -47,11 +47,7 @@
   }
 
   .inactive {
-    background-color: #C0C0C0;
-    
-    &:hover {
-      cursor: not-allowed;
-    }
+    @include inactive-button;
   }
 
   .inactive__button {
