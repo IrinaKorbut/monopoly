@@ -42,6 +42,10 @@ main {
           background-color: $dark-gray;
         }
       }
+
+      .inactive {
+        @include inactive-button;
+      }
     }
   
     .player-card__name {

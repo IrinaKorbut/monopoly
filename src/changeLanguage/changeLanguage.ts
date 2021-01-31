@@ -7,6 +7,8 @@ import { changeBuyoutBtnLanguage } from '../buyout/buyout';
 import { changeSellHouseLanguage } from '../sellHouse/sellHouse';
 import  { changeBuyHouseLanguage } from '../buyHouse/buyHouse';
 
+import { switchLanguage } from '../switchLanguage/switchLanguage';
+import changeDialogWindowLanguage from '../dialogWindow/changeDialogWindowLanguage';
 
 function changeTitleOncell(language: string): void {
     cells.forEach((cell: cell) => {
@@ -46,6 +48,8 @@ export function addListenerToButtonLng(): void {
         changeTitleOncell(input.value);
         changeBuyHouseLanguage();
         changeSellHouseLanguage();
+        switchLanguage()
+        changeDialogWindowLanguage();
         changePledgeBtnLanguage();
         changeBuyoutBtnLanguage();
     })
