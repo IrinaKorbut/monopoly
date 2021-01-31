@@ -16,18 +16,18 @@ export function startWindow() {
 
   const currentLanguage: string = localStorage.getItem('language')
 
-  const numberPlayers = createElement('div', ['number-players'], 'Select number of players.');
+  const numberPlayers = createElement('div', ['number-players'], 'Select number of players:');
   if (currentLanguage === 'RU') {
-    numberPlayers.innerText = 'Выберите количество игроков.'
+    numberPlayers.textContent = 'Выберите количество игроков:'
   } else if (currentLanguage === 'BEL') {
-    numberPlayers.innerText = 'Выберыце колькасць гульцоў.'
+    numberPlayers.textContent = 'Выберыце колькасць гульцоў:'
   }
   const gamekoi = createElement('select', ['select-style']);
   const gamekoiDisabl = createElement('option', ['num'], 'num');
   if (currentLanguage === 'RU') {
-    gamekoiDisabl.innerText = 'число'
+    gamekoiDisabl.textContent = 'число'
   } else if (currentLanguage === 'BEL') {
-    gamekoiDisabl.innerText = 'нумар'
+    gamekoiDisabl.textContent = 'нумар'
   }
   gamekoiDisabl.selected = 'selected';
   gamekoiDisabl.disabled = 'disabled';
@@ -44,9 +44,9 @@ export function startWindow() {
   const settingGamers = createElement('div', ['setting-gamers']);
   const btnStart = createElement('button', ['btn-start', 'color-btn'], 'Start game');
   if (currentLanguage === 'RU') {
-    btnStart.innerText = 'Начать игру'
+    btnStart.textContent = 'Начать игру'
   } else if (currentLanguage === 'BEL') {
-    btnStart.innerText = 'Пачаць гульню'
+    btnStart.textContent = 'Пачаць гульню'
   }
 
   appendElementTo(classStartWindow, numberPlayers);
@@ -55,7 +55,7 @@ export function startWindow() {
   appendElementTo(classStartWindow, settingGamers);
   appendElementTo(classStartWindow, btnStart);
 
-  gamekoi.addEventListener('change', () => addGamecoaSetting(settingGamers, gamekoi.value, currentLanguage));
+  gamekoi.addEventListener('change', () => addGamecoaSetting(settingGamers, gamekoi.value));
   startBtn();
 }
 
@@ -104,77 +104,85 @@ export function startBtn() {
   });
 }
 
-function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number, currentLanguage: string) {
+function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number) {
   settingGamers.innerHTML = '';
+  const currentLanguage: string = localStorage.getItem('language')
 
   for (let i = 0; i < selectNum; i++) {
     const playerWrapper = createElement('div', ['player-wrapper']);
     const playerIcon = createElement('div', [`player-icon${i + 1}`, 'icon']);
     const playerIconName = createElement('p', [`player-icon-name${i + 1}`, 'icon-name'], 'P');
-    const playerInput = createElement('input', [`player-input${i + 1}`, 'input-name']);
-    playerInput.placeholder = `Player ${i + 1}`;
-    if (currentLanguage === 'RU') {
-      playerInput.placeholder = `Игрок ${i + 1}`
-    } else if (currentLanguage === 'BEL') {
-      playerInput.placeholder = `Гулец ${i + 1}`
+    if(currentLanguage === 'EN'){
+      playerIconName.textContent = 'P';
+    } else if (currentLanguage === 'RU') {
+      playerIconName.textContent = 'И'
+    } else {
+      playerIconName.textContent = 'Г'
     }
-    
+    const playerInput = createElement('input', [`player-input`, 'input-name']);
+    playerInput.placeholder = 'Player';
+    if (currentLanguage === 'RU') {
+      playerInput.placeholder = 'Игрок'
+    } else if (currentLanguage === 'BEL') {
+      playerInput.placeholder = 'Гулец'
+    }
+
     const playerSelectColor = createElement('select', [`player-select-color${i + 1}`, 'select-style', 'select-game']);
     const selectColorDisabl = createElement('option', ['disabled'], 'Color');
     if (currentLanguage === 'RU') {
-      selectColorDisabl.innerText = 'Цвет'
+      selectColorDisabl.textContent = 'Цвет'
     } else if (currentLanguage === 'BEL') {
-      selectColorDisabl.innerText = 'Колер'
+      selectColorDisabl.textContent = 'Колер'
     }
     selectColorDisabl.selected = 'selected';
     selectColorDisabl.disabled = 'disabled';
 
     const selectColorUan = createElement('option', ['red'], 'Red');
     if (currentLanguage === 'RU') {
-      selectColorUan.innerText = 'Красный'
+      selectColorUan.textContent = 'Красный'
     } else if (currentLanguage === 'BEL') {
-      selectColorUan.innerText = 'Чырвоны'
+      selectColorUan.textContent = 'Чырвоны'
     }
     selectColorUan.value = '#db2428';
 
-    const selectColorTuo = createElement('option', ['blue'], 'Blue');
+    const selectColorTuo = createElement('option', ['blue', 'lang'], 'Blue');
     if (currentLanguage === 'RU') {
-      selectColorTuo.innerText = 'Синий'
+      selectColorTuo.textContent = 'Синий'
     } else if (currentLanguage === 'BEL') {
-      selectColorTuo.innerText = 'Сіні'
+      selectColorTuo.textContent = 'Сіні'
     }
     selectColorTuo.value = '#47a7ff';
 
-    const selectColorThree = createElement('option', ['orange'], 'Orange');
+    const selectColorThree = createElement('option', ['orange', 'lang'], 'Orange');
     if (currentLanguage === 'RU') {
-      selectColorThree.innerText = 'Оранжевый'
+      selectColorThree.textContent = 'Оранжевый'
     } else if (currentLanguage === 'BEL') {
-      selectColorThree.innerText = 'Аранжавы'
+      selectColorThree.textContent = 'Аранжавы'
     }
     selectColorThree.value = '#eb8b2c';
 
-    const selectColorFour = createElement('option', ['green'], 'Green');
+    const selectColorFour = createElement('option', ['green', 'lang'], 'Green');
     if (currentLanguage === 'RU') {
-      selectColorFour.innerText = 'Зеленый'
+      selectColorFour.textContent = 'Зеленый'
     } else if (currentLanguage === 'BEL') {
-      selectColorFour.innerText = 'Зялёны'
+      selectColorFour.textContent = 'Зялёны'
     }
     selectColorFour.value = '#11a85a';
 
     const playerSelectHuman = createElement('select', ['player-selectHuman', 'select-style']);
-    const selectHuman = createElement('option', ['num'], 'Human');
+    const selectHuman = createElement('option', ['numHuman'], 'Human');
     if (currentLanguage === 'RU') {
-      selectHuman.innerText = 'Человек'
+      selectHuman.textContent = 'Человек'
     } else if (currentLanguage === 'BEL') {
-      selectHuman.innerText = 'Чалавек'
+      selectHuman.textContent = 'Чалавек'
     }
     selectHuman.value = 'human';
 
-    const selectAi = createElement('option', ['num'], 'Computer');
+    const selectAi = createElement('option', ['numComputer'], 'Computer');
     if (currentLanguage === 'RU') {
-      selectAi.innerText = 'Компьютер'
+      selectAi.textContent = 'Компьютер'
     } else if (currentLanguage === 'BEL') {
-      selectAi.innerText = "Камп'ютар"
+      selectAi.textContent = "Камп'ютар"
     }
     selectAi.value = 'ai';
 
@@ -190,9 +198,16 @@ function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number, curren
 }
 
 function addNameA(playerIconName: HTMLElement, playerInput: any): void {
+  const currentLanguage: string = localStorage.getItem('language')
   if (!playerInput[0]) {
-    playerIconName.innerText = 'P';
+    if(currentLanguage === 'EN'){
+      playerIconName.textContent = 'P';
+    } else if (currentLanguage === 'RU') {
+      playerIconName.textContent = 'И'
+    } else {
+      playerIconName.textContent = 'Г'
+    }
   } else {
-    playerIconName.innerText = playerInput[0].toUpperCase();
+    playerIconName.textContent = playerInput[0].toUpperCase();
   }
 }
