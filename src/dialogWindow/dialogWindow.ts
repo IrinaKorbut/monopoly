@@ -9,6 +9,7 @@ import Street from '../Street/Street';
 import Communal from '../Communal/Communal';
 import Property from '../ifacies/Property';
 import playerLose from '../losing/lose';
+import { isGameFinish, end } from '../gameEnding/gameEnding';
 
 export default function showDialogWindow(action?: string): void {
   const language: string = localStorage.getItem('language');
@@ -142,6 +143,11 @@ export default function showDialogWindow(action?: string): void {
           // const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
           // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
           removePlayerFromGame();
+          if (isGameFinish()) {
+            end();
+          } else {
+            nextPlayerMove();
+          }
         }
       } else {
         let rollDiceButton: HTMLElement;
@@ -203,6 +209,11 @@ export default function showDialogWindow(action?: string): void {
               // const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
               // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
               removePlayerFromGame();
+              if (isGameFinish()) {
+                end();
+              } else {
+                nextPlayerMove();
+              }
             }
           });
         });
@@ -238,6 +249,11 @@ export default function showDialogWindow(action?: string): void {
         appendElementTo(dialogWindowSection, title, payTaxButton);
       } else {
         removePlayerFromGame();
+        if (isGameFinish()) {
+          end();
+        } else {
+          nextPlayerMove();
+        }
       }
       break;
     default:
@@ -272,7 +288,6 @@ export function removePlayerFromGame(): void {
   }
   setNextPlayerAsActive();
   playerLose(loser);
-  nextPlayerMove();
 }
 
 function nextPlayerMove(): void {

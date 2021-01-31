@@ -5,6 +5,7 @@ import showDialogWindow, {
   getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame
 } from '../dialogWindow/dialogWindow';
 import initHistoryWindow from '../histiryWindow/historyWindow';
+import { isGameFinish, end} from '../gameEnding/gameEnding';
 import { checkIsHuman } from '../helpFunctions/helpFunctions';
 
 export default function computerMove(action?: string): void {
@@ -78,6 +79,11 @@ export default function computerMove(action?: string): void {
         } else {
           // доработать
           removePlayerFromGame();
+          if (isGameFinish()) {
+            end();
+          } else {
+            nextPlayerMove();
+          }
         }
       } else {
         const p: Promise<void> = new Promise((resolve) => {
@@ -109,6 +115,11 @@ export default function computerMove(action?: string): void {
           } else {
             // доработать
             removePlayerFromGame();
+            if (isGameFinish()) {
+              end();
+            } else {
+              nextPlayerMove();
+            }
           }
         });
       }
@@ -128,6 +139,11 @@ export default function computerMove(action?: string): void {
       } else {
         // доработать
         removePlayerFromGame();
+        if (isGameFinish()) {
+          end();
+        } else {
+          nextPlayerMove();
+        }
       }
       break;
     default:

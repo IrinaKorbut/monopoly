@@ -5,7 +5,7 @@ import { changePledgeBtnLanguage } from '../pledge/pledge';
 import { changeBuyoutBtnLanguage } from '../buyout/buyout';
 import { changeSellHouseLanguage } from '../sellHouse/sellHouse';
 import  { changeBuyHouseLanguage } from '../buyHouse/buyHouse';
-
+import { gameСompletion } from '../gameСompletion/gameСompletion';
 import { switchLanguage } from '../switchLanguage/switchLanguage';
 import changeDialogWindowLanguage from '../dialogWindow/changeDialogWindowLanguage';
 
@@ -50,6 +50,7 @@ export function addListenerToButtonLng(): void {
         changeDialogWindowLanguage();
         changePledgeBtnLanguage();
         changeBuyoutBtnLanguage();
+        gameСompletion();
     })
 }
 

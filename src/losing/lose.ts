@@ -6,6 +6,12 @@ import Player from '../Player/Player';
 export default function playerLose(player: Player): void {
   player.property.forEach((property: Property) => {
     property.owner = null;
+    if (property.type === 'street') {
+      property.isAvailableToBuyHouse = false;
+      property.numberOfHouses = 0;
+      property.isThereHotel = false;
+      removeChildsFromElement(property.element.querySelector('.street-color'));
+    }
     const propertyViewCost: HTMLElement = property.element.querySelector('.cost');
     const ownerColor: HTMLElement = property.element.querySelector('.owner');
     ownerColor.style.backgroundColor = '';

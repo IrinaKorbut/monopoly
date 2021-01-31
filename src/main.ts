@@ -47,8 +47,8 @@ initBuyoutBtn();
 
 changeTitleOnCell();
 
-const btn = document.querySelector('.btn')
-btn.addEventListener('click', gameСompletion)
+// const btn = document.querySelector('.btn')
+// btn.addEventListener('click', gameСompletion)
 
 
 
