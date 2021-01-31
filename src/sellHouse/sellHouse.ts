@@ -150,18 +150,6 @@ export function changeSellHouseLanguage(): void {
   }
 }
 
-export function checkIsHuman() {  
-  const sellHouseButton: HTMLElement = document.querySelector('.button__sell-house');  
-  if (!Game.activePlayer.isHuman && !sellHouseButton.classList.contains('inactive__button')) {
-    sellHouseButton.classList.add('inactive__button');
-    console.log('123')
-  } 
-  if (Game.activePlayer.isHuman) {
-    sellHouseButton.classList.remove('inactive__button');
-    console.log('456')
-  }
-}
-
 
 export default function initSellHouseButton(): void {
   const buyingSection: HTMLElement = document.querySelector('.buying-section');

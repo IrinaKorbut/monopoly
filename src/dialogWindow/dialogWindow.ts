@@ -1,9 +1,8 @@
-import { createElement, appendElementTo, removeChildsFromElement } from '../helpFunctions/helpFunctions';
+import { createElement, appendElementTo, removeChildsFromElement, checkIsHuman } from '../helpFunctions/helpFunctions';
 import roll from '../dice/dice';
 import movePlayer from '../move_player/movePlayerFn';
 import game from '../Game/Game';
 import computerMove from '../computerRival/computerRival';
-import { checkIsHuman } from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import Player from '../Player/Player';
 import Street from '../Street/Street';
