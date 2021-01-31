@@ -5,6 +5,8 @@ import cells from '../cells/cells';
 import Game from '../Game/Game'
 import { changePledgeBtnLanguage } from '../pledge/pledge';
 import { changeBuyoutBtnLanguage } from '../buyout/buyout';
+import { switchLanguage } from '../switchLanguage/switchLanguage';
+import changeDialogWindowLanguage from '../dialogWindow/changeDialogWindowLanguage';
 
 function changeTitleOncell(language: string): void {
     cells.forEach((cell: cell) => {
@@ -43,6 +45,8 @@ export function addListenerToButtonLng(): void {
         if (!languageSection.contains(input)) return;
         changeTitleOncell(input.value);
         changeBuyHouseLanguage();
+        switchLanguage()
+        changeDialogWindowLanguage();
         changePledgeBtnLanguage();
         changeBuyoutBtnLanguage();
     })
