@@ -4,8 +4,8 @@ import movePlayer from '../move_player/movePlayerFn';
 import showDialogWindow, {
   getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame
 } from '../dialogWindow/dialogWindow';
-import { checkIsHuman } from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
+import { checkIsHuman } from '../helpFunctions/helpFunctions';
 
 export default function computerMove(action?: string): void {
   const language = localStorage.getItem('language');

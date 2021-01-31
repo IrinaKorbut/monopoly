@@ -129,17 +129,6 @@ export function changeBuyHouseLanguage(): void {
   }
 }
 
-export function checkIsHuman() {  
-  const buyHouseButton: HTMLElement = document.querySelector('.button__buy-house');  
-  if (!Game.activePlayer.isHuman && !buyHouseButton.classList.contains('inactive__button')) {
-    buyHouseButton.classList.add('inactive__button');
-  } 
-  if (Game.activePlayer.isHuman) {
-    buyHouseButton.classList.remove('inactive__button');
-  }
-}
-
-
 export default function initBuyHouseButton(): void {
   const buyingSection: HTMLElement = document.querySelector('.buying-section');
   const currentLanguage: string = localStorage.getItem('language') || 'EN';
