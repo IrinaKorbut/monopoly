@@ -35,17 +35,9 @@
   }
 
   .button {
-    width: 45%;
-    height: 3rem;
-    background-color: #DC4433;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 3.5rem;
-    color: #fff;
-    font-size: 1.2rem;
+    @include button;
 
-    @include tablet-width{
+    @include tablet-width {
       font-size: 1.5rem;
     }
 
@@ -55,11 +47,11 @@
   }
 
   .inactive {
-    background-color: #C0C0C0;
-    
-    &:hover {
-      cursor: not-allowed;
-    }
+    @include inactive-button;
+  }
+
+  .inactive__button {
+    @include inactive-button;
   }
 }
 

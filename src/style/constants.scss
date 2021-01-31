@@ -1,5 +1,10 @@
 $tablet-width: 1024px;
 
+$footer_background_color: #75a1dc;
+$github_link_hover_color: #3a3939;
+
+$active_cell: #88aad6;
+
 
 $scroll_bar_track_color: #5a5a5aea;
 $scroll_bar_thumb_color: #222222;
@@ -14,5 +19,23 @@ $light-gray: #C6CACC;
   @media (max-width: $tablet-width) {
     @content;
   }
+}
+
+@mixin button {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #dc4433;
+  border-radius: 3.5rem;
+  color: #fff;
+  font-size: 1.2rem;
+  padding: 0 0.5rem;
+  height: 2.5rem;
+}
+
+@mixin inactive-button {
+  pointer-events: none;
+  background-color: #C6CACC;
 }
 

@@ -50,52 +50,69 @@ html {
 }
 
 body {
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
   display: flex;
   background-color: #555d61;
   font-family: Montserrat;
 
+  // @include tablet-width {
+  //   flex-wrap: wrap;
+  // }
+}
+
+main {
+  display: flex;
+  height: 95%;
+  width: 100%;
+
   @include tablet-width {
     flex-wrap: wrap;
   }
-}
 
-.game-field-and-history {
-  width: 70%;
-  height: 100%;
-
-  @include tablet-width {
+  .game-field-and-history {
+    width: 70%;
+    height: 100%;
+  
+    @include tablet-width {
+      width: 100%;
+      height:75%;
+      order: 3;
+  }
+  }
+  
+  .addition-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    height: 100%;
+    background-color: #B0C4DE;
+  
+    @include tablet-width {
+      
+      justify-content: center;
+      width: 50%;
+      height:25%;
+      order: 2;
+    }
+  }
+  
+  .history-and-buying-section {
+    display: flex;
     width: 100%;
-    height:75%;
-    order: 3;
-}
-}
-
-.addition-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 15%;
-  height: 100%;
-  background-color: #B0C4DE;
-
-  @include tablet-width {
-    
-    justify-content: center;
-    width: 50%;
-    height:25%;
-    order: 2;
+    height: 25%;
+    background-color: #B0C4DE;
+    padding: 0 10px;
+  
+    @include tablet-width {
+      height: 35%;
+    }
   }
 }
 
-.history-and-buying-section {
-  display: flex;
-  width: 100%;
-  height: 25%;
-  background-color: #B0C4DE;;
 
-  @include tablet-width {
-    height: 35%;
-  }
-}
+
+

@@ -39,10 +39,17 @@ function resetPlayerPosition(playerPositionAfterMove: number): number{
 function addMoneyPerCycle(): void {
   game.activePlayer.money += 200;
   changeMoneyOnPlayerCard(game.activePlayer);
-  initHistoryWindow('got $ 200 for completing the circle');
+  const language = localStorage.getItem('language');
+  if (language === 'RU') {
+    initHistoryWindow('получил(а) $200 за круг');
+  } else if (language === 'BEL') {
+    initHistoryWindow('атрымаў(ла) $200 за круг');
+  } else {
+    initHistoryWindow('got $200 for completing the circle');
+  }
 }
 
-async function showAnimationMove(currentPlayerPosition: number, playerPositionAfterMove: number, playerDisplay: HTMLElement) {
+async function showAnimationMove(currentPlayerPosition: number, playerPositionAfterMove: number, player: Player) {
   for (let i = currentPlayerPosition + 1; i <= playerPositionAfterMove; i += 1) {
     if (i === 40) {
       playerPositionAfterMove = resetPlayerPosition(playerPositionAfterMove);
@@ -54,7 +61,9 @@ async function showAnimationMove(currentPlayerPosition: number, playerPositionAf
     }
     if (i === playerPositionAfterMove) {
       setTimeout(() => {
-        cells[playerPositionAfterMove].element.querySelector('.players-container').appendChild(playerDisplay);
+        if (player.chip) {
+          cells[playerPositionAfterMove].element.querySelector('.players-container').appendChild(player.chip);
+        }
       }, 200);      
     }
   }
@@ -128,7 +137,7 @@ export default async function movePlayer(stepsAmount: number) {
   const playerDisplay: HTMLElement = game.activePlayer.chip;
   const currentPlayerPosition: number = checkWherePlayerNow(playerDisplay);
   let playerPositionAfterMove: number = currentPlayerPosition + stepsAmount;
-  await showAnimationMove(currentPlayerPosition, playerPositionAfterMove, playerDisplay);
+  await showAnimationMove(currentPlayerPosition, playerPositionAfterMove, game.activePlayer);
   if (playerPositionAfterMove > 39) {
     playerPositionAfterMove = resetPlayerPosition(playerPositionAfterMove);
     addMoneyPerCycle();

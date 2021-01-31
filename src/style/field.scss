@@ -38,6 +38,14 @@
       text-align: center;
       position: relative;
 
+      .lock {
+        display: none;
+        position: absolute;
+        width: 50%;
+        top: 28%;
+        left: 26%;
+      }
+
       .cost {
         margin-bottom: 21px;
       }
@@ -202,11 +210,12 @@
       }
 
       .active {
-        background-color: purple;
+        background-color: $active_cell;
       }
     }
 
     .owner-and-cost-wrapper {
+      position: relative;
       width: 100%;
 
       .cost {
@@ -239,7 +248,7 @@
     }
 
     .active {
-      background-color: purple;
+      background-color: $active_cell;
     }
   }
 }

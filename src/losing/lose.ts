@@ -15,7 +15,15 @@ export default function playerLose(player: Player): void {
     const propertyViewCost: HTMLElement = property.element.querySelector('.cost');
     const ownerColor: HTMLElement = property.element.querySelector('.owner');
     ownerColor.style.backgroundColor = '';
-    player.chip.remove();
+    (<HTMLElement>property.element.querySelector('.lock')).style.display = '';
+    property.isPredge = false;
+    if (property.type === 'street') {
+      removeChildsFromElement(property.element.querySelector('.street-color'));
+      property.isAvailableToBuyHouse = false;
+      property.numberOfHouses = 0;
+      property.isThereHotel = false;
+    }
+    player.chip = null;
     propertyViewCost.innerText = `$${property.cost}`;
   });
   const loserIndex = Game.players.indexOf(player);
