@@ -49,7 +49,13 @@ function getStringBuyoutAction(property: Property): string {
 }
 
 function buyoutProperty(event: any): void {
-  const cellElement: HTMLElement = event.target.parentNode;
+  let cellElement: HTMLElement;
+  if (event.target.classList.contains('players-container')) {
+    cellElement = event.target.parentNode;
+  } else {
+    cellElement = event.target.parentNode.parentNode;
+  }
+  console.log(cellElement);
   let currentObjCell: Property;
   Game.cells.forEach((cell) => {
     if (cellElement === cell.element) {
@@ -62,7 +68,8 @@ function buyoutProperty(event: any): void {
     currentObjCell.isPredge = false;
     Game.activePlayer.money -= currentObjCell.redemptionPrice;
     changeMoneyOnPlayerCard(Game.activePlayer);
-    currentObjCell.element.querySelector('.lock').remove();
+    currentObjCell.element.querySelector('.lock').removeEventListener('click', buyoutProperty);
+    (<HTMLElement>currentObjCell.element.querySelector('.lock')).style.display = 'none';
     initHistoryWindow(getStringBuyoutAction(currentObjCell));
     lockPayOrBuyBtnIfNotEnoughMoney();
   }
@@ -74,6 +81,7 @@ function buyoutBtnEvent(event: any): void {
     Game.cells.forEach((cell: Property) => {
       if (Game.activePlayer.property.includes(cell) && cell.isPredge) {
         cell.element.addEventListener('click', buyoutProperty);
+        cell.element.querySelector('.lock').addEventListener('click', buyoutProperty);
       } else {
         cell.element.querySelector('.players-container').classList.add('dark');
       }
