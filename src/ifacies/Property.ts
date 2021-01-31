@@ -15,8 +15,6 @@ export default interface Property {
   isPredge?: Boolean;
   owner?: Player;
   currentRent?: number;
-  numberOfHouses?: number;
-  isThereHotel?: boolean
   isAvailableToBuyHouse?: boolean;
   numberOfHouses?: number;
   isThereHotel?: boolean;

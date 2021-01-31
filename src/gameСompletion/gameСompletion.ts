@@ -1,28 +1,31 @@
-
-
 import { newPlayFn } from '../menu/menu'
 
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
+import Game from '../Game/Game';
 
-export function gameСompletion() {
-    const currentLanguage: string = localStorage.getItem('language')
-    const completion = document.querySelector('.game-completion')
+export function gameСompletion(): void {
+    const currentLanguage: string = localStorage.getItem('language');
+    const completion: HTMLElement = document.querySelector('.game-completion');
     completion.innerHTML = '';
-    const congratulations = createElement('div', ['congratulations'], 'Congratulations')
-    const namePlayer = createElement('div', ['name-player'], 'Name Player')
-    const newPlay = createElement('div', ['new-play'], 'New game')
-
-    // if (currentLanguage === 'RU') {
-    //     newPlay.textContent = 'Новая игра'
-    // } else if (currentLanguage === 'BEL') {
-    //     newPlay.textContent = 'Новая гульня'
-    // }
-
-    appendElementTo(completion, congratulations, namePlayer, newPlay)
-
+    const congratulations: HTMLElement = createElement('div', ['congratulations']);
+    const namePlayer: HTMLElement = createElement('div', ['name-player']);
+    const newGameBtn: HTMLElement = createElement('div', ['new-play']);
+    if (currentLanguage === 'RU') {
+        congratulations.innerText = 'Поздравляем!';
+        namePlayer.innerText = `Игрок ${Game.activePlayer.name} победил!`;
+        newGameBtn.textContent = 'Новая игра';
+    } else if (currentLanguage === 'BEL') {
+        congratulations.innerText = 'Bіншуем!';
+        namePlayer.innerText = `Гулец ${Game.activePlayer.name} перамог!`;
+        newGameBtn.textContent = 'Новая гульня';
+    } else {
+        congratulations.innerText = 'Congratulations!';
+        namePlayer.innerText = `Player ${Game.activePlayer.name} won!`;
+        newGameBtn.textContent = 'New game';
+    }
+    appendElementTo(completion, congratulations, namePlayer, newGameBtn);
     completion.classList.toggle('completion');
     document.querySelector('#blackout').classList.toggle('blackout');
     completion.classList.toggle('no-window');
-
-    newPlay.addEventListener('click', newPlayFn)
+    newGameBtn.addEventListener('click', newPlayFn);
 }
