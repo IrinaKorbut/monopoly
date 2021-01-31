@@ -5,7 +5,7 @@ import { btnClikMenu } from './menu/menu';
 import initPledgeBtn  from './pledge/pledge';
 import initBuyoutBtn from './buyout/buyout';
 // import cells from './cells/cells';
-import setLanguage from './changeLanguage/changeLanguage';
+import { changeTitleOnCell } from './changeLanguage/changeLanguage';
 
 import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
@@ -43,6 +43,8 @@ initSellHouseButton();
 
 initPledgeBtn();
 initBuyoutBtn();
+
+changeTitleOnCell();
 
 
 

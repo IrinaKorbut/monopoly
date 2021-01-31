@@ -1,7 +1,6 @@
 
 import cell from '../cell/cell';
 import cells from '../cells/cells';
-import Game from '../Game/Game'
 import { changePledgeBtnLanguage } from '../pledge/pledge';
 import { changeBuyoutBtnLanguage } from '../buyout/buyout';
 import { changeSellHouseLanguage } from '../sellHouse/sellHouse';
@@ -10,27 +9,25 @@ import  { changeBuyHouseLanguage } from '../buyHouse/buyHouse';
 import { switchLanguage } from '../switchLanguage/switchLanguage';
 import changeDialogWindowLanguage from '../dialogWindow/changeDialogWindowLanguage';
 
-function changeTitleOncell(language: string): void {
+export function changeTitleOnCell(): void {
+    const currentLanguage: string = localStorage.getItem('language') || 'EN';
     cells.forEach((cell: cell) => {
         const cellTitle: HTMLElement = cell.element.querySelector('.title');       
         let titleJailVisitSection:  HTMLElement;
         if (cell.position === 10) {
             titleJailVisitSection = <HTMLElement>cell.element.querySelectorAll('.title')[1];
         }
-        if (language === 'RU') {            
-            localStorage.setItem('language', 'RU');
+        if (currentLanguage === 'RU') {
             cellTitle.innerText = cell.russianName;
             if (cell.position === 10) {
                 titleJailVisitSection.innerText = 'Посещение';
             }
-        } else if (language === 'BEL') {
-            localStorage.setItem('language', 'BEL');
+        } else if (currentLanguage === 'BEL') {
             cellTitle.innerText = cell.belarusianName;
             if (cell.position === 10) {
                 titleJailVisitSection.innerText = 'Наведванне';
             }
-        } else if (language === 'EN') {
-            localStorage.setItem('language', 'EN');
+        } else if (currentLanguage === 'EN') {
             cellTitle.innerText = cell.name;
             if (cell.position === 10) {
                 titleJailVisitSection.innerText = 'Visiting';
@@ -45,7 +42,8 @@ export function addListenerToButtonLng(): void {
         let input = (<HTMLElement>event.target).closest('input');
         if (!input) return;
         if (!languageSection.contains(input)) return;
-        changeTitleOncell(input.value);
+        localStorage.setItem('language', input.value);
+        changeTitleOnCell();
         changeBuyHouseLanguage();
         changeSellHouseLanguage();
         switchLanguage()
@@ -65,6 +63,7 @@ function selectCurrentInput(): void {
         }
     })
 }
+
 function isRadioButtonLanguageExist(): boolean {
     const buttonsLanguage: Array<HTMLElement> = Array.from(document.querySelectorAll('.radio_language'));
     return !!buttonsLanguage; 
@@ -75,5 +74,5 @@ export default function setLanguage(): void {
         selectCurrentInput(); 
     } 
     addListenerToButtonLng();
-    changeTitleOncell(localStorage.getItem('language') || 'EN');
+    changeTitleOnCell();
 }
