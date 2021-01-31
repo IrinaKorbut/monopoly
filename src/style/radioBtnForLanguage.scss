@@ -11,60 +11,66 @@
     font-weight: 600;
   }
 
-  .form_radio {
-    margin-left: 21px;
-    height: 25px;
+  .div_radio {
     display: flex;
-    align-items: center;
+    width: 50%;
+    justify-content: space-between;
 
-    .input[type="radio"] {
-      display: none;
-    }
-    .label {
-      position: relative;
-      display: inline-block;
-      padding: 3px 3px 3px 20px;
-      cursor: pointer;
-      margin-left: 5px;
-    }
-    .label::before,
-    .label::after {
-      position: absolute;
-      content: "";
-      top: 50%;
-      border-radius: 100%;
-      -webkit-transition: all 0.2s;
-      transition: all 0.2s;
-    }
-    .label::before {
-      left: 0;
-      width: 14px;
-      height: 14px;
-      margin-top: -8px;
-      background: #f3f3f3;
-      border: 1px solid #ccc;
-    }
-    .label:hover::before {
-      background: #fff;
-    }
-    .label::after {
-      opacity: 0;
-      left: 4px;
-      width: 8px;
-      height: 8px;
-      margin-top: -4px;
-      background: #3498db;
-      -webkit-transform: scale(2);
-      transform: scale(2);
-    }
-    .input[type="radio"]:checked + label::before {
-      background: #fff;
-      border: 1px solid #3498db;
-    }
-    .input[type="radio"]:checked + label::after {
-      opacity: 1;
-      -webkit-transform: scale(1);
-      transform: scale(1);
+    .form_radio {
+      margin-left: 10px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+
+      .input[type="radio"] {
+        display: none;
+      }
+      .label {
+        position: relative;
+        display: inline-block;
+        padding: 3px 3px 3px 20px;
+        cursor: pointer;
+        margin-left: 5px;
+      }
+      .label::before,
+      .label::after {
+        position: absolute;
+        content: "";
+        top: 50%;
+        border-radius: 100%;
+        -webkit-transition: all 0.2s;
+        transition: all 0.2s;
+      }
+      .label::before {
+        left: 0;
+        width: 14px;
+        height: 14px;
+        margin-top: -8px;
+        background: #f3f3f3;
+        border: 1px solid #ccc;
+      }
+      .label:hover::before {
+        background: #fff;
+      }
+      .label::after {
+        opacity: 0;
+        left: 4px;
+        width: 8px;
+        height: 8px;
+        margin-top: -4px;
+        background: #3498db;
+        -webkit-transform: scale(2);
+        transform: scale(2);
+      }
+      .input[type="radio"]:checked + label::before {
+        background: #fff;
+        border: 1px solid #3498db;
+      }
+      .input[type="radio"]:checked + label::after {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+      }
     }
   }
 }

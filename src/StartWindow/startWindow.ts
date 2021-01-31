@@ -69,7 +69,7 @@ export function startBtn() {
     inputName.forEach((e) => name += !e.value);
 
     const selectStyle: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.select-game');
-    selectStyle.forEach((e) => sumClass = e.value !== 'Color');
+    selectStyle.forEach((e) => sumClass = e.value !== 'Color' && e.value !== 'Цвет' && e.value !== 'Колер');
 
     const isHumanSelect: NodeListOf<HTMLSelectElement> = document.querySelectorAll('.player-selectHuman');
 
@@ -87,6 +87,11 @@ export function startBtn() {
         buttonBuyHouse.classList.add('inactive');
         computerMove('roll');
       }
+
+      renderPlayerCard();
+      Game.activePlayer.playerCard.classList.add('backlight');
+      addPlayerToField();
+      
       document.querySelector('.start-window').classList.add('no-active');
       document.querySelector('#blackout').classList.remove('blackout');
 
@@ -96,9 +101,9 @@ export function startBtn() {
       startBtn.classList.remove('color-btn');
       startBtn.classList.add('color-warning-btn');
     }
-    renderPlayerCard();
-    Game.activePlayer.playerCard.classList.add('backlight');
-    addPlayerToField();
+    // renderPlayerCard();
+    // Game.activePlayer.playerCard.classList.add('backlight');
+    // addPlayerToField();
 
   });
 }
@@ -136,7 +141,7 @@ function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number) {
     selectColorDisabl.selected = 'selected';
     selectColorDisabl.disabled = 'disabled';
 
-    const selectColorUan = createElement('option', ['red'], 'Red');
+    const selectColorUan = createElement('option', ['red', 'lang-red'], 'Red');
     if (currentLanguage === 'RU') {
       selectColorUan.textContent = 'Красный'
     } else if (currentLanguage === 'BEL') {
@@ -144,7 +149,7 @@ function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number) {
     }
     selectColorUan.value = '#db2428';
 
-    const selectColorTuo = createElement('option', ['blue', 'lang'], 'Blue');
+    const selectColorTuo = createElement('option', ['blue', 'lang-blue'], 'Blue');
     if (currentLanguage === 'RU') {
       selectColorTuo.textContent = 'Синий'
     } else if (currentLanguage === 'BEL') {
@@ -152,7 +157,7 @@ function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number) {
     }
     selectColorTuo.value = '#47a7ff';
 
-    const selectColorThree = createElement('option', ['orange', 'lang'], 'Orange');
+    const selectColorThree = createElement('option', ['orange', 'lang-orange'], 'Orange');
     if (currentLanguage === 'RU') {
       selectColorThree.textContent = 'Оранжевый'
     } else if (currentLanguage === 'BEL') {
@@ -160,7 +165,7 @@ function addGamecoaSetting(settingGamers: HTMLElement, selectNum: number) {
     }
     selectColorThree.value = '#eb8b2c';
 
-    const selectColorFour = createElement('option', ['green', 'lang'], 'Green');
+    const selectColorFour = createElement('option', ['green', 'lang-green'], 'Green');
     if (currentLanguage === 'RU') {
       selectColorFour.textContent = 'Зеленый'
     } else if (currentLanguage === 'BEL') {

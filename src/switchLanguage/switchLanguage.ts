@@ -52,7 +52,7 @@ function startWindow() {
     constLanguage(numberPlayers, 'Select number of players:', 'Выберите количество игроков:', 'Выберыце колькасць гульцоў:')
 
     const gamekoiDisabl: HTMLElement = document.querySelector('.num');
-    constLanguage(gamekoiDisabl, 'num', 'число', 'нумар')
+    constLanguage(gamekoiDisabl, 'num', 'кол.', 'кол.')
 
     const playerInput: NodeListOf<HTMLInputElement> = document.querySelectorAll('.player-input')
     playerInput.forEach(input => constLanguagePlaceholder(input, 'Player', 'Игрок', 'Гулец'))
@@ -60,16 +60,16 @@ function startWindow() {
     const selectColorDisabl: NodeListOf<HTMLInputElement> = document.querySelectorAll('.disabled');
     selectColorDisabl.forEach(color => constLanguage(color, 'Color', 'Цвет', 'Колер'))
     
-    const selectColorUan: NodeListOf<HTMLInputElement> = document.querySelectorAll('.red');
+    const selectColorUan: NodeListOf<HTMLInputElement> = document.querySelectorAll('.lang-red');
     selectColorUan.forEach(e => constLanguageContent(e, 'Red', 'Красный', 'Чырвоны'))
     
-    const selectColorTuo: NodeListOf<HTMLInputElement> = document.querySelectorAll('.blue');
+    const selectColorTuo: NodeListOf<HTMLInputElement> = document.querySelectorAll('.lang-blue');
     selectColorTuo.forEach(e => constLanguageContent(e, 'Blue', 'Синий', 'Сіні'))
 
-    const selectColorThree: NodeListOf<HTMLInputElement> = document.querySelectorAll('.orange');
+    const selectColorThree: NodeListOf<HTMLInputElement> = document.querySelectorAll('.lang-orange');
     selectColorThree.forEach(e => constLanguageContent(e, 'Orange', 'Оранжевый', 'Аранжавы'))
 
-    const selectColorFour: NodeListOf<HTMLInputElement> = document.querySelectorAll('.green');
+    const selectColorFour: NodeListOf<HTMLInputElement> = document.querySelectorAll('.lang-green');
     selectColorFour.forEach(e => constLanguageContent(e, 'Green', 'Зеленый', 'Зялёны'))
 
     const iconName: NodeListOf<HTMLInputElement> = document.querySelectorAll('.icon-name');
