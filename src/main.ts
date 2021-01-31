@@ -11,6 +11,7 @@ import renderPlayerCard from './playerCards/renderPlayerCard';
 import addPlayerToField from './addPlayerToField/addPlayerToField'
 import initHistoryWindow from './histiryWindow/historyWindow'
 import initBuyHouseButton from './buyHouse/buyHouse';
+import initSellHouseButton from './sellHouse/sellHouse';
 
 
 import './style/style.scss';
@@ -38,6 +39,7 @@ startWindow();
 btnClikMenu()
 
 initBuyHouseButton();
+initSellHouseButton();
 
 initPledgeBtn();
 initBuyoutBtn();

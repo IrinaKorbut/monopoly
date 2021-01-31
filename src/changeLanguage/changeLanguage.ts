@@ -1,10 +1,12 @@
-import  { changeBuyHouseLanguage } from '../buyHouse/buyHouse';
 
 import cell from '../cell/cell';
 import cells from '../cells/cells';
 import Game from '../Game/Game'
 import { changePledgeBtnLanguage } from '../pledge/pledge';
 import { changeBuyoutBtnLanguage } from '../buyout/buyout';
+import { changeSellHouseLanguage } from '../sellHouse/sellHouse';
+import  { changeBuyHouseLanguage } from '../buyHouse/buyHouse';
+
 import { switchLanguage } from '../switchLanguage/switchLanguage';
 import changeDialogWindowLanguage from '../dialogWindow/changeDialogWindowLanguage';
 
@@ -45,6 +47,7 @@ export function addListenerToButtonLng(): void {
         if (!languageSection.contains(input)) return;
         changeTitleOncell(input.value);
         changeBuyHouseLanguage();
+        changeSellHouseLanguage();
         switchLanguage()
         changeDialogWindowLanguage();
         changePledgeBtnLanguage();
