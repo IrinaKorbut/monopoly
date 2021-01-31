@@ -4,7 +4,7 @@ import { appendElementTo, createElement } from '../helpFunctions/helpFunctions';
 import Property from '../ifacies/Property';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import { makeAllButtonsActive, makeAllButtonsInactiveExceptPressed } from '../inactiveButton/inactiveButton';
-import unlockPayOrBuyBtnIfEnoughMoney from '../unlockPayOrBuyButton/unlockPayOrBuyButton';
+import unlockPayOrBuyBtnIfEnoughMoney from '../payOrBuyButtonAccess/unlockPayOrBuyButton';
 
 function setPledgeBtnText(): void {
   const language: string = localStorage.getItem('language');
