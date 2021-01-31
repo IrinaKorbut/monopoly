@@ -1,4 +1,4 @@
-import initBuyHouseButton from '../buyHouse/buyHouse';
+import  { changeBuyHouseLanguage } from '../buyHouse/buyHouse';
 
 import cell from '../cell/cell';
 import cells from '../cells/cells';
@@ -44,9 +44,7 @@ export function addListenerToButtonLng(): void {
         if (!input) return;
         if (!languageSection.contains(input)) return;
         changeTitleOncell(input.value);
-        if (Game.players.length) {
-            initBuyHouseButton();
-        }
+        changeBuyHouseLanguage();
         switchLanguage()
         changeDialogWindowLanguage();
         changePledgeBtnLanguage();

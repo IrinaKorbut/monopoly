@@ -4,13 +4,14 @@ import movePlayer from '../move_player/movePlayerFn';
 import showDialogWindow, {
   getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame
 } from '../dialogWindow/dialogWindow';
-import initBuyHouseButton from '../buyHouse/buyHouse';
+import { checkIsHuman } from '../buyHouse/buyHouse';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 
 export default function computerMove(action?: string): void {
   const cell = getCellObjByPosition(game.activePlayer.position);
   switch (action) {
     case 'roll':
+      checkIsHuman();
       const p: Promise<void> = new Promise((resolve) => {
         let test: any;
         setTimeout(() => {
@@ -102,7 +103,6 @@ export default function computerMove(action?: string): void {
     default:
       setNextPlayerAsActive();
       nextPlayerMove();
-      initBuyHouseButton();
       break;
   }
 }

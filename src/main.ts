@@ -36,8 +36,12 @@ initWindowCards();
 
 startWindow();
 btnClikMenu()
+
+initBuyHouseButton();
+
 initPledgeBtn();
 initBuyoutBtn();
+
 
 
 // export const player = new Player('#2295FF');
@@ -64,8 +68,6 @@ initBuyoutBtn();
 roll();
 
 //initHistoryWindow('do something');
-
-// initBuyHouseButton();
 
 //let isDark = false;
 

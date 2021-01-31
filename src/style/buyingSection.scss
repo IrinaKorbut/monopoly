@@ -25,37 +25,9 @@
     @include tablet-width {
       height: 90%;
     }
+    
 
-    .button__buy-house {
-      width: 45%;
-      min-width: fit-content;
-      padding: 0 0.5rem;
-      height: 3rem;
-      background-color: #dc4433;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 3.5rem;
-      color: #fff;
-      font-size: 1.2rem;
-
-      @include tablet-width {
-        font-size: 1.5rem;
-      }
-
-      &:hover {
-        cursor: pointer;
-      }
-    }
-    .inactive {
-      background-color: #c0c0c0;
-
-      &:hover {
-        cursor: not-allowed;
-      }
-    }
-
-    .button__buyout, .button__pladge {
+    .button__buyout, .button__pladge, .button__buy-house {
       @include button;
     }
 
