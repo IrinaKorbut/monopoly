@@ -67,6 +67,9 @@ function newPlayFn() {
         }
     })
 
+    const owner: NodeListOf<HTMLInputElement> = document.querySelectorAll('.owner')
+    owner.forEach(e => e.style.backgroundColor = '')
+    
     document.querySelector('.setings-menu').classList.toggle('no-burger-menu')
     document.querySelector('.setings-menu').classList.toggle('window-menu')
     document.querySelector('.start-window').classList.toggle('no-active');
@@ -138,6 +141,8 @@ export function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, 
     } else if (currentLanguage === 'BEL') {
         languageTitle.textContent = 'Мова'
     }
+
+    const divRadio = createElement('div', ['div_radio'])
     const formRadio1 = createElement('div', ['form_radio'])
     const radioLanguage = createElement('input', ['radio_language'])
     radioLanguage.id = "radio-1"
@@ -183,7 +188,8 @@ export function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, 
     appendElementTo(subject, subjectBtn)
     appendElementTo(subjectBtn, subjectInput, subjectLabel)
 
-    appendElementTo(languageChoose, languageTitle, formRadio1, formRadio2, formRadio3)
+    appendElementTo(languageChoose, languageTitle, divRadio)
+    appendElementTo(divRadio, formRadio1, formRadio2, formRadio3) 
     appendElementTo(formRadio1, radioLanguage, radioLabel)
     appendElementTo(formRadio2, radioLanguage2, radioLabel2)
     appendElementTo(formRadio3, radioLanguage3, radioLabel3)
