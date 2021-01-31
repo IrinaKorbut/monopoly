@@ -12,7 +12,7 @@ function setFinishBuyHouseButton(): void {
   const currentLanguage: string = localStorage.getItem('language');
   const buyHouseButton: HTMLElement = document.querySelector('.button__buy-house');
   if (currentLanguage === 'EN') {
-    buyHouseButton.innerText = 'Finish buy house';
+    buyHouseButton.innerText = 'Finish buying';
   } else if (currentLanguage === 'RU') {
     buyHouseButton.innerText = 'Завершить покупку';
   } else if (currentLanguage === 'BEL' ) {
@@ -77,17 +77,17 @@ function generateMessageToHistory(currentObjCell: Street): void {
     if (currentLanguage === 'EN') {
       initHistoryWindow(`bought hotel on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
     } else if (currentLanguage === 'RU') {
-      initHistoryWindow(`Купил(a) отель по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost}`);
+      initHistoryWindow(`купил(a) отель по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost}`);
     } else if (currentLanguage === 'BEL') {
-      initHistoryWindow(`Купіў(ла) гатэль па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
+      initHistoryWindow(`купіў(ла) гатэль па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
     }      
   } else {
     if (currentLanguage === 'EN') {
       initHistoryWindow(`bought house on ${currentObjCell.name} for $${currentObjCell.houseCost}`);
     } else if (currentLanguage === 'RU') {
-      initHistoryWindow(`Купил(а) дом по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost}`);
+      initHistoryWindow(`купил(а) дом по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost}`);
     } else if (currentLanguage === 'BEL') {
-      initHistoryWindow(`Купіў((ла)) дом па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
+      initHistoryWindow(`купіў(ла) дом па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost}`);
     }
   }
 }
@@ -129,16 +129,13 @@ export function changeBuyHouseLanguage(): void {
   }
 }
 
-export function checkIsHuman() {
-  
+export function checkIsHuman() {  
   const buyHouseButton: HTMLElement = document.querySelector('.button__buy-house');  
   if (!Game.activePlayer.isHuman && !buyHouseButton.classList.contains('inactive__button')) {
     buyHouseButton.classList.add('inactive__button');
-    console.log('123')
   } 
   if (Game.activePlayer.isHuman) {
     buyHouseButton.classList.remove('inactive__button');
-    console.log('456')
   }
 }
 
