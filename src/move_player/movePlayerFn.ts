@@ -39,7 +39,14 @@ function resetPlayerPosition(playerPositionAfterMove: number): number{
 function addMoneyPerCycle(): void {
   game.activePlayer.money += 200;
   changeMoneyOnPlayerCard(game.activePlayer);
-  initHistoryWindow('got $ 200 for completing the circle');
+  const language = localStorage.getItem('language');
+  if (language === 'RU') {
+    initHistoryWindow('получил(а) $200 за круг');
+  } else if (language === 'BEL') {
+    initHistoryWindow('атрымаў(ла) $200 за круг');
+  } else {
+    initHistoryWindow('got $200 for completing the circle');
+  }
 }
 
 async function showAnimationMove(currentPlayerPosition: number, playerPositionAfterMove: number, playerDisplay: HTMLElement) {

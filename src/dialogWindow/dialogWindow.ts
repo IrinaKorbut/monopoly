@@ -96,9 +96,9 @@ export default function showDialogWindow(action?: string): void {
             setCommunalRent(cell, game.activePlayer);
           }
           if (language === 'RU') {
-            initHistoryWindow(`купил ${cell.name} за $${cell.cost}`);
+            initHistoryWindow(`купил(ла) ${cell.russianName} за $${cell.cost}`);
           } else if (language === 'BEL') {
-            initHistoryWindow(`купіл ${cell.name} за $${cell.cost}`);
+            initHistoryWindow(`купіў(ла) ${cell.belarusianName} за $${cell.cost}`);
           } else {
             initHistoryWindow(`bought ${cell.name} for $${cell.cost}`);
           }
@@ -132,9 +132,9 @@ export default function showDialogWindow(action?: string): void {
             cell.owner.addMoney(cell.currentRent);
             changeMoneyOnPlayerCard(cell.owner);
             if (language === 'RU') {
-              initHistoryWindow(`заплатил $${cell.currentRent} аренды ${cell.owner.name}`);
+              initHistoryWindow(`заплатил(а) $${cell.currentRent} аренды ${cell.owner.name}`);
             } else if (language === 'BEL') {
-              initHistoryWindow(`заплаціў $${cell.currentRent} арэнды ${cell.owner.name}`);
+              initHistoryWindow(`заплаціў(ла) $${cell.currentRent} арэнды ${cell.owner.name}`);
             } else {
               initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
             }
@@ -192,9 +192,9 @@ export default function showDialogWindow(action?: string): void {
                 cell.owner.addMoney(rent);
                 changeMoneyOnPlayerCard(cell.owner);
                 if (language === 'RU') {
-                  initHistoryWindow(`заплатил $${cell.currentRent} аренды ${cell.owner.name}`);
+                  initHistoryWindow(`заплатил(а) $${cell.currentRent} аренды ${cell.owner.name}`);
                 } else if (language === 'BEL') {
-                  initHistoryWindow(`заплаціў $${cell.currentRent} арэнды ${cell.owner.name}`);
+                  initHistoryWindow(`заплаціў(ла) $${cell.currentRent} арэнды ${cell.owner.name}`);
                 } else {
                   initHistoryWindow(`paid $${cell.currentRent} rent to ${cell.owner.name}`);
                 }
@@ -217,10 +217,10 @@ export default function showDialogWindow(action?: string): void {
       if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
         let payTaxButton: HTMLElement;
         if (language === 'RU') {
-          title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+          title = createElement('p', ['title'], `${cell.russianName} $${cell.cost}`);
           payTaxButton = createElement('div', ['button'], 'Заплатить');
         } else if (language === 'BEL') {
-          title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
+          title = createElement('p', ['title'], `${cell.belarusianName} $${cell.cost}`);
           payTaxButton = createElement('div', ['button'], 'Заплаціць');
         } else {
           title = createElement('p', ['title'], `${cell.name} $${cell.cost}`);
@@ -230,9 +230,9 @@ export default function showDialogWindow(action?: string): void {
           game.activePlayer.subtractMoney(cell.cost);
           changeMoneyOnPlayerCard(game.activePlayer);
           if (language === 'RU') {
-            initHistoryWindow(`заплатил $${cell.cost} ${cell.name}`);
+            initHistoryWindow(`заплатил(а) $${cell.cost} ${cell.russianName}`);
           } else if (language === 'BEL') {
-            initHistoryWindow(`заплаціў $${cell.cost} ${cell.name}`);
+            initHistoryWindow(`заплаціў(ла) $${cell.cost} ${cell.belarusianName}`);
           } else {
             initHistoryWindow(`paid $${cell.cost} ${cell.name}`);
           }
@@ -266,7 +266,14 @@ export default function showDialogWindow(action?: string): void {
 
 export function removePlayerFromGame(): void {
   const loser = game.activePlayer;
-  initHistoryWindow('went bankrupt');
+  const language = localStorage.getItem('language');
+  if (language === 'RU') {
+    initHistoryWindow('обанкротился(лась)');
+  } else if (language === 'BEL') {
+    initHistoryWindow('абанкроціўся(лась)');
+  } else {
+    initHistoryWindow('went bankrupt');
+  }
   setNextPlayerAsActive();
   playerLose(loser);
   nextPlayerMove();

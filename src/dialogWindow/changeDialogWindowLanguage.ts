@@ -57,12 +57,15 @@ export default function changeDialogWindowLanguage(): void {
       title.innerText = 'Roll dice to know rent';
       button.innerText = 'Roll Dice';
     }
-  } else if (title.innerText === `${cell.name} $${cell.cost}`) {
+  } else if (title.innerText === `${cell.name} $${cell.cost}` || title.innerText === `${cell.russianName} $${cell.cost}` || title.innerText === `${cell.belarusianName} $${cell.cost}`) {
     if (language === 'RU') {
+      title.innerText = `${cell.russianName} $${cell.cost}`
       button.innerText = 'Заплатить';
     } else if (language === 'BEL') {
+      title.innerText = `${cell.belarusianName} $${cell.cost}`
       button.innerText = 'Заплаціць';
     } else {
+      title.innerText = `${cell.name} $${cell.cost}`
       button.innerText = 'Pay';
     }
   } else {
