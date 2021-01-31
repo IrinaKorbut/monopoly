@@ -6,6 +6,8 @@ import initHistoryWindow from '../histiryWindow/historyWindow';
 import Property from '../ifacies/Property';
 import Street from '../Street/Street';
 import { makeAllButtonsInactiveExceptPressed, makeAllButtonsActive } from '../inactiveButton/inactiveButton';
+import unlockPayOrBuyBtnIfEnoughMoney from '../payOrBuyButtonAccess/unlockPayOrBuyButton';
+
 
 function setFinishSellHouseButton(): void {
   const currentLanguage: string = localStorage.getItem('language');
@@ -138,6 +140,7 @@ function removeHouse(event: any): void {
         changeMoneyOnPlayerCard(Game.activePlayer);
         generateMessageToHistory(currentObjCell);    
         setStreetRent(currentObjCell, Game.activePlayer);
+        unlockPayOrBuyBtnIfEnoughMoney();
     }    
 }
 
