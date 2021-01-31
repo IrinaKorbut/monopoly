@@ -45,7 +45,7 @@ function menu(audioPlay: HTMLAudioElement) {
     btnClose.addEventListener('click', () => classMenu(audioPlay))
 }
 
-function newPlayFn() {
+export function newPlayFn() {
     Game.players.forEach(player => {
         player.chip.remove()
         player.playerCard.remove()
