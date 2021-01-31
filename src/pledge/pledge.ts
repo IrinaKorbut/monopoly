@@ -4,6 +4,7 @@ import { appendElementTo, createElement } from '../helpFunctions/helpFunctions';
 import Property from '../ifacies/Property';
 import initHistoryWindow from '../histiryWindow/historyWindow';
 import { makeAllButtonsActive, makeAllButtonsInactiveExceptPressed } from '../inactiveButton/inactiveButton';
+import unlockPayOrBuyBtnIfEnoughMoney from '../payOrBuyButtonAccess/unlockPayOrBuyButton';
 
 function setPledgeBtnText(): void {
   const language: string = localStorage.getItem('language');
@@ -55,6 +56,7 @@ function pledgeProperty(event: any): void {
   lockImg.setAttribute('src', './images/lock1.svg');
   appendElementTo(event.target, lockImg);
   initHistoryWindow(getStringPledgeAction(currentObjCell));
+  unlockPayOrBuyBtnIfEnoughMoney();
 }
 
 function pledgeBtnEvent(event: any): void {
