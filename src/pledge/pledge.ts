@@ -40,7 +40,12 @@ export function changePledgeBtnLanguage(): void {
 }
 
 function pledgeProperty(event: any): void {
-  const cellElement: HTMLElement = event.target.parentNode;
+  let cellElement: HTMLElement;
+  if (event.target.className === 'player') {
+    cellElement = event.target.parentNode.parentNode;
+  } else {
+    cellElement = event.target.parentNode;
+  }
   let currentObjCell: Property;
   Game.cells.forEach((cell) => {
     if (cellElement === cell.element) {
