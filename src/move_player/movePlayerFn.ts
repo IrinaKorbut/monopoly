@@ -106,7 +106,7 @@ function doMoveLogic(playerPositionAfterMove: number): void {
       break;
     default:
       const cellsOwner: Player = (<any>cells[playerPositionAfterMove]).owner;
-      if (cellsOwner && cellsOwner !== game.activePlayer) {
+      if (cellsOwner && cellsOwner !== game.activePlayer && !(<any>cells[playerPositionAfterMove]).isPredge) {
         if (game.activePlayer.isHuman) {
           showDialogWindow('rent');
         } else {
@@ -122,7 +122,7 @@ function doMoveLogic(playerPositionAfterMove: number): void {
         }
         return;
       }
-      if (cellsOwner === game.activePlayer) {
+      if (cellsOwner === game.activePlayer || (<any>cells[playerPositionAfterMove]).isPredge) {
         if (game.activePlayer.isHuman) {
           showDialogWindow();
         } else {
