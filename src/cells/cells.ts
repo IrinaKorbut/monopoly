@@ -6,7 +6,7 @@ import Tax from '../Tax/Tax';
 
 export default [
   new Cell('start', 'Start', 'Старт', 'Старт', 0),
-  new Street('street', 'Mediterranean Avenue', 'Малинина', 'Малініна', 1, 60, 2, 10, 30, 90, 160, 250, 50, 2, 1, 30, 33),
+  new Street('street', 'Alaska Avenue', 'Малинина', 'Малініна', 1, 60, 2, 10, 30, 90, 160, 250, 50, 2, 1, 30, 33),
   new Cell('chest', 'Chest', 'Сундук', 'Куфар', 2), // chest,
   new Street('street', 'Baltic Avenue', 'Плеханова', 'Пляханава', 3, 70, 4, 20, 60, 180, 320, 450, 50, 2, 1, 30, 33),
   new Tax('tax', 'City Tax', 'Городской налог', 'Гарадскі падатак', 4, 200),

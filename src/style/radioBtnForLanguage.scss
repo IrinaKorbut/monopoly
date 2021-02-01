@@ -1,11 +1,9 @@
 @import "constants";
 
 .language-choose {
-  // margin-top: 20px;
   display: flex;
   text-align: center;
   align-items: center;
-  // font-size: 1.2rem;
 
   &__title {
     font-weight: 600;
@@ -74,55 +72,3 @@
     }
   }
 }
-//     .form_radio input[type=radio] {
-//         display: none;
-//     }
-//     .form_radio label {
-//         display: inline-block;
-//         cursor: pointer;
-//         position: relative;
-//         padding-left: 25px;
-//         margin-right: 0;
-//         line-height: 18px;
-//         font-size: 1.2rem;
-//     }
-//     .form_radio label:before {
-//         content: "";
-//         display: inline-block;
-//         width: 17px;
-//         height: 18px;
-//         position: absolute;
-//         left: 0;
-//         bottom: 1px;
-//     }
-
-//     /* Checked */
-//     .form_radio input[type=radio]:checked + label:before {
-//     }
-
-//     /* Hover */
-//     .form_radio label:hover:before {
-//         filter: brightness(120%);
-//     }
-// }
-
-// .button_language {
-//     width: 45%;
-//     height: 2.5rem;
-//     background-color: #dc4433;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     border-radius: 3.5rem;
-//     color: #fff;
-//     font-size: 1.2rem;
-//     margin-top: 5px;
-
-//     @include tablet-width {
-//       font-size: 1.5rem;
-//     }
-
-//     &:hover {
-//       cursor: pointer;
-//     }
-//   }

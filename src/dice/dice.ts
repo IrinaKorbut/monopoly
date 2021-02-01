@@ -18,7 +18,7 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: n
 function drawDice(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, value: number) {
   const dots = [];
   ctx.save();
-  ctx.fillStyle = '#D77';
+  ctx.fillStyle = '#4167cd';
   ctx.translate(x, y);
   roundRect(ctx, 0, 0, size, size, size * 0.1, true);
   const padding = 0.25;

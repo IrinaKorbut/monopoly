@@ -13,14 +13,14 @@ html {
   font-size: 10px;  
 
   @media only screen and (max-width: 1400px) {
-    font-size: 9px;
+    font-size: 10px;
   }
 
   @media only screen and (max-width: 1200px) {
     font-size: 8px;
   }
 
-  @media only screen and (max-width: $tablet-width) {
+  @media only screen and (max-width: 1024px) {
     font-size: 9px;
   }
 

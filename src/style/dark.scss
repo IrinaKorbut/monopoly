@@ -1,43 +1,110 @@
 @import "constants";
 
+.start-window.dark-style,
+.window-menu.dark-style {
+  background-color: $middle-dark-gray;
+
+  .btn-start,
+  .color-btn {
+    background: repeating-linear-gradient(
+        75grad,
+        rgba(0, 0, 0, 0) 25%,
+        rgba(255, 255, 255, 0.6) 26%,
+        rgba(0, 0, 0, 0) 50%,
+        rgba(0, 0, 0, 0) 100%
+      ),
+      $dark-mode-red-btns;
+
+    &:hover {
+      background: repeating-linear-gradient(
+          75grad,
+          rgba(0, 0, 0, 0) 25%,
+          rgba(255, 255, 255, 0.6) 26%,
+          rgba(0, 0, 0, 0) 70%,
+          rgba(0, 0, 0, 0) 100%
+        ),
+        $dark-mode-red-btns-hover;
+    }
+  }
+
+  .color-warning-btn {
+    background: repeating-linear-gradient(
+            75grad,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(255, 255, 255, 0.6) 26%,
+            rgba(0, 0, 0, 0) 50%,
+            rgba(0, 0, 0, 0) 100%
+        ),
+        $warning-start-btn;
+}
+}
 
 main {
   .dark-style {
     background-color: $dark-gray;
-    
+
     .addition-options {
       background-color: $dark-gray;
     }
-  
-    .player-card, .dice, .dialog-window, .buying-section {
-      background-color: #919699;
+
+    .btn-Menu {
+      background: repeating-linear-gradient(
+          75grad,
+          rgba(0, 0, 0, 0) 25%,
+          rgba(255, 255, 255, 0.6) 26%,
+          rgba(0, 0, 0, 0) 50%,
+          rgba(0, 0, 0, 0) 100%
+        ),
+        $dark-mode-red-btns;
+
+      &:hover {
+        background: repeating-linear-gradient(
+            75grad,
+            rgba(0, 0, 0, 0) 25%,
+            rgba(255, 255, 255, 0.6) 26%,
+            rgba(0, 0, 0, 0) 70%,
+            rgba(0, 0, 0, 0) 100%
+          ),
+          $dark-mode-red-btns-hover;
+      }
+    }
+
+    .player-card,
+    .dice,
+    .dialog-window,
+    .buying-section {
+      background-color: $middle-dark-gray;
 
       .button__buy-house {
         background: $dark-mode-red-btns;
       }
-  
+
       .button {
         background: $dark-mode-red-btns;
+
+        &:hover {
+          background: $dark-mode-red-btns-hover;
+        }
       }
 
       .inactive__button {
         @include inactive-button;
       }
     }
-  
+
     .backlight {
       animation: backlight-dark-mode 3s linear infinite;
     }
 
-  
     .dialog-window {
       .loader {
         border-color: $dark-gray;
-  
-        &::after, &::before {
-          border-bottom-color:  $dark-gray;
+
+        &::after,
+        &::before {
+          border-bottom-color: $dark-gray;
         }
-  
+
         &::after {
           background-color: $dark-gray;
         }
@@ -47,99 +114,104 @@ main {
         @include inactive-button;
       }
     }
-  
+
     .player-card__name {
-      color: #00FF7F;
+      color: #00ff7f;
     }
-  
+
     .player-card__cash__currency {
       color: #696969;
     }
-  
+
     .game-history {
-  
       .action-list {
         background-color: $light-gray;
       }
     }
-  
+
     .row {
-      .street, .tax, .communal, .jail {
+      .street,
+      .tax,
+      .communal,
+      .jail {
         background-color: $light-gray;
-  
+
         .visit-section {
           background-color: $gray;
         }
       }
-  
+
       .go-to-jail {
-        background-color: #FFDEAD;
+        background-color: #ffdead;
       }
-  
+
       .parking {
         background-color: $gray;
       }
-  
+
       .railroad {
-        background-color: #DEB887;
+        background-color: #deb887;
       }
-  
+
       .chest {
-        background-color: #87CEEB;
+        background-color: #87ceeb;
       }
-  
+
       .chance {
-        background-color: #D8BFD8;
+        background-color: #d8bfd8;
       }
-  
+
       .go {
-        background-color: #3CB371;
-  
+        background-color: #3cb371;
+
         .cost {
           color: #006400;
         }
       }
-      
+
       .active {
-        background-color: #FFE4E1;
+        background-color: #ffe4e1;
       }
-  
+
       .cell {
         .owner {
           background-color: $gray;
         }
-  
+
         .yellow {
-          background-color: #FFD700;
+          background-color: #ffd700;
         }
-  
+
         .red {
-          background-color: #B22222;
+          background-color: #b22222;
         }
-  
+
         .blue {
-          background-color: #1E90FF;
+          background-color: #1e90ff;
         }
       }
     }
-  
+
     .tooltip-dark {
       background-color: $light-gray;
     }
   }
 }
 
-@keyframes backlight-dark-mode{
+footer.dark-style {
+  background-color: $middle-dark-gray;
+}
 
+@keyframes backlight-dark-mode {
   0% {
-      box-shadow: 0 1px 10px #228b22;
+    box-shadow: 0 1px 10px #228b22;
   }
 
   50% {
-      box-shadow: 0 1px 30px #32cd32;
+    box-shadow: 0 1px 30px #32cd32;
   }
 
   100% {
-      box-shadow: 0 1px 10px #228b22;
+    box-shadow: 0 1px 10px #228b22;
   }
 }
