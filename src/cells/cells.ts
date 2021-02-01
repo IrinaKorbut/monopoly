@@ -17,7 +17,7 @@ export default [
   new Street('street', 'Connecticut Avenue', 'Калинина', 'Калініна', 9, 120, 8, 40, 100, 300, 450, 600, 50, 3, 2, 60, 66),
   new Cell('jail', 'Jail', 'Тюрьма', 'Астрог', 10), // jail,
   new Street('street', 'St. Charles Place', 'Окрестина', 'Акрэсціна', 11, 140, 10, 50, 150, 450, 625, 750, 100, 3, 3, 70, 77),
-  new Communal('communal', 'Electric Company', 'Электрическая компания', 'Электрычная кампанія', 12, 150, 2, 9), 
+  new Communal('communal', 'Electric Company', 'Электр. компания', 'Электр. кампанія', 12, 150, 2, 9), 
   new Street('street', 'States Avenue', 'Володько', 'Валадзько', 13, 140, 10, 50, 150, 450, 625, 750, 100, 3, 3, 70, 77),
   new Street('street', 'Virginia Avenue', 'Свердлова', 'Свярдлова', 14, 160, 12, 60, 180, 500, 700, 900, 100, 3, 3, 80, 88),
   new Railroad('railroad', 'Pennsylvania Railroad', 'Минск', 'Мінск', 15),
@@ -43,6 +43,6 @@ export default [
   new Railroad('railroad', 'Short Line', 'Могилев', 'Магілёў', 35),
   new Cell('chance', 'Chance', 'Шанс', 'Шанец', 36), // chance
   new Street('street', 'Park Place', 'Зыбицкая', 'Зыбіцкая', 37, 350, 35, 175, 500, 1100, 1300, 1500, 200, 2, 8, 175, 193),
-  new Tax('tax', 'Luxury Tax', 'Налог на роскошь', 'Падатак на раскошу', 38, 100),
+  new Tax('tax', 'Trade Fee', 'Торговый сбор', 'Гандлёвы збор', 38, 100),
   new Street('street', 'Boardwalk', 'Немига', 'Няміга', 39, 400, 50, 200, 600, 1400, 1700, 2000, 200, 2, 8, 200, 220),
 ];
