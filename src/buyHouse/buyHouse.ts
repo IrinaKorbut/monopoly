@@ -93,7 +93,7 @@ function generateMessageToHistory(currentObjCell: Street): void {
 }
 
 function addHouse(event: any): void {  
-  const cellElement: HTMLElement = event.target.parentNode;
+  const cellElement: HTMLElement = event.target.className === 'player' ? event.target.parentNode.parentNode : event.target.parentNode;
   let currentObjCell: Street;
   cells.forEach((cell) => {
     if (cellElement === cell.element) {
