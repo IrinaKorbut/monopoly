@@ -22,17 +22,17 @@ export default function changeDialogWindowLanguage(): void {
         title.innerText = 'Make a move';
         button.innerText = 'Roll Dice';
       }
-    } else if (title.innerText === 'Kупить?' || title.innerText === 'Купіць?' || title.innerText === 'Buy?') {
+    } else if (title.innerText === `Kупить за $${cell.cost}?` || title.innerText === `Купіць за $${cell.cost}?` || title.innerText === `Buy for $${cell.cost}?`) {
       if (language === 'RU') {
-        title.innerText = 'Kупить?';
+        title.innerText = `Kупить за $${cell.cost}?`;
         buttonYes.innerText = 'Да';
         buttonNo.innerText = 'Нет';
       } else if (language === 'BEL') {
-        title.innerText = 'Kупить?';
+        title.innerText = `Купіць за $${cell.cost}?`;
         buttonYes.innerText = 'Да';
         buttonNo.innerText = 'Нет';
       } else {
-        title.innerText = 'Buy?';
+        title.innerText = `Buy for $${cell.cost}?`;
         buttonYes.innerText = 'Yes';
         buttonNo.innerText = 'No';
       }

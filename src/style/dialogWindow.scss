@@ -7,7 +7,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
   border-radius: 1.5rem;
   background-color: #fff;
   margin-top: 20px;
@@ -19,13 +19,9 @@
     height: 15rem;
   }
 
-  img {
-    width: 8rem;
-    animation: circle 1s linear infinite;
-  }
-
   .title {
     font-size: 2.4rem;
+    margin-top: 5%;
   }
 
   .buttons-wrapper {
@@ -36,7 +32,8 @@
 
   .button {
     @include button;
-
+    min-width: fit-content;
+    margin-bottom: 5%;
     @include tablet-width {
       font-size: 1.5rem;
     }
@@ -44,6 +41,10 @@
     &:hover {
       cursor: pointer;
     }
+  }
+
+  .yes, .no {
+    width: 40%;
   }
 
   .inactive {

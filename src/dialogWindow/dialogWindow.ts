@@ -67,15 +67,15 @@ export default function showDialogWindow(action?: string): void {
       let buttonYes: HTMLElement;
       let buttonNo: HTMLElement;
       if (language === 'RU') {
-        title = createElement('p', ['title'], 'Kупить?');
+        title = createElement('p', ['title'], `Kупить за $${cell.cost}?`);
         buttonYes = createElement('div', ['button', 'yes', 'pay-or-buy', 'buy'], 'Да');
         buttonNo = createElement('div', ['button', 'no'], 'Нет');
       } else if (language === 'BEL') {
-        title = createElement('p', ['title'], 'Купіць?');
+        title = createElement('p', ['title'], `Купіць за $${cell.cost}?`);
         buttonYes = createElement('div', ['button', 'yes', 'pay-or-buy', 'buy'], 'Да');
         buttonNo = createElement('div', ['button', 'no'], 'Нет');
       } else {
-        title = createElement('p', ['title'], 'Buy?');
+        title = createElement('p', ['title'], `Buy for $${cell.cost}?`);
         buttonYes = createElement('div', ['button', 'yes', 'pay-or-buy', 'buy'], 'Yes');
         buttonNo = createElement('div', ['button', 'no'], 'No');
       }
