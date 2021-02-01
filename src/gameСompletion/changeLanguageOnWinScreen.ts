@@ -1,11 +1,9 @@
-import { newPlayFn } from '../menu/menu'
-import { createElement, appendElementTo } from '../helpFunctions/helpFunctions'
+import { createElement} from '../helpFunctions/helpFunctions';
 import Game from '../Game/Game';
 
-export function gameСompletion(): void {
+export default function changeLanguageOnWinScreen(): void {
+  if (document.querySelector('.congratulations')) {
     const currentLanguage: string = localStorage.getItem('language');
-    const completion: HTMLElement = document.querySelector('.game-completion');
-    completion.innerHTML = '';
     const congratulations: HTMLElement = createElement('div', ['congratulations']);
     const namePlayer: HTMLElement = createElement('div', ['name-player']);
     const newGameBtn: HTMLElement = createElement('div', ['new-play']);
@@ -28,9 +26,5 @@ export function gameСompletion(): void {
         }
         newGameBtn.textContent = 'New game';
     }
-    appendElementTo(completion, congratulations, namePlayer, newGameBtn);
-    completion.classList.toggle('completion');
-    document.querySelector('#blackout').classList.toggle('blackout');
-    completion.classList.toggle('no-window');
-    newGameBtn.addEventListener('click', newPlayFn);
+  }
 }
