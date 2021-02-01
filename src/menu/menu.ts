@@ -46,8 +46,10 @@ function menu(audioPlay: HTMLAudioElement) {
 }
 
 export function newPlayFn() {
+    Game.activePlayer = null;
     Game.players.forEach(player => {
         player.chip.remove()
+        player.chip = null; 
         player.playerCard.remove()
     })
     Game.players = []

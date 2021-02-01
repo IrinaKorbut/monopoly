@@ -142,5 +142,7 @@ export default async function movePlayer(stepsAmount: number) {
     playerPositionAfterMove = resetPlayerPosition(playerPositionAfterMove);
     addMoneyPerCycle();
   }
-  doMoveLogic(playerPositionAfterMove);
+  if (game.activePlayer) {
+    doMoveLogic(playerPositionAfterMove);
+  }
 }
