@@ -1,8 +1,10 @@
+@import "constants";
+
 .loader {
   position: relative;
   width: 9rem;
   height: 9rem;
-  border: 0.4rem solid #FA8072;
+  border: 0.4rem solid $light-mode-btns;
   border-radius: 100%;
 
   &::after, &::before {
@@ -11,7 +13,7 @@
     top: 50%;
     left: 50%;
     margin: -.2rem 0 0 -.2rem;
-    border-bottom: 0.4rem solid #FA8072;
+    border-bottom: 0.4rem solid $light-mode-btns;
     border-radius: .6rem;
     -webkit-transform-origin: .2rem center;
   }
@@ -23,7 +25,7 @@
 
   &::after {
     width: 40%;
-    background-color: #FA8072;
+    background-color: $light-mode-btns;
     -webkit-animation: rotate 2s linear infinite;
   }
 
