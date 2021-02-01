@@ -79,8 +79,6 @@ function generateMessageToHistory(currentObjCell: Street): void {
 
 
 function addFourHouses(housePlace: HTMLElement, currentObjCell: Street): void {
-    console.log(currentObjCell.numberOfHouses)
-    console.log(currentObjCell.isThereHotel)    
     while (currentObjCell.numberOfHouses !== 4) {
         const houseImg: HTMLImageElement = createElement('img', ['house']);
         houseImg.src = './images/House.svg';
@@ -113,7 +111,7 @@ function isAvailableToSellHouse(currentObjCell: Street): boolean {
   }
 
 function removeHouse(event: any): void {  
-  const cellElement: HTMLElement = event.target.parentNode;
+  const cellElement: HTMLElement = event.target.className === 'player' ? event.target.parentNode.parentNode : event.target.parentNode;
   let currentObjCell: Street;
   cells.forEach((cell) => {
     if (cellElement === cell.element) {
@@ -123,15 +121,11 @@ function removeHouse(event: any): void {
     const housePlace: HTMLElement = cellElement.querySelector('.street-color');
     if (isAvailableToSellHouse(currentObjCell)){
         if (currentObjCell.isThereHotel) {
-            console.log(currentObjCell.numberOfHouses)
-            console.log(currentObjCell.isThereHotel)
             housePlace.removeChild(housePlace.lastChild);
             currentObjCell.isThereHotel = !currentObjCell.isThereHotel;
             addFourHouses(housePlace, currentObjCell)
         } else {    
             if (currentObjCell.numberOfHouses) {
-                console.log(currentObjCell.numberOfHouses)
-                console.log(currentObjCell.isThereHotel)
                 housePlace.removeChild(housePlace.lastChild);
                 currentObjCell.numberOfHouses -= 1;
             }  
