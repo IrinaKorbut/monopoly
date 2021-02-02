@@ -1,11 +1,11 @@
-import cells from '../cells/cells';
+import cells from '../entities/cells/cells';
 import computerMove from '../computerRival/computerRival';
-import game from '../Game/Game';
-import showDialogWindow from '../dialogWindow/dialogWindow';
-import { changeMoneyOnPlayerCard } from '../dialogWindow/dialogWindow';
-import initHistoryWindow from '../histiryWindow/historyWindow';
-import Cell from '../Cell/Cell';
-import Player from '../Player/Player';
+import game from '../entities/Game/Game';
+import showDialogWindow from '../gameSections/dialogWindow/dialogWindow';
+import { changeMoneyOnPlayerCard } from '../gameSections/dialogWindow/dialogWindow';
+import initHistoryWindow from '../gameSections/histiryWindow/historyWindow';
+import Cell from '../entities/Cell/Cell';
+import Player from '../entities/Player/Player';
 
 
 function checkWherePlayerNow(playerDisplay: HTMLElement): number {

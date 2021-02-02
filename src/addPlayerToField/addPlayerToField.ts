@@ -1,6 +1,6 @@
-import Game from '../Game/Game';
+import Game from '../entities/Game/Game';
 import { createElement, appendElementTo } from '../helpFunctions/helpFunctions';
-import Player from '../Player/Player'; 
+import Player from '../entities/Player/Player'; 
 
 function renderPlayerToken(player: Player, playerContainer: HTMLElement) {
   const playerToken = createElement('div', ['player'], player.name[0]);

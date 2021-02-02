@@ -1,7 +1,7 @@
-import Game from '../Game/Game';
+import Game from '../entities/Game/Game';
 import { createElement, removeChildsFromElement, appendElementTo } from '../helpFunctions/helpFunctions';
-import Property from '../ifacies/Property';
-import Player from '../Player/Player';
+import Property from '../entities/ifacies/Property';
+import Player from '../entities/Player/Player';
 
 export default function playerLose(player: Player): void {
   player.property.forEach((property: Property) => {

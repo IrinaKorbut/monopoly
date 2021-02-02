@@ -1,13 +1,13 @@
 
-import cell from '../cell/cell';
-import cells from '../cells/cells';
-import { changePledgeBtnLanguage } from '../pledge/pledge';
-import { changeBuyoutBtnLanguage } from '../buyout/buyout';
-import { changeSellHouseLanguage } from '../sellHouse/sellHouse';
-import  { changeBuyHouseLanguage } from '../buyHouse/buyHouse';
-import changeLanguageOnWinScreen from '../gameСompletion/changeLanguageOnWinScreen';
-import { switchLanguage } from '../switchLanguage/switchLanguage';
-import changeDialogWindowLanguage from '../dialogWindow/changeDialogWindowLanguage';
+import cell from '../entities/Cell/cell';
+import cells from '../entities/cells/cells';
+import { changePledgeBtnLanguage } from '../gameSections/propertyActions/pledge/pledge';
+import { changeBuyoutBtnLanguage } from '../gameSections/propertyActions/buyout/buyout';
+import { changeSellHouseLanguage } from '../gameSections/propertyActions/sellHouse/sellHouse';
+import  { changeBuyHouseLanguage } from '../gameSections/propertyActions/buyHouse/buyHouse';
+import changeLanguageOnWinScreen from '../popupWindows/winScreen/changeLanguageOnWinScreen';
+import { switchLanguage } from '../popupWindows/menu/switchLanguageOnMenuAndStartWindow';
+import changeDialogWindowLanguage from '../gameSections/dialogWindow/changeDialogWindowLanguage';
 
 export function changeTitleOnCell(): void {
     const currentLanguage: string = localStorage.getItem('language') || 'EN';
