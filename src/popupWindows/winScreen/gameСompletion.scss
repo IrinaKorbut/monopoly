@@ -32,4 +32,13 @@
         margin: 4rem;
     }
 
+    .new-game {
+        font-size: 4rem;
+        margin: 2rem;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
 }

@@ -57,10 +57,7 @@ body {
   display: flex;
   background-color: #555d61;
   font-family: Montserrat;
-
-  // @include tablet-width {
-  //   flex-wrap: wrap;
-  // }
+  overflow-y: hidden;
 }
 
 main {
