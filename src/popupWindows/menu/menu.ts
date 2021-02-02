@@ -52,6 +52,12 @@ export function newPlayFn() {
         player.chip = null; 
         player.playerCard.remove()
     })
+
+    const playerCard = document.querySelectorAll('.player-card')
+    if(playerCard.length !== 0){
+        playerCard.forEach(e => e.remove())
+    }
+    
     Game.players = []
     Game.cells.forEach((cell: any) => {
         if (cell.type === 'street' || cell.type === 'railroad' || cell.type === 'communal') {
@@ -59,7 +65,9 @@ export function newPlayFn() {
             cell.isAvailableToBuyHouse = false;
             cell.numberOfHouses = 0;
             cell.isThereHotel = false;
+            cell.isPredge = false;
 
+            (<HTMLElement>document.querySelector('.lock')).style.display = '';
             document.querySelectorAll('.house').forEach(hous => hous.remove())
             document.querySelector('.action-list').innerHTML = "";
             const propertyViewCost: HTMLElement = cell.element.querySelector('.cost');
