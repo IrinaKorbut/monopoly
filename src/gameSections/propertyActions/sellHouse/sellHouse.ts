@@ -81,7 +81,7 @@ function generateMessageToHistory(currentObjCell: Street): void {
 function addFourHouses(housePlace: HTMLElement, currentObjCell: Street): void {
     while (currentObjCell.numberOfHouses !== 4) {
         const houseImg: HTMLImageElement = createElement('img', ['house']);
-        houseImg.src = './images/House.svg';
+        houseImg.src = './assets/images/House.svg';
         appendElementTo(housePlace, houseImg);
         currentObjCell.numberOfHouses += 1;
     }   
