@@ -2,6 +2,7 @@ import { createElement, appendElementTo } from '../../helpFunctions/helpFunction
 import { startWindow } from '../StartWindow/startWindow';
 import Game from '../../entities/Game/Game';
 import setLanguage, { addListenerToButtonLng } from '../../changeLanguage/changeLanguage';
+import { addHint } from './hints';
 
 function menu(audioPlay: HTMLAudioElement) {
     const setingMenu: HTMLElement = document.querySelector('.setings-menu')
@@ -205,6 +206,7 @@ export function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, 
     appendElementTo(formRadio3, radioLanguage3, radioLabel3)
 
     audioFn(audioPlay)
+    addHint()
 
     back.addEventListener('click', menu)
     subjectInput.addEventListener('click', (e: any) => subjectLocalStorage(e.target))
