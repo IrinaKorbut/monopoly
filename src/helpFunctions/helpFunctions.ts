@@ -1,4 +1,4 @@
-import Game from '../Game/Game';
+import Game from '../entities/Game/Game';
 
 
 export function createElement(elementType?: any, elementsClassList?: any, elementInnerText?: any) {

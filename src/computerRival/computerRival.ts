@@ -1,10 +1,10 @@
-import roll from '../dice/dice';
-import game from '../Game/Game';
+import roll from '../gameSections/dice/dice';
+import game from '../entities/Game/Game';
 import movePlayer from '../move_player/movePlayerFn';
 import showDialogWindow, {
   getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame
-} from '../dialogWindow/dialogWindow';
-import initHistoryWindow from '../histiryWindow/historyWindow';
+} from '../gameSections/dialogWindow/dialogWindow';
+import initHistoryWindow from '../gameSections/histiryWindow/historyWindow';
 import { isGameFinish, end} from '../gameEnding/gameEnding';
 import { checkIsHuman } from '../helpFunctions/helpFunctions';
 
