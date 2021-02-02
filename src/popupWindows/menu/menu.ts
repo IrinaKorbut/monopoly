@@ -305,7 +305,7 @@ export function btnClikMenu() {
     } else if (currentLanguage === 'BEL') {
         btnMenu.textContent = 'Меню'
     }
-    const audioPlay = new Audio('./assets/audio/Ennio-Morricone.mp3')
+    const audioPlay = new Audio('./assets/audio/gameMusic.mp3')
     btnMenu.addEventListener('click', () => classMenu(audioPlay))
     keyEsc(audioPlay)
     checkBtnAudio(audioPlay)
