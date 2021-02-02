@@ -1,0 +1,118 @@
+@import "constants";
+
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  user-select: none;
+  font-size: 10px;  
+
+  @media only screen and (max-width: 1400px) {
+    font-size: 10px;
+  }
+
+  @media only screen and (max-width: 1200px) {
+    font-size: 8px;
+  }
+
+  @media only screen and (max-width: 1024px) {
+    font-size: 9px;
+  }
+
+  @media only screen and (max-width: 880px) {
+    font-size: 7px;
+  }
+
+  @media only screen and (max-width: 650px) {
+    font-size: 6px;
+  }
+
+  @media only screen and (min-width: 1650px) {
+    font-size: 12px;
+  }
+  
+  @media only screen and (min-width: 1850px) {
+    font-size: 15px;
+  }
+
+  @media only screen and (min-width: 2200px) {
+    font-size: 20px;
+  }
+
+  @media only screen and (min-width: 4000px) {
+    font-size: 30px;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: #555d61;
+  font-family: Montserrat;
+
+  // @include tablet-width {
+  //   flex-wrap: wrap;
+  // }
+}
+
+main {
+  display: flex;
+  height: 95%;
+  width: 100%;
+
+  @include tablet-width {
+    flex-wrap: wrap;
+  }
+
+  .game-field-and-history {
+    width: 70%;
+    height: 100%;
+  
+    @include tablet-width {
+      width: 100%;
+      height:75%;
+      order: 3;
+  }
+  }
+  
+  .addition-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    height: 100%;
+    background-color: #B0C4DE;
+  
+    @include tablet-width {
+      
+      justify-content: center;
+      width: 50%;
+      height:25%;
+      order: 2;
+    }
+  }
+  
+  .history-and-buying-section {
+    display: flex;
+    width: 100%;
+    height: 25%;
+    background-color: #B0C4DE;
+    padding: 0 10px;
+  
+    @include tablet-width {
+      height: 35%;
+    }
+  }
+}
+
+
+
+

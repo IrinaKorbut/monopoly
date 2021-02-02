@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="blackout" class="blackout"></div>
+  <div class="start-window"></div>
+  <div class="setings-menu no-burger-menu"></div>
+  <div class="game-completion no-window"></div>
+  <!--<button class="btn">Finish</button>-->
+  <main>
+    <section class="players-cards">
+      <button class="btn-Menu">Menu</button>
+    </section>
+    <section class="game-field-and-history">
+      <div class="game-field">
+        <div class="row">
+          <div class="cell left-edge-cell go" id="0">
+            <img src="./assets/images/go.svg" alt="">
+            <p class="title">Start</p>
+            <p class="cost">+ $200</p>
+            <div class="players-container">
+            </div>        
+          </div>
+          <div class="cell street" id="1">
+            <div class="street-color brown"></div>
+            <p class="title">Alaska Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$60</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell chest" id="2">
+            <img src="./assets/images/chest.svg" alt="">
+            <p class="title">Community Chest</p>
+            <div class="players-container"></div>
+          </div>  
+          <div class="cell street" id="3">
+            <div class="street-color brown"></div>
+            <p class="title">Baltic Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$70</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell tax" id="4">
+            <img src="./assets/images/tax.svg" alt="">
+            <p class="title">City Tax</p>
+            <p class="cost">- $200</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell railroad" id="5">
+            <img src="./assets/images/railroad.svg" alt="">
+            <p class="title">Reading Railroad</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$200</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="6">
+            <div class="street-color blue"></div>
+            <p class="title">Oriental Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$100</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell chance" id="7">
+            <img src="./assets/images/chance.svg" alt="">
+            <p class="title">Chance</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="8">
+            <div class="street-color blue"></div>
+            <p class="title">Vermont Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$100</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell right-edge-cell street" id="9">
+            <div class="street-color blue"></div>
+            <p class="title">Connecticut Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$120</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell left-edge-cell jail" id="10">
+            <div class="jail-section">
+              <img src="./assets/images/prisoner.svg" alt="">
+              <p class="title">Jail</p>
+            </div>
+            <div class="visit-section">
+              <p class="title">Visiting</p>
+            </div>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="11">
+            <div class="street-color purple"></div>
+            <p class="title">St. Charles Place</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$140</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell communal" id="12">
+            <img src="./assets/images/bulb.svg" alt="">
+            <p class="title electricity">Electricity Company</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$150</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="13">
+            <div class="street-color purple"></div>
+            <p class="title">States Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$140</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="14">
+            <div class="street-color purple"></div>
+            <p class="title">Virginia Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$160</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell railroad" id="15">
+            <img src="./assets/images/railroad.svg" alt="">
+            <p class="title">Pennsylvania Railroad</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$200</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="16">
+            <div class="street-color orange"></div>
+            <p class="title">St. James Place</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$180</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell chest" id="17">
+            <img src="./assets/images/chest.svg" alt="">
+            <p class="title">Community Chest</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="18">
+            <div class="street-color orange"></div>
+            <p class="title">Tennessee Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$180</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell right-edge-cell street" id="19">
+            <div class="street-color orange"></div>
+            <p class="title">New York Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$200</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell left-edge-cell parking" id="20">
+            <img src="./assets/images/car.svg" alt="">
+            <p class="title">Free Parking</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="21">
+            <div class="street-color red"></div>
+            <p class="title">Kentucky Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$220</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell chance" id="22">
+            <img src="./assets/images/chance.svg" alt="">
+            <p class="title">Chance</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="23">
+            <div class="street-color red"></div>
+            <p class="title">Indiana Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$220</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="24">
+            <div class="street-color red"></div>
+            <p class="title">Illinois Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$240</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell railroad" id="25">
+            <img src="./assets/images/railroad.svg" alt="">
+            <p class="title">B&O Railroad</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$200</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="26">
+            <div class="street-color yellow"></div>
+            <p class="title">Atlantic Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$260</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="27">
+            <div class="street-color yellow"></div>
+            <p class="title">Ventnor Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$260</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell communal" id="28">
+            <img src="./assets/images/water.svg" alt="">
+            <p class="title water">Water Company</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$150</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell right-edge-cell street" id="29">
+            <div class="street-color yellow"></div>
+            <p class="title">Marvin Gardens</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$280</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="cell left-edge-cell go-to-jail" id="30">
+            <img src="./assets/images/police.svg" alt="">
+            <p class="title">Go to Jail</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="31">
+            <div class="street-color green"></div>
+            <p class="title">Pacific Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$300</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell street" id="32">
+            <div class="street-color green"></div>
+            <p class="title">North Carolina Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$300</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell chest" id="33">
+            <img src="./assets/images/chest.svg" alt="">
+            <p class="title">Community Chest</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="34">
+            <div class="street-color green"></div>
+            <p class="title">Pennsylvania Avenue</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$320</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell railroad" id="35">
+            <img src="./assets/images/railroad.svg" alt="">
+            <p class="title">Short Line</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$200</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell chance" id="36">
+            <img src="./assets/images/chance.svg" alt="">
+            <p class="title">Chance</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell street" id="37">
+            <div class="street-color dark-blue"></div>
+            <p class="title">Park Place</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$350</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+          <div class="cell tax" id="38">
+            <img src="./assets/images/tax.svg" alt="">
+            <p class="title">Trade fee</p>
+            <p class="cost">- $100</p>
+            <div class="players-container"></div>
+          </div>
+          <div class="cell right-edge-cell street" id="39">
+            <div class="street-color dark-blue"></div>
+            <p class="title">Boardwalk</p>
+            <div class="owner-and-cost-wrapper">
+              <p class="cost">$400</p>
+              <div class="owner"></div>
+            </div>
+            <div class="players-container">
+              <img class="lock" src="./assets/images/lock1.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="history-and-buying-section">
+        <div class="game-history">
+          <ul class="action-list">            
+          </ul>
+        </div>
+        <div class="addition-options">
+          <div class="buying-section">
+          </div>
+        </div>        
+      </div>    
+    </section>
+    <section class="addition-section">
+      <section class='dice'>
+        <canvas id='canvas'></canvas>
+      </section>
+      <section class='dialog-window'>
+        <div class="loader"></div>
+      </section>
+    </section>
+  </main>
+  <footer>        
+    <div class="info-about-creator">
+      <div class="coloborators">
+        <a href="https://github.com/SergeyDanchenko" class="github-link">
+          Sergey Danchenko
+          <img src="./assets/images/github_icon.svg" alt="GitHub Icon">
+        </a>
+        <a href="https://github.com/IvanoPro" class="github-link">
+          Ivano Pro
+          <img src="./assets/images/github_icon.svg" alt="GitHub Icon">
+        </a>
+        <a href="https://github.com/IrinaKorbut" class="github-link">
+          Irina Korbut
+          <img src="./assets/images/github_icon.svg" alt="GitHub Icon">
+        </a>  
+      </div>                              
+    </div>
+    <div class="logo-year-container">
+      <div class="logo">                
+        <a href="https://rs.school/js/">
+            <img src="./assets/images/rs_school_js.svg" alt="Logo RS School">
+        </a>
+      </div>
+      <div class="year">
+          2021
+      </div> 
+    </div>    
+  </footer>
+</body>
+
+</html>
