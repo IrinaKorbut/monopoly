@@ -8,7 +8,6 @@ import Street from '../../../entities/Street/Street';
 import { makeAllButtonsInactiveExceptPressed, makeAllButtonsActive } from '../../../inactiveButton/inactiveButton';
 import unlockPayOrBuyBtnIfEnoughMoney from '../../dialogWindow/payOrBuyButtonAccess/unlockPayOrBuyButton';
 
-
 function setFinishSellHouseButton(): void {
   const currentLanguage: string = localStorage.getItem('language');
   const sellHouseButton: HTMLElement = document.querySelector('.button__sell-house');
@@ -16,7 +15,7 @@ function setFinishSellHouseButton(): void {
     sellHouseButton.innerText = 'Finish selling';
   } else if (currentLanguage === 'RU') {
     sellHouseButton.innerText = 'Завершить продажу';
-  } else if (currentLanguage === 'BEL' ) {
+  } else if (currentLanguage === 'BEL') {
     sellHouseButton.innerText = 'Завяршыць продаж';
   }
 }
@@ -63,54 +62,49 @@ function generateMessageToHistory(currentObjCell: Street): void {
       initHistoryWindow(`продал(a) отель банку по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost * 0.8}`);
     } else if (currentLanguage === 'BEL') {
       initHistoryWindow(`прадаў(ла) гатэль банку па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost * 0.8}`);
-    }      
-  } else {
-    if (currentLanguage === 'EN') {
-      initHistoryWindow(`sold house to bank on ${currentObjCell.name} for $${currentObjCell.houseCost * 0.8}`);
-    } else if (currentLanguage === 'RU') {
-      initHistoryWindow(`продал(a) дом банку по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost * 0.8}`);
-    } else if (currentLanguage === 'BEL') {
-      initHistoryWindow(`прадаў(ла) дом банку па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost * 0.8}`);
     }
+  } else if (currentLanguage === 'EN') {
+    initHistoryWindow(`sold house to bank on ${currentObjCell.name} for $${currentObjCell.houseCost * 0.8}`);
+  } else if (currentLanguage === 'RU') {
+    initHistoryWindow(`продал(a) дом банку по улице ${currentObjCell.russianName} за $${currentObjCell.houseCost * 0.8}`);
+  } else if (currentLanguage === 'BEL') {
+    initHistoryWindow(`прадаў(ла) дом банку па вуліцы ${currentObjCell.belarusianName} за $${currentObjCell.houseCost * 0.8}`);
   }
 }
 
-
-
-
 function addFourHouses(housePlace: HTMLElement, currentObjCell: Street): void {
-    while (currentObjCell.numberOfHouses !== 4) {
-        const houseImg: HTMLImageElement = createElement('img', ['house']);
-        houseImg.src = './assets/images/House.svg';
-        appendElementTo(housePlace, houseImg);
-        currentObjCell.numberOfHouses += 1;
-    }   
+  while (currentObjCell.numberOfHouses !== 4) {
+    const houseImg: HTMLImageElement = createElement('img', ['house']);
+    houseImg.src = './assets/images/House.svg';
+    appendElementTo(housePlace, houseImg);
+    currentObjCell.numberOfHouses += 1;
+  }
 }
 
 function isAvailableToSellHouse(currentObjCell: Street): boolean {
-    const playerPropertiesWithHouses = Game.activePlayer.property
-      .filter((property: Street) => property.numberOfHouses || property.isThereHotel);
-    let result = !!(playerPropertiesWithHouses.length);
-    playerPropertiesWithHouses.forEach((property: Street) => {
-      if (currentObjCell !== property) {
-        if (currentObjCell.numberOfHouses < property.numberOfHouses && !currentObjCell.isThereHotel) {
-            result = false;
-        }
-        if (!currentObjCell.isThereHotel && property.isThereHotel) {
-            result = false;
-        }
-        if (currentObjCell.numberOfHouses === 0 && !property.isThereHotel) {
-            result = false;
-        }
-        if (currentObjCell.isThereHotel) {
-            result = true;
-        }
-      }      
-    });
-    return result;
-  }
+  const playerPropertiesWithHouses = Game.activePlayer.property
+    .filter((property: Street) => property.numberOfHouses || property.isThereHotel);
+  let result = !!(playerPropertiesWithHouses.length);
+  playerPropertiesWithHouses.forEach((property: Street) => {
+    if (currentObjCell !== property) {
+      if (currentObjCell.numberOfHouses < property.numberOfHouses && !currentObjCell.isThereHotel) {
+        result = false;
+      }
+      if (!currentObjCell.isThereHotel && property.isThereHotel) {
+        result = false;
+      }
+      if (currentObjCell.numberOfHouses === 0 && !property.isThereHotel) {
+        result = false;
+      }
+      if (currentObjCell.isThereHotel) {
+        result = true;
+      }
+    }
+  });
+  return result;
+}
 
-function removeHouse(event: any): void {  
+function removeHouse(event: any): void {
   const cellElement: HTMLElement = event.target.className === 'player' ? event.target.parentNode.parentNode : event.target.parentNode;
   let currentObjCell: Street;
   cells.forEach((cell) => {
@@ -118,35 +112,32 @@ function removeHouse(event: any): void {
       currentObjCell = <Street>cell;
     }
   });
-    const housePlace: HTMLElement = cellElement.querySelector('.street-color');
-    if (isAvailableToSellHouse(currentObjCell)){
-        if (currentObjCell.isThereHotel) {
-            housePlace.removeChild(housePlace.lastChild);
-            currentObjCell.isThereHotel = !currentObjCell.isThereHotel;
-            addFourHouses(housePlace, currentObjCell)
-        } else {    
-            if (currentObjCell.numberOfHouses) {
-                housePlace.removeChild(housePlace.lastChild);
-                currentObjCell.numberOfHouses -= 1;
-            }  
-        }
-        Game.activePlayer.addMoney(currentObjCell.houseCost * 0.8);
-        changeMoneyOnPlayerCard(Game.activePlayer);
-        generateMessageToHistory(currentObjCell);    
-        setStreetRent(currentObjCell, Game.activePlayer);
-        unlockPayOrBuyBtnIfEnoughMoney();
-    }    
+  const housePlace: HTMLElement = cellElement.querySelector('.street-color');
+  if (isAvailableToSellHouse(currentObjCell)) {
+    if (currentObjCell.isThereHotel) {
+      housePlace.removeChild(housePlace.lastChild);
+      currentObjCell.isThereHotel = !currentObjCell.isThereHotel;
+      addFourHouses(housePlace, currentObjCell);
+    } else if (currentObjCell.numberOfHouses) {
+      housePlace.removeChild(housePlace.lastChild);
+      currentObjCell.numberOfHouses -= 1;
+    }
+    Game.activePlayer.addMoney(currentObjCell.houseCost * 0.8);
+    changeMoneyOnPlayerCard(Game.activePlayer);
+    generateMessageToHistory(currentObjCell);
+    setStreetRent(currentObjCell, Game.activePlayer);
+    unlockPayOrBuyBtnIfEnoughMoney();
+  }
 }
 
 export function changeSellHouseLanguage(): void {
-  const sellHouseButton: HTMLElement = document.querySelector('.button__sell-house');  
+  const sellHouseButton: HTMLElement = document.querySelector('.button__sell-house');
   if (sellHouseButton.innerText === 'Sell houses' || sellHouseButton.innerText === 'Продать дома' || sellHouseButton.innerText === 'Прадаць дамы') {
-    setSellHouseButton()
+    setSellHouseButton();
   } else {
     setFinishSellHouseButton();
   }
 }
-
 
 export default function initSellHouseButton(): void {
   const buyingSection: HTMLElement = document.querySelector('.buying-section');
@@ -158,8 +149,8 @@ export default function initSellHouseButton(): void {
     buttonSellName = 'Продать дома';
   } else if (currentLanguage === 'BEL') {
     buttonSellName = 'Прадаць дамы';
-  }  
+  }
   const sellHouseButton: HTMLElement = createElement('div', ['button__sell-house', 'button'], buttonSellName);
   appendElementTo(buyingSection, sellHouseButton);
-  sellHouseButton.addEventListener('click', highlightActivePlayerCellsWithHouse);  
+  sellHouseButton.addEventListener('click', highlightActivePlayerCellsWithHouse);
 }
