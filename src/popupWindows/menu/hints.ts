@@ -1,12 +1,10 @@
-import { createCell, addWindow, addSelectorClass } from '../cellsCards/cellCardConst';
+import { addWindow } from '../cellsCards/cellCardConst';
 import { createElement, appendElementTo } from '../../helpFunctions/helpFunctions'
 
 export function addHint() {
     hint('slideThree', 'F9')
     hint('subjectBtn', 'F4')
     hint('volumeInput', '- / +')
-   // hint('btn-close', 'Esc')
-
 }
 
 function hint(selector: string, text: string) {
