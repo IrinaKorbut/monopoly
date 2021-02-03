@@ -4,7 +4,9 @@ import Player from '../Player/Player';
 
 class Game {
   readonly cells: Cell[] = cells;
+
   players: Player[] = [];
+
   activePlayer: Player;
 
   addPlayer(player: Player) {

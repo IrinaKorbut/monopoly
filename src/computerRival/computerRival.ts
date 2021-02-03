@@ -2,10 +2,12 @@ import roll from '../gameSections/dice/dice';
 import game from '../entities/Game/Game';
 import movePlayer from '../move_player/movePlayerFn';
 import showDialogWindow, {
-  getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard, setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet, removePlayerFromGame
+  getCellObjByPosition, isPlayerHaveEnoughMoney, addPropertyToPlayer, changeMoneyOnPlayerCard,
+  setNextPlayerAsActive, setStreetRent, setRailroadRent, setCommunalRent, isColorSet,
+  removePlayerFromGame,
 } from '../gameSections/dialogWindow/dialogWindow';
 import initHistoryWindow from '../gameSections/histiryWindow/historyWindow';
-import { isGameFinish, end} from '../gameEnding/gameEnding';
+import { isGameFinish, end } from '../gameEnding/gameEnding';
 import { checkIsHuman } from '../helpFunctions/helpFunctions';
 
 export default function computerMove(action?: string): void {
@@ -86,7 +88,7 @@ export default function computerMove(action?: string): void {
           }
         }
       } else {
-        const p: Promise<void> = new Promise((resolve) => {
+        const promise: Promise<void> = new Promise((resolve) => {
           let test: any;
           setTimeout(() => {
             test = setInterval(roll, 200);
@@ -96,7 +98,7 @@ export default function computerMove(action?: string): void {
             resolve();
           }, 3000);
         });
-        p.then(() => {
+        promise.then(() => {
           let rent = roll();
           rent = isColorSet(cell.owner, cell) ? rent * 10 : rent * 4;
           if (isPlayerHaveEnoughMoney(game.activePlayer, rent)) {
@@ -113,7 +115,6 @@ export default function computerMove(action?: string): void {
             }
             computerMove();
           } else {
-            // доработать
             removePlayerFromGame();
             if (isGameFinish()) {
               end();
@@ -137,7 +138,6 @@ export default function computerMove(action?: string): void {
         }
         computerMove();
       } else {
-        // доработать
         removePlayerFromGame();
         if (isGameFinish()) {
           end();

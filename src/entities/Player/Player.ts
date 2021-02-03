@@ -2,12 +2,19 @@ import Property from '../ifacies/Property';
 
 export default class Player {
   readonly color: string;
+
   readonly name: string;
+
   readonly isHuman: boolean;
+
   playerCard: HTMLElement;
+
   position: number = 0;
+
   money: number = 1500;
+
   property: Array<Property> = [];
+
   chip: HTMLElement;
 
   constructor(color: string, name: string, isHuman: boolean) {

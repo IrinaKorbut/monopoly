@@ -1,4 +1,5 @@
-function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number, height: number, radius: number, fill: boolean) {
+function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: number,
+  height: number, radius: number, fill: boolean) {
   ctx.beginPath();
   ctx.moveTo(x + radius, y);
   ctx.lineTo(x + width - radius, y);
@@ -15,7 +16,8 @@ function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, width: n
   }
 }
 
-function drawDice(ctx: CanvasRenderingContext2D, x: number, y: number, size: number, value: number) {
+function drawDice(ctx: CanvasRenderingContext2D, x: number, y: number, size: number,
+  value: number) {
   const dots = [];
   ctx.save();
   ctx.fillStyle = '#4167cd';

@@ -1,4 +1,6 @@
-import { createElement, appendElementTo, removeChildsFromElement, checkIsHuman } from '../../helpFunctions/helpFunctions';
+import {
+  createElement, appendElementTo, removeChildsFromElement, checkIsHuman,
+} from '../../helpFunctions/helpFunctions';
 import roll from '../dice/dice';
 import movePlayer from '../../move_player/movePlayerFn';
 import game from '../../entities/Game/Game';
@@ -63,7 +65,7 @@ export default function showDialogWindow(action?: string): void {
       appendElementTo(dialogWindowSection, title, rollButton);
       break;
     case 'buy':
-      const buttonsWrapper = createElement('div', ['buttons-wrapper']);  
+      const buttonsWrapper = createElement('div', ['buttons-wrapper']);
       let buttonYes: HTMLElement;
       let buttonNo: HTMLElement;
       if (language === 'RU') {
@@ -107,7 +109,7 @@ export default function showDialogWindow(action?: string): void {
       if (!isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
         buttonYes.classList.add('inactive');
       }
-        appendElementTo(dialogWindowSection, title, buttonsWrapper);
+      appendElementTo(dialogWindowSection, title, buttonsWrapper);
       break;
     case 'rent':
       if (cell.type !== 'communal') {
@@ -139,9 +141,6 @@ export default function showDialogWindow(action?: string): void {
           });
           appendElementTo(dialogWindowSection, title, payRentButton);
         } else {
-          // payRentButton.classList.add('inactive');
-          // const subtitle = createElement('p', ['subtitle'], `You are short $${cell.currentRent - game.activePlayer.money}`);
-          // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
           removePlayerFromGame();
           if (isGameFinish()) {
             end();
@@ -205,9 +204,6 @@ export default function showDialogWindow(action?: string): void {
               });
               appendElementTo(dialogWindowSection, title, payRentButton);
             } else {
-              // payRentButton.classList.add('inactive');
-              // const subtitle = createElement('p', ['subtitle'], `You are short $${rent - game.activePlayer.money}`);
-              // appendElementTo(dialogWindowSection, title, subtitle, payRentButton);
               removePlayerFromGame();
               if (isGameFinish()) {
                 end();
@@ -221,7 +217,6 @@ export default function showDialogWindow(action?: string): void {
       }
       break;
     case 'tax':
-      // проработать случай с нехваткой денег
       if (isPlayerHaveEnoughMoney(game.activePlayer, cell.cost)) {
         let payTaxButton: HTMLElement;
         if (language === 'RU') {

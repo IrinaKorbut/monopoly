@@ -3,10 +3,11 @@ module.exports = {
       "browser": true,
       "es6": true
   },
-  "extends": "airbnb-base",
+  "extends": "airbnb-typescript/base",
   "parserOptions": {
       "ecmaVersion": 12,
-      "sourceType": "module"
+      "sourceType": "module",
+      "project": './tsconfig.json',
   },
   "rules": {
   }

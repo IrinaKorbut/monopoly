@@ -9,13 +9,13 @@ import unlockPayOrBuyBtnIfEnoughMoney from '../../dialogWindow/payOrBuyButtonAcc
 function setPledgeBtnText(): void {
   const language: string = localStorage.getItem('language');
   const pladgeBtn: HTMLElement = document.querySelector('.button__pladge');
-    if (language === 'RU') {
-      pladgeBtn.innerText = 'Залог';
-    } else if (language === 'BEL') {
-      pladgeBtn.innerText = 'Заклад';
-    } else {
-      pladgeBtn.innerText = 'Pledge';
-    }
+  if (language === 'RU') {
+    pladgeBtn.innerText = 'Залог';
+  } else if (language === 'BEL') {
+    pladgeBtn.innerText = 'Заклад';
+  } else {
+    pladgeBtn.innerText = 'Pledge';
+  }
 }
 
 function setFinishPledgeBtnText(): void {
@@ -37,6 +37,16 @@ export function changePledgeBtnLanguage(): void {
   } else {
     setFinishPledgeBtnText();
   }
+}
+
+function getStringPledgeAction(property: Property): string {
+  const language: string = localStorage.getItem('language');
+  if (language === 'RU') {
+    return ` заложил(а) ${property.russianName} за $${property.pledgePrice}`;
+  } if (language === 'BEL') {
+    return ` заклаў(ла) ${property.belarusianName} за $${property.pledgePrice}`;
+  }
+  return ` pledged ${property.name} for $${property.pledgePrice}`;
 }
 
 function pledgeProperty(event: any): void {
@@ -65,7 +75,8 @@ function pledgeProperty(event: any): void {
 function pledgeBtnEvent(event: any): void {
   if (event.target.innerText === 'Pledge' || event.target.innerText === 'Залог' || event.target.innerText === 'Заклад') {
     Game.cells.forEach((cell: Property) => {
-      if (Game.activePlayer.property.includes(cell) && !cell.isPredge && (cell.numberOfHouses === 0 || cell.numberOfHouses === undefined)) {
+      if (Game.activePlayer.property.includes(cell) && !cell.isPredge
+      && (cell.numberOfHouses === 0 || cell.numberOfHouses === undefined)) {
         cell.element.addEventListener('click', pledgeProperty);
       } else {
         cell.element.querySelector('.players-container').classList.add('dark');
@@ -85,7 +96,7 @@ function pledgeBtnEvent(event: any): void {
 
 export default function initPledgeBtn(): void {
   const buyingSection: HTMLElement = document.querySelector('.buying-section');
-  let btnInnerText: string; 
+  let btnInnerText: string;
   const language: string = localStorage.getItem('language');
   if (language === 'RU') {
     btnInnerText = 'Залог';
@@ -97,15 +108,4 @@ export default function initPledgeBtn(): void {
   const pledgeBtn: HTMLElement = createElement('div', ['button__pladge', 'button'], btnInnerText);
   pledgeBtn.addEventListener('click', pledgeBtnEvent);
   appendElementTo(buyingSection, pledgeBtn);
-}
-
-function getStringPledgeAction(property: Property): string {
-  const language: string = localStorage.getItem('language');
-  if (language === 'RU') {
-    return ` заложил(а) ${property.russianName} за $${property.pledgePrice}`;
-  } else if (language === 'BEL') {
-    return ` заклаў(ла) ${property.belarusianName} за $${property.pledgePrice}`;
-  } else {
-    return ` pledged ${property.name} for $${property.pledgePrice}`;
-  }
 }

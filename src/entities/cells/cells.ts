@@ -17,7 +17,7 @@ export default [
   new Street('street', 'Connecticut Avenue', 'Калинина', 'Калініна', 9, 120, 8, 40, 100, 300, 450, 600, 50, 3, 2, 60, 66),
   new Cell('jail', 'Jail', 'Тюрьма', 'Астрог', 10), // jail,
   new Street('street', 'St. Charles Place', 'Окрестина', 'Акрэсціна', 11, 140, 10, 50, 150, 450, 625, 750, 100, 3, 3, 70, 77),
-  new Communal('communal', 'Electric Company', 'Электр. компания', 'Электр. кампанія', 12, 150, 2, 9), 
+  new Communal('communal', 'Electric Company', 'Электр. компания', 'Электр. кампанія', 12, 150, 2, 9),
   new Street('street', 'States Avenue', 'Володько', 'Валадзько', 13, 140, 10, 50, 150, 450, 625, 750, 100, 3, 3, 70, 77),
   new Street('street', 'Virginia Avenue', 'Свердлова', 'Свярдлова', 14, 160, 12, 60, 180, 500, 700, 900, 100, 3, 3, 80, 88),
   new Railroad('railroad', 'Pennsylvania Railroad', 'Минск', 'Мінск', 15),
