@@ -1,12 +1,11 @@
 import cells from '../entities/cells/cells';
 import computerMove from '../computerRival/computerRival';
 import game from '../entities/Game/Game';
-import showDialogWindow from '../gameSections/dialogWindow/dialogWindow';
-import { changeMoneyOnPlayerCard } from '../gameSections/dialogWindow/dialogWindow';
+import showDialogWindow, { changeMoneyOnPlayerCard } from '../gameSections/dialogWindow/dialogWindow';
+
 import initHistoryWindow from '../gameSections/histiryWindow/historyWindow';
 import Cell from '../entities/Cell/Cell';
 import Player from '../entities/Player/Player';
-
 
 function checkWherePlayerNow(playerDisplay: HTMLElement): number {
   const currentPlayerCell = <HTMLElement>playerDisplay.parentNode.parentNode;
@@ -32,7 +31,7 @@ function highlightActiveCell(delay: number, i: number): Promise<void> {
   });
 }
 
-function resetPlayerPosition(playerPositionAfterMove: number): number{
+function resetPlayerPosition(playerPositionAfterMove: number): number {
   return playerPositionAfterMove - 40;
 }
 
@@ -64,7 +63,7 @@ async function showAnimationMove(currentPlayerPosition: number, playerPositionAf
         if (player.chip) {
           cells[playerPositionAfterMove].element.querySelector('.players-container').appendChild(player.chip);
         }
-      }, 200);      
+      }, 200);
     }
   }
 }
