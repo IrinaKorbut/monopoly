@@ -1,7 +1,7 @@
 import { createElement, appendElementTo, removeChildsFromElement } from '../../helpFunctions/helpFunctions'
 import { startWindow } from '../StartWindow/startWindow';
 import Game from '../../entities/Game/Game';
-import setLanguage, { addListenerToButtonLng } from '../../changeLanguage/changeLanguage';
+import setLanguage from '../../changeLanguage/changeLanguage';
 import { notСompletion } from '../winScreen/winScreen'
 import { addHint } from './hints';
 
@@ -28,7 +28,6 @@ function menu(audioPlay: HTMLAudioElement) {
         setings.textContent = 'Налады'
     }
 
-    //const language = createElement('div', ['language'], 'Language') //удалить
     const newPlay = createElement('div', ['new-play'], 'New game')
     if (currentLanguage === 'RU') {
         newPlay.textContent = 'Новая игра'
@@ -39,7 +38,7 @@ function menu(audioPlay: HTMLAudioElement) {
 
     appendElementTo(setingMenu, heder, nameBtn)
     appendElementTo(heder, menu, btnClose)
-    appendElementTo(nameBtn, setings, newPlay, options) //language, 
+    appendElementTo(nameBtn, setings, newPlay, options)
 
     setings.addEventListener('click', () => setingsMeny(setingMenu, nameBtn, menu, setings, audioPlay, currentLanguage))
     setings.addEventListener('click', () => setLanguage())
@@ -286,7 +285,7 @@ export function keyEsc(audioPlay: HTMLAudioElement) {
             subjectLocalStorage(subjectInput)
         }
 
-        if (event.code === 'NumpadAdd') {  //+  
+        if (event.code === 'NumpadAdd') {  
             if (audioPlay.volume < 0.99) {
                 audioPlay.volume += 0.1
                 localStorage.setItem('volume', String(audioPlay.volume));
@@ -300,7 +299,7 @@ export function keyEsc(audioPlay: HTMLAudioElement) {
             }
         }
 
-        if (event.code === 'NumpadSubtract') { //-
+        if (event.code === 'NumpadSubtract') { 
             if (audioPlay.volume > 0.1) {
                 audioPlay.volume -= 0.1
                 localStorage.setItem('volume', String(audioPlay.volume));
@@ -383,7 +382,6 @@ function classMenu(audioPlay: HTMLAudioElement): void {
 function checkBtnAudio(audioPlay: HTMLAudioElement): void {
     const stateRange = localStorage.getItem('stateRange')
     if (stateRange === '1') {
-        // audioPlay.setAttribute('muted', false)
         audioPlay.setAttribute('allow', "autoplay");
         audioPlay.play()
     } else {

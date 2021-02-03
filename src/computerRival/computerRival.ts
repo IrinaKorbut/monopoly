@@ -79,7 +79,6 @@ export default function computerMove(action?: string): void {
           }
           computerMove();
         } else {
-          // доработать
           removePlayerFromGame();
           if (isGameFinish()) {
             end();
