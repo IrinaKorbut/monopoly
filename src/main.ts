@@ -44,7 +44,7 @@ initBuyoutBtn();
 changeTitleOnCell();
 
 // const btn = document.querySelector('.btn')
-// btn.addEventListener('click', gameСompletion)
+// btn.addEventListener('click', showWinScreen)
 
 roll();
 
