@@ -10,10 +10,8 @@ export default function unlockPayOrBuyBtnIfEnoughMoney(): void {
       if (isPlayerHaveEnoughMoney(Game.activePlayer, cellObj.cost)) {
         payOrBuyBtn.classList.remove('inactive');
       }
-    } else {
-      if (isPlayerHaveEnoughMoney(Game.activePlayer, cellObj.currentRent)) {
-        payOrBuyBtn.classList.remove('inactive');
-      }
+    } else if (isPlayerHaveEnoughMoney(Game.activePlayer, cellObj.currentRent)) {
+      payOrBuyBtn.classList.remove('inactive');
     }
   }
 }

@@ -4,7 +4,7 @@ import Property from '../../entities/ifacies/Property';
 
 export default function changeDialogWindowLanguage(): void {
   const dialodWindow: HTMLElement = document.querySelector('.dialog-window');
-  if (!dialodWindow.querySelector('.loader')) {  
+  if (!dialodWindow.querySelector('.loader')) {
     const cell: Property = getCellObjByPosition(Game.activePlayer.position);
     const language: string = localStorage.getItem('language');
     const title: HTMLElement = (<HTMLElement>dialodWindow.querySelector('.title'));
@@ -60,26 +60,24 @@ export default function changeDialogWindowLanguage(): void {
       }
     } else if (title.innerText === `${cell.name} $${cell.cost}` || title.innerText === `${cell.russianName} $${cell.cost}` || title.innerText === `${cell.belarusianName} $${cell.cost}`) {
       if (language === 'RU') {
-        title.innerText = `${cell.russianName} $${cell.cost}`
+        title.innerText = `${cell.russianName} $${cell.cost}`;
         button.innerText = 'Заплатить';
       } else if (language === 'BEL') {
-        title.innerText = `${cell.belarusianName} $${cell.cost}`
+        title.innerText = `${cell.belarusianName} $${cell.cost}`;
         button.innerText = 'Заплаціць';
       } else {
-        title.innerText = `${cell.name} $${cell.cost}`
+        title.innerText = `${cell.name} $${cell.cost}`;
         button.innerText = 'Pay';
       }
+    } else if (language === 'RU') {
+      title.innerText = 'Закончить ход?';
+      button.innerText = 'Да';
+    } else if (language === 'BEL') {
+      title.innerText = 'Скончыць ход?';
+      button.innerText = 'Да';
     } else {
-      if (language === 'RU') {
-        title.innerText = 'Закончить ход?';
-        button.innerText = 'Да';
-      } else if (language === 'BEL') {
-        title.innerText = 'Скончыць ход?';
-        button.innerText = 'Да';
-      } else {
-        title.innerText = 'End the turn?';
-        button.innerText = 'Yes';
-      }
+      title.innerText = 'End the turn?';
+      button.innerText = 'Yes';
     }
   }
 }

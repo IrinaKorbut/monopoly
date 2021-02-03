@@ -4,19 +4,24 @@ import Player from '../Player/Player';
 
 export default class Railroad extends Cell implements Property {
   readonly cost: number = 200;
-  readonly oneRailroadRent: number = 25;
-  readonly twoRailroadRent: number = 50;
-  readonly threeRailroadRent: number = 100;
-  readonly fourRailroadRent: number = 200;
-  readonly pledgePrice: number = 100;
-  readonly redemptionPrice: number = 110;
-  isPredge: boolean = false;
-  rent: number;
-  owner: Player;
 
-  constructor(type: string, name: string, russianName: string, belarusianName: string, position: number) {
-    super(type, name, russianName, belarusianName, position);
-  }
+  readonly oneRailroadRent: number = 25;
+
+  readonly twoRailroadRent: number = 50;
+
+  readonly threeRailroadRent: number = 100;
+
+  readonly fourRailroadRent: number = 200;
+
+  readonly pledgePrice: number = 100;
+
+  readonly redemptionPrice: number = 110;
+
+  isPredge: boolean = false;
+
+  rent: number;
+
+  owner: Player;
 
   get currentRent() {
     return this.rent;

@@ -1,4 +1,4 @@
-import Player from "../Player/Player";
+import Player from '../Player/Player';
 
 export default interface Property {
   readonly name: string;

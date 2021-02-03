@@ -1,6 +1,5 @@
 import Game from '../entities/Game/Game';
 
-
 export function createElement(elementType?: any, elementsClassList?: any, elementInnerText?: any) {
   const element: any = document.createElement(elementType);
   if (elementsClassList) {
@@ -26,16 +25,14 @@ export function removeChildsFromElement(element: any) {
   }
 }
 
-
-
-export function checkIsHuman() {   
-  const allButton: HTMLElement[] = Array.from(document.querySelectorAll('.button'))
+export function checkIsHuman() {
+  const allButton: HTMLElement[] = Array.from(document.querySelectorAll('.button'));
   allButton.forEach((button: HTMLElement) => {
     if (!Game.activePlayer.isHuman && !button.classList.contains('inactive__button')) {
       button.classList.add('inactive__button');
-    } 
+    }
     if (Game.activePlayer.isHuman) {
       button.classList.remove('inactive__button');
     }
-  })  
+  });
 }
