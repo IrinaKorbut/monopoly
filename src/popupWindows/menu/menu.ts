@@ -2,6 +2,7 @@ import { createElement, appendElementTo } from '../../helpFunctions/helpFunction
 import { startWindow } from '../StartWindow/startWindow';
 import Game from '../../entities/Game/Game';
 import setLanguage, { addListenerToButtonLng } from '../../changeLanguage/changeLanguage';
+import { notСompletion } from '../winScreen/winScreen'
 
 function menu(audioPlay: HTMLAudioElement) {
     const setingMenu: HTMLElement = document.querySelector('.setings-menu')
@@ -258,6 +259,11 @@ export function keyEsc(audioPlay: HTMLAudioElement) {
 
         if (event.code === 'Escape') {
             classMenu(audioPlay)
+            let setin = document.querySelector('.completion')
+            if(setin){
+                newPlayFn()
+                notСompletion()
+            }
         }
 
         if (event.code === 'F9') {
@@ -343,7 +349,9 @@ function classMenu(audioPlay: HTMLAudioElement): void {
     const startWindow = document.querySelector('.start-window')
     const setingsMenu = document.querySelector('.setings-menu')
     const blackout = document.querySelector('#blackout')
+    const offOnBlackout = document.querySelector('.blackout')
     const menuAndSection = document.querySelector('.menu-and-section')
+    const setinCompletion = document.querySelector('.completion')
 
     if (startWindow.classList.length === 1) {
         startWindow.classList.toggle('no-active');
@@ -358,7 +366,8 @@ function classMenu(audioPlay: HTMLAudioElement): void {
             startWindow.classList.toggle('no-active');
         } else {
             setingsMenu.classList.toggle('window-menu')
-            blackout.classList.toggle('blackout');
+            if(offOnBlackout && setinCompletion) {           
+            }else blackout.classList.toggle('blackout');
             setingsMenu.classList.toggle('no-burger-menu')
         }
     }

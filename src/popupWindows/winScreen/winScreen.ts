@@ -29,8 +29,27 @@ export function showWinScreen(): void {
         newGameBtn.textContent = 'New game';
     }
     appendElementTo(completion, congratulations, namePlayer, newGameBtn);
-    completion.classList.toggle('completion');
-    document.querySelector('#blackout').classList.toggle('blackout');
-    completion.classList.toggle('no-window');
-    newGameBtn.addEventListener('click', newPlayFn);
+
+    const blackout = document.querySelector('#blackout')
+    const offOnBlackout = document.querySelector('.blackout')
+    if (!offOnBlackout) {
+        blackout.classList.toggle('blackout');
+    }
+    notСompletion()
+
+    newGameBtn.addEventListener('click', () => {
+        newPlayFn()
+        showWinScreen()
+    });
+}
+
+export function notСompletion() {
+    const completion: HTMLElement = document.querySelector('.game-completion');
+    const windowMenu: HTMLElement = document.querySelector('.window-menu');
+    if (windowMenu) {
+        windowMenu.classList.toggle('window-menu');
+        windowMenu.classList.toggle('no-burger-menu');
+    }
+    completion.classList.toggle('completion');
+    completion.classList.toggle('no-window');
 }
