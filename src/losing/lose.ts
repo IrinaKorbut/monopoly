@@ -30,6 +30,6 @@ export default function playerLose(player: Player): void {
   Game.players.splice(loserIndex, 1);
   removeChildsFromElement(player.playerCard);
   const loseImg: HTMLElement = createElement('img');
-  loseImg.setAttribute('src', './assest/images/dead.svg');
+  loseImg.setAttribute('src', './assets/images/dead.svg');
   appendElementTo(player.playerCard, createElement('div', ['player-card__name'], player.name), loseImg);
 }
