@@ -28,6 +28,9 @@ import './style/footer.scss';
 import './popupWindows/winScreen/gameСompletion.scss';
 import './popupWindows/menu/hints.scss';
 
+if (!localStorage.getItem('language')) {
+    localStorage.setItem('language', 'EN');
+}
 initWindowCards();
 startWindow();
 btnClikMenu();
