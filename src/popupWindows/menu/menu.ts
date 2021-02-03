@@ -1,8 +1,9 @@
-import { createElement, appendElementTo } from '../../helpFunctions/helpFunctions'
+import { createElement, appendElementTo, removeChildsFromElement } from '../../helpFunctions/helpFunctions'
 import { startWindow } from '../StartWindow/startWindow';
 import Game from '../../entities/Game/Game';
 import setLanguage, { addListenerToButtonLng } from '../../changeLanguage/changeLanguage';
 import { notСompletion } from '../winScreen/winScreen'
+import { addHint } from './hints';
 
 function menu(audioPlay: HTMLAudioElement) {
     const setingMenu: HTMLElement = document.querySelector('.setings-menu')
@@ -58,7 +59,10 @@ export function newPlayFn() {
     if(playerCard.length !== 0){
         playerCard.forEach(e => e.remove())
     }
-    
+    const dialogWindow: HTMLElement = document.querySelector('.dialog-window');
+    removeChildsFromElement(dialogWindow);
+    const loader: HTMLElement = createElement('div', ['loader']);
+    appendElementTo(dialogWindow, loader);
     Game.players = []
     Game.cells.forEach((cell: any) => {
         if (cell.type === 'street' || cell.type === 'railroad' || cell.type === 'communal') {
@@ -68,7 +72,7 @@ export function newPlayFn() {
             cell.isThereHotel = false;
             cell.isPredge = false;
 
-            (<HTMLElement>document.querySelector('.lock')).style.display = '';
+            (<HTMLElement>cell.element.querySelector('.lock')).style.display = '';
             document.querySelectorAll('.house').forEach(hous => hous.remove())
             document.querySelector('.action-list').innerHTML = "";
             const propertyViewCost: HTMLElement = cell.element.querySelector('.cost');
@@ -206,6 +210,7 @@ export function setingsMeny(setingMenu: HTMLElement, classOptions: HTMLElement, 
     appendElementTo(formRadio3, radioLanguage3, radioLabel3)
 
     audioFn(audioPlay)
+    addHint()
 
     back.addEventListener('click', menu)
     subjectInput.addEventListener('click', (e: any) => subjectLocalStorage(e.target))

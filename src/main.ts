@@ -28,6 +28,7 @@ import './style/dark.scss';
 import './gameSections/dialogWindow/loader.scss';
 import './style/footer.scss';
 import './popupWindows/winScreen/gameСompletion.scss';
+import './popupWindows/menu/hints.scss';
 
 initWindowCards();
 
